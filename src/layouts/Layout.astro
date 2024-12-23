@@ -1,6 +1,10 @@
 ---
 import NavigationHeader from "../views/NavigationHeader.astro";
 import Horizon from "../views/Horizon.astro";
+
+const {
+  page_title = "Karina Tovar"
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -10,7 +14,7 @@ import Horizon from "../views/Horizon.astro";
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>Astro Basics</title>
+    <title>{page_title}</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
