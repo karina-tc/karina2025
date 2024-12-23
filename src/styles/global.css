@@ -12,7 +12,8 @@
 @layer base {
   :root {
     --background-color: #FCFCFC;
-    --text-color: #000000;
+    --copy-primary: #271E29;
+    --copy-secondary: #878188;
   }
 }
 
@@ -22,7 +23,7 @@ html {
 }
 
 body {
-  @apply min-h-screen bg-background-color text-text-color font-safiro;
+  @apply min-h-screen bg-background-color text-copy-primary font-safiro;
 }
 
 h1 {
