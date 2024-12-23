@@ -22,3 +22,7 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# spotify instructions
+SPOTIFY.md
+get-spotify-token.js

@@ -1,0 +1,9 @@
+---
+const code = Astro.url.searchParams.get('code');
+---
+
+<div>
+  <h1>Spotify Authorization Code:</h1>
+  <pre>{code}</pre>
+  <p>Copy this code to use in the next step to get your refresh token.</p>
+</div> 
