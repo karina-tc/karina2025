@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply min-h-screen bg-white dark:bg-gray-900;
+}
+
+/* Optional: Add any other global styles below */ 
