@@ -1,9 +1,20 @@
 ---
-const { music_text = "Nothing playing" } = Astro.props;
+const { music_text = "music" } = Astro.props;
 ---
 
-<div class="music-container" id="music-container">
-  <span class="m-auto w-fit">Listening to {music_text}</span>
+<div class="music-container group" id="music-container">
+  <div class="music-info m-auto w-fit cursor-pointer">
+    Listening to <span class="current-track group-hover:underline underline-offset-4">{music_text}</span>
+  </div>
+  <div class="music-details">
+    <a href="#" class="spotify-link" target="_blank" rel="noopener noreferrer">
+      <img src="" alt="Album Art" class="album-art" />
+      <div class="text-info">
+        <span class="song-name min-w-fit"></span>
+        <span class="artist-name text-copy-secondary min-w-fit"></span>
+      </div>
+    </a>
+  </div>
 </div>
 
 <script>
@@ -12,10 +23,36 @@ const { music_text = "Nothing playing" } = Astro.props;
       const response = await fetch("/api/spotify.json");
       const data = await response.json();
       const container = document.getElementById("music-container");
-      if (container) {
-        const span = container.querySelector("span");
-        if (span) {
-          span.textContent = `Listening to ${data.song} by ${data.artist}`;
+
+      if (container && data.song && data.artist) {
+        // Update the current track text
+        const currentTrack = container.querySelector(".current-track");
+        if (currentTrack) {
+          currentTrack.textContent = data.artist;
+        }
+
+        // Update album art
+        const albumArt = container.querySelector(
+          ".album-art",
+        ) as HTMLImageElement;
+        if (albumArt) {
+          albumArt.src = data.albumArt;
+        }
+
+        // Update song and artist name
+        const songName = container.querySelector(".song-name");
+        const artistName = container.querySelector(".artist-name");
+        if (songName && artistName) {
+          songName.textContent = data.song;
+          artistName.textContent = `by ${data.artist}`;
+        }
+
+        // Update Spotify link
+        const spotifyLink = container.querySelector(
+          ".spotify-link",
+        ) as HTMLAnchorElement;
+        if (spotifyLink) {
+          spotifyLink.href = `https://open.spotify.com/search/${encodeURIComponent(data.song + " " + data.artist)}`;
         }
       }
     } catch (error) {
@@ -32,6 +69,45 @@ const { music_text = "Nothing playing" } = Astro.props;
 
 <style>
   .music-container {
-    @apply flex flex-row items-center justify-center gap-3 text-base leading-6 text-copy-secondary animate-fade-in-right;
+    @apply flex flex-row items-center justify-center gap-3 text-base leading-6 text-copy-secondary animate-fade-in-right relative;
+
+    .music-info {
+      @apply opacity-100 transition-opacity duration-200;
+    }
+
+    .music-details {
+      @apply absolute left-0 top-5 right-0 opacity-0 transition-opacity duration-200;
+    }
+
+    &:hover {
+      .music-details {
+        @apply opacity-100;
+      }
+    }
+  }
+
+  .music-details {
+    @apply flex flex-row items-center mt-3 gap-3 min-w-fit;
+
+    .spotify-link {
+      @apply flex flex-row items-center gap-3 py-2 px-4 bg-white/50 rounded-full border border-black/5 shadow-sm backdrop-blur-sm 
+             transition-all duration-200 hover:bg-white/70 w-full;
+    }
+
+    .album-art {
+      @apply w-8 h-8 rounded-full;
+    }
+
+    .text-info {
+      @apply flex flex-col;
+
+      .song-name {
+        @apply text-copy-primary text-sm font-medium;
+      }
+
+      .artist-name {
+        @apply text-xs;
+      }
+    }
   }
 </style>
