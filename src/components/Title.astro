@@ -1,0 +1,69 @@
+---
+import atomic from "../assets/atomic.svg";
+
+const {
+  logo = "default",
+  logo_alt_text,
+  logoClasses = "",
+  title_text,
+  eyelash_text,
+  description_text,
+  visual,
+  visualClasses = "",
+} = Astro.props;
+---
+
+<div class="title-container">
+  {
+    logo === "default" ? (
+      <img
+        id="atomic-logo"
+        src={atomic.src}
+        alt="Logomark"
+        fetchpriority="high"
+        draggable="false"
+        class={logoClasses}
+      />
+    ) : (
+      <img
+        src={logo}
+        alt={logo_alt_text}
+        class={logoClasses}
+        draggable="false"
+      />
+    )
+  }
+  <div class="flex flex-1 flex-col gap-10 my-10">
+    {eyelash_text && <h2>{eyelash_text}</h2>}
+    <h1>{title_text}</h1>
+    {description_text && <p>{description_text}</p>}
+  </div>
+  {
+    visual && (
+      <img
+        src={visual}
+        alt={title_text}
+        class={`${visualClasses}m-auto`}
+        draggable="false"
+      />
+    )
+  }
+</div>
+
+<style>
+  .title-container {
+    @apply flex flex-col items-center justify-center max-w-[720px] m-auto text-center;
+    h2 {
+      @apply text-base uppercase tracking-widest leading-6 m-auto w-fit;
+    }
+    h1 {
+      @apply text-[5rem] leading-[5rem] font-medium;
+    }
+    p {
+      @apply text-base leading-6 m-auto w-fit;
+    }
+  }
+  .title-logo {
+    @apply w-40 h-40 pt-20 m-auto;
+  }
+</style>

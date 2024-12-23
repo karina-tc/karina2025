@@ -1,0 +1,32 @@
+---
+import trees from "../assets/landscape/trees.png";
+import cloudLeft from "../assets/landscape/cloud-left.svg";
+import cloudRight from "../assets/landscape/cloud-right.svg";
+---
+
+<div class="horizon-container">
+  <div class="cloud-left">
+    <img src={cloudLeft.src} alt="Cloud Left" />
+  </div>
+  <div class="cloud-right">
+    <img src={cloudRight.src} alt="Cloud Right" />
+  </div>
+  <div class="trees">
+    <img src={trees.src} alt="Trees" />
+  </div>
+</div>
+
+<style>
+  .horizon-container {
+    @apply w-full h-screen min-h-[1060px] relative [&>div]:absolute;
+  }
+  .cloud-left {
+    @apply top-0 left-0 animate-fade-in;
+  }
+  .cloud-right {
+    @apply top-0 right-0 animate-fade-in;
+  }
+  .trees {
+    @apply bottom-0 left-0 animate-fade-in;
+  }
+</style>

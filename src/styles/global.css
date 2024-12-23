@@ -1,6 +1,20 @@
+@font-face {
+    font-family: 'Safiro-Regular';
+    src: url('/fonts/Safiro-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    --background-color: #FCFCFC;
+    --text-color: #000000;
+  }
+}
 
 /* Base styles */
 html {
@@ -8,7 +22,11 @@ html {
 }
 
 body {
-  @apply min-h-screen bg-white dark:bg-gray-900;
+  @apply min-h-screen bg-background-color text-text-color font-safiro;
+}
+
+h1 {
+  @apply font-instrument-serif;
 }
 
 /* Optional: Add any other global styles below */ 

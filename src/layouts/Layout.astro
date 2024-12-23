@@ -1,13 +1,33 @@
+---
+import NavigationHeader from "../views/NavigationHeader.astro";
+import Horizon from "../views/Horizon.astro";
+---
+
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body class="w-full h-screen bg-red-500 m-0">
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro Basics</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Poppins&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="w-full h-screen p-0 m-0 overflow-x-hidden">
+    <NavigationHeader />
+    <main class="flex-1 relative p-10">
+      <div class="absolute top-0 left-0 w-full h-screen">
+        <Horizon />
+      </div>
+      <div class="flex-1 relative z-10">
+        <slot />
+      </div>
+    </main>
+  </body>
 </html>
