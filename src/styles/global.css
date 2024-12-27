@@ -14,6 +14,15 @@
   }
 }
 
+@layer utilities {
+  .divider--large {
+    @apply w-full h-20;
+  }
+  .divider--small {
+    @apply w-full h-10;
+  }
+}
+
 /* Base styles */
 html {
   scroll-behavior: smooth;
@@ -38,6 +47,10 @@ h3 {
 
 p {
   @apply text-xl leading-8 text-ink-secondary;
+}
+
+.section-wrapper {
+  @apply px-10 w-full max-w-3xl m-auto;
 }
 
 .content-section {

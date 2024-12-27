@@ -1,10 +1,12 @@
 ---
 import "../styles/global.css";
+import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import karina from "../assets/brand/karina-profile.webp";
 import { statusCards } from "../types/intro/Statuses";
 import { jobHistory } from "../types/intro/Resume";
 import ArrowElbowRightDown from "phosphor-astro/ArrowElbowRightDown.astro";
+import tropic from "../assets/work/tropic/demo-tropic-01.png";
 ---
 
 <Layout
@@ -25,22 +27,20 @@ import ArrowElbowRightDown from "phosphor-astro/ArrowElbowRightDown.astro";
     </div>
   </div>
 
-  <div class="content-wrapper">
-    <section class="mt-10 mx-auto max-w-screen-md content-section">
+  <div class="content-wrapper flex flex-col">
+    <section class="section-wrapper pt-20 content-section">
       <div class="flex flex-col gap-8 items-center text-center">
         <h3>Experience</h3>
         <h2 class="max-w-lg">
           10+ years of making the complex simple and enjoyable
         </h2>
-        <p class="text-stone-600">
+        <p class="text-stone-600 text-base">
           Over 10 years I've worked on all size startups in all categories. I
           have deep experience distilling technical products into simple
           easy-to-use solutions.
         </p>
       </div>
-      <div
-        class="grid grid-cols-1 md:grid-cols-3 mt-8 items-center bg-paper-green rounded-md overflow-hidden"
-      >
+      <div class="grid grid-cols-1 md:grid-cols-3 mt-8 items-center bg-paper-green rounded-md overflow-hidden">
         {
           statusCards.map((item) => (
             <div class="flex flex-1 flex-col gap-2 p-5 border-r border-white text-stone-900 text-sm text-center">
@@ -54,9 +54,11 @@ import ArrowElbowRightDown from "phosphor-astro/ArrowElbowRightDown.astro";
       </div>
     </section>
 
-    <section class="mx-auto max-w-screen-md pt-12 pb-16 content-section">
-      <div class="flex flex-col gap-10">
-        <div class="flex flex-col text-base">
+    <div class="divider--small"></div>
+
+    <section class="section-wrapper content-section">
+      <div class="flex flex-col gap-10 w-full">
+        <div class="flex-1 flex flex-col text-base">
           {
             jobHistory.map((job) => (
               <div class="flex justify-between items-center px-2 py-4 bg-paper-base border-b border-dashed border-neutral-200">
@@ -72,17 +74,43 @@ import ArrowElbowRightDown from "phosphor-astro/ArrowElbowRightDown.astro";
         </div>
       </div>
     </section>
+
+    <div class="divider--large"></div>
+
+    <section class="demo-area h-96 content-section">
+      <h2>Building procurement paradise</h2>
+      <span
+        class="uppercase text-sm tracking-widest font-semibold text-ink-secondary my-5"
+        >Supplier Intelligence for Tropic</span
+      >
+    </section>
+
+    <div class="divider--large"></div>
+
+    <section class="section-wrapper mt-10 content-section">
+      <div class="flex flex-col gap-8 items-center text-center">
+        <h3>Testimonials</h3>
+        <h2 class="max-w-lg">
+          In their own words
+        </h2>
+      </div>
+    </section>
   </div>
 </Layout>
 
 <style>
   .arrow-holder {
-    @apply w-full -ml-10 -mt-28 absolute z-[1] text-white flex items-center justify-center;
+    @apply w-full -mt-20 absolute z-[1] text-white flex items-center justify-center;
 
     div {
       @apply mx-auto h-14 w-14 rounded-full bg-paper-dark border-2 border-white flex items-center justify-center;
     }
   }
+
+  .demo-area {
+    @apply w-full p-10 bg-paper-green relative flex flex-col items-center justify-center;
+  }
+
   .content-section {
     opacity: 0;
     transform: translateY(20px);

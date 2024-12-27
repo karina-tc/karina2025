@@ -15,7 +15,7 @@ const {
 } = Astro.props;
 ---
 
-<div class={`title-container ${include_classes}`}>
+<div class={`title-container section-wrapper ${include_classes}`}>
   {
     logo === "default" ? (
       <AtomicLogo include_classes={logoClasses} />
@@ -38,7 +38,7 @@ const {
 
 <style>
   .title-container {
-    @apply flex flex-col items-center justify-center max-w-2xl m-auto text-center;
+    @apply flex flex-col items-center justify-center text-center;
   }
   .title-logo {
     @apply w-40 h-40 pt-20 m-auto;
