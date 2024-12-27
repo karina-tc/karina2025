@@ -15,6 +15,9 @@
 }
 
 @layer utilities {
+  .divider--extra-large {
+    @apply w-full h-32;
+  }
   .divider--large {
     @apply w-full h-20;
   }
