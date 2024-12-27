@@ -1,4 +1,5 @@
 ---
+import type { ImageMetadata } from 'astro';
 import type { HeaderProps } from '../types/HeaderProps';
 import Title from "./Title.astro";
 import Horizon from "./Horizon.astro";
@@ -15,10 +16,10 @@ const {
   title_classes = "pt-10",
   // Horizon props
   horizon_height = "",
-  header_visual_image = "",
+  header_visual_image = undefined as unknown as ImageMetadata,
   header_visual_alt_text = "",
   header_visual_classes = "",
-  header_visual_width = "600px",
+  header_visual_width = 600,
 } = Astro.props;
 ---
 

@@ -1,5 +1,6 @@
 ---
 import type { HorizonProps } from '../types/HeaderProps';
+import { Image } from "astro:assets";
 import trees from "../assets/landscape/trees.webp";
 
 interface Props extends HorizonProps {}
@@ -9,21 +10,21 @@ const {
   visual_image = "",
   visual_alt_text = "",
   visual_classes = "",
-  visual_width = "600px",
+  visual_width = 600,
 } = Astro.props;
 ---
 
 <div class="horizon-container" style={`min-height: ${horizon_height}`}>
   {visual_image && (
-    <img
+    <Image
       src={visual_image}
       alt={visual_alt_text}
       class={`center_image ${visual_classes}`}
       width={visual_width}
-      draggable="false"
+      loading="eager"
     />
   )}
-  <img src={trees.src} alt="Trees" class="trees" />
+  <Image src={trees} alt="Trees" class="trees" loading="eager" />
 </div>
 
 <style>
