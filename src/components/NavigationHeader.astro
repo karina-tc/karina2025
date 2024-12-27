@@ -22,23 +22,22 @@ const menuItems = [
     <Music music_text="music" />
   </div>
   <div class="navigation-blur-mask"></div>
-  </div>
-
-  <style>
-    .navigation-header-container {
-      @apply flex flex-row items-center justify-between w-full sticky top-0 p-10 animate-fade-in duration-500 z-navigation relative;
-    }
-    .navigation-blur-mask {
-      @apply absolute h-full w-full pointer-events-none top-0 left-0 bg-gradient-to-t from-transparent to-paper-base backdrop-blur-[2px];
-    }
-    .navigation-header-greeting {
-      @apply flex-1 flex flex-row items-center justify-start max-lg:hidden;
-    }
-    .navigation-header-menu {
-      @apply flex-none max-lg:mx-auto;
-    }
-    .navigation-header-music {
-      @apply flex-1 flex flex-row items-center justify-end max-lg:hidden;
-    }
-  </style>
 </div>
+
+<style>
+  .navigation-header-container {
+    @apply fixed top-0 left-0 right-0 flex flex-row items-center justify-between w-full p-10 animate-fade-in duration-500 z-navigation;
+  }
+  .navigation-blur-mask {
+    @apply absolute h-full w-full pointer-events-none top-0 left-0 bg-gradient-to-t from-transparent to-paper-base backdrop-blur-[2px];
+  }
+  .navigation-header-greeting {
+    @apply flex-1 flex flex-row items-center justify-start max-lg:hidden;
+  }
+  .navigation-header-menu {
+    @apply flex-none max-lg:mx-auto;
+  }
+  .navigation-header-music {
+    @apply flex-1 flex flex-row items-center justify-end max-lg:hidden;
+  }
+</style>
