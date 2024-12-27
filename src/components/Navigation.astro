@@ -15,6 +15,13 @@ const currentPath = Astro.url.pathname;
           <a href={item.href} class={currentPath === item.href ? "active" : ""}>
             <span>{item.label}</span>
             <div class="menu-item-underline" />
+            {
+              item.label === "Work" && (
+                <span class="shortcut inline-flex text-xs text-stone-400 px-1 min-h-5 bg-stone-100 rounded-md items-center justify-center">
+                  /
+                </span>
+              )
+            }
           </a>
         ),
       )
@@ -25,7 +32,7 @@ const currentPath = Astro.url.pathname;
   .menu-container {
     @apply flex flex-row items-center justify-center gap-4 w-fit m-auto py-3 px-6 bg-paper-base rounded-full border border-neutral-100 shadow-md shadow-neutral-200/50 backdrop-blur-sm;
     a {
-      @apply text-base text-ink-secondary leading-6 w-fit transition-all duration-300 ease-in-out relative;
+      @apply text-base text-ink-secondary leading-6 w-fit transition-all duration-300 ease-in-out relative flex items-center gap-2;
 
       &:hover {
         @apply text-ink-primary;
@@ -39,6 +46,10 @@ const currentPath = Astro.url.pathname;
 
         .menu-item-underline {
           @apply opacity-100 bg-orange-500;
+        }
+
+        .shortcut {
+          @apply text-orange-900;
         }
       }
     }
