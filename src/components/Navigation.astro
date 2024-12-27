@@ -1,12 +1,16 @@
 ---
 const { menu_items } = Astro.props;
+const currentPath = Astro.url.pathname;
 ---
 
 <nav class="menu-container">
   {
     menu_items.map(
       (item: { href: string | URL | null | undefined; label: unknown }) => (
-        <a href={item.href}>{item.label}</a>
+        <a href={item.href} class={currentPath === item.href ? "active" : ""}>
+          <span>{item.label}</span>
+          <div class="menu-item-underline" />
+        </a>
       ),
     )
   }
@@ -16,7 +20,25 @@ const { menu_items } = Astro.props;
   .menu-container {
     @apply flex flex-row items-center justify-center gap-4 w-fit m-auto py-3 px-6 bg-paper-base rounded-full border border-neutral-100 shadow-md shadow-neutral-200/50 backdrop-blur-sm;
     a {
-      @apply text-base leading-6 w-fit;
+      @apply text-base text-ink-secondary leading-6 w-fit transition-all duration-300 ease-in-out relative;
+
+      &:hover {
+        @apply text-ink-primary;
+
+        .menu-item-underline {
+          @apply opacity-100 bg-stone-200;
+        }
+      }
+      &.active {
+        @apply font-semibold text-ink-primary;
+
+        .menu-item-underline {
+          @apply opacity-100 bg-orange-500;
+        }
+      }
+    }
+    .menu-item-underline {
+      @apply w-full h-0.5 absolute top-full left-0 right-0 bg-transparent opacity-0 transition-all duration-300 ease-in-out;
     }
   }
 </style>
