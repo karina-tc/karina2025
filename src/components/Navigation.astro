@@ -3,19 +3,24 @@ const { menu_items } = Astro.props;
 const currentPath = Astro.url.pathname;
 ---
 
-<nav class="menu-container">
-  {
-    menu_items.map(
-      (item: { href: string | URL | null | undefined; label: unknown }) => (
-        <a href={item.href} class={currentPath === item.href ? "active" : ""}>
-          <span>{item.label}</span>
-          <div class="menu-item-underline" />
-        </a>
-      ),
-    )
-  }
-</nav>
-
+<div class="relative">
+  <div class="absolute top-0 left-0 w-full h-1/2 bg-purple-500 blur-sm rounded-full rounded-b-none opacity-15 mix-blend-multiply">
+  </div>
+  <div class="absolute bottom-0 left-0 w-full h-1/2 bg-orange-500 blur-sm rounded-full rounded-t-none opacity-15 mix-blend-multiply">
+  </div>
+  <nav class="menu-container">
+    {
+      menu_items.map(
+        (item: { href: string | URL | null | undefined; label: unknown }) => (
+          <a href={item.href} class={currentPath === item.href ? "active" : ""}>
+            <span>{item.label}</span>
+            <div class="menu-item-underline" />
+          </a>
+        ),
+      )
+    }
+  </nav>
+</div>
 <style>
   .menu-container {
     @apply flex flex-row items-center justify-center gap-4 w-fit m-auto py-3 px-6 bg-paper-base rounded-full border border-neutral-100 shadow-md shadow-neutral-200/50 backdrop-blur-sm;
