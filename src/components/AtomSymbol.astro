@@ -3,7 +3,6 @@ const { include_classes = "" } = Astro.props;
 ---
 
 <div class="atom-container">
-  <span class="atom-title">Stop</span>
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="140"
@@ -12,7 +11,6 @@ const { include_classes = "" } = Astro.props;
     fill="none"
     class={`atom ${include_classes}`}
   >
-    <title>Stop</title>
     <path
       fill-rule="evenodd"
       clip-rule="evenodd"
@@ -80,67 +78,36 @@ const { include_classes = "" } = Astro.props;
   .atom-container {
     @apply inline-block relative;
 
-    .atom-title {
-      @apply absolute inset-0 m-auto w-10 h-10 flex items-center justify-center text-xs uppercase text-ink-secondary
-      px-2 pt-1 rounded-full bg-white/50 z-10 opacity-0 pointer-events-none transition-opacity duration-300;
-    }
-
-    &:hover .atom-title {
-      @apply opacity-100 cursor-pointer delay-1000;
-    }
-
     &:hover {
       @apply origin-center scale-110 transition-all duration-300;
     }
   }
 
   .atom {
-    @apply origin-center cursor-pointer;
+    @apply origin-center;
     animation: scale-up 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
   }
 
   .atom path {
-    @apply origin-center delay-700;
-    animation: spin-clockwise 3s linear infinite;
-  }
-
-  .atom.paused path {
-    animation-play-state: paused;
+    @apply origin-center;
+    animation: spin-clockwise 10s linear infinite;
   }
 
   @keyframes scale-up {
-    from { transform: scale(0.05); }
-    to { transform: scale(1); }
+    from {
+      transform: scale(0.05);
+    }
+    to {
+      transform: scale(1);
+    }
   }
 
   @keyframes spin-clockwise {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
 </style>
-
-<script>
-  // Check initial state from sessionStorage
-  document.querySelectorAll('.atom').forEach(atom => {
-    const isPaused = sessionStorage.getItem('atomPaused') === 'true';
-    if (isPaused) {
-      atom.classList.add('paused');
-      atom.setAttribute('title', 'Spin');
-      if (atom.previousElementSibling) {
-        atom.previousElementSibling.textContent = 'Spin';
-      }
-    }
-
-    // Toggle and save state on click
-    atom.addEventListener('click', () => {
-      atom.classList.toggle('paused');
-      const isPaused = atom.classList.contains('paused');
-      sessionStorage.setItem('atomPaused', isPaused.toString());
-      const newText = isPaused ? 'Spin' : 'Stop';
-      atom.setAttribute('title', newText);
-      if (atom.previousElementSibling) {
-        atom.previousElementSibling.textContent = newText;
-      }
-    });
-  });
-</script>
