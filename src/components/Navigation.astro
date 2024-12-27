@@ -1,0 +1,22 @@
+---
+const { menu_items } = Astro.props;
+---
+
+<nav class="menu-container">
+  {
+    menu_items.map(
+      (item: { href: string | URL | null | undefined; label: unknown }) => (
+        <a href={item.href}>{item.label}</a>
+      ),
+    )
+  }
+</nav>
+
+<style>
+  .menu-container {
+    @apply flex flex-row items-center justify-center gap-4 w-fit m-auto py-3 px-6 bg-paper-base rounded-full border border-neutral-100 shadow-md shadow-neutral-200/50 backdrop-blur-sm;
+    a {
+      @apply text-base leading-6 w-fit;
+    }
+  }
+</style>

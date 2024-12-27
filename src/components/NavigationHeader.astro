@@ -1,0 +1,44 @@
+---
+import Greeting from "../components/Greeting.astro";
+import Navigation from "../components/Navigation.astro";
+import Music from "../components/Music.astro";
+
+const menuItems = [
+  { href: "/", label: "Intro" },
+  { href: "/about", label: "About" },
+  { href: "/work", label: "Work" },
+  { href: "/thoughts", label: "Thoughts" },
+];
+---
+
+<div class="navigation-header-container">
+  <div class="navigation-header-greeting z-[1]">
+    <Greeting greeting_time="morning" />
+  </div>
+  <div class="navigation-header-menu z-[1]">
+    <Navigation menu_items={menuItems} />
+  </div>
+  <div class="navigation-header-music z-[1]">
+    <Music music_text="music" />
+  </div>
+  <div class="navigation-blur-mask"></div>
+  </div>
+
+  <style>
+    .navigation-header-container {
+      @apply flex flex-row items-center justify-between w-full sticky top-0 p-10 animate-fade-in duration-500 z-navigation relative;
+    }
+    .navigation-blur-mask {
+      @apply absolute h-full w-full pointer-events-none top-0 left-0 bg-gradient-to-t from-transparent to-paper-base backdrop-blur-[2px];
+    }
+    .navigation-header-greeting {
+      @apply flex-1 flex flex-row items-center justify-start max-lg:hidden;
+    }
+    .navigation-header-menu {
+      @apply flex-none max-lg:mx-auto;
+    }
+    .navigation-header-music {
+      @apply flex-1 flex flex-row items-center justify-end max-lg:hidden;
+    }
+  </style>
+</div>

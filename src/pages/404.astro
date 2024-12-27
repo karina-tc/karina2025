@@ -1,0 +1,33 @@
+---
+import "../styles/global.css";
+
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+  pageTitle="404"
+  pageDescription="Page not found"
+  eyelash_text="TIME FOR A BREAK"
+  title_text="This Page Is Lost"
+  description_text="But you shouldn't. Go outside and enjoy the sun."
+>
+  <div slot="title-content" class="flex justify-center">
+    <a href="/" class="button group">
+      <span class="button-text">Return Home</span>
+    </a>
+  </div>
+</Layout>
+
+<style>
+  .button {
+    @apply px-6 py-3 bg-orange-700 text-white flex flex-row items-center justify-center relative overflow-hidden rounded-full border border-white shadow-md backdrop-blur-sm transition-all duration-200;
+
+    &:hover {
+      @apply bg-orange-600 -mt-1 mb-1 shadow-xl;
+    }
+  }
+
+  .button-text {
+    @apply relative transition-all;
+  }
+</style>

@@ -1,0 +1,44 @@
+---
+import type { HeaderProps } from '../types/HeaderProps';
+import Title from "./Title.astro";
+import Horizon from "./Horizon.astro";
+
+interface Props extends HeaderProps {}
+
+const {
+  // Title props
+  logo = "default",
+  logoClasses = "w-24 h-24",
+  title_text = "Title Text Here",
+  eyelash_text = "Eyelash Text Here",
+  description_text = "",
+  title_classes = "pt-10",
+  // Horizon props
+  horizon_height = "",
+  header_visual_image = "",
+  header_visual_alt_text = "",
+  header_visual_classes = "",
+  header_visual_width = "600px",
+} = Astro.props;
+---
+
+<header class="w-full relative">
+  <Title
+    {logo}
+    {logoClasses}
+    {eyelash_text}
+    {title_text}
+    {description_text}
+    include_classes={title_classes}
+  >
+    <slot name="title-content" slot="title-content" />
+  </Title>
+  <Horizon
+    horizon_height={horizon_height}
+    visual_image={header_visual_image}
+    visual_alt_text={header_visual_alt_text}
+    visual_classes={header_visual_classes}
+    visual_width={header_visual_width}
+  />
+</header>
+

@@ -1,34 +1,97 @@
 ---
-import Sun from 'phosphor-astro/Sun.astro'
-import Moon from 'phosphor-astro/Moon.astro'
-
-const { 
-  greeting_time = 'morning',
-} = Astro.props;
+import Sun from "phosphor-astro/Sun.astro";
+import Moon from "phosphor-astro/Moon.astro";
 ---
 
-<div class="greeting-container">
+<div 
+  data-controller="greeting"
+  data-greeting-target="container"
+  class="greeting-container" 
+>
   <div class="icon-container">
-    {
-      greeting_time === 'morning' || greeting_time === 'afternoon' 
-      ? <Sun class="w-4 h-4" /> 
-      : <Moon class="w-4 h-4" />
-    }
+    <Sun class="w-4 h-4 hidden" data-greeting-target="sunIcon" />
+    <Moon class="w-4 h-4 hidden" data-greeting-target="moonIcon" />
   </div>
-	<span class="text-base leading-6 m-auto w-fit">
-    {greeting_time === 'morning' 
-    ? 'Morning, sunshine!' 
-    : greeting_time === 'afternoon' 
-    ? 'Afternoon, friend!' 
-    : 'Hello, night owl!'}
-  </span>
+  <span class="text-base leading-6 m-auto w-fit" data-greeting-target="text"></span>
 </div>
+
+<script>
+  const controller = 'greeting';
+  const elements = {
+    container: document.querySelector(`[data-${controller}-target="container"]`),
+    text: document.querySelector(`[data-${controller}-target="text"]`),
+    sunIcon: document.querySelector(`[data-${controller}-target="sunIcon"]`),
+    moonIcon: document.querySelector(`[data-${controller}-target="moonIcon"]`),
+  } as const;
+
+  function getNextUpdateTime() {
+    const now = new Date();
+    const hour = now.getHours();
+    
+    let nextHour;
+    if (hour < 5) nextHour = 5;         // Next change at 5 AM
+    else if (hour < 12) nextHour = 12;  // Next change at 12 PM
+    else if (hour < 18) nextHour = 18;  // Next change at 6 PM
+    else nextHour = 29;                 // Next change at 5 AM following day (24 + 5)
+
+    const nextUpdate = new Date(now);
+    nextUpdate.setHours(nextHour, 0, 0, 0);
+    
+    return nextUpdate.getTime() - now.getTime();
+  }
+
+  function updateGreeting() {
+    const hour = new Date().getHours();
+    let greetingTime;
+    
+    if (hour >= 5 && hour < 12) {
+      greetingTime = 'morning';
+    } else if (hour >= 12 && hour < 18) {
+      greetingTime = 'afternoon';
+    } else {
+      greetingTime = 'night';
+    }
+    // Update container and text
+    if (elements.container && elements.text) {
+      elements.container.setAttribute('data-greeting-time', greetingTime);
+      elements.text.textContent = greetingTime === 'morning'
+        ? 'Morning, sunshine!'
+        : greetingTime === 'afternoon'
+        ? 'Afternoon, friend!'
+        : 'Hello, night owl!';
+    }
+
+    // Update icons
+    if (greetingTime === 'morning' || greetingTime === 'afternoon') {
+      elements.sunIcon?.classList.remove('hidden');
+      elements.moonIcon?.classList.add('hidden');
+    } else {
+      elements.moonIcon?.classList.remove('hidden');
+      elements.sunIcon?.classList.add('hidden');
+    }
+
+    // Schedule next update
+    setTimeout(updateGreeting, getNextUpdateTime());
+  }
+
+  // Initial update
+  updateGreeting();
+</script>
 
 <style>
   .greeting-container {
     @apply flex flex-row items-center justify-center gap-3 text-base leading-6;
   }
+  .greeting-container[data-greeting-time="morning"] .icon-container {
+    @apply bg-amber-50 text-amber-700;
+  }
+  .greeting-container[data-greeting-time="afternoon"] .icon-container {
+    @apply bg-sky-50 text-sky-700;
+  }
+  .greeting-container[data-greeting-time="night"] .icon-container {
+    @apply bg-indigo-50 text-indigo-500;
+  }
   .icon-container {
-    @apply flex flex-row items-center justify-center h-10 w-10 bg-white/90 rounded-full shadow-md;
+    @apply flex flex-row items-center justify-center h-10 w-10 bg-paper-base rounded-full shadow-md shadow-neutral-200/50;
   }
 </style>

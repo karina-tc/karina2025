@@ -11,22 +11,31 @@
 
 @layer base {
   :root {
-    --background-color: #FCFCFC;
-    --text-color: #000000;
   }
 }
 
 /* Base styles */
 html {
   scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
 }
 
 body {
-  @apply min-h-screen bg-background-color text-text-color font-safiro;
+  @apply min-h-screen bg-paper-base text-ink-primary font-safiro font-normal;
 }
 
 h1 {
-  @apply font-instrument-serif;
+  @apply font-instrument-serif text-6xl lg:text-8xl tracking-tight text-ink-primary font-medium;
 }
 
-/* Optional: Add any other global styles below */ 
+h2 {
+  @apply font-instrument-serif text-4xl lg:text-5xl tracking-tight text-ink-primary font-medium;
+}
+
+h3 {
+  @apply font-safiro text-base text-ink-secondary tracking-widest uppercase;
+}
+
+p {
+  @apply text-xl leading-8 text-ink-secondary;
+}

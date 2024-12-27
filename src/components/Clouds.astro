@@ -1,0 +1,26 @@
+---
+import { Image } from "astro:assets";
+import cloudLeft from "../assets/landscape/cloud-left.png";
+import cloudRight from "../assets/landscape/cloud-right.png";
+
+const {
+  additionalClasses = "",
+} = Astro.props;
+---
+
+<div class={`clouds-container ${additionalClasses}`}>
+  <Image src={cloudLeft} alt="Cloud Left" width={400} class="cloud-left" />
+  <Image src={cloudRight} alt="Cloud Right" width={400} class="cloud-right" />
+</div>
+
+<style>
+  .clouds-container {
+    @apply w-screen absolute inset-0;
+  }
+  .cloud-left {
+    @apply top-20 left-0 absolute animate-slow-fade-in;
+  }
+  .cloud-right {
+    @apply top-0 right-0 absolute animate-slow-fade-in;
+  }
+</style>
