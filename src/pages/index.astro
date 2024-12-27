@@ -7,6 +7,7 @@ import { statusCards } from "../types/intro/Statuses";
 import { jobHistory } from "../types/intro/Resume";
 import ArrowElbowRightDown from "phosphor-astro/ArrowElbowRightDown.astro";
 import tropic from "../assets/work/tropic/demo-tropic-01.png";
+import SectionHeader from "../components/SectionHeader.astro";
 ---
 
 <Layout
@@ -29,17 +30,11 @@ import tropic from "../assets/work/tropic/demo-tropic-01.png";
 
   <div class="content-wrapper flex flex-col">
     <section class="section-wrapper pt-20 content-section">
-      <div class="flex flex-col gap-8 items-center text-center">
-        <h3>Experience</h3>
-        <h2 class="max-w-lg">
-          10+ years of making the complex simple and enjoyable
-        </h2>
-        <p class="text-stone-600 text-base">
-          Over 10 years I've worked on all size startups in all categories. I
-          have deep experience distilling technical products into simple
-          easy-to-use solutions.
-        </p>
-      </div>
+      <SectionHeader
+        eyebrow="Experience"
+        title="10+ years of making the complex simple and enjoyable"
+        description="Over 10 years I've worked on all size startups in all categories. I have deep experience distilling technical products into simple easy-to-use solutions."
+      />
       <div class="grid grid-cols-1 md:grid-cols-3 mt-8 items-center bg-paper-green rounded-md overflow-hidden">
         {
           statusCards.map((item) => (
@@ -88,12 +83,10 @@ import tropic from "../assets/work/tropic/demo-tropic-01.png";
     <div class="divider--large"></div>
 
     <section class="section-wrapper mt-10 content-section">
-      <div class="flex flex-col gap-8 items-center text-center">
-        <h3>Testimonials</h3>
-        <h2 class="max-w-lg">
-          In their own words
-        </h2>
-      </div>
+      <SectionHeader
+        eyebrow="Testimonials"
+        title="In their own words"
+      />
     </section>
   </div>
 </Layout>
