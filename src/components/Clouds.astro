@@ -12,7 +12,7 @@ const { additionalClasses = "" } = Astro.props;
       src={cloudLeft}
       alt="Cloud Left"
       width={400}
-      class="cloud-left"
+      class="cloud-left content-section opacity-0 -translate-x-10"
       loading="eager"
       decoding="async"
     />
@@ -20,7 +20,7 @@ const { additionalClasses = "" } = Astro.props;
       src={cloudRight}
       alt="Cloud Right"
       width={400}
-      class="cloud-right"
+      class="cloud-right content-section opacity-0 translate-x-10"
       loading="eager"
       decoding="async"
     />
@@ -37,10 +37,16 @@ const { additionalClasses = "" } = Astro.props;
   }
 
   .cloud-left {
-    @apply absolute top-20 left-0;
+    @apply absolute top-20 left-0 transition-all duration-1000 ease-out;
   }
 
   .cloud-right {
-    @apply absolute top-0 right-0;
+    @apply absolute top-0 right-0 transition-all duration-1000 ease-out;
+  }
+
+  /* Override the default content-section animation duration for clouds */
+  .cloud-left.visible,
+  .cloud-right.visible {
+    @apply translate-x-0;
   }
 </style>

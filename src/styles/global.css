@@ -39,3 +39,11 @@ h3 {
 p {
   @apply text-xl leading-8 text-ink-secondary;
 }
+
+.content-section {
+  @apply transition-all duration-500 ease-out;
+}
+
+.content-section.visible {
+  @apply opacity-100 translate-y-0;
+}
