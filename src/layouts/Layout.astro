@@ -1,9 +1,9 @@
 ---
-import type { HeaderProps } from '../types/HeaderProps';
+import type { HeaderProps } from "../types/HeaderProps";
 import NavigationHeader from "../components/NavigationHeader.astro";
 import Clouds from "../components/Clouds.astro";
 import HeaderHero from "../components/HeaderHero.astro";
-
+import Footer from "../components/Footer.astro";
 interface Props extends HeaderProps {
   pageTitle: string;
   pageDescription: string;
@@ -29,7 +29,7 @@ const {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Poppins&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap"
       rel="stylesheet"
     />
   </head>
@@ -42,5 +42,26 @@ const {
     <main class="flex-1 relative p-10">
       <slot />
     </main>
+    <Footer />
   </body>
 </html>
+
+<script>
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    },
+    {
+      threshold: 0.1,
+      rootMargin: "50px",
+    },
+  );
+
+  document.querySelectorAll(".content-section").forEach((section) => {
+    observer.observe(section);
+  });
+</script>

@@ -33,7 +33,7 @@ h2 {
 }
 
 h3 {
-  @apply font-safiro text-base text-ink-secondary tracking-widest uppercase;
+  @apply font-safiro text-base font-semibold text-ink-secondary tracking-widest uppercase;
 }
 
 p {

@@ -1,7 +1,7 @@
 ---
 import "../styles/global.css";
 import Layout from "../layouts/Layout.astro";
-import karina from "../assets/brand/karina-profile.png";
+import karina from "../assets/brand/karina-profile.webp";
 import { statusCards } from "../types/intro/Statuses";
 import { jobHistory } from "../types/intro/Resume";
 ---
@@ -14,28 +14,32 @@ import { jobHistory } from "../types/intro/Resume";
   description_text="My motivation is to build products that aim to help people have happier days. Life is too short to be ruined by awful experiences. Every product needs to be crafted for human joy."
   header_visual_image={karina}
   header_visual_alt_text="Karina Tovar"
-  header_visual_classes="-translate-x-10 mt-10"
-  header_visual_width={700}
-  horizon_height="425px"
+  header_visual_classes="mt-10"
+  header_visual_width={473}
+  horizon_height="455px"
 >
   <div class="content-wrapper">
-    <section class="mt-[var(--space-large)] mx-auto max-w-screen-md">
+    <section class="mt-10 mx-auto max-w-screen-md content-section">
       <div class="flex flex-col gap-8 items-center text-center">
         <h3>Experience</h3>
         <h2 class="max-w-lg">
           10+ years of making the complex simple and enjoyable
         </h2>
         <p class="text-stone-600">
-          Over 10 years I've worked on all size startups in all categories. I have
-          deep experience distilling technical products into simple easy-to-use
-          solutions.
+          Over 10 years I've worked on all size startups in all categories. I
+          have deep experience distilling technical products into simple
+          easy-to-use solutions.
         </p>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 mt-8 items-center bg-stone-200 rounded-md overflow-hidden">
+      <div
+        class="grid grid-cols-1 md:grid-cols-3 mt-8 items-center bg-paper-green rounded-md overflow-hidden"
+      >
         {
           statusCards.map((item) => (
             <div class="flex flex-1 flex-col gap-2 p-5 border-r border-white text-stone-900 text-sm text-center">
-              <span>{item.label}</span>
+              <span class="text-ink-highlight-green font-semibold tracking-widest text-xs">
+                {item.label}
+              </span>
               <span>{item.value}</span>
             </div>
           ))
@@ -43,14 +47,14 @@ import { jobHistory } from "../types/intro/Resume";
       </div>
     </section>
 
-    <section class="mt-[var(--space-small)] mx-auto max-w-screen-md pt-12 pb-16">
+    <section class="mx-auto max-w-screen-md pt-12 pb-16 content-section">
       <div class="flex flex-col gap-10">
         <div class="flex flex-col text-base">
           {
             jobHistory.map((job) => (
-              <div class="flex justify-between items-center px-2 py-4 bg-paper-base border-b border-dashed border-neutral-500">
+              <div class="flex justify-between items-center px-2 py-4 bg-paper-base border-b border-dashed border-neutral-200">
                 <div class="flex items-center">
-                  <div class="w-10 h-10 bg-white shadow-md shadow-neutral-500 rounded-md overflow-hidden border border-neutral-500 mr-4" />
+                  <div class="w-10 h-10 bg-white shadow-md shadow-neutral-200 rounded-md overflow-hidden border border-neutral-200 mr-4" />
                   <span class="font-semibold">{job.company}</span>
                   <span>, {job.role}</span>
                 </div>
@@ -65,10 +69,17 @@ import { jobHistory } from "../types/intro/Resume";
 </Layout>
 
 <style>
-  .content-wrapper {
-    /* Force a new stacking context */
-    isolation: isolate;
-    position: relative;
-    z-index: 1;
+  .content-section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+      opacity 0.6s ease-out,
+      transform 0.6s ease-out;
+  }
+
+  .content-section.visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 </style>
+

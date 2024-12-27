@@ -1,26 +1,46 @@
 ---
 import { Image } from "astro:assets";
-import cloudLeft from "../assets/landscape/cloud-left.png";
-import cloudRight from "../assets/landscape/cloud-right.png";
+import cloudLeft from "../assets/landscape/cloud-left.webp";
+import cloudRight from "../assets/landscape/cloud-right.webp";
 
-const {
-  additionalClasses = "",
-} = Astro.props;
+const { additionalClasses = "" } = Astro.props;
 ---
 
-<div class={`clouds-container ${additionalClasses}`}>
-  <Image src={cloudLeft} alt="Cloud Left" width={400} class="cloud-left" loading="eager" />
-  <Image src={cloudRight} alt="Cloud Right" width={400} class="cloud-right" loading="eager" />
+<div class="clouds-wrapper">
+  <div class="clouds-container">
+    <Image
+      src={cloudLeft}
+      alt="Cloud Left"
+      width={400}
+      class="cloud-left"
+      loading="eager"
+      decoding="async"
+    />
+    <Image
+      src={cloudRight}
+      alt="Cloud Right"
+      width={400}
+      class="cloud-right"
+      loading="eager"
+      decoding="async"
+    />
+  </div>
 </div>
 
 <style>
+  .clouds-wrapper {
+    @apply w-full absolute top-0 left-0 right-0 z-0 pointer-events-none;
+  }
+
   .clouds-container {
-    @apply w-screen absolute inset-0;
+    @apply w-full h-full relative;
   }
+
   .cloud-left {
-    @apply top-20 left-0 absolute animate-slow-fade-in;
+    @apply absolute top-20 left-0;
   }
+
   .cloud-right {
-    @apply top-0 right-0 absolute animate-slow-fade-in;
+    @apply absolute top-0 right-0;
   }
 </style>

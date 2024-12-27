@@ -10,7 +10,8 @@ export default {
       colors: {
         'paper': {
           'base': '#FCFCFC',
-          'green': '#EAF4EA'
+          'green': '#EAF4EA',
+          'dark': '#271E29'
         },
         'ink': {
           'primary': '#271E29',
