@@ -9,43 +9,49 @@ const currentPath = Astro.url.pathname;
   <div class="absolute bottom-0 left-0 w-full h-1/2 bg-orange-500 blur-sm rounded-full rounded-t-none opacity-15 mix-blend-multiply">
   </div>
   <nav class="menu-container">
+    <div class="dynamic-underline"></div>
     {
-      menu_items.map(
-        (item: { href: string | URL | null | undefined; label: unknown }) => (
-          <a href={item.href} class={currentPath === item.href ? "active" : ""}>
-            <span>{item.label}</span>
-            <div class="menu-item-underline" />
-            {
-              item.label === "Work" && (
-                <span class="shortcut inline-flex text-xs text-stone-400 px-1 min-h-5 bg-stone-100 rounded-md items-center justify-center">
-                  /
-                </span>
-              )
-            }
-          </a>
-        ),
-      )
+      menu_items.map((item: { href: string | URL | null | undefined; label: unknown; }) => (
+        <a href={item.href} class={currentPath === item.href ? "active" : ""}>
+          <span>{item.label}</span>
+          {
+            item.label === "Work" && (
+              <span class="shortcut inline-flex text-xs text-stone-400 px-1 min-h-5 bg-stone-100 rounded-md items-center justify-center">
+                /
+              </span>
+            )
+          }
+        </a>
+      ))
     }
   </nav>
 </div>
+
 <style>
   .menu-container {
-    @apply flex flex-row items-center justify-center gap-4 w-fit m-auto py-3 px-6 bg-paper-base rounded-full border border-neutral-100 shadow-md shadow-neutral-200/50 backdrop-blur-sm;
+    @apply flex flex-row items-center justify-center gap-4 w-fit m-auto py-3 px-6 bg-paper-base rounded-full border border-neutral-100 shadow-md shadow-neutral-200/50 backdrop-blur-sm relative;
+
+    .dynamic-underline {
+      @apply absolute h-0.5 bg-orange-500 transition-all duration-300 ease-in-out;
+      bottom: 0.75rem;
+      left: var(--left, 1rem);
+      width: var(--width, 0);
+      opacity: 1;
+      pointer-events: none;
+    }
+
     a {
       @apply text-base text-ink-secondary leading-6 w-fit transition-all duration-300 ease-in-out relative flex items-center gap-2;
 
       &:hover {
         @apply text-ink-primary;
-
-        .menu-item-underline {
-          @apply opacity-100 bg-stone-200;
-        }
       }
+      
       &.active {
         @apply font-semibold text-ink-primary;
 
-        .menu-item-underline {
-          @apply opacity-100 bg-orange-500;
+        ~ .dynamic-underline {
+          @apply bg-orange-500;
         }
 
         .shortcut {
@@ -53,8 +59,9 @@ const currentPath = Astro.url.pathname;
         }
       }
     }
-    .menu-item-underline {
-      @apply w-full h-0.5 absolute top-full left-0 right-0 bg-transparent opacity-0 transition-all duration-300 ease-in-out;
-    }
   }
 </style>
+
+<script>
+  import '../scripts/controllers/navigation-controller';
+</script>
