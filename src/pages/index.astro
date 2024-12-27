@@ -1,8 +1,6 @@
 ---
 import "../styles/global.css";
-
 import Layout from "../layouts/Layout.astro";
-
 import karina from "../assets/brand/karina-profile.png";
 import { statusCards } from "../types/intro/Statuses";
 import { jobHistory } from "../types/intro/Resume";
@@ -20,69 +18,57 @@ import { jobHistory } from "../types/intro/Resume";
   header_visual_width={700}
   horizon_height="425px"
 >
-  <section class="mt-[var(--space-large)] mx-auto max-w-screen-md">
-    <div class="flex flex-col gap-8 items-center text-center">
-      <h3>Experience</h3>
-      <h2 class="max-w-lg">
-        10+ years of making the complex simple and enjoyable
-      </h2>
-      <p class="text-stone-600">
-        Over 10 years I’ve worked on all size startups in all categories. I have
-        deep experience distilling technical products into simple easy-to-use
-        solutions.
-      </p>
-    </div>
-    <div class="stats-card-container">
-      {
-        statusCards.map((item) => (
-          <div>
-            <span class="">{item.label}</span>
-            <span>{item.value}</span>
-          </div>
-        ))
-      }
-    </div>
-  </section>
-
-  <section class="mt-[var(--space-small)] mx-auto max-w-screen-md pt-12 pb-16">
-    <div class="flex flex-col gap-10">
-      <div class="flex flex-col text-base">
+  <div class="content-wrapper">
+    <section class="mt-[var(--space-large)] mx-auto max-w-screen-md">
+      <div class="flex flex-col gap-8 items-center text-center">
+        <h3>Experience</h3>
+        <h2 class="max-w-lg">
+          10+ years of making the complex simple and enjoyable
+        </h2>
+        <p class="text-stone-600">
+          Over 10 years I've worked on all size startups in all categories. I have
+          deep experience distilling technical products into simple easy-to-use
+          solutions.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 mt-8 items-center bg-stone-200 rounded-md overflow-hidden">
         {
-          jobHistory.map((job) => (
-            <div class="resume-row">
-              <div class="flex items-center">
-                <div class="resume-row--logo" />
-                <span class="font-semibold">{job.company}</span>
-                <span>, {job.role}</span>
-              </div>
-              <span class="text-ink-secondary">{job.period}</span>
+          statusCards.map((item) => (
+            <div class="flex flex-1 flex-col gap-2 p-5 border-r border-white text-stone-900 text-sm text-center">
+              <span>{item.label}</span>
+              <span>{item.value}</span>
             </div>
           ))
         }
       </div>
-      Test
-    </div>
-  </section>
+    </section>
+
+    <section class="mt-[var(--space-small)] mx-auto max-w-screen-md pt-12 pb-16">
+      <div class="flex flex-col gap-10">
+        <div class="flex flex-col text-base">
+          {
+            jobHistory.map((job) => (
+              <div class="flex justify-between items-center px-2 py-4 bg-paper-base border-b border-dashed border-neutral-500">
+                <div class="flex items-center">
+                  <div class="w-10 h-10 bg-white shadow-md shadow-neutral-500 rounded-md overflow-hidden border border-neutral-500 mr-4" />
+                  <span class="font-semibold">{job.company}</span>
+                  <span>, {job.role}</span>
+                </div>
+                <span class="text-ink-secondary">{job.period}</span>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+  </div>
 </Layout>
 
 <style>
-  .stats-card-container {
-    @apply grid grid-cols-1 md:grid-cols-3 mt-8 items-center bg-stone-200 text-white rounded-md overflow-hidden;
-
-    div {
-      @apply flex flex-1 flex-col gap-2 p-5 border-r border-white text-stone-900 text-sm text-center transition-all duration-300 ease-in-out;
-    }
-
-    span:first-child {
-      @apply font-semibold tracking-widest text-stone-500;
-    }
-  }
-
-  .resume-row {
-    @apply flex justify-between items-center px-2 py-4 bg-paper-base border-b border-dashed border-neutral-500 hover:px-4 transition-all duration-300 ease-in-out;
-
-    .resume-row--logo {
-      @apply w-10 h-10 bg-white shadow-md shadow-neutral-500 rounded-md overflow-hidden border border-neutral-500 mr-4;
-    }
+  .content-wrapper {
+    /* Force a new stacking context */
+    isolation: isolate;
+    position: relative;
+    z-index: 1;
   }
 </style>
