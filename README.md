@@ -46,3 +46,10 @@ All commands are run from the root of the project, from a terminal:
 ## 👀 Want to learn more?
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+
+## Environment Setup
+
+1. Copy `.env.example` to `.env`
+2. Register your application at [Spotify Developer Dashboard](https://developer.spotify.com/dashboard)
+3. Fill in your Spotify API credentials in `.env`
+4. Generate a refresh token using the authorization URL (see `.env.example` for format)

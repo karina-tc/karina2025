@@ -4,7 +4,7 @@ const { music_text = "music" } = Astro.props;
 
 <div class="music-container group" id="music-container">
   <div class="music-info">
-    <span class="current-track">Listening to {music_text}</span>
+    <span class="current-track"></span>
   </div>
   <div class="music-details">
     <div class="flex flex-row gap-3">
@@ -86,3 +86,7 @@ const { music_text = "music" } = Astro.props;
     }
   }
 </style>
+
+<script>
+  import '../scripts/controllers/music-controller';
+</script>

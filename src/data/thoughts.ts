@@ -28,11 +28,11 @@ export const thoughts = [
     slug: "when-becoming-an-expert-is-a-bad-idea"
   },
   {
-    title: "Saying No to Asses",
+    title: "The Agentic Future",
     category: "Strategy",
     readingTime: 4,
     date: "2025-01-02",
-    slug: "saying-no-to-asses"
+    slug: "the-agentic-future"
   },
   {
     title: "The Rise of the Unicorn",
