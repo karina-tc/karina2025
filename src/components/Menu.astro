@@ -1,0 +1,164 @@
+---
+import XCircle from "phosphor-astro/XCircle.astro";
+
+interface MenuItem {
+  company: string;
+  description: string;
+  href: string;
+}
+
+const workItems: MenuItem[] = [
+  {
+    company: "Renumerate",
+    description: "Branding and early guidance",
+    href: "/work/renumerate",
+  },
+  {
+    company: "Tropic",
+    description: "Developing a new AI driven product",
+    href: "/work/tropic",
+  },
+  {
+    company: "Mystery / Glue",
+    description: "Turning events software into company connections",
+    href: "/work/glue",
+  },
+  {
+    company: "Teikametrics",
+    description: "Setting a foundation for AI driven PPC advertising",
+    href: "/work/teikametrics",
+  },
+  {
+    company: "Rejoiner",
+    description:
+      "Evolving a cart abandonment platform into a flexible marketing workflow",
+    href: "/work/rejoiner",
+  },
+];
+---
+
+<div id="work-menu" class="work-menu hidden">
+  <button
+    type="button"
+    class="menu-close"
+    data-action="close-menu"
+    aria-label="Close menu"
+  >
+    <span class="close-label">Close</span>
+    <XCircle class="w-8 h-8" />
+  </button>
+  <div class="menu-container">
+    <div class="search-section">
+      <input
+        type="text"
+        placeholder="Search anything"
+        class="search-input peer"
+      />
+      <button type="button" class="clear-button"> Clear </button>
+    </div>
+    <div class="menu-items">
+      {
+        workItems.map((item) => (
+          <a href={item.href} class="menu-item group">
+            <h3 class="company-name">{item.company}</h3>
+            <p class="description">{item.description}</p>
+          </a>
+        ))
+      }
+      <div class="menu-footer">
+        <span>Or</span>
+        <a href="/work/gallery" class="gallery-link"> view pixel gallery </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .work-menu {
+    @apply fixed top-0 left-0 w-full h-screen bg-neutral-100/90 backdrop-blur-lg z-menu pt-20;
+  }
+
+  .menu-container {
+    @apply max-w-5xl mx-auto p-10 backdrop-blur-sm rounded-3xl relative;
+  }
+
+  .menu-close {
+    @apply flex flex-col items-center justify-center opacity-70 text-ink-secondary relative;
+    @apply transition-all duration-300 absolute top-10 right-10 hover:opacity-100 outline-none;
+
+    .close-label {
+      @apply absolute top-0 text-xs opacity-0 text-neutral-500 transition-all duration-300;
+    }
+
+    &:hover .close-label {
+      @apply opacity-100 -top-4;
+    }
+  }
+
+  .search-section {
+    @apply mb-8 relative overflow-hidden;
+  }
+
+  .search-input {
+    @apply w-full text-5xl border-b-2 border-neutral-200 pb-4 pr-14 bg-transparent outline-none transition-all duration-300;
+    @apply placeholder:text-neutral-400 focus:border-neutral-300 [&:not(:placeholder-shown)]:border-green-500;
+  }
+
+  .clear-button {
+    @apply absolute opacity-100 top-0 right-0 mt-6 mr-0 text-sm text-neutral-500 transition-all duration-300;
+    @apply peer-placeholder-shown:-mr-20 peer-placeholder-shown:opacity-0;
+  }
+
+  .menu-items {
+    @apply space-y-2;
+  }
+
+  .menu-item {
+    @apply block py-4 transition-colors outline-none;
+  }
+
+  .company-name {
+    @apply text-ink-highlight-green mb-1 group-hover:underline underline-offset-4;
+  }
+
+  .description {
+    @apply text-neutral-500;
+  }
+
+  .menu-footer {
+    @apply flex items-center gap-2 text-ink-secondary pt-8;
+  }
+
+  .gallery-link {
+    @apply text-ink-secondary underline underline-offset-4;
+  }
+</style>
+
+<script>
+  // Get DOM elements
+  const workLink = document.querySelector('a[href="/work"]');
+  const workMenu = document.getElementById("work-menu");
+
+  // Toggle menu visibility
+  workLink?.addEventListener("click", (e) => {
+    e.preventDefault();
+    workMenu?.classList.toggle("hidden");
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener("click", (e) => {
+    if (
+      !workMenu?.contains(e.target as Node) &&
+      !(e.target as Element).closest('a[href="/work"]')
+    ) {
+      workMenu?.classList.add("hidden");
+    }
+  });
+
+  // Close menu on escape key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      workMenu?.classList.add("hidden");
+    }
+  });
+</script>

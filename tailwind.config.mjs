@@ -21,7 +21,10 @@ export default {
         }
       },
       zIndex: {
+        'minimal': '1',
+        'base': '10',
         'navigation': '20',
+        'menu': '30',
       },
       animation: {
         'fade-in': 'fade-in 0.5s ease-in-out',

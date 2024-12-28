@@ -42,7 +42,7 @@ const { music_text = "music" } = Astro.props;
   }
 
   .music-details {
-    @apply absolute left-[calc(100%-150px)] -translate-x-1/2 top-8 opacity-0 translate-y-2 z-10
+    @apply absolute left-[calc(100%-150px)] -translate-x-1/2 top-8 opacity-0 translate-y-2 z-base
            min-w-[300px] p-4 bg-white/50 backdrop-blur-sm rounded-lg border border-white shadow-md
            transition-all duration-200 group-hover:opacity-100 group-hover:translate-y-0;
 
@@ -50,7 +50,7 @@ const { music_text = "music" } = Astro.props;
       @apply w-20 h-20 rounded-full overflow-hidden relative shadow-md border border-white animate-fade-in-right;
 
       .album-hole {
-        @apply w-5 h-5 bg-white rounded-full absolute inset-0 m-auto z-10;
+        @apply w-5 h-5 bg-white rounded-full absolute inset-0 m-auto z-base;
       }
 
       .album-art {
