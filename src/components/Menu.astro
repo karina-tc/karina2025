@@ -137,28 +137,65 @@ const workItems: MenuItem[] = [
 <script>
   // Get DOM elements
   const workLink = document.querySelector('a[href="/work"]');
-  const workMenu = document.getElementById("work-menu");
+  const workMenu = document.getElementById('work-menu');
+  const searchInput = document.querySelector('.search-input') as HTMLInputElement;
+  const clearButton = document.querySelector('.clear-button');
+  const closeButton = document.querySelector('[data-action="close-menu"]');
+
+  // Function to open menu and focus search
+  const openMenu = () => {
+    workMenu?.classList.remove('hidden');
+    // Focus the search input after a brief delay to ensure the menu is visible
+    setTimeout(() => searchInput?.focus(), 100);
+  };
+
+  // Function to close menu
+  const closeMenu = () => {
+    workMenu?.classList.add('hidden');
+    if (searchInput) searchInput.value = '';
+  };
 
   // Toggle menu visibility
-  workLink?.addEventListener("click", (e) => {
+  workLink?.addEventListener('click', (e) => {
     e.preventDefault();
-    workMenu?.classList.toggle("hidden");
+    workMenu?.classList.contains('hidden') ? openMenu() : closeMenu();
   });
 
-  // Close menu when clicking outside
-  document.addEventListener("click", (e) => {
-    if (
-      !workMenu?.contains(e.target as Node) &&
-      !(e.target as Element).closest('a[href="/work"]')
-    ) {
-      workMenu?.classList.add("hidden");
+  // Close menu when clicking close button
+  closeButton?.addEventListener('click', closeMenu);
+
+  // Clear search input
+  clearButton?.addEventListener('click', () => {
+    if (searchInput) {
+      searchInput.value = '';
+      searchInput.focus();
     }
   });
 
-  // Close menu on escape key
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      workMenu?.classList.add("hidden");
+  // Close menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!workMenu?.contains(e.target as Node) && 
+        !(e.target as Element).closest('a[href="/work"]')) {
+      closeMenu();
+    }
+  });
+
+  // Handle keyboard shortcuts
+  document.addEventListener('keydown', (e) => {
+    // Check if the active element is an input or textarea
+    const isTyping = ['input', 'textarea'].includes(
+      (document.activeElement?.tagName || '').toLowerCase()
+    );
+
+    // Close on escape
+    if (e.key === 'Escape') {
+      closeMenu();
+    }
+    
+    // Open on forward slash, but only if not typing in an input/textarea
+    if (e.key === '/' && !isTyping) {
+      e.preventDefault(); // Prevent the "/" from being typed
+      openMenu();
     }
   });
 </script>
