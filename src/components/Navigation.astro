@@ -13,7 +13,10 @@ const currentPath = Astro.url.pathname;
     <div class="dynamic-underline"></div>
     {
       menu_items.map((item: { href: string | URL | null | undefined; label: unknown; }) => (
-        <a href={item.href} class={currentPath === item.href ? "active" : ""}>
+        <a 
+          href={item.href} 
+          class={currentPath.startsWith(item.href as string) && item.href !== "/" ? "active" : currentPath === item.href ? "active" : ""}
+        >
           <span>{item.label}</span>
           {
             item.label === "Work" && (
