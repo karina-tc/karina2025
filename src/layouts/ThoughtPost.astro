@@ -1,0 +1,67 @@
+---
+import Layout from "./Layout.astro";
+import art from "../assets/brand/art-thoughts.png";
+
+interface Props {
+  title: string;
+  category: string;
+  date: string;
+  readingTime: number;
+}
+
+const { title, category, date, readingTime } = Astro.props;
+
+// Format date
+const formattedDate = new Date(date).toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+---
+
+<Layout
+  pageTitle={`${title} - Thoughts`}
+  pageDescription={title}
+  eyelash_text={category}
+  title_text={title}
+  header_visual_image={art}
+  header_visual_alt_text="Thoughts"
+  header_visual_classes="mt-10 mix-blend-multiply"
+  header_visual_width={280}
+>
+  <div class="divider--small"></div>
+
+  <article class="w-full max-w-3xl mx-auto">
+    <header class="mb-12">
+      <div class="flex items-center justify-center gap-2 text-ink-secondary text-sm content-section">
+        <span>{formattedDate}</span>
+        <span>·</span>
+        <span>{readingTime} min read</span>
+        <span>·</span>
+        <span>{category}</span>
+      </div>
+    </header>
+
+    <div class="divider--small"></div>
+
+    <div class="prose max-w-none content-section">
+      <slot />
+    </div>
+  </article>
+
+  <div class="divider--extra-large"></div>
+</Layout>
+
+<style>
+  .prose {
+    @apply font-safiro
+      prose-headings:text-ink-primary
+      prose-h2:font-medium
+      prose-h2:text-red-500
+      prose-h4:font-medium
+      prose-p:text-ink-secondary
+      prose-a:text-orange-600 
+      prose-a:no-underline 
+      hover:prose-a:underline;
+  }
+</style>
