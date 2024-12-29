@@ -134,12 +134,14 @@ export async function getThoughtContent(slug: string) {
   if (showcaseProperty?.files?.length > 0) {
     const file = showcaseProperty.files[0];
     
-    // Use Notion's authenticated URL
+    // Use Notion's authenticated URL directly without any optimization
     showcaseImage = file.type === 'external' 
       ? file.external.url 
       : file.file.url;
     
-    console.log('Using Notion authenticated URL:', showcaseImage);
+    // Remove any Astro/Netlify image optimization
+    // Just return the raw Notion URL
+    console.log('Using direct Notion URL:', showcaseImage);
   }
 
   return {
@@ -147,6 +149,6 @@ export async function getThoughtContent(slug: string) {
     date: formatDate((page as any).properties.Date.date.start),
     categories: (page as any).properties.Categories.multi_select.map((cat: any) => cat.name),
     content: blocks.results,
-    showcase: showcaseImage
+    showcase: showcaseImage // Raw Notion URL
   };
 }
