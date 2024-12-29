@@ -13,6 +13,10 @@ const getEnvVar = (key: string): string => {
   throw new Error(`Environment variable ${key} is not set`);
 };
 
+// Cache for storing fetched data
+const CACHE_DURATION = 60 * 1000; // 1 minute
+const cache = new Map();
+
 const notion = new Client({
   auth: getEnvVar('NOTION_API_KEY')
 });
@@ -27,6 +31,16 @@ function formatDate(dateStr: string): string {
 }
 
 export async function getThoughts() {
+  const cacheKey = 'thoughts-list';
+  
+  // Check cache first
+  if (cache.has(cacheKey)) {
+    const { data, timestamp } = cache.get(cacheKey);
+    if (Date.now() - timestamp < CACHE_DURATION) {
+      return data;
+    }
+  }
+
   const response = await notion.databases.query({
     database_id: getEnvVar('NOTION_DATABASE_ID'),
     filter: {
@@ -66,6 +80,12 @@ export async function getThoughts() {
       content: previewText
     };
   }));
+
+  // Cache the results
+  cache.set(cacheKey, {
+    data: thoughtsWithContent,
+    timestamp: Date.now()
+  });
 
   return thoughtsWithContent;
 }

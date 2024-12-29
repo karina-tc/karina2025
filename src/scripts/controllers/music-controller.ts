@@ -6,6 +6,8 @@ let spotifyBadge: HTMLAnchorElement | null;
 let currentTrack: HTMLElement | null;
 
 function updateMusicDetails(data: any) {
+  if (!data) return;
+  
   if (albumArt) albumArt.src = data.albumArt;
   if (songName) songName.textContent = data.song;
   if (artistName) artistName.textContent = data.artist;
@@ -45,8 +47,10 @@ document.addEventListener('DOMContentLoaded', () => {
   currentTrack = document.querySelector('.current-track');
 
   // Hide the current track text initially
-  if (currentTrack) currentTrack.style.transition = 'opacity 0.3s ease';
-  if (currentTrack) currentTrack.style.opacity = '0';
+  if (currentTrack) {
+    currentTrack.style.transition = 'opacity 0.3s ease';
+    currentTrack.style.opacity = '0';
+  }
 
   // Single fetch on page load
   fetchMusicData();
