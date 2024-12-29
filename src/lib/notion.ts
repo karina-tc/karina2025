@@ -133,22 +133,13 @@ export async function getThoughtContent(slug: string) {
 
   if (showcaseProperty?.files?.length > 0) {
     const file = showcaseProperty.files[0];
-    // Handle both internal Notion files and external URLs
-    const imageUrl = file.type === 'external' ? file.external.url : file.file.url;
     
-    try {
-      // Optimize and cache the image
-      const optimizedImage = await getImage({
-        src: imageUrl,
-        width: 1200,
-        height: 630,
-        format: 'webp', // Convert to WebP for better compression
-      });
-      showcaseImage = optimizedImage.src;
-    } catch (error) {
-      console.error('Error optimizing image:', error);
-      showcaseImage = imageUrl; // Fallback to original URL if optimization fails
-    }
+    // Use Notion's authenticated URL
+    showcaseImage = file.type === 'external' 
+      ? file.external.url 
+      : file.file.url;
+    
+    console.log('Using Notion authenticated URL:', showcaseImage);
   }
 
   return {
