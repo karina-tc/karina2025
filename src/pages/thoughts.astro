@@ -5,16 +5,16 @@ import { getThoughts } from "../lib/notion";
 import type { ThoughtPost } from "../lib/notion";
 
 const posts = await getThoughts();
-const mainPosts = posts.filter(post => !post.categories.includes('Briefs'));
-const sideNotes = posts.filter(post => post.categories.includes('Briefs'));
+const mainPosts = posts.filter((post) => !post.categories.includes("Briefs"));
+const sideNotes = posts.filter((post) => post.categories.includes("Briefs"));
 
 // Group main posts by year
-const years = [...new Set(mainPosts.map(post => 
-  new Date(post.date).getFullYear()
-))].sort((a, b) => b - a);
+const years = [
+  ...new Set(mainPosts.map((post) => new Date(post.date).getFullYear())),
+].sort((a, b) => b - a);
 
-const getPostsForYear = (year: number) => 
-  mainPosts.filter(post => new Date(post.date).getFullYear() === year);
+const getPostsForYear = (year: number) =>
+  mainPosts.filter((post) => new Date(post.date).getFullYear() === year);
 ---
 
 <Layout
@@ -27,59 +27,66 @@ const getPostsForYear = (year: number) =>
   header_visual_classes="mt-10 mix-blend-multiply"
   header_visual_width={280}
 >
-  <div class="divider--large" />
+  <div class="divider--large"></div>
 
-  <section class="w-full max-w-5xl h-full mx-auto content-section flex items-start justify-between gap-10">
+  <section
+    class="w-full max-w-5xl h-full mx-auto flex items-start justify-between gap-10"
+  >
     <!-- Sidenotes -->
-    <aside class="w-1/3 max-w-[200px] [&>p]:text-sm [&>p]:text-ink-secondary [&>p]:mb-2">
+    <aside
+      class="w-1/3 max-w-[200px] [&>p]:text-sm [&>p]:text-ink-secondary [&>p]:mb-2 content-section"
+    >
       <h3 class="mb-4 text-sm">Side notes</h3>
-      {sideNotes.map(note => (
-        <p>
-          <a href={note.href} class="hover:underline underline-offset-4">
-            {note.title}
-          </a>
-        </p>
-      ))}
+      {
+        sideNotes.map((note) => (
+          <p>
+            <a href={note.href} class="hover:underline underline-offset-4">
+              {note.title}
+            </a>
+          </p>
+        ))
+      }
     </aside>
 
     <!-- Main posts -->
     <div class="flex-1 flex flex-col items-start gap-5">
-      {years.map(year => {
-        const postsForYear = getPostsForYear(year);
-        return (
-          <>
-            <div class="w-full flex items-center justify-between flex-wrap px-2 [&:not(:first-child)]:mt-20">
-              <h2>{year}</h2>
-              <p class="text-ink-secondary text-base">
-                {postsForYear.length} published thoughts
-              </p>
-            </div>
-            <ul class="w-full flex flex-col items-start mt-2.5 [&>li]:w-full">
-              {postsForYear.map(post => (
-                <li class="group">
-                  <a 
-                    href={post.href} 
-                    rel="prefetch"
-                    class="w-full flex items-center gap-2 justify-between text-base outline-none transition-all duration-300 px-2 py-5 border-b border-dashed border-stone-200 hover:bg-paper-green/50 hover:px-4"
-                  >
-                    <span class="text-ink-primary group-hover:underline underline-offset-4">
-                      {post.title}
-                    </span>
-                    <div class="flex items-center justify-end gap-1 text-ink-secondary">
-                      <span>{post.categories[0]}</span>
-                      <span>·</span>
-                      <span>{Math.ceil(post.content.length / 200)} mins</span>
-                    </div>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </>
-        );
-      })}
+      {
+        years.map((year) => {
+          const postsForYear = getPostsForYear(year);
+          return (
+            <>
+              <div class="w-full flex items-center justify-between flex-wrap px-2 [&:not(:first-child)]:mt-20 content-section">
+                <h2>{year}</h2>
+                <p class="text-ink-secondary text-base">
+                  {postsForYear.length} published thoughts
+                </p>
+              </div>
+              <ul class="w-full flex flex-col items-start mt-2.5 [&>li]:w-full content-section">
+                {postsForYear.map((post) => (
+                  <li class="group">
+                    <a
+                      href={post.href}
+                      rel="prefetch"
+                      class="w-full flex items-center gap-2 justify-between text-base outline-none transition-all duration-300 px-2 py-5 border-b border-dashed border-stone-200 hover:bg-paper-green/50 hover:px-4"
+                    >
+                      <span class="text-ink-primary group-hover:underline underline-offset-4">
+                        {post.title}
+                      </span>
+                      <div class="flex items-center justify-end gap-1 text-ink-secondary">
+                        <span>{post.categories[0]}</span>
+                        <span>·</span>
+                        <span>{Math.ceil(post.content.length / 200)} mins</span>
+                      </div>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </>
+          );
+        })
+      }
     </div>
   </section>
 
-  <div class="divider--extra-large" />
+  <div class="divider--extra-large"></div>
 </Layout>
-
