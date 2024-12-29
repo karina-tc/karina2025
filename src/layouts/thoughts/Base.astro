@@ -7,6 +7,7 @@ import Footer from "../../components/structure/Footer.astro";
 import LoadingBar from "../../components/elements/LoadingBar.astro";
 import Breadcrumbs from "../../components/structure/Breadcrumbs.astro";
 import ScribbleLoop from "phosphor-astro/ScribbleLoop.astro";
+import CommonHead from "../../components/structure/CommonHead.astro";
 
 interface Props {
   pageTitle?: string;
@@ -43,18 +44,9 @@ const eyelash = `${formattedDate} · ${readingTime} min read`;
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{pageTitle || `${title} - Thoughts`}</title>
-    <meta name="description" content={pageDescription || title} />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap"
-      rel="stylesheet"
+    <CommonHead 
+      pageTitle={pageTitle || title} 
+      pageDescription={pageDescription || `Read ${title} - a blog post about ${categories.join(', ')}`} 
     />
   </head>
   <body class="w-full h-screen p-0 m-0 overflow-x-hidden relative">
