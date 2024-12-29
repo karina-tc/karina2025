@@ -19,6 +19,7 @@ export interface HorizonProps {
 
 export interface HeaderProps extends TitleProps {
   horizon_height?: string;
+  breadcrumbs?: { text: string; href: string }[];
   title_classes?: string;
   header_visual_image?: ImageMetadata;
   header_visual_alt_text?: string;

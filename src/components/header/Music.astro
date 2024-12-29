@@ -1,5 +1,6 @@
 ---
-const { music_text = "music" } = Astro.props;
+import { Image } from "astro:assets";
+const placeholderImage = "/images/other/record.png";
 ---
 
 <div class="music-container group" id="music-container">
@@ -10,7 +11,20 @@ const { music_text = "music" } = Astro.props;
     <div class="flex flex-row gap-3">
       <div class="album-cover group/album">
         <div class="album-hole"></div>
-        <img class="album-art" src="" alt="Album Art" draggable="false" />
+        {
+          placeholderImage ? (
+            <Image
+              class="album-art"
+              src={placeholderImage}
+              alt="Album Art"
+              draggable="false"
+              width={100}
+              height={100}
+            />
+          ) : (
+            <div class="album-art-placeholder" />
+          )
+        }
       </div>
       <div class="text-info">
         <span class="song-name">Some song</span>
@@ -88,6 +102,5 @@ const { music_text = "music" } = Astro.props;
 </style>
 
 <script>
-  import '../../scripts/controllers/music-controller';
+  import "../../scripts/controllers/music-controller";
 </script>
-

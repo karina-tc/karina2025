@@ -1,0 +1,154 @@
+---
+import "../../styles/global.css";
+import { Image } from "astro:assets";
+import NavWrapper from "../../components/header/NavWrapper.astro";
+import Title from "../../components/structure/Title.astro";
+import Footer from "../../components/structure/Footer.astro";
+import LoadingBar from "../../components/elements/LoadingBar.astro";
+import Breadcrumbs from "../../components/structure/Breadcrumbs.astro";
+
+interface Props {
+  pageTitle?: string;
+  pageDescription?: string;
+  title: string;
+  date: string;
+  readingTime: number;
+  showcase?: string;
+  categories?: string[];
+}
+
+const {
+  pageTitle,
+  pageDescription,
+  title,
+  date,
+  readingTime,
+  showcase,
+  categories = [],
+} = Astro.props;
+
+const breadcrumbs = [{ text: "← Back to thoughts", href: "/thoughts" }];
+
+// Format date
+const formattedDate = new Date(date).toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+});
+
+const eyelash = `${formattedDate} · ${readingTime} min read`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle || `${title} - Thoughts`}</title>
+    <meta name="description" content={pageDescription || title} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="w-full h-screen p-0 m-0 overflow-x-hidden relative">
+    <LoadingBar />
+    <NavWrapper />
+
+    <header class="w-full relative pt-32">
+      <div class="max-w-3xl mx-auto">
+        <Breadcrumbs crumbs={breadcrumbs} />
+        <Title
+          eyelash_text={eyelash}
+          title_text={title}
+          logo_classes="hidden"
+          wrapper_classes="max-3xl:[&.section-wrapper]:px-0 [&>div>*]:!text-left [&>div:last-of-type]:mb-0 [&>div:last-of-type>h3]:text-sm"
+        >
+          <div slot="title-content" class="flex justify-start gap-2 mt-6">
+            {
+              categories.map((category) => (
+                <span class="inline-block px-3 py-1 rounded-full text-sm bg-paper-green text-ink-primary">
+                  {category}
+                </span>
+              ))
+            }
+          </div>
+        </Title>
+      </div>
+    </header>
+
+    <main class="flex-1 relative">
+      <article class="w-full max-w-3xl mx-auto px-10 max-3xl:px-0">
+        {
+          showcase && (
+            <div class="relative mb-12 rounded-lg overflow-hidden">
+              <Image
+                src={showcase}
+                alt={title}
+                width={1200}
+                height={630}
+                class="w-full h-auto"
+                loading="eager"
+              />
+              <div class="absolute inset-0 bg-paper-primary/20 animate-pulse" />
+            </div>
+          )
+        }
+
+        <div class="prose max-w-none">
+          <slot />
+        </div>
+      </article>
+    </main>
+
+    <div class="divider--extra-large"></div>
+    <Footer showBackToTop={true} />
+  </body>
+</html>
+
+<script>
+  import "../../scripts/controllers/intersection-controller";
+</script>
+
+<style>
+  .prose {
+    @apply font-safiro
+      prose-headings:text-ink-primary
+      prose-h2:font-medium
+      prose-h2:text-3xl
+      prose-h2:[&:not(:first-of-type)]:mt-16
+      prose-h2:[&:not(:last-of-type)]:mb-6
+      prose-h4:font-medium
+      prose-p:text-ink-secondary
+      prose-p:leading-relaxed
+      prose-a:text-orange-600 
+      prose-a:no-underline 
+      hover:prose-a:underline
+      prose-blockquote:border-l-4
+      prose-blockquote:border-stone-300
+      prose-blockquote:pl-4
+      prose-blockquote:italic
+      prose-ul:list-disc
+      prose-ul:ml-6
+      prose-li:text-ink-secondary
+      prose-img:rounded-lg;
+  }
+
+  /* Notion-specific styles */
+  .prose :global(.callout) {
+    @apply p-4 rounded-lg flex gap-3 my-6 bg-paper-green;
+  }
+
+  .prose :global(.video-wrapper) {
+    @apply relative w-full my-6 aspect-video;
+  }
+
+  .prose :global(.video-wrapper iframe) {
+    @apply absolute inset-0 w-full h-full rounded-lg;
+  }
+</style>

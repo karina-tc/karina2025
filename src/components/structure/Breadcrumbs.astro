@@ -1,0 +1,19 @@
+---
+interface Props {
+  crumbs: {
+    text: string;
+    href: string;
+  }[];
+  showDropdown?: boolean;
+}
+
+const { crumbs, showDropdown = false } = Astro.props;
+---
+
+<nav class="flex items-center gap-2 mt-5 px-10 max-3xl:px-0">
+  {crumbs.map((crumb) => (
+    <a href={crumb.href} class="text-sm text-ink-secondary hover:text-ink-primary transition-colors">
+      {crumb.text}
+    </a>
+  ))}
+</nav> 

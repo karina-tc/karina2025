@@ -1,19 +1,13 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import art from "../assets/brand/art-thoughts.png";
-import { thoughts } from "../data/thoughts";
+import { getThoughts } from "../lib/notion";
 
-// Sort posts by date in descending order
-const posts = thoughts.sort(
-  (
-    a: { date: string | number | Date },
-    b: { date: string | number | Date },
-  ) => {
-    const dateA = new Date(b.date).getTime();
-    const dateB = new Date(a.date).getTime();
-    return dateA - dateB;
-  },
-);
+// Fetch posts from Notion
+const posts = await getThoughts();
+
+// Group posts by year (adjusted for new date format)
+const years = [...new Set(posts.map(post => new Date(post.date).getFullYear()))].sort((a, b) => b - a);
 ---
 
 <Layout
@@ -40,47 +34,40 @@ const posts = thoughts.sort(
     </div>
 
     <div class="flex-1 flex flex-col items-start gap-5">
-      {
-        [2025, 2024].map((year) => {
-          const postsForYear = posts.filter(
-            (post: { date: string | number | Date }) =>
-              new Date(post.date).getFullYear() === year,
-          );
-          return (
-            <>
-              <div class="w-full flex items-center justify-between flex-wrap px-2 [&:not(:first-child)]:mt-20">
-                <h2>{year}</h2>
-                <p class="text-ink-secondary text-base">
-                  {postsForYear.length} published thoughts
-                </p>
-              </div>
-              <ul class="w-full flex flex-col items-start mt-2.5 [&>li]:w-full">
-                {postsForYear.map(
-                  (post: {
-                    title: unknown;
-                    category: unknown;
-                    readingTime: unknown;
-                    slug: unknown;
-                  }) => (
-                    <li class="group">
-                      <a href={`/thoughts/${post.slug}`} class="w-full flex items-center gap-2 justify-between text-base outline-none transition-all duration-300 px-2 py-5 border-b border-dashed border-stone-200 hover:bg-paper-green/50 hover:px-4">
-                        <span class="text-ink-primary group-hover:underline underline-offset-4">
-                          {post.title}
-                        </span>
-                        <div class="flex items-center justify-end gap-1 text-ink-secondary">
-                          <span>{post.category}</span>
-                          <span>·</span>
-                          <span>{post.readingTime} mins</span>
-                        </div>
-                      </a>
-                    </li>
-                  ),
-                )}
-              </ul>
-            </>
-          );
-        })
-      }
+      {years.map((year) => {
+        const postsForYear = posts.filter(
+          (post) => new Date(post.date).getFullYear() === year
+        );
+        return (
+          <>
+            <div class="w-full flex items-center justify-between flex-wrap px-2 [&:not(:first-child)]:mt-20">
+              <h2>{year}</h2>
+              <p class="text-ink-secondary text-base">
+                {postsForYear.length} published thoughts
+              </p>
+            </div>
+            <ul class="w-full flex flex-col items-start mt-2.5 [&>li]:w-full">
+              {postsForYear.map((post) => (
+                <li class="group">
+                  <a 
+                    href={post.href} 
+                    class="w-full flex items-center gap-2 justify-between text-base outline-none transition-all duration-300 px-2 py-5 border-b border-dashed border-stone-200 hover:bg-paper-green/50 hover:px-4"
+                  >
+                    <span class="text-ink-primary group-hover:underline underline-offset-4">
+                      {post.title}
+                    </span>
+                    <div class="flex items-center justify-end gap-1 text-ink-secondary">
+                      <span>{post.categories[0]}</span>
+                      <span>·</span>
+                      <span>{Math.ceil(post.content.length / 200)} mins</span>
+                    </div>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </>
+        );
+      })}
     </div>
   </section>
 

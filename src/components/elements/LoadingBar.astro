@@ -1,0 +1,44 @@
+---
+
+---
+
+<div id="loading-bar" class="loading-bar" style="display: none;"></div>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const loadingBar = document.getElementById("loading-bar");
+    if (loadingBar) {
+      loadingBar.style.display = "none";
+    }
+  });
+
+  document.addEventListener("astro:before-preparation", () => {
+    const loadingBar = document.getElementById("loading-bar");
+    if (loadingBar) {
+      loadingBar.style.display = "block";
+    }
+  });
+</script>
+
+<style>
+  .loading-bar {
+    @apply fixed top-0 left-0 h-[3px] bg-purple-500 z-50;
+    transform-origin: left;
+    animation: loading-progress 1s ease-in-out infinite;
+  }
+
+  @keyframes loading-progress {
+    0% {
+      width: 0;
+      transform: scaleX(0);
+    }
+    50% {
+      width: 50%;
+      transform: scaleX(0.5);
+    }
+    100% {
+      width: 100%;
+      transform: scaleX(1);
+    }
+  }
+</style>
