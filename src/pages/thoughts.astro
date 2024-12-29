@@ -2,21 +2,19 @@
 import Layout from "../layouts/Layout.astro";
 import art from "../assets/brand/art-thoughts.png";
 import { getThoughts } from "../lib/notion";
+import type { ThoughtPost } from "../lib/notion";
 
-interface ThoughtPost {
-  date: string;
-  title: string;
-  href: string;
-  categories: string[];
-  content: string;
-}
-
-// Fetch posts from Notion
 const posts = await getThoughts();
+const mainPosts = posts.filter(post => !post.categories.includes('Briefs'));
+const sideNotes = posts.filter(post => post.categories.includes('Briefs'));
 
-// Group posts by year (adjusted for new date format)
-const years = [...new Set(posts.map((post: ThoughtPost) => new Date(post.date).getFullYear()))] as number[];
-years.sort((a: number, b: number) => b - a);
+// Group main posts by year
+const years = [...new Set(mainPosts.map(post => 
+  new Date(post.date).getFullYear()
+))].sort((a, b) => b - a);
+
+const getPostsForYear = (year: number) => 
+  mainPosts.filter(post => new Date(post.date).getFullYear() === year);
 ---
 
 <Layout
@@ -29,24 +27,25 @@ years.sort((a: number, b: number) => b - a);
   header_visual_classes="mt-10 mix-blend-multiply"
   header_visual_width={280}
 >
-  <div class="divider--large"></div>
+  <div class="divider--large" />
 
-  <section
-    class="w-full max-w-5xl h-full mx-auto content-section flex items-start justify-between gap-10"
-  >
-    <div
-      class="w-1/3 max-w-[200px] [&>p]:text-sm [&>p]:text-ink-secondary [&>p]:mb-2"
-    >
+  <section class="w-full max-w-5xl h-full mx-auto content-section flex items-start justify-between gap-10">
+    <!-- Sidenotes -->
+    <aside class="w-1/3 max-w-[200px] [&>p]:text-sm [&>p]:text-ink-secondary [&>p]:mb-2">
       <h3 class="mb-4 text-sm">Side notes</h3>
-      <p>Ruby on Rails</p>
-      <p>Better prompts</p>
-    </div>
+      {sideNotes.map(note => (
+        <p>
+          <a href={note.href} class="hover:underline underline-offset-4">
+            {note.title}
+          </a>
+        </p>
+      ))}
+    </aside>
 
+    <!-- Main posts -->
     <div class="flex-1 flex flex-col items-start gap-5">
-      {years.map((year) => {
-        const postsForYear = posts.filter(
-          (post: ThoughtPost) => new Date(post.date).getFullYear() === year
-        );
+      {years.map(year => {
+        const postsForYear = getPostsForYear(year);
         return (
           <>
             <div class="w-full flex items-center justify-between flex-wrap px-2 [&:not(:first-child)]:mt-20">
@@ -56,7 +55,7 @@ years.sort((a: number, b: number) => b - a);
               </p>
             </div>
             <ul class="w-full flex flex-col items-start mt-2.5 [&>li]:w-full">
-              {postsForYear.map((post: ThoughtPost) => (
+              {postsForYear.map(post => (
                 <li class="group">
                   <a 
                     href={post.href} 
@@ -81,6 +80,6 @@ years.sort((a: number, b: number) => b - a);
     </div>
   </section>
 
-  <div class="divider--extra-large"></div>
+  <div class="divider--extra-large" />
 </Layout>
 

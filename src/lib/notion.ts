@@ -1,26 +1,41 @@
 import { Client } from '@notionhq/client';
-import { getImage } from "astro:assets";
+import type { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints';
+import { getImage } from 'astro:assets';
 
+// Define expected structure of Notion database properties
+type NotionProperties = {
+  Title: { title: Array<{ plain_text: string }> };
+  Date: { date: { start: string } };
+  Categories: { multi_select: Array<{ name: string }> };
+  Slug: { rich_text: Array<{ plain_text: string }> };
+};
+
+// Define shape of processed thought posts for the frontend
+export interface ThoughtPost {
+  title: string;
+  date: string;
+  categories: string[];
+  href: string;
+  content: string;
+}
+
+// Helper to safely get environment variables
 const getEnvVar = (key: string): string => {
-  // Try import.meta.env first (local development)
-  if (import.meta.env[key]) {
-    return import.meta.env[key];
-  }
-  // Fall back to process.env (production/Netlify)
-  if (process.env[key]) {
-    return process.env[key];
-  }
+  if (import.meta.env[key]) return import.meta.env[key];
+  if (process.env[key]) return process.env[key];
   throw new Error(`Environment variable ${key} is not set`);
 };
 
-// Cache for storing fetched data
+// Cache configuration to minimize API calls
 const CACHE_DURATION = 60 * 1000; // 1 minute
 const cache = new Map();
 
+// Initialize Notion client
 const notion = new Client({
   auth: getEnvVar('NOTION_API_KEY')
 });
 
+// Format dates consistently
 function formatDate(dateStr: string): string {
   const date = new Date(dateStr);
   return date.toLocaleDateString('en-US', {
@@ -30,10 +45,11 @@ function formatDate(dateStr: string): string {
   });
 }
 
-export async function getThoughts() {
+// Main function to fetch and process thoughts from Notion
+export async function getThoughts(): Promise<ThoughtPost[]> {
   const cacheKey = 'thoughts-list';
   
-  // Check cache first
+  // Return cached data if valid
   if (cache.has(cacheKey)) {
     const { data, timestamp } = cache.get(cacheKey);
     if (Date.now() - timestamp < CACHE_DURATION) {
@@ -41,47 +57,47 @@ export async function getThoughts() {
     }
   }
 
+  // Fetch live posts from Notion
   const response = await notion.databases.query({
     database_id: getEnvVar('NOTION_DATABASE_ID'),
     filter: {
       property: 'Status',
-      status: {
-        equals: 'Live'
-      }
+      status: { equals: 'Live' }
     },
-    sorts: [
-      {
-        property: 'Date',
-        direction: 'descending',
-      },
-    ],
+    sorts: [{ property: 'Date', direction: 'descending' }],
   });
 
-  // Fetch preview content for each thought
-  const thoughtsWithContent = await Promise.all(response.results.map(async page => {
-    // Fetch first few blocks for preview
+  // Process each post
+  const pages = response.results as PageObjectResponse[];
+  const thoughtsWithContent = await Promise.all(pages.map(async page => {
+    // Get preview content from first few blocks
     const blocks = await notion.blocks.children.list({
       block_id: page.id,
-      page_size: 3 // Fetch first 3 blocks
+      page_size: 3
     });
 
-    // Convert blocks to plain text, excluding headers
+    // Extract and format preview text
     const previewText = blocks.results
       .filter((block: any) => block.type === 'paragraph')
-      .map((block: any) => block.paragraph.rich_text.map((text: any) => text.plain_text).join(''))
-      .join(' ');
+      .map((block: any) => block.paragraph.rich_text
+        .map((text: any) => text.plain_text)
+        .join('')
+      )
+      .join(' ')
+      .slice(0, 200);
 
-    const { properties } = page as any;
+    // Extract and format post metadata
+    const { properties } = page as unknown as { properties: NotionProperties };
     return {
       title: properties.Title.title[0].plain_text,
       date: formatDate(properties.Date.date.start),
-      categories: properties.Categories.multi_select.map((cat: any) => cat.name),
+      categories: properties.Categories.multi_select.map(cat => cat.name),
       href: `/thoughts/${properties.Slug.rich_text[0].plain_text}`,
       content: previewText
     };
   }));
 
-  // Cache the results
+  // Cache results
   cache.set(cacheKey, {
     data: thoughtsWithContent,
     timestamp: Date.now()
