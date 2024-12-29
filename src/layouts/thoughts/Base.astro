@@ -118,13 +118,7 @@ const eyelash = `${formattedDate} · ${readingTime} min read`;
   .prose {
     @apply font-safiro
       prose-headings:text-ink-primary
-      prose-h2:font-medium
-      prose-h2:text-3xl
-      prose-h2:[&:not(:first-of-type)]:mt-16
-      prose-h2:[&:not(:last-of-type)]:mb-6
       prose-h4:font-medium
-      prose-p:text-ink-secondary
-      prose-p:leading-relaxed
       prose-a:text-orange-600 
       prose-a:no-underline 
       hover:prose-a:underline
@@ -136,6 +130,20 @@ const eyelash = `${formattedDate} · ${readingTime} min read`;
       prose-ul:ml-6
       prose-li:text-ink-secondary
       prose-img:rounded-lg;
+  }
+
+  .prose :global(p) {
+    @apply text-base text-ink-secondary leading-loose;
+  }
+
+  .prose :global(strong) {
+    @apply font-semibold;
+  }
+
+  .prose :global(h2) {
+    @apply text-4xl font-medium text-ink-primary mt-8;
+    @apply [&:not(:first-of-type)]:mt-16;
+    @apply [&:not(:last-of-type)]:mb-6;
   }
 
   /* Notion-specific styles */
