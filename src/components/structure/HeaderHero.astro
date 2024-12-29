@@ -1,19 +1,19 @@
 ---
 import type { ImageMetadata } from 'astro';
-import type { HeaderProps } from '../types/HeaderProps';
-import Title from "./Title.astro";
-import Horizon from "./Horizon.astro";
+import type { HeaderProps } from '../../types/HeaderProps';
+import Title from "../structure/Title.astro";
+import Horizon from "../background/Horizon.astro";
 
 interface Props extends HeaderProps {}
 
 const {
   // Title props
   logo = "default",
-  logoClasses = "w-24 h-24",
+  logo_classes = "w-24 h-24",
   title_text = "Title Text Here",
   eyelash_text = "Eyelash Text Here",
   description_text = "",
-  title_classes = "pt-10",
+  wrapper_classes = "pt-10",
   // Horizon props
   horizon_height = "",
   header_visual_image = undefined as unknown as ImageMetadata,
@@ -26,11 +26,11 @@ const {
 <header class="w-full relative pt-32">
   <Title
     {logo}
-    {logoClasses}
+    {logo_classes}
     {eyelash_text}
     {title_text}
     {description_text}
-    include_classes={title_classes}
+    {wrapper_classes}
   >
     <slot name="title-content" slot="title-content" />
   </Title>

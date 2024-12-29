@@ -1,29 +1,29 @@
 ---
-import type { TitleProps } from '../types/HeaderProps';
-import AtomicLogo from "./AtomSymbol.astro";
+import type { TitleProps } from '../../types/HeaderProps';
+import AtomSymbol from "../structure/AtomSymbol.astro";
 
 interface Props extends TitleProps {}
 
 const {
   logo = "default",
   logo_alt_text = "Logo",
-  logoClasses = "",
+  logo_classes = "",
   title_text,
   eyelash_text,
   description_text,
-  include_classes = "",
+  wrapper_classes = "",
 } = Astro.props;
 ---
 
-<div class={`title-container section-wrapper ${include_classes}`}>
+<div class={`title-container section-wrapper ${wrapper_classes}`}>
   {
     logo === "default" ? (
-      <AtomicLogo include_classes={logoClasses} />
+      <AtomSymbol include_classes={logo_classes} />
     ) : (
       <img
         src={logo}
         alt={logo_alt_text}
-        class={logoClasses}
+        class={logo_classes}
         draggable="false"
       />
     )

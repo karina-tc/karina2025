@@ -1,7 +1,7 @@
 ---
-import Greeting from "../components/Greeting.astro";
-import Navigation from "../components/Navigation.astro";
-import Music from "../components/Music.astro";
+import Greeting from "../header/Greeting.astro";
+import Links from "../header/Links.astro";
+import Music from "../header/Music.astro";
 
 const menuItems = [
   { href: "/", label: "Intro" },
@@ -16,7 +16,7 @@ const menuItems = [
     <Greeting greeting_time="morning" />
   </div>
   <div class="navigation-header-menu z-base">
-    <Navigation menu_items={menuItems} />
+    <Links menu_items={menuItems} />
   </div>
   <div class="navigation-header-music z-minimal">
     <Music music_text="music" />

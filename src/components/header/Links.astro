@@ -1,5 +1,5 @@
 ---
-import Menu from "../components/Menu.astro";
+import Menu from "../header/Menu.astro";
 const { menu_items } = Astro.props;
 const currentPath = Astro.url.pathname;
 ---
@@ -68,5 +68,6 @@ const currentPath = Astro.url.pathname;
 </style>
 
 <script>
-  import '../scripts/controllers/navigation-controller';
+  import '../../scripts/controllers/navigation-controller';
 </script>
+

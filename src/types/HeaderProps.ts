@@ -2,11 +2,11 @@ import type { ImageMetadata } from 'astro';
 export interface TitleProps {
   logo?: string;
   logo_alt_text?: string;
-  logoClasses?: string;
+  logo_classes?: string;
   title_text: string;
   eyelash_text: string;
   description_text?: string;
-  include_classes?: string;
+  wrapper_classes?: string;
 }
 
 export interface HorizonProps {
