@@ -3,11 +3,20 @@ import Layout from "../layouts/Layout.astro";
 import art from "../assets/brand/art-thoughts.png";
 import { getThoughts } from "../lib/notion";
 
+interface ThoughtPost {
+  date: string;
+  title: string;
+  href: string;
+  categories: string[];
+  content: string;
+}
+
 // Fetch posts from Notion
 const posts = await getThoughts();
 
 // Group posts by year (adjusted for new date format)
-const years = [...new Set(posts.map(post => new Date(post.date).getFullYear()))].sort((a, b) => b - a);
+const years = [...new Set(posts.map((post: ThoughtPost) => new Date(post.date).getFullYear()))] as number[];
+years.sort((a: number, b: number) => b - a);
 ---
 
 <Layout
@@ -36,7 +45,7 @@ const years = [...new Set(posts.map(post => new Date(post.date).getFullYear()))]
     <div class="flex-1 flex flex-col items-start gap-5">
       {years.map((year) => {
         const postsForYear = posts.filter(
-          (post) => new Date(post.date).getFullYear() === year
+          (post: ThoughtPost) => new Date(post.date).getFullYear() === year
         );
         return (
           <>
@@ -47,7 +56,7 @@ const years = [...new Set(posts.map(post => new Date(post.date).getFullYear()))]
               </p>
             </div>
             <ul class="w-full flex flex-col items-start mt-2.5 [&>li]:w-full">
-              {postsForYear.map((post) => (
+              {postsForYear.map((post: ThoughtPost) => (
                 <li class="group">
                   <a 
                     href={post.href} 
