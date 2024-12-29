@@ -1,6 +1,5 @@
 ---
 import "../../styles/global.css";
-import { Image } from "astro:assets";
 import NavWrapper from "../../components/header/NavWrapper.astro";
 import Title from "../../components/structure/Title.astro";
 import Footer from "../../components/structure/Footer.astro";
@@ -85,11 +84,9 @@ const eyelash = `${formattedDate} · ${readingTime} min read`;
                 <ScribbleLoop class="w-6 h-6 animate-spin" />
                 <span class="animate-pulse">Drawing...</span>
               </div>
-              <Image
+              <img
                 src={showcase}
                 alt={title}
-                width={1200}
-                height={630}
                 class="w-full h-auto relative z-10 opacity-0 transition-opacity duration-300"
                 loading="eager"
                 onload="this.style.opacity = '1'; this.previousElementSibling.classList.add('opacity-0', 'pointer-events-none')"
