@@ -44,9 +44,10 @@ const eyelash = `${formattedDate} · ${readingTime} min read`;
 <!doctype html>
 <html lang="en">
   <head>
-    <CommonHead 
-      pageTitle={pageTitle || title} 
-      pageDescription={pageDescription || `Read ${title} - a blog post about ${categories.join(', ')}`} 
+    <CommonHead
+      pageTitle={pageTitle || title}
+      pageDescription={pageDescription ||
+        `Read ${title} - a blog post about ${categories.join(", ")}`}
     />
   </head>
   <body class="w-full h-screen p-0 m-0 overflow-x-hidden relative">
@@ -60,7 +61,7 @@ const eyelash = `${formattedDate} · ${readingTime} min read`;
           eyelash_text={eyelash}
           title_text={title}
           logo_classes="hidden"
-          wrapper_classes="max-3xl:[&.section-wrapper]:px-0 [&>div>*]:!text-left [&>div:last-of-type]:mb-0 [&>div:last-of-type>h3]:text-sm"
+          wrapper_classes="max-3xl:[&.section-wrapper]:px-0 [&>div>*]:!text-left [&>div:last-of-type]:mb-0 [&>div:last-of-type>h3]:text-sm [&>div:last-of-type>h3]:order-2 [&>div:last-of-type>h3]:mb-10 [&>div:last-of-type>div]:hidden"
         >
           <div slot="title-content" class="flex justify-start gap-2 mt-6">
             {
