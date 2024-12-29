@@ -1,5 +1,5 @@
 ---
-import Menu from "../header/Menu.astro";
+import LinksMenu from "../menus/LinksMenu.astro";
 const { menu_items } = Astro.props;
 const currentPath = Astro.url.pathname;
 ---
@@ -29,7 +29,7 @@ const currentPath = Astro.url.pathname;
       ))
     }
   </nav>
-  <Menu />
+  <LinksMenu />
 </div>
 
 <style>
