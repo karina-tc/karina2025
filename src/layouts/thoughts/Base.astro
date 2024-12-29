@@ -61,17 +61,7 @@ const eyelash = `${formattedDate} · ${readingTime} min read`;
           title_text={title}
           logo_classes="hidden"
           wrapper_classes="max-3xl:[&.section-wrapper]:px-0 [&>div>*]:!text-left [&>div:last-of-type]:mb-0 [&>div:last-of-type>h3]:text-sm [&>div:last-of-type>h3]:order-2 [&>div:last-of-type>h3]:mb-10 [&>div:last-of-type>div]:hidden"
-        >
-          <div slot="title-content" class="flex justify-start gap-2 mt-6">
-            {
-              categories.map((category) => (
-                <span class="inline-block px-3 py-1 rounded-full text-sm bg-paper-green text-ink-primary">
-                  {category}
-                </span>
-              ))
-            }
-          </div>
-        </Title>
+        />
       </div>
     </header>
 
