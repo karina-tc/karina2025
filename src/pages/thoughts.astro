@@ -51,6 +51,7 @@ const years = [...new Set(posts.map(post => new Date(post.date).getFullYear()))]
                 <li class="group">
                   <a 
                     href={post.href} 
+                    rel="prefetch"
                     class="w-full flex items-center gap-2 justify-between text-base outline-none transition-all duration-300 px-2 py-5 border-b border-dashed border-stone-200 hover:bg-paper-green/50 hover:px-4"
                   >
                     <span class="text-ink-primary group-hover:underline underline-offset-4">

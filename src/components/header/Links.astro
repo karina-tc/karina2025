@@ -14,7 +14,8 @@ const currentPath = Astro.url.pathname;
     {
       menu_items.map((item: { href: string | URL | null | undefined; label: unknown; }) => (
         <a 
-          href={item.href} 
+          href={item.href}
+          rel={item.href === "/thoughts" || item.href === "/about" ? "prefetch" : ""}
           class={currentPath.startsWith(item.href as string) && item.href !== "/" ? "active" : currentPath === item.href ? "active" : ""}
         >
           <span>{item.label}</span>
