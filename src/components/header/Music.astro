@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-const placeholderImage = "/images/other/record.png";
+import record from "../../assets/other/record.png";
 ---
 
 <div class="music-container group" id="music-container">
@@ -12,10 +12,10 @@ const placeholderImage = "/images/other/record.png";
       <div class="album-cover group/album">
         <div class="album-hole"></div>
         {
-          placeholderImage ? (
+          record ? (
             <Image
               class="album-art"
-              src={placeholderImage}
+              src={record}
               alt="Album Art"
               draggable="false"
               width={100}
