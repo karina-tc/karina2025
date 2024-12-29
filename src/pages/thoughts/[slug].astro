@@ -19,6 +19,8 @@ if (!thought) {
   return Astro.redirect("/404");
 }
 
+console.log('Server-side showcase URL:', thought?.showcase);
+
 // Convert Notion blocks to HTML
 const contentHtml = renderNotionBlocks(thought.content);
 ---

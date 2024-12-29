@@ -1,4 +1,5 @@
 import { Client } from '@notionhq/client';
+import { getImage } from "astro:assets";
 
 const getEnvVar = (key: string): string => {
   // Try import.meta.env first (local development)
@@ -97,7 +98,21 @@ export async function getThoughtContent(slug: string) {
   if (showcaseProperty?.files?.length > 0) {
     const file = showcaseProperty.files[0];
     // Handle both internal Notion files and external URLs
-    showcaseImage = file.type === 'external' ? file.external.url : file.file.url;
+    const imageUrl = file.type === 'external' ? file.external.url : file.file.url;
+    
+    try {
+      // Optimize and cache the image
+      const optimizedImage = await getImage({
+        src: imageUrl,
+        width: 1200,
+        height: 630,
+        format: 'webp', // Convert to WebP for better compression
+      });
+      showcaseImage = optimizedImage.src;
+    } catch (error) {
+      console.error('Error optimizing image:', error);
+      showcaseImage = imageUrl; // Fallback to original URL if optimization fails
+    }
   }
 
   return {

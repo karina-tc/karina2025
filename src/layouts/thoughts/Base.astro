@@ -6,6 +6,7 @@ import Title from "../../components/structure/Title.astro";
 import Footer from "../../components/structure/Footer.astro";
 import LoadingBar from "../../components/elements/LoadingBar.astro";
 import Breadcrumbs from "../../components/structure/Breadcrumbs.astro";
+import ScribbleLoop from "phosphor-astro/ScribbleLoop.astro";
 
 interface Props {
   pageTitle?: string;
@@ -86,21 +87,25 @@ const eyelash = `${formattedDate} · ${readingTime} min read`;
       <article class="w-full max-w-3xl mx-auto px-10 max-3xl:px-0">
         {
           showcase && (
-            <div class="relative mb-12 rounded-lg overflow-hidden">
+            <div class="artwork-wrapper content-section">
+              <div class="absolute inset-0 w-full h-full flex justify-center items-center gap-2 text-ink-secondary text-center loading-overlay">
+                <ScribbleLoop class="w-6 h-6 animate-spin" />
+                <span class="animate-pulse">Drawing...</span>
+              </div>
               <Image
                 src={showcase}
                 alt={title}
                 width={1200}
                 height={630}
-                class="w-full h-auto"
+                class="w-full h-auto relative z-10 opacity-0 transition-opacity duration-300"
                 loading="eager"
+                onload="this.style.opacity = '1'; this.previousElementSibling.classList.add('opacity-0', 'pointer-events-none')"
               />
-              <div class="absolute inset-0 bg-paper-primary/20 animate-pulse" />
             </div>
           )
         }
 
-        <div class="prose max-w-none">
+        <div class="prose max-w-none content-section">
           <slot />
         </div>
       </article>
@@ -116,6 +121,10 @@ const eyelash = `${formattedDate} · ${readingTime} min read`;
 </script>
 
 <style>
+  .artwork-wrapper {
+    @apply relative mb-12 rounded-lg overflow-hidden bg-stone-100;
+  }
+
   .prose {
     @apply font-safiro
       prose-headings:text-ink-primary
@@ -150,5 +159,14 @@ const eyelash = `${formattedDate} · ${readingTime} min read`;
 
   .prose :global(.video-wrapper iframe) {
     @apply absolute inset-0 w-full h-full rounded-lg;
+  }
+
+  .loading-overlay {
+    transition: opacity 0.3s ease-out;
+  }
+
+  /* Ensure the image transition works */
+  .artwork-wrapper img {
+    transition: opacity 0.3s ease-out;
   }
 </style>
