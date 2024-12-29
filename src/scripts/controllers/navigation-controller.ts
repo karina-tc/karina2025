@@ -6,11 +6,19 @@ function initializeUnderline() {
 
     function updateUnderline(link: Element | null) {
         if (!link || !underline || !nav) return;
-        const rect = link.getBoundingClientRect();
+        
+        // Get the relative position within the nav container
+        const linkRect = link.getBoundingClientRect();
         const navRect = nav.getBoundingClientRect();
-
-        underline.style.setProperty('--left', `${rect.left - navRect.left}px`);
-        underline.style.setProperty('--width', `${rect.width}px`);
+        
+        // Account for any scrolling
+        const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+        
+        // Calculate position relative to the nav container
+        const left = linkRect.left - navRect.left + nav.scrollLeft;
+        
+        underline.style.setProperty('--left', `${left}px`);
+        underline.style.setProperty('--width', `${linkRect.width}px`);
     }
     // Set initial position
     updateUnderline(activeLink ?? null);
