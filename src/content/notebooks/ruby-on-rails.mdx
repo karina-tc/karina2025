@@ -16,8 +16,9 @@ Rails has strong opinions. Its like a wise friend who knows-it-all without the a
 
 The ERB (.html.erb) file can serve a page or a component - this renders the structure. Using ERB (`.html.erb`), you can interweave Ruby code into your HTML to generate dynamic content.
 
-- **Structure**: Use `.html.erb` files to define the skeleton of your page.
-- **Functionality**: Share responsibilities between `.rb` files (server-side logic) and Stimulus controllers (front-end interactivity).
+**Structure**: Use `.html.erb` files to define the skeleton of your page.
+
+**Functionality**: Share responsibilities between `.rb` files (server-side logic) and Stimulus controllers (front-end interactivity).
 
 Neat tip - you can do really cool shit between tailwind css and dynamic printing to reduce the amount of code.
 
@@ -56,6 +57,8 @@ The `form_with` helper ties your form directly to your model, so all you need to
 <% end %>
 ```
 
+---
+
 **Link helpers**
 
 Forget writing raw `link` tags. Rails’ `link_to` helper makes links intuitive and clean:
@@ -63,6 +66,8 @@ Forget writing raw `link` tags. Rails’ `link_to` helper makes links intuitive 
 ```ruby
 <%= link_to "Home", root_path, class: "btn btn-primary" %>
 ```
+
+---
 
 **Tag helpers**
 
@@ -111,7 +116,7 @@ It’s like modular design for your templates—clean, efficient, and kind of sa
 
 Rails uses StimulusJS for interactive front-end behavior. 
 
-1. **Define Your Controller**: Create a Stimulus controller in `app/javascript/controllers/`:
+**Define Your Controller**: Create a Stimulus controller in `app/javascript/controllers/`:
 
 ```ruby
 import { Controller } from "@hotwired/stimulus";
@@ -125,13 +130,17 @@ export default class extends Controller {
 }
 ```
 
-1. **Hook It Up**: Attach your controller to HTML elements with `data-controller` attributes:
+---
+
+**Hook It Up**: Attach your controller to HTML elements with `data-controller` attributes:
 
 ```ruby
 <div data-controller="example" data-example-name-value="Rails"></div>
 ```
 
-1. **Enjoy the Magic**: Open your browser console and see your Stimulus controller in action.
+---
+
+**Enjoy the Magic**: Open your browser console and see your Stimulus controller in action.
 
 Stimulus keeps your front-end JavaScript snappy without dragging in an entire framework. It’s a win-win.
 
@@ -139,7 +148,18 @@ Stimulus keeps your front-end JavaScript snappy without dragging in an entire fr
 
 Most devs I’ve worked with have this thing about keeping everything in its lane. I’ve learned that this is for good reason. When you respect separation of concerns, your app or site stays clean and manageable.
 
-1. **Keep Views Clean**: No one likes messy `.html.erb` files. Extract logic into helpers or partials.
-2. **Use Helpers**: Got repetitive view logic? Helpers in `app/helpers/` are your shortcut to sanity.
-3. **Leverage StimulusJS**: Let Stimulus handle interactivity instead of cramming JavaScript directly into your views.
-4. **Follow MVC Principles**: Stick to the Model-View-Controller pattern for structure that scales.
+**Keep Views Clean**:
+
+No one likes messy `.html.erb` files. Extract logic into helpers or partials.
+
+**Use Helpers**:
+
+Got repetitive view logic? Helpers in `app/helpers/` are your shortcut to sanity.
+
+**Leverage StimulusJS**:
+
+Let Stimulus handle interactivity instead of cramming JavaScript directly into your views.
+
+**Follow MVC Principles**:
+
+Stick to the Model-View-Controller pattern for structure that scales.
