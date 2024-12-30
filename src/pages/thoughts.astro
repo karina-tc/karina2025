@@ -3,10 +3,15 @@ import Layout from "../layouts/Layout.astro";
 import art from "../assets/brand/art-thoughts.png";
 import { getThoughts } from "../lib/notion";
 import type { ThoughtPost } from "../lib/notion";
+import { getCollection } from 'astro:content';
 
-const posts = await getThoughts();
-const mainPosts = posts.filter((post) => !post.categories.includes("Briefs"));
-const sideNotes = posts.filter((post) => post.categories.includes("Briefs"));
+// Get content collection posts for sidenotes
+const contentPosts = await getCollection('notebooks');
+const sideNotes = contentPosts.filter((post: { data: { categories?: string[] } }) => !post.data.categories?.includes("Briefs"));
+
+// Get Notion posts for main content
+const notionPosts = await getThoughts();
+const mainPosts = notionPosts.filter((post: ThoughtPost) => !post.categories.includes("Briefs"));
 
 // Group main posts by year
 const years = [
@@ -34,12 +39,12 @@ const getPostsForYear = (year: number) =>
     <aside
       class="[&>p]:text-sm [&>p]:text-ink-primary [&>p]:mb-2 max-md:px-2 content-section"
     >
-      <h3 class="mb-4 text-sm">Side notes</h3>
+      <h3 class="mb-4 text-sm">Notebooks</h3>
       {
-        sideNotes.map((note) => (
+        sideNotes.map((post: { slug: string; data: { title: string } }) => (
           <p>
-            <a href={note.href} class="hover:underline underline-offset-4">
-              {note.title}
+            <a href={`/notebooks/${post.slug}`} class="hover:underline underline-offset-4">
+              {post.data.title}
             </a>
           </p>
         ))
