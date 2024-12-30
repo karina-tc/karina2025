@@ -1,10 +1,10 @@
 ---
-import "../styles/global.css";
-import NavWrapper from "../components/header/NavWrapper.astro";
-import Title from "../components/structure/Title.astro";
-import Footer from "../components/structure/Footer.astro";
-import Breadcrumbs from "../components/structure/Breadcrumbs.astro";
-import CommonHead from "../components/structure/CommonHead.astro";
+import "../../styles/global.css";
+import NavWrapper from "../../components/header/NavWrapper.astro";
+import Title from "../../components/structure/Title.astro";
+import Footer from "../../components/structure/Footer.astro";
+import Breadcrumbs from "../../components/structure/Breadcrumbs.astro";
+import CommonHead from "../../components/structure/CommonHead.astro";
 
 interface Props {
     title: string;
@@ -58,7 +58,7 @@ const formattedDate = new Date(date).toLocaleDateString("en-US", {
 </html>
 
 <script>
-  import "../scripts/controllers/intersection-controller";
+  import "../../scripts/controllers/intersection-controller";
 </script>
 
 <style>

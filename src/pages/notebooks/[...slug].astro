@@ -1,6 +1,6 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content';
-import ContentLayout from '../../layouts/ContentLayout.astro';
+import NotebooksLayout from '../../layouts/thoughts/Notebooks.astro';
 
 // Generate static paths for all notebooks
 export async function getStaticPaths() {
@@ -20,10 +20,10 @@ console.log('Rendered content:', Content);
 const { title, description, date } = post.data;
 ---
 
-<ContentLayout 
+<NotebooksLayout 
   title={title}
   description={description}
   date={date}
 >
   <Content />
-</ContentLayout> 
+</NotebooksLayout> 
