@@ -1,65 +1,42 @@
 ---
-import "../../styles/global.css";
-import NavWrapper from "../../components/header/NavWrapper.astro";
-import Title from "../../components/structure/Title.astro";
-import Footer from "../../components/structure/Footer.astro";
-import LoadingBar from "../../components/elements/LoadingBar.astro";
-import Breadcrumbs from "../../components/structure/Breadcrumbs.astro";
-import ScribbleLoop from "phosphor-astro/ScribbleLoop.astro";
-import CommonHead from "../../components/structure/CommonHead.astro";
+import "../styles/global.css";
+import NavWrapper from "../components/header/NavWrapper.astro";
+import Title from "../components/structure/Title.astro";
+import Footer from "../components/structure/Footer.astro";
+import Breadcrumbs from "../components/structure/Breadcrumbs.astro";
+import CommonHead from "../components/structure/CommonHead.astro";
 
 interface Props {
-  pageTitle?: string;
-  pageDescription?: string;
-  title: string;
-  date: string;
-  readingTime: number;
-  showcase?: string;
-  categories?: string[];
+    title: string;
+    description: string;
+    date: string;
 }
 
-const {
-  pageTitle,
-  pageDescription,
-  title,
-  date,
-  readingTime,
-  showcase,
-  categories = [],
-} = Astro.props;
+const { title, description, date } = Astro.props;
 
-const breadcrumbs = [
-  { text: "Back to thoughts", href: "/thoughts", showArrow: true },
-];
-
-// Format date
 const formattedDate = new Date(date).toLocaleDateString("en-US", {
   year: "numeric",
   month: "short",
   day: "numeric",
 });
-
-const eyelash = `${formattedDate} · ${readingTime} min read`;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <CommonHead
-      pageTitle={pageTitle || title}
-      pageDescription={pageDescription ||
-        `Read ${title} - a blog post about ${categories.join(", ")}`}
+      pageTitle={title}
+      pageDescription={description}
     />
   </head>
   <body class="w-full h-screen p-0 m-0 overflow-x-hidden relative">
-    <LoadingBar />
     <NavWrapper />
 
     <header class="w-full relative pt-32">
       <div class="max-w-3xl mx-auto">
-        <Breadcrumbs crumbs={breadcrumbs} />
+        <Breadcrumbs crumbs={[{ text: "Back to thoughts", href: "/thoughts", showArrow: true }]} />
         <Title
-          eyelash_text={eyelash}
+          eyelash_text={formattedDate}
           title_text={title}
           logo_classes="hidden"
           wrapper_classes="max-3xl:[&.section-wrapper]:px-0 [&>div>*]:!text-left [&>div:last-of-type]:mb-0 [&>div:last-of-type>h3]:text-sm [&>div:last-of-type>h3]:order-2 [&>div:last-of-type>h3]:mb-10 [&>div:last-of-type>div]:hidden"
@@ -69,24 +46,6 @@ const eyelash = `${formattedDate} · ${readingTime} min read`;
 
     <main class="flex-1 relative">
       <article class="w-full max-w-3xl mx-auto px-10 max-3xl:px-0">
-        {
-          showcase && (
-            <div class="artwork-wrapper content-section">
-              <div class="absolute inset-0 w-full h-full flex justify-center items-center gap-2 text-ink-secondary text-center loading-overlay">
-                <ScribbleLoop class="w-6 h-6 animate-spin" />
-                <span class="animate-pulse">Drawing...</span>
-              </div>
-              <img
-                src={showcase}
-                alt={title}
-                class="w-full h-auto relative z-10 opacity-0 transition-opacity duration-300"
-                loading="eager"
-                onload="this.style.opacity = '1'; this.previousElementSibling.classList.add('opacity-0', 'pointer-events-none')"
-              />
-            </div>
-          )
-        }
-
         <div class="prose max-w-none content-section">
           <slot />
         </div>
@@ -99,28 +58,7 @@ const eyelash = `${formattedDate} · ${readingTime} min read`;
 </html>
 
 <script>
-  import "../../scripts/controllers/intersection-controller";
-</script>
-
-<script>
-  class AstroCodeBlockElement extends HTMLElement {
-    constructor() {
-      super();
-      const code = decodeURIComponent(this.getAttribute("code") || "");
-      const lang = this.getAttribute("lang") || "plaintext";
-
-      // Create the Code component structure
-      const pre = document.createElement("pre");
-      const codeEl = document.createElement("code");
-      pre.className = "astro-code vesper"; // Changed to match Astro's Shiki classes
-      codeEl.className = `language-${lang}`;
-      codeEl.textContent = code;
-      pre.appendChild(codeEl);
-      this.appendChild(pre);
-    }
-  }
-
-  customElements.define("astro-code-block", AstroCodeBlockElement);
+  import "../scripts/controllers/intersection-controller";
 </script>
 
 <style>
@@ -218,14 +156,14 @@ const eyelash = `${formattedDate} · ${readingTime} min read`;
   }
 
   /* Inline code */
-  .prose :global(.notion-inline-code:not(pre *)) {
+  .prose :global(:not(pre) code) {
     @apply text-sm px-1.5 py-0.5 font-semibold rounded font-mono bg-indigo-100 text-indigo-900;
     &::before, &::after {
       content: none;
     }
   }
 
-  .prose :global(pre.astro-code) {
+  .prose :global(pre) {
     @apply text-sm p-5 rounded-none font-mono border text-indigo-50 bg-indigo-950 border-t-indigo-200 border-t-4 shadow-lg shadow-indigo-500/10;
   }
 </style>
