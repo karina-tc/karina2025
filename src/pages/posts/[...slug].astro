@@ -1,18 +1,18 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import ContentLayout from '../../layouts/ContentLayout.astro';
 
 // Generate static paths for all posts
 export async function getStaticPaths() {
   const posts = await getCollection('posts');
-  return posts.map(post => ({
+  return posts.map((post: CollectionEntry<'posts'>) => ({
     params: { slug: post.slug },
     props: { post },
   }));
 }
 
 // Get the post data
-const { post } = Astro.props;
+const { post } = Astro.props as { post: CollectionEntry<'posts'> };
 const { Content } = await post.render();
 console.log('Rendered content:', Content);
 
