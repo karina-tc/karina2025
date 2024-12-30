@@ -1,169 +1,20 @@
 ---
-import "../../styles/global.css";
-import NavWrapper from "../../components/header/NavWrapper.astro";
-import Title from "../../components/structure/Title.astro";
-import Footer from "../../components/structure/Footer.astro";
-import Breadcrumbs from "../../components/structure/Breadcrumbs.astro";
-import CommonHead from "../../components/structure/CommonHead.astro";
+import Template from "./Template.astro";
 
 interface Props {
-    title: string;
-    description: string;
-    date: string;
+  title: string;
+  description?: string;
+  date: string;
 }
 
 const { title, description, date } = Astro.props;
-
-const formattedDate = new Date(date).toLocaleDateString("en-US", {
-  year: "numeric",
-  month: "short",
-  day: "numeric",
-});
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <CommonHead
-      pageTitle={title}
-      pageDescription={description}
-    />
-  </head>
-  <body class="w-full h-screen p-0 m-0 overflow-x-hidden relative">
-    <NavWrapper />
-
-    <header class="w-full relative pt-32">
-      <div class="max-w-3xl mx-auto">
-        <Breadcrumbs crumbs={[{ text: "Back to thoughts", href: "/thoughts", showArrow: true }]} />
-        <Title
-          eyelash_text={formattedDate}
-          title_text={title}
-          logo_classes="hidden"
-          wrapper_classes="max-3xl:[&.section-wrapper]:px-0 [&>div>*]:!text-left [&>div:last-of-type]:mb-0 [&>div:last-of-type>h3]:text-sm [&>div:last-of-type>h3]:order-2 [&>div:last-of-type>h3]:mb-10 [&>div:last-of-type>div]:hidden"
-        />
-      </div>
-    </header>
-
-    <main class="flex-1 relative">
-      <article class="w-full max-w-3xl mx-auto px-10 max-3xl:px-0">
-        <div class="prose max-w-none content-section">
-          <slot />
-        </div>
-      </article>
-    </main>
-
-    <div class="divider--extra-large"></div>
-    <Footer showBackToTop={true} />
-  </body>
-</html>
-
-<script>
-  import "../../scripts/controllers/intersection-controller";
-</script>
-
-<style>
-  .artwork-wrapper {
-    @apply relative mb-12 rounded-lg overflow-hidden bg-stone-100;
-  }
-
-  .prose {
-    @apply font-safiro
-      prose-headings:text-ink-primary
-      prose-h4:font-medium
-      prose-a:text-orange-600 
-      prose-a:no-underline 
-      hover:prose-a:underline
-      prose-blockquote:border-l-4
-      prose-blockquote:border-stone-300
-      prose-blockquote:pl-4
-      prose-blockquote:italic
-      prose-img:rounded-lg;
-  }
-
-  .prose :global(p) {
-    @apply text-base text-ink-secondary leading-loose;
-  }
-
-  .prose :global(strong) {
-    @apply font-semibold;
-  }
-
-  .prose :global(h2) {
-    @apply text-4xl font-medium text-ink-primary mt-8;
-    @apply [&:not(:first-of-type)]:mt-16;
-    @apply [&:not(:last-of-type)]:mb-6;
-  }
-
-  .prose :global(h3) {
-    @apply text-xl font-semibold text-ink-secondary mt-8 tracking-normal;
-    @apply [&:not(:first-of-type)]:mt-16;
-    @apply [&:not(:last-of-type)]:mb-6;
-    text-transform: none;
-  }
-
-  .prose :global(ul),
-  .prose :global(ol) {
-    @apply list-disc text-ink-secondary space-y-2;
-  }
-
-  .prose :global(ul) {
-    padding-inline-start: 2px;
-  }
-
-  .prose :global(ol) {
-    padding-inline-start: 1em;
-  }
-
-  .prose :global(ul li) {
-    @apply pl-0;
-    padding-inline-start: 1rem;
-    text-indent: -1rem;
-
-    /* Remove default list styling to prevent double bullets */
-    &::marker {
-      @apply text-stone-400;
-    }
-  }
-
-  .prose :global(strong) {
-    @apply font-semibold text-ink-secondary;
-  }
-
-  .prose :global(blockquote) {
-    @apply text-ink-secondary;
-  }
-
-  /* Notion-specific styles */
-  .prose :global(.callout) {
-    @apply p-4 rounded-lg flex gap-3 my-6 bg-paper-green;
-  }
-
-  .prose :global(.video-wrapper) {
-    @apply relative w-full my-6 aspect-video;
-  }
-
-  .prose :global(.video-wrapper iframe) {
-    @apply absolute inset-0 w-full h-full rounded-lg;
-  }
-
-  .loading-overlay {
-    transition: opacity 0.3s ease-out;
-  }
-
-  /* Ensure the image transition works */
-  .artwork-wrapper img {
-    transition: opacity 0.3s ease-out;
-  }
-
-  /* Inline code */
-  .prose :global(:not(pre) code) {
-    @apply text-sm px-1.5 py-0.5 font-semibold rounded font-mono bg-indigo-100 text-indigo-900;
-    &::before, &::after {
-      content: none;
-    }
-  }
-
-  .prose :global(pre) {
-    @apply text-sm p-5 rounded-none font-mono border text-indigo-50 bg-indigo-950 border-t-indigo-200 border-t-4 shadow-lg shadow-indigo-500/10;
-  }
-</style>
+<Template
+  title={title}
+  description={description}
+  date={date}
+  source="markdown"
+>
+  <slot />
+</Template>
