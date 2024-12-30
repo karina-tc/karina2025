@@ -6,36 +6,46 @@ function initializeUnderline() {
 
     function updateUnderline(link: Element | null) {
         if (!link || !underline || !nav) return;
+        // Force a reflow to ensure accurate measurements
+        void (nav as HTMLElement).offsetHeight;
         
-        // Get the relative position within the nav container
-        const linkRect = link.getBoundingClientRect();
+        const span = link.querySelector('span');
+        const spanRect = span?.getBoundingClientRect();
         const navRect = nav.getBoundingClientRect();
         
-        // Account for any scrolling
-        const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-        
-        // Calculate position relative to the nav container
-        const left = linkRect.left - navRect.left + nav.scrollLeft;
-        
-        underline.style.setProperty('--left', `${left}px`);
-        underline.style.setProperty('--width', `${linkRect.width}px`);
+        if (spanRect) {
+            const left = Math.round(spanRect.left - navRect.left);
+            const width = Math.round(spanRect.width);
+            
+            requestAnimationFrame(() => {
+                underline.style.setProperty('--left', `${left}px`);
+                underline.style.setProperty('--width', `${width}px`);
+            });
+        }
     }
-    // Set initial position
-    updateUnderline(activeLink ?? null);
 
-    // Add event listeners
+    // Initialize with a slight delay to ensure all styles are applied
+    setTimeout(() => {
+        updateUnderline(activeLink ?? null);
+    }, 0);
+    
     links?.forEach(link => {
         link.addEventListener('mouseenter', () => updateUnderline(link));
     });
+    
     nav?.addEventListener('mouseleave', () => {
         updateUnderline(activeLink ?? null);
     });
 
-    // Update on resize
     window.addEventListener('resize', () => {
+        updateUnderline(activeLink ?? null);
+    });
+
+    // Update on page load and when all resources are loaded
+    window.addEventListener('load', () => {
         updateUnderline(activeLink ?? null);
     });
 }
 
-// Initialize when the page loads
+// Ensure the function runs when the DOM is ready
 document.addEventListener('DOMContentLoaded', initializeUnderline); 
