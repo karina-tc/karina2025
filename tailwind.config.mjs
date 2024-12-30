@@ -15,7 +15,8 @@ export default {
         },
         'ink': {
           'primary': '#271E29',
-          'secondary': '#878188',
+          'secondary': '#554f56',
+          'tertiary': '#878188',
           'highlight-orange': '#FF7945',
           'highlight-green': '#4A6E72'
         }

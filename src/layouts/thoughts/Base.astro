@@ -100,6 +100,27 @@ const eyelash = `${formattedDate} · ${readingTime} min read`;
   import "../../scripts/controllers/intersection-controller";
 </script>
 
+<script>
+  class AstroCodeBlockElement extends HTMLElement {
+    constructor() {
+      super();
+      const code = decodeURIComponent(this.getAttribute("code") || "");
+      const lang = this.getAttribute("lang") || "plaintext";
+
+      // Create the Code component structure
+      const pre = document.createElement("pre");
+      const codeEl = document.createElement("code");
+      pre.className = "astro-code vesper"; // Changed to match Astro's Shiki classes
+      codeEl.className = `language-${lang}`;
+      codeEl.textContent = code;
+      pre.appendChild(codeEl);
+      this.appendChild(pre);
+    }
+  }
+
+  customElements.define("astro-code-block", AstroCodeBlockElement);
+</script>
+
 <style>
   .artwork-wrapper {
     @apply relative mb-12 rounded-lg overflow-hidden bg-stone-100;
@@ -136,6 +157,26 @@ const eyelash = `${formattedDate} · ${readingTime} min read`;
     @apply [&:not(:last-of-type)]:mb-6;
   }
 
+  .prose :global(h3) {
+    @apply text-xl font-semibold text-ink-secondary mt-8 tracking-normal;
+    @apply [&:not(:first-of-type)]:mt-16;
+    @apply [&:not(:last-of-type)]:mb-6;
+    text-transform: none;
+  }
+
+  .prose :global(ul),
+  .prose :global(ol) {
+    @apply list-disc list-inside text-ink-secondary;
+  }
+
+  .prose :global(strong) {
+    @apply font-semibold text-ink-secondary;
+  }
+
+  .prose :global(blockquote) {
+    @apply text-ink-secondary;
+  }
+
   /* Notion-specific styles */
   .prose :global(.callout) {
     @apply p-4 rounded-lg flex gap-3 my-6 bg-paper-green;
@@ -156,5 +197,14 @@ const eyelash = `${formattedDate} · ${readingTime} min read`;
   /* Ensure the image transition works */
   .artwork-wrapper img {
     transition: opacity 0.3s ease-out;
+  }
+
+  /* Inline code */
+  .prose :global(.notion-inline-code:not(pre *)) {
+    @apply bg-emerald-100 text-sm px-1.5 py-0.5 font-medium rounded font-mono text-emerald-950;
+  }
+
+  .prose :global(pre.astro-code) {
+    @apply bg-neutral-100 text-sm p-5 rounded-lg font-mono text-neutral-600 border border-neutral-200;
   }
 </style>

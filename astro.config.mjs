@@ -6,5 +6,16 @@ import prefetch from '@astrojs/prefetch';
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind(), prefetch()],
-  adapter: netlify()
+  adapter: netlify(),
+  markdown: {
+    shikiConfig: {
+      // Choose from Shiki's built-in themes (or add your own)
+      // https://github.com/shikijs/shiki/blob/main/docs/themes.md
+      theme: 'vesper',
+      wrap: true,
+      // Add custom languages
+      // Note: Shiki has countless langs built-in, including .astro!
+      langs: ['astro', 'typescript', 'javascript', 'python', 'bash', 'markdown', 'css', 'html', 'json', 'ruby'],
+    },
+  },
 });

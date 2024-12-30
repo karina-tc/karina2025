@@ -1,25 +1,67 @@
+import { Code } from 'astro:components';
+
+function renderRichText(richText: any[], isCodeBlock = false) {
+  // For code blocks, just return the plain text without any processing
+  if (isCodeBlock) {
+    return richText.map(text => text.plain_text).join('');
+  }
+  
+  return richText.map((text: any) => {
+    let content = text.plain_text;
+    
+    // Only process annotations if we're not in a code block
+    if (text.annotations?.code) {
+      content = content.replace(/`/g, '').trim();
+      content = `<code class="notion-inline-code">${content}</code>`;
+    }
+    
+    if (text.annotations) {
+      if (text.annotations.bold) content = `<strong>${content}</strong>`;
+      if (text.annotations.italic) content = `<em>${content}</em>`;
+      if (text.annotations.strikethrough) content = `<del>${content}</del>`;
+      if (text.annotations.underline) content = `<u>${content}</u>`;
+      if (text.annotations.color !== 'default') {
+        content = `<span class="notion-color-${text.annotations.color}">${content}</span>`;
+      }
+    }
+
+    if (text.href) {
+      content = `<a href="${text.href}" class="notion-link">${content}</a>`;
+    }
+
+    return content;
+  }).join('');
+}
+
 export function renderNotionBlock(block: any) {
   switch (block.type) {
+    case 'code':
+      const code = block.code.rich_text[0].plain_text;
+      const language = block.code.language || 'plaintext';
+      
+      // Use our CodeBlock component via a custom element
+      return `<astro-code-block code="${encodeURIComponent(code)}" lang="${language}"></astro-code-block>`;
+    
     case 'paragraph':
-      return `<p>${block.paragraph.rich_text.map((text: any) => text.plain_text).join('')}</p>`;
+      return `<p>${renderRichText(block.paragraph.rich_text)}</p>`;
     case 'heading_1':
-      return `<h1>${block.heading_1.rich_text.map((text: any) => text.plain_text).join('')}</h1>`;
+      return `<h1>${renderRichText(block.heading_1.rich_text)}</h1>`;
     case 'heading_2':
-      return `<h2>${block.heading_2.rich_text.map((text: any) => text.plain_text).join('')}</h2>`;
+      return `<h2>${renderRichText(block.heading_2.rich_text)}</h2>`;
     case 'heading_3':
-      return `<h3>${block.heading_3.rich_text.map((text: any) => text.plain_text).join('')}</h3>`;
+      return `<h3>${renderRichText(block.heading_3.rich_text)}</h3>`;
     case 'bulleted_list_item':
-      return `<li>${block.bulleted_list_item.rich_text.map((text: any) => text.plain_text).join('')}</li>`;
+      return `<li>${renderRichText(block.bulleted_list_item.rich_text)}</li>`;
     case 'numbered_list_item':
-      return `<ol><li>${block.numbered_list_item.rich_text.map((text: any) => text.plain_text).join('')}</li></ol>`;
+      return `<ol><li>${renderRichText(block.numbered_list_item.rich_text)}</li></ol>`;
     case 'quote':
-      return `<blockquote>${block.quote.rich_text.map((text: any) => text.plain_text).join('')}</blockquote>`;
+      return `<blockquote>${renderRichText(block.quote.rich_text)}</blockquote>`;
     case 'callout':
       return `
         <div class="callout ${block.callout.color}">
           ${block.callout.icon?.emoji ? `<span class="callout-icon">${block.callout.icon.emoji}</span>` : ''}
           <div class="callout-content">
-            ${block.callout.rich_text.map((text: any) => text.plain_text).join('')}
+            ${renderRichText(block.callout.rich_text)}
           </div>
         </div>
       `;
