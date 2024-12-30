@@ -1,10 +1,9 @@
 ---
-import Logo from "../elements/Logo.astro";
 interface Props {
   showBackToTop?: boolean;
 }
 
-const { showBackToTop = true } = Astro.props;
+const { showBackToTop = false } = Astro.props;
 ---
 
 <footer
@@ -139,7 +138,6 @@ const { showBackToTop = true } = Astro.props;
       class="w-full max-w-screen-md my-10 flex items-center justify-between text-xs text-white"
     >
       <div class="flex items-center gap-2">
-        <Logo classes="w-6 h-6" />
         <span>© 2024 Karina Tovar</span>
       </div>
       <span>Colophon</span>

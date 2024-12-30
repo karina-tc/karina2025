@@ -1,0 +1,145 @@
+---
+title: "Ruby on Rails"
+description: "Learning Ruby on Rails"
+date: "Dec 30, 2024"
+---
+
+These are my personal notes as I am learning Ruby on Rails. I see these as breadcrumbs that anyone can use to learn. Leave no crumbs — or whatever the kids say now…
+
+## Conventions
+
+### Ruby is Opinionated
+
+Rails has strong opinions. Its like a wise friend who knows-it-all without the annoying personality. So you need to follow its rules about folder structure and naming conventions to make your life so much easier. 
+
+### View Templates
+
+The ERB (.html.erb) file can serve a page or a component - this renders the structure. Using ERB (`.html.erb`), you can interweave Ruby code into your HTML to generate dynamic content.
+
+- **Structure**: Use `.html.erb` files to define the skeleton of your page.
+- **Functionality**: Share responsibilities between `.rb` files (server-side logic) and Stimulus controllers (front-end interactivity).
+
+Neat tip - you can do really cool shit between tailwind css and dynamic printing to reduce the amount of code.
+
+```ruby
+<ul class="my-10 space-y-2 [&>li]:font-bold [&>li]:text-base">
+  <% @items.each do |item| %>
+    <li><%= item.name %></li>
+  <% end %>
+</ul>
+
+OR
+
+<ul class="my-10 space-y-2">
+  <% @items.each do |item| %>
+    <li class="font-bold text-base"><%= item.name %></li>
+  <% end %>
+</ul>
+```
+
+### Hacky Style Definitions
+
+In some of my work, I’ve used an `.rb` file to also define the classes of a component. This allows me to keep the classes organized and outside of the `.html.erb` — which is specially useful when you want to use the power of css to help you build fuctionality with minimal js.
+
+## Grab a Helper
+
+Rails provides several built-in helpers to simplify front-end tasks. 
+
+**Form helpers**
+
+The `form_with` helper ties your form directly to your model, so all you need to worry about is what fields you want.
+
+```ruby
+<%= form_with(model: @post, local: true) do |form| %>
+  <%= form.text_field :title %>
+  <%= form.submit %>
+<% end %>
+```
+
+**Link helpers**
+
+Forget writing raw `link` tags. Rails’ `link_to` helper makes links intuitive and clean:
+
+```ruby
+<%= link_to "Home", root_path, class: "btn btn-primary" %>
+```
+
+**Tag helpers**
+
+Tag helpers let you generate HTML programmatically. If you hate cluttered templates, these are your best friend:
+
+```ruby
+<%= tag.div("Hello, world!", class: "greeting") %>
+```
+
+You can tag just about anything, including images. Rails’ `image_tag` helper is a quick way to add images to your views with all the necessary attributes in place:
+
+```ruby
+<%= image_tag("logo.png", alt: "Logo", class: "img-fluid") %>
+```
+
+## Partials for the Win
+
+Partials are like the Tupperware of Rails—just slightly less colored by your last pasta dish. These are perfect for stashing reusable pieces of view code. 
+
+Need a header on every page? A card component? A shared form? Wrap it up in a partial.
+
+To create one, start by naming the file with a leading underscore (e.g., `_header.html.erb`). Then call it in your views:
+
+```ruby
+<%= render "header" %>
+```
+
+Partials can also take local variables, making them flexible and dynamic:
+
+```ruby
+<%= render "card", title: "My Title", content: "My Content" %>
+```
+
+And in `_card.html.erb`:
+
+```ruby
+<div class="card">
+  <h3><%= title %></h3>
+  <p><%= content %></p>
+</div>
+```
+
+It’s like modular design for your templates—clean, efficient, and kind of satisfying.
+
+## Stimulate It
+
+Rails uses StimulusJS for interactive front-end behavior. 
+
+1. **Define Your Controller**: Create a Stimulus controller in `app/javascript/controllers/`:
+
+```ruby
+import { Controller } from "@hotwired/stimulus";
+
+export default class extends Controller {
+  static values = { name: String };
+
+  connect() {
+    console.log(`Hello, ${this.nameValue}!`);
+  }
+}
+```
+
+1. **Hook It Up**: Attach your controller to HTML elements with `data-controller` attributes:
+
+```ruby
+<div data-controller="example" data-example-name-value="Rails"></div>
+```
+
+1. **Enjoy the Magic**: Open your browser console and see your Stimulus controller in action.
+
+Stimulus keeps your front-end JavaScript snappy without dragging in an entire framework. It’s a win-win.
+
+## Separation of Concerns
+
+Most devs I’ve worked with have this thing about keeping everything in its lane. I’ve learned that this is for good reason. When you respect separation of concerns, your app or site stays clean and manageable.
+
+1. **Keep Views Clean**: No one likes messy `.html.erb` files. Extract logic into helpers or partials.
+2. **Use Helpers**: Got repetitive view logic? Helpers in `app/helpers/` are your shortcut to sanity.
+3. **Leverage StimulusJS**: Let Stimulus handle interactivity instead of cramming JavaScript directly into your views.
+4. **Follow MVC Principles**: Stick to the Model-View-Controller pattern for structure that scales.
