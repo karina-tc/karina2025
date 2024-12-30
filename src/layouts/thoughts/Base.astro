@@ -28,7 +28,9 @@ const {
   categories = [],
 } = Astro.props;
 
-const breadcrumbs = [{ text: "← Back to thoughts", href: "/thoughts" }];
+const breadcrumbs = [
+  { text: "Back to thoughts", href: "/thoughts", showArrow: true },
+];
 
 // Format date
 const formattedDate = new Date(date).toLocaleDateString("en-US", {
@@ -137,9 +139,6 @@ const eyelash = `${formattedDate} · ${readingTime} min read`;
       prose-blockquote:border-stone-300
       prose-blockquote:pl-4
       prose-blockquote:italic
-      prose-ul:list-disc
-      prose-ul:ml-6
-      prose-li:text-ink-secondary
       prose-img:rounded-lg;
   }
 
@@ -166,7 +165,26 @@ const eyelash = `${formattedDate} · ${readingTime} min read`;
 
   .prose :global(ul),
   .prose :global(ol) {
-    @apply list-disc list-inside text-ink-secondary;
+    @apply list-disc text-ink-secondary space-y-2;
+  }
+
+  .prose :global(ul) {
+    padding-inline-start: 2px;
+  }
+
+  .prose :global(ol) {
+    padding-inline-start: 1em;
+  }
+
+  .prose :global(ul li) {
+    @apply pl-0;
+    padding-inline-start: 1rem;
+    text-indent: -1rem;
+
+    /* Remove default list styling to prevent double bullets */
+    &::marker {
+      @apply text-stone-400;
+    }
   }
 
   .prose :global(strong) {
@@ -201,10 +219,10 @@ const eyelash = `${formattedDate} · ${readingTime} min read`;
 
   /* Inline code */
   .prose :global(.notion-inline-code:not(pre *)) {
-    @apply bg-emerald-100 text-sm px-1.5 py-0.5 font-medium rounded font-mono text-emerald-950;
+    @apply text-sm px-1.5 py-0.5 font-semibold rounded font-mono bg-indigo-100 text-indigo-800;
   }
 
   .prose :global(pre.astro-code) {
-    @apply bg-neutral-100 text-sm p-5 rounded-lg font-mono text-neutral-600 border border-neutral-200;
+    @apply text-sm p-5 rounded-none font-mono border text-indigo-50 bg-indigo-950 border-t-indigo-200 border-t-4 shadow-lg shadow-indigo-500/10;
   }
 </style>
