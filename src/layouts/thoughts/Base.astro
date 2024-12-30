@@ -102,27 +102,6 @@ const eyelash = `${formattedDate} · ${readingTime} min read`;
   import "../../scripts/controllers/intersection-controller";
 </script>
 
-<script>
-  class AstroCodeBlockElement extends HTMLElement {
-    constructor() {
-      super();
-      const code = decodeURIComponent(this.getAttribute("code") || "");
-      const lang = this.getAttribute("lang") || "plaintext";
-
-      // Create the Code component structure
-      const pre = document.createElement("pre");
-      const codeEl = document.createElement("code");
-      pre.className = "astro-code vesper"; // Changed to match Astro's Shiki classes
-      codeEl.className = `language-${lang}`;
-      codeEl.textContent = code;
-      pre.appendChild(codeEl);
-      this.appendChild(pre);
-    }
-  }
-
-  customElements.define("astro-code-block", AstroCodeBlockElement);
-</script>
-
 <style>
   .artwork-wrapper {
     @apply relative mb-12 rounded-lg overflow-hidden bg-stone-100;

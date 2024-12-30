@@ -35,13 +35,6 @@ function renderRichText(richText: any[], isCodeBlock = false) {
 
 export function renderNotionBlock(block: any) {
   switch (block.type) {
-    case 'code':
-      const code = block.code.rich_text[0].plain_text;
-      const language = block.code.language || 'plaintext';
-      
-      // Use our CodeBlock component via a custom element
-      return `<astro-code-block code="${encodeURIComponent(code)}" lang="${language}"></astro-code-block>`;
-    
     case 'paragraph':
       return `<p>${renderRichText(block.paragraph.rich_text)}</p>`;
     case 'heading_1':
