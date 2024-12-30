@@ -2,6 +2,8 @@
 import Layout from "../layouts/Layout.astro";
 import karina from "../assets/brand/karina-profile.webp";
 import SectionHeader from "../components/structure/SectionHeader.astro";
+import { Image } from "astro:assets";
+import karinaProfile from "../assets/brand/karina-profile.png";
 ---
 
 <Layout
@@ -16,6 +18,8 @@ import SectionHeader from "../components/structure/SectionHeader.astro";
   horizon_height="455px"
 >
   <div class="divider--small"></div>
+
+  <Image src={karinaProfile} alt="Karina Tovar" class="w-1/2 rounded-lg" />
 
   <section class="section-wrapper mt-10 content-section">
     <SectionHeader eyebrow="Background" title="Artist turned product designer">
