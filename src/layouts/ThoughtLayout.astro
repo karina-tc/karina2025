@@ -1,0 +1,163 @@
+---
+import Layout from "./Layout.astro";
+import Header from "../components/elements/Header.astro";
+import Breadcrumbs from "../components/structure/Breadcrumbs.astro";
+import Signature from "../components/elements/Signature.astro";
+
+interface Props {
+  title: string;
+  date: string;
+  description?: string;
+  showcase?: string;
+}
+
+const { title, date, description, showcase } = Astro.props;
+
+const breadcrumbs = [
+  { text: "Back to thoughts", href: "/thoughts", showArrow: true },
+];
+---
+
+<Layout
+  pageTitle={title}
+  pageDescription={description || "Thoughts - Karina Tovar"}
+>
+  {/* Breadcrumbs */}
+  <Breadcrumbs crumbs={breadcrumbs} />
+
+  {/* Header */}
+  <Header title={title} />
+
+  {/* Date */}
+  <h2 class="text-2xl opacity-70 -mt-14 mb-10">{date}</h2>
+
+  {/* Showcase Image (if provided) */}
+  {
+    showcase && (
+      <div class="artwork-wrapper content-section">
+        <img
+          src={showcase}
+          alt={title}
+          class="w-full h-auto rounded-lg"
+          loading="eager"
+        />
+      </div>
+    )
+  }
+
+  {/* Content */}
+  <article class="prose">
+    <slot />
+  </article>
+
+  {/* Signature */}
+  <Signature includeClasses="mt-10" text="Life is good!" />
+</Layout>
+
+<style>
+  .artwork-wrapper {
+    @apply relative mb-12 rounded-lg overflow-hidden bg-stone-100;
+  }
+
+  .prose {
+    @apply font-safiro
+      prose-headings:text-ink-primary
+      prose-h4:font-medium
+      prose-a:text-orange-600 
+      prose-a:no-underline 
+      hover:prose-a:underline
+      prose-blockquote:border-l-4
+      prose-blockquote:border-stone-300
+      prose-blockquote:pl-4
+      prose-blockquote:italic
+      prose-img:rounded-lg;
+  }
+
+  .prose :global(p) {
+    @apply text-[#6c5f3c] text-base leading-loose;
+  }
+
+  .prose :global(strong) {
+    @apply !text-[#6c5f3c] font-semibold;
+  }
+
+  .prose :global(h2) {
+    @apply text-[#6c5f3c] text-5xl font-medium mt-12 opacity-70;
+    @apply [&:not(:first-of-type)]:mt-24;
+    @apply [&:not(:last-of-type)]:mb-6;
+  }
+
+  .prose :global(h3) {
+    @apply text-[#6c5f3c] text-xl font-semibold mt-8 tracking-normal opacity-70;
+    @apply [&:not(:first-of-type)]:mt-8;
+    @apply [&:not(:last-of-type)]:mb-6;
+    text-transform: none;
+  }
+
+  .prose :global(ul),
+  .prose :global(ol) {
+    @apply text-[#6c5f3c] list-disc space-y-2;
+  }
+
+  .prose :global(ul) {
+    padding-inline-start: 2px;
+  }
+
+  .prose :global(ol) {
+    padding-inline-start: 1em;
+  }
+
+  .prose :global(ul li) {
+    @apply pl-0;
+    padding-inline-start: 1rem;
+    text-indent: -1rem;
+
+    &::marker {
+      @apply text-[#6c5f3c];
+    }
+  }
+
+  .prose :global(strong) {
+    @apply text-[#6c5f3c] font-semibold text-ink-secondary;
+  }
+
+  .prose :global(blockquote) {
+    @apply text-[#6c5f3c] font-normal;
+  }
+
+  /* Notion-specific styles */
+  .prose :global(.callout) {
+    @apply p-4 rounded-lg flex gap-3 my-6 bg-paper-green;
+  }
+
+  .prose :global(.video-wrapper) {
+    @apply relative w-full my-6 aspect-video;
+  }
+
+  .prose :global(.video-wrapper iframe) {
+    @apply absolute inset-0 w-full h-full rounded-lg;
+  }
+
+  .loading-overlay {
+    transition: opacity 0.3s ease-out;
+  }
+
+  .artwork-wrapper img {
+    transition: opacity 0.3s ease-out;
+  }
+
+  /* Code styles */
+  .prose :global(:not(pre) code),
+  .prose :global(.notion-inline-code:not(pre *)) {
+    @apply text-sm px-1.5 py-0.5 font-semibold rounded font-mono bg-[#6c5f3c]/15 text-[#6c5f3c];
+    &::before,
+    &::after {
+      content: none;
+    }
+  }
+
+  .prose :global(pre.astro-code),
+  .prose :global(pre) {
+    @apply text-sm p-5 rounded-none font-mono border border-[#6c5f3c]/10 border-t-[#6c5f3c]/50 border-t-4 shadow-lg shadow-[#6c5f3c]/10;
+  }
+</style>

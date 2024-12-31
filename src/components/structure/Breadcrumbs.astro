@@ -12,7 +12,7 @@ interface Props {
 const { crumbs } = Astro.props;
 ---
 
-<nav class="breadcrumbs px-10 max-3xl:px-0">
+<nav class="breadcrumbs max-3xl:px-0">
   {
     crumbs.map((crumb) => (
       <a href={crumb.href} class="crumb">
@@ -29,7 +29,7 @@ const { crumbs } = Astro.props;
   }
 
   .crumb {
-    @apply flex items-center gap-2 text-ink-secondary hover:text-ink-primary transition-all;
+    @apply flex items-center gap-2 transition-all;
 
     &:hover span.label {
       @apply underline underline-offset-4;
@@ -37,6 +37,6 @@ const { crumbs } = Astro.props;
   }
 
   .arrow {
-    @apply text-orange-500;
+    @apply opacity-80;
   }
 </style>

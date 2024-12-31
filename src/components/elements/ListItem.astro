@@ -10,38 +10,24 @@ interface Props {
   icon?: ImageMetadata;
 }
 
-const { 
-  isLink = false, 
-  label, 
-  detail, 
-  href, 
-  icon = bubble 
-} = Astro.props;
+const { isLink = false, label, detail, href, icon = bubble } = Astro.props;
 ---
 
 {
   isLink ? (
     <a href={href} class="listing-item group relative">
       {icon && <Image src={icon} alt="" class="w-10 h-10 z-[1]" />}
-      <span class="listing-label">
-        {label}
-      </span>
+      <span class="listing-label">{label}</span>
       <span class="listing-dots" />
-      <span class="listing-detail">
-        {detail}
-      </span>
+      <span class="listing-detail">{detail}</span>
       <div class="listing-hover-overlay" />
     </a>
   ) : (
     <div class="listing-item group relative">
       {icon && <Image src={icon} alt="" class="w-10 h-10 z-[1]" />}
-      <span class="listing-label">
-        {label}
-      </span>
+      <span class="listing-label">{label}</span>
       <span class="listing-dots" />
-      <span class="listing-detail">
-        {detail}
-      </span>
+      <span class="listing-detail">{detail}</span>
       <div class="listing-hover-overlay" />
     </div>
   )
@@ -53,7 +39,7 @@ const {
   }
 
   .listing-label {
-    @apply text-neutral-900 z-[1] shrink-0;
+    @apply z-[1] shrink-0;
   }
 
   .listing-dots {

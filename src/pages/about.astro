@@ -4,7 +4,7 @@ import Layout from "../layouts/Layout.astro";
 import Header from "../components/elements/Header.astro";
 import Timeline from "../components/elements/Timeline.astro";
 import TrayArrowDown from "phosphor-astro/TrayArrowDown.astro";
-
+import Signature from "../components/elements/Signature.astro";
 // Data
 import { timelineItems } from "../data/timeline";
 
@@ -116,7 +116,7 @@ import life from "../assets/bubbles/bubble-1.png";
     <figure class="flex justify-center w-full h-[450px] bg-neutral-100 border-[5px] border-white rounded-lg shadow-lg">
     </figure>
 
-    <p class="font-homemade-apple text-4xl py-10">- Life is good!</p>
+    <Signature text="Life is good!" includeClasses="mt-10" />
   </section>
 
 </Layout>

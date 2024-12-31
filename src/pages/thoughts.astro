@@ -11,6 +11,31 @@ import ListItemHeader from "../components/elements/ListItemHeader.astro";
 }
 import { Image } from "astro:assets";
 import bubble from "../assets/bubbles/bubble-1.png";
+import { getThoughts } from "../lib/notion";
+import type { ThoughtPost } from "../lib/notion";
+import { getCollection } from 'astro:content';
+
+// Get content collection posts for notebooks
+const contentPosts = await getCollection('notebooks');
+const sideNotes = contentPosts;
+
+// Get Notion posts for main content
+const notionPosts = await getThoughts();
+const mainPosts = notionPosts.filter((post: ThoughtPost) => !post.categories.includes("Briefs"));
+
+// Group main posts by year
+const years = [
+  ...new Set(mainPosts.map((post) => new Date(post.date).getFullYear())),
+].sort((a, b) => b - a);
+
+const getPostsForYear = (year: number) =>
+  mainPosts.filter((post) => new Date(post.date).getFullYear() === year);
+
+// Helper function to format date to MM/DD
+const formatDate = (dateString: string) => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit' });
+};
 ---
 
 <Layout
@@ -33,75 +58,40 @@ import bubble from "../assets/bubbles/bubble-1.png";
   {/* Notebooks */}
   <section>
     <h3 class="mt-20 mb-5 text-5xl font-medium opacity-50">Notebooks</h3>
-
     <div class="writing-list">
-      <ListItem
-        isLink={true}
-        label="How to Make Tails with Ruby on Rails"
-        detail="2024"
-        href="/post-1"
-        icon={bubble}
-      />
-      <ListItem
-        isLink={true}
-        label="Writing Better Prompts"
-        detail="2024"
-        href="/post-1"
-        icon={bubble}
-      />
+      {sideNotes.map((post) => (
+        <ListItem
+          isLink={true}
+          label={post.data.title}
+          detail={new Date().getFullYear().toString()}
+          href={`/notebooks/${post.slug}`}
+          icon={bubble}
+        />
+      ))}
     </div>
   </section>
 
-  {/* 2024 */}
-  <section>
-    <h3 class="mt-20 mb-5 text-5xl font-medium opacity-50">2024</h3>
-    <ListItemHeader leftLabel="TITLE" rightLabel="DATE" />
-    <div class="writing-list">
-      <ListItem
-        isLink={true}
-        label="Some Post Name Here"
-        detail="2024"
-        href="/post-1"
-        icon={bubble}
-      />
-      <ListItem
-        isLink={true}
-        label="Some Post Name Here"
-        detail="2024"
-        href="/post-1"
-        icon={bubble}
-      />
-      <ListItem
-        isLink={true}
-        label="Some Post Name Here"
-        detail="2024"
-        href="/post-1"
-        icon={bubble}
-      />
-    </div>
-  </section>
-
-  {/* 2023 */}
-  <section>
-    <h3 class="mt-20 mb-5 text-5xl font-medium opacity-50">2023</h3>
-    <ListItemHeader leftLabel="TITLE" rightLabel="DATE" />
-    <div class="writing-list">
-      <ListItem
-        isLink={true}
-        label="Some Post Name Here"
-        detail="2024"
-        href="/post-1"
-        icon={bubble}
-      />
-      <ListItem
-        isLink={true}
-        label="Some Post Name Here"
-        detail="2024"
-        href="/post-1"
-        icon={bubble}
-      />
-    </div>
-  </section>
+  {/* Dynamic Year Sections */}
+  {years.map((year) => {
+    const postsForYear = getPostsForYear(year);
+    return (
+      <section>
+        <h3 class="mt-20 mb-5 text-5xl font-medium opacity-50">{year}</h3>
+        <ListItemHeader leftLabel="TITLE" rightLabel="DATE" />
+        <div class="writing-list">
+          {postsForYear.map((post) => (
+            <ListItem
+              isLink={true}
+              label={post.title}
+              detail={formatDate(post.date)}
+              href={post.href}
+              icon={bubble}
+            />
+          ))}
+        </div>
+      </section>
+    );
+  })}
 </Layout>
 
 <style>
