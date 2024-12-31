@@ -38,14 +38,14 @@ const prevPost =
 const nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
 ---
 
-<nav class="mt-20 flex justify-between items-center">
+<nav class="thoughts-navigation">
   {
     prevPost && (
-      <a href={prevPost.href} class="group flex items-center gap-2 group">
-        <ArrowLeft class="w-10 h-10 opacity-60 group-hover:text-purple-500" />
-        <span class="text-sm">
-          <span class="block opacity-60">Previous</span>
-          <span class="block text-lg">{prevPost.title}</span>
+      <a href={prevPost.href} class="group thoughts-navigation-item previous">
+        <ArrowLeft class="thoughts-navigation-icon" />
+        <span class="thoughts-navigation-text">
+          <span class="thoughts-navigation-text-label">Previous</span>
+          <span class="thoughts-navigation-text-title">{prevPost.title}</span>
         </span>
       </a>
     )
@@ -53,17 +53,47 @@ const nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
 
   {
     nextPost && (
-      <a
-        href={nextPost.href}
-        class="group flex items-center gap-2 group ml-auto"
-      >
-        <span class="text-sm text-right">
-          <span class="block opacity-60">Next</span>
-          <span class="block text-lg">{nextPost.title}</span>
+      <a href={nextPost.href} class="group thoughts-navigation-item next">
+        <span class="thoughts-navigation-text">
+          <span class="thoughts-navigation-text-label">Next</span>
+          <span class="thoughts-navigation-text-title">{nextPost.title}</span>
         </span>
-        <ArrowRight class="w-10 h-10 opacity-60 group-hover:text-purple-500" />
+        <ArrowRight class="thoughts-navigation-icon" />
       </a>
     )
   }
 </nav>
 
+<style>
+  .thoughts-navigation {
+    @apply mt-20 flex justify-between items-center max-md:flex-col max-md:gap-4;
+  }
+
+  .thoughts-navigation-item {
+    @apply flex items-center gap-2 max-md:w-full;
+  }
+
+  .thoughts-navigation-item.next:not(:only-child) {
+    @apply max-md:w-full max-md:border-t max-md:border-neutral-200 max-md:border-dashed max-md:pt-4;
+
+    .thoughts-navigation-text {
+      @apply max-md:pl-11;
+    }
+  }
+
+  .thoughts-navigation-text {
+    @apply text-sm max-md:w-full [&>span]:block;
+  }
+
+  .thoughts-navigation-text-label {
+    @apply opacity-60;
+  }
+
+  .thoughts-navigation-text-title {
+    @apply text-lg;
+  }
+
+  .thoughts-navigation-icon {
+    @apply w-10 h-10 opacity-60 group-hover:text-purple-500;
+  }
+</style>
