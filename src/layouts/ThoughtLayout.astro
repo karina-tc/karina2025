@@ -5,6 +5,8 @@ import Header from "../components/elements/Header.astro";
 import Breadcrumbs from "../components/structure/Breadcrumbs.astro";
 import Signature from "../components/elements/Signature.astro";
 import ScribbleLoop from "phosphor-astro/ScribbleLoop.astro";
+import PostNavigation from "../components/elements/PostNavigation.astro";
+
 // Type Definitions
 interface Props {
   title: string;
@@ -12,10 +14,11 @@ interface Props {
   description?: string;
   showcase?: string;
   source?: "notion" | "markdown";
+  currentSlug: string;
 }
 
 // Props Destructuring
-const { title, date, description, showcase, source } = Astro.props;
+const { title, date, description, showcase, source, currentSlug } = Astro.props;
 
 // Navigation Configuration
 const breadcrumbs = [
@@ -72,8 +75,9 @@ const breadcrumbs = [
     <slot />
   </article>
 
-  {/* Footer */}
   <Signature includeClasses="mt-10" text="Byeeeeee!" />
+  
+  <PostNavigation currentSlug={currentSlug} />
 </Layout>
 
 <style>

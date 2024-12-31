@@ -12,7 +12,7 @@ import bubble from "../assets/bubbles/bubble-1.png";
 // Data Fetching
 import { getThoughts } from "../lib/notion";
 import type { ThoughtPost } from "../lib/notion";
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 
 // Fetch Notebooks (Content Collection)
 const contentPosts = await getCollection('notebooks');
@@ -70,7 +70,7 @@ const formatDate = (dateString: string) => {
       Notebooks
     </h3>
     <div class="writing-list">
-      {sideNotes.map((post) => (
+      {sideNotes.map((post: CollectionEntry<'notebooks'>) => (
         <ListItem
           isLink={true}
           label={post.data.title}
