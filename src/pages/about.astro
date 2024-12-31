@@ -1,78 +1,36 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { Image } from "astro:assets";
 import Header from "../components/elements/Header.astro";
+import { timelineItems } from "../data/timeline";
 import Timeline from "../components/elements/Timeline.astro";
-import avatar1 from "../assets/avatars/avatar-1.png";
-import avatar2 from "../assets/avatars/avatar-2.png";
-import avatar3 from "../assets/avatars/avatar-3.png";
-import avatar4 from "../assets/avatars/avatar-4.png";
-import avatar5 from "../assets/avatars/avatar-5.png";
-
-const timelineItems = [
-  {
-    title: "Lead Product Designer",
-    company: "Tropic App",
-    description:
-      "I was the lead product designer at Tropic App. I was responsible for the product design and branding of the app. I was also responsible for the design of the app. I was also responsible for the design of the app. I was also responsible for the design of the app. I was also responsible for the design of the app. I was also responsible for the design of the app.",
-    avatar: avatar1,
-    skills: [
-      "Product Design",
-      "Design Systems",
-      "UX Research",
-      "Design Engineering",
-    ],
-  },
-  {
-    title: "Senior Product Designer",
-    company: "Glue",
-    description:
-      "I was the lead product designer at Tropic App. I was responsible for the product design and branding of the app. I was also responsible for the design of the app. I was also responsible for the design of the app. I was also responsible for the design of the app. I was also responsible for the design of the app. I was also responsible for the design of the app.",
-    avatar: avatar2,
-    skills: ["Product Design", "Branding", "UX Research", "Design Engineering"],
-  },
-  {
-    title: "Staff Product Designer",
-    company: "Teikametrics",
-    description:
-      "I was the lead product designer at Tropic App. I was responsible for the product design and branding of the app. I was also responsible for the design of the app. I was also responsible for the design of the app. I was also responsible for the design of the app. I was also responsible for the design of the app. I was also responsible for the design of the app.",
-    avatar: avatar3,
-    skills: ["Product Design", "Design Systems", "UX Research"],
-  },
-  {
-    title: "Product Owner",
-    company: "Rejoiner",
-    description:
-      "I was the lead product designer at Tropic App. I was responsible for the product design and branding of the app. I was also responsible for the design of the app. I was also responsible for the design of the app. I was also responsible for the design of the app. I was also responsible for the design of the app. I was also responsible for the design of the app.",
-    avatar: avatar4,
-    skills: [
-      "Product Design",
-      "Branding",
-      "UX Research",
-      "Design Engineering",
-      "Product Management",
-    ],
-  },
-  {
-    title: "Lead Designer",
-    company: "Venly",
-    description:
-      "I was the lead product designer at Tropic App. I was responsible for the product design and branding of the app. I was also responsible for the design of the app. I was also responsible for the design of the app. I was also responsible for the design of the app. I was also responsible for the design of the app. I was also responsible for the design of the app.",
-    avatar: avatar5,
-    skills: ["Branding"],
-  },
-];
+import { Image } from "astro:assets";
+import avatarBackground from "../assets/avatars/avatar-4.png";
+import karina from "../assets/brand/karina-profile.png";
+import TrayArrowDown from "phosphor-astro/TrayArrowDown.astro";
+import notion from "../assets/logos/notion.png";
+import cursor from "../assets/logos/cursor.png";
+import figma from "../assets/logos/figma.png";
 ---
 
 <Layout
   pageTitle="About - Karina Tovar"
   pageDescription="Pixel Philosopher Cautious Technologist"
 >
-  <Header title="Hello Stranger" />
+  <Header
+    title="Hello Stranger"
+    subtitle="I am an artist turned product designer working on the intersection of technology and human happiness."
+  />
 
-  <h2 class="mt-0 text-3xl font-medium">A little about me</h2>
+  <figure class="rounded-t-full overflow-hidden relative">
+    <Image
+      src={karina}
+      alt="Karina Tovar"
+      class="absolute bottom-0 translate-x-5 karina-profile"
+    />
+    <Image src={avatarBackground} alt="Noise" />
+  </figure>
 
-  <h2 class="mt-0">I'm an artist turned product designer</h2>
+  <h2 class="mt-10">Building for Joy</h2>
 
   <p class="text-lg">
     I have a background in the Fine Arts, with a MFA from the Massachusetts
@@ -85,62 +43,52 @@ const timelineItems = [
 
   <div class="divider--large"></div>
 
-  <h2 class="pt-10">I have a decade of experience</h2>
-
-  <div class="flex flex-col gap-8">
-    <Timeline items={timelineItems} />
-    <a
-      href="#"
-      class="text-sm underline-offset-4 hover:underline transition-all duration-300"
-    >
-      See more in Read.CV
+  <div class="flex justify-between items-center flex-wrap gap-4 pt-10 mb-5 group">
+    <h2 class="m-0">A Decade of Experience</h2>
+    <a href="#" class="resume-link text-sm">
+      <TrayArrowDown class="w-6 h-6" />
+      <span class="underline-offset-4 group-hover:underline"
+        >Download Resume</span
+      >
     </a>
   </div>
 
+  <Timeline items={timelineItems} />
+
   <div class="divider--large"></div>
 
-  <h2 class="pt-10">My preferred stack</h2>
+  <h2 class="pt-10">My Preferred Stack</h2>
 
   <p>Stack I use to build products</p>
 
   <div class="stack-grid">
     <div class="stack-item--cell">
       <div class="stack-item--icon"></div>
+      <span>Pen & Paper</span>
+    </div>
+    <div class="stack-item--cell">
+      <div class="stack-item--icon">
+        <Image src={notion} alt="Notion" class="w-6 h-6" />
+      </div>
       <span>Notion</span>
     </div>
     <div class="stack-item--cell">
-      <div class="stack-item--icon"></div>
+      <div class="stack-item--icon">
+        <Image src={figma} alt="Figma" class="w-4" />
+      </div>
+      <span>Figma</span>
+    </div>
+    <div class="stack-item--cell">
+      <div class="stack-item--icon">
+        <Image src={cursor} alt="Cursor" class="w-9" />
+      </div>
       <span>Cursor</span>
-    </div>
-    <div class="stack-item--cell">
-      <div class="stack-item--icon"></div>
-      <span>Figma</span>
-    </div>
-    <div class="stack-item--cell">
-      <div class="stack-item--icon"></div>
-      <span>Figma</span>
-    </div>
-    <div class="stack-item--cell">
-      <div class="stack-item--icon"></div>
-      <span>Notion</span>
-    </div>
-    <div class="stack-item--cell">
-      <div class="stack-item--icon"></div>
-      <span>Cursor</span>
-    </div>
-    <div class="stack-item--cell">
-      <div class="stack-item--icon"></div>
-      <span>Figma</span>
-    </div>
-    <div class="stack-item--cell">
-      <div class="stack-item--icon"></div>
-      <span>Figma</span>
     </div>
   </div>
 
   <div class="divider--large"></div>
 
-  <h2 class="pt-10">Outside of work</h2>
+  <h2 class="pt-10">Outside of Work</h2>
   <p>
     I have a background in the Fine Arts, with a MFA from the Massachusetts
     College of Art & Design. There I was part of the Studio for Interrelated
@@ -149,8 +97,6 @@ const timelineItems = [
     happiness. I worked on a lot of performance art pieces that lived outside of
     the museum so I could create room for joy in the mundane.
   </p>
-
-  <Image src={avatar1} alt="Karina Tovar" />
 </Layout>
 
 <style>
@@ -159,11 +105,20 @@ const timelineItems = [
   }
 
   .stack-item--cell {
-    @apply flex flex-col items-center gap-2 p-4 bg-paper-base rounded-lg shadow-md transition-all duration-300;
-    @apply hover:shadow-lg hover:scale-105 shadow-neutral-300/50;
+    @apply flex flex-col items-center gap-2 p-4;
   }
 
   .stack-item--icon {
-    @apply w-10 h-10 bg-neutral-100 rounded-full;
+    @apply w-12 h-12 bg-neutral-100 rounded-full flex items-center justify-center;
+    @apply bg-paper-base rounded-lg shadow-md mb-2;
+  }
+
+  .karina-profile {
+    @apply drop-shadow-[0_8px_20px_rgb(70,46,15)] mix-blend-overlay;
+  }
+
+  .resume-link {
+    @apply flex items-center gap-2 w-fit py-3 bg-paper-base rounded-full transition-all duration-300;
+    @apply hover:shadow-lg hover:shadow-neutral-300/50 hover:pl-3 hover:pr-4 hover:bg-[#6c5f3c] hover:text-white;
   }
 </style>

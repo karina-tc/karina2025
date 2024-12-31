@@ -3,9 +3,12 @@ interface Props {
   items: {
     title: string;
     company: string;
+    companyUrl?: string;
+    startDate?: string;
+    endDate?: string;
     description: string;
     avatar: ImageMetadata;
-    skills: string[];
+    categories: string[];
   }[];
 }
 
@@ -21,14 +24,33 @@ const { items } = Astro.props;
           <Image src={item.avatar} alt={`${item.company} logo`} />
         </div>
         <div class="timeline-item--content">
-          <span class="timeline-item--content--title">{item.title}</span>
-          <span class="timeline-item--content--company">{item.company}</span>
+          <div class="timeline-item--content--title">
+            {item.companyUrl ? (
+              <span>
+                {item.title} at{" "}
+                <a
+                  href={item.companyUrl}
+                  target="_blank"
+                  class="group-hover:underline underline-offset-4 decoration-neutral-300"
+                  rel="noopener noreferrer">
+                  {item.company}
+                </a>
+              </span>
+            ) : (
+              <span>
+                {item.title} at {item.company}
+              </span>
+            )}
+          </div>
+          <div class="timeline-item--content--dates">
+            {item.startDate} &mdash; {item.endDate}
+          </div>
           <div class="timeline-item--description">
-            <span class="pl-2 pt-3 inline-block">{item.description}</span>
+            <span class="pt-3 inline-block">{item.description}</span>
           </div>
           <ul class="timeline-item--content--list">
-            {item.skills.map((skill) => (
-              <li>{skill}</li>
+            {item.categories.map((category) => (
+              <li>{category}</li>
             ))}
           </ul>
         </div>
@@ -43,7 +65,20 @@ const { items } = Astro.props;
   }
 
   .timeline-item {
-    @apply flex gap-4 p-5 border-l-2 border-neutral-200 hover:bg-neutral-100 cursor-default transition-all duration-300;
+    @apply grid grid-cols-[40px_1fr] gap-5 p-5 hover:bg-neutral-100 cursor-default transition-all duration-300;
+
+    &.focused {
+      @apply bg-neutral-100;
+      .timeline-item--logo {
+        @apply scale-110;
+      }
+      .timeline-item--content--description {
+        @apply h-auto opacity-100 py-2;
+      }
+      .timeline-item--content--list li {
+        @apply bg-white;
+      }
+    }
   }
 
   .timeline-item--logo {
@@ -53,27 +88,31 @@ const { items } = Astro.props;
   }
 
   .timeline-item--content {
-    @apply flex flex-col pt-2;
+    @apply flex flex-col;
   }
 
   .timeline-item--content--title {
-    @apply text-base font-medium pl-2;
+    @apply text-base font-semibold pl-2;
   }
 
-  .timeline-item--content--company {
-    @apply text-sm mt-1 pl-2;
+  .timeline-item--content--dates {
+    @apply text-sm text-neutral-500 pl-2;
   }
 
   .timeline-item--description {
     @apply text-sm h-0 opacity-0 p-0 overflow-hidden transition-all duration-300;
     @apply group-hover:h-auto group-hover:opacity-100 group-hover:py-2;
+
+    span {
+      @apply whitespace-pre-line pl-2;
+    }
   }
 
   .timeline-item--content--list {
-    @apply flex gap-1 flex-wrap text-sm mt-3;
+    @apply flex flex-wrap gap-2 mt-5 text-xs group-hover:[&>li]:bg-white;
 
     li {
-      @apply bg-neutral-100 px-2 py-1 rounded-full;
+      @apply bg-neutral-100 px-3 py-1.5 rounded-full transition-all duration-300;
     }
   }
-</style> 
+</style>
