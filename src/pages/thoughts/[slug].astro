@@ -24,6 +24,7 @@ const contentHtml = renderNotionBlocks(thought.content);
   title={thought.title}
   date={thought.date}
   showcase={thought.showcase}
+  source="notion"
 >
   <Fragment set:html={contentHtml} />
 </ThoughtLayout>

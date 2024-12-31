@@ -1,40 +1,48 @@
 ---
-{
-  /* Components */
-}
+// Component Imports
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/elements/Header.astro";
 import ListItem from "../components/elements/ListItem.astro";
 import ListItemHeader from "../components/elements/ListItemHeader.astro";
-{
-  /* Assets */
-}
+
+// Asset Imports
 import { Image } from "astro:assets";
 import bubble from "../assets/bubbles/bubble-1.png";
+
+// Data Fetching
 import { getThoughts } from "../lib/notion";
 import type { ThoughtPost } from "../lib/notion";
 import { getCollection } from 'astro:content';
 
-// Get content collection posts for notebooks
+// Fetch Notebooks (Content Collection)
 const contentPosts = await getCollection('notebooks');
 const sideNotes = contentPosts;
 
-// Get Notion posts for main content
+// Fetch and Filter Notion Posts
 const notionPosts = await getThoughts();
-const mainPosts = notionPosts.filter((post: ThoughtPost) => !post.categories.includes("Briefs"));
+const mainPosts = notionPosts.filter((post: ThoughtPost) => 
+  !post.categories.includes("Briefs")
+);
 
-// Group main posts by year
+// Group Posts by Year
 const years = [
-  ...new Set(mainPosts.map((post) => new Date(post.date).getFullYear())),
+  ...new Set(mainPosts.map((post) => 
+    new Date(post.date).getFullYear()
+  )),
 ].sort((a, b) => b - a);
 
+// Helper Functions
 const getPostsForYear = (year: number) =>
-  mainPosts.filter((post) => new Date(post.date).getFullYear() === year);
+  mainPosts.filter((post) => 
+    new Date(post.date).getFullYear() === year
+  );
 
-// Helper function to format date to MM/DD
 const formatDate = (dateString: string) => {
   const date = new Date(dateString);
-  return date.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit' });
+  return date.toLocaleDateString('en-US', { 
+    month: '2-digit', 
+    day: '2-digit' 
+  });
 };
 ---
 
@@ -42,22 +50,25 @@ const formatDate = (dateString: string) => {
   pageTitle="Thoughts - Karina Tovar"
   pageDescription="Mental Notes and Deep Thoughts"
 >
-  {/* Header */}
+  {/* Page Header */}
   <Header title="Notes & Deep Thoughts" />
 
-  {/* Intro */}
+  {/* Introduction Section */}
   <section>
-    <h2 class="mt-0 text-3xl font-medium">Diary of a pixel philosopher</h2>
-
+    <h2 class="mt-0 text-3xl font-medium">
+      Diary of a pixel philosopher
+    </h2>
     <p class="text-lg">
       This is where I keep my thoughts and ideas. I write about design,
       technology, and human happiness.
     </p>
   </section>
 
-  {/* Notebooks */}
+  {/* Notebooks Section */}
   <section>
-    <h3 class="mt-20 mb-5 text-5xl font-medium opacity-50">Notebooks</h3>
+    <h3 class="mt-20 mb-5 text-5xl font-medium opacity-50">
+      Notebooks
+    </h3>
     <div class="writing-list">
       {sideNotes.map((post) => (
         <ListItem
@@ -71,13 +82,18 @@ const formatDate = (dateString: string) => {
     </div>
   </section>
 
-  {/* Dynamic Year Sections */}
+  {/* Yearly Posts Sections */}
   {years.map((year) => {
     const postsForYear = getPostsForYear(year);
     return (
       <section>
-        <h3 class="mt-20 mb-5 text-5xl font-medium opacity-50">{year}</h3>
-        <ListItemHeader leftLabel="TITLE" rightLabel="DATE" />
+        <h3 class="mt-20 mb-5 text-5xl font-medium opacity-50">
+          {year}
+        </h3>
+        <ListItemHeader 
+          leftLabel="TITLE" 
+          rightLabel="DATE" 
+        />
         <div class="writing-list">
           {postsForYear.map((post) => (
             <ListItem
@@ -95,7 +111,6 @@ const formatDate = (dateString: string) => {
 </Layout>
 
 <style>
-  /* Writing list */
   .writing-list {
     @apply space-y-3 mt-2 relative;
   }

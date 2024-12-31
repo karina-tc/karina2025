@@ -1,78 +1,119 @@
 ---
+// Component Imports
 import Layout from "./Layout.astro";
 import Header from "../components/elements/Header.astro";
 import Breadcrumbs from "../components/structure/Breadcrumbs.astro";
 import Signature from "../components/elements/Signature.astro";
 
+// Type Definitions
 interface Props {
   title: string;
   date: string;
   description?: string;
   showcase?: string;
+  source?: 'notion' | 'markdown';
 }
 
-const { title, date, description, showcase } = Astro.props;
+// Props Destructuring
+const { 
+  title, 
+  date, 
+  description, 
+  showcase, 
+  source 
+} = Astro.props;
 
+// Navigation Configuration
 const breadcrumbs = [
-  { text: "Back to thoughts", href: "/thoughts", showArrow: true },
+  { 
+    text: "Back to thoughts", 
+    href: "/thoughts", 
+    showArrow: true 
+  },
 ];
 ---
 
-<Layout
-  pageTitle={title}
+<Layout 
+  pageTitle={title} 
   pageDescription={description || "Thoughts - Karina Tovar"}
 >
-  {/* Breadcrumbs */}
+  {/* Navigation */}
   <Breadcrumbs crumbs={breadcrumbs} />
 
   {/* Header */}
   <Header title={title} />
 
-  {/* Date */}
-  <h2 class="text-2xl opacity-70 -mt-14 mb-10">{date}</h2>
+  <section class="flex flex-col items-start gap-2 mb-10">
+    {/* Date */}
+    <h2 class="text-2xl opacity-70 my-0">{date}</h2>
+
+    {/* Source Attribution */}
+    {source === 'notion' && (
+      <p class="text-sm mb-0 opacity-60">
+        Published via Notion
+      </p>
+    )}
+  </section>
 
   {/* Showcase Image (if provided) */}
-  {
-    showcase && (
-      <div class="artwork-wrapper content-section">
-        <img
-          src={showcase}
-          alt={title}
-          class="w-full h-auto rounded-lg"
-          loading="eager"
-        />
-      </div>
-    )
-  }
+  {showcase && (
+    <div class="artwork-wrapper content-section">
+      <img
+        src={showcase}
+        alt={title}
+        class="w-full h-auto rounded-lg"
+        loading="eager"
+      />
+    </div>
+  )}
 
-  {/* Content */}
+  {/* Main Content */}
   <article class="prose">
     <slot />
   </article>
 
-  {/* Signature */}
+  {/* Footer */}
   <Signature includeClasses="mt-10" text="Byeeeeee!" />
 </Layout>
 
 <style>
+  /* Layout Components */
   .artwork-wrapper {
     @apply relative mb-12 rounded-lg overflow-hidden bg-stone-100;
   }
 
+  /* Prose Base Styles */
   .prose {
     @apply font-safiro
       prose-headings:text-ink-primary
       prose-h4:font-medium
       prose-a:text-orange-600 
       prose-a:no-underline 
-      hover:prose-a:underline
-      prose-blockquote:border-l-4
+      hover:prose-a:underline;
+  }
+
+  /* Prose Block Elements */
+  .prose {
+    /* Blockquotes */
+    @apply prose-blockquote:border-l-4
       prose-blockquote:border-stone-300
       prose-blockquote:pl-4
       prose-blockquote:italic
-      prose-img:rounded-lg;
+      prose-blockquote:text-[#6c5f3c]
+      prose-blockquote:font-normal;
+
+    /* Images */
+    @apply prose-img:rounded-lg;
+
+    /* Lists */
+    @apply prose-ul:text-[#6c5f3c]
+      prose-ul:list-disc
+      prose-ul:space-y-2
+      prose-ol:text-[#6c5f3c]
+      prose-ol:space-y-2;
   }
 
+  /* Typography Styles */
   .prose :global(p) {
     @apply text-[#6c5f3c] text-base leading-loose;
   }
@@ -81,8 +122,9 @@ const breadcrumbs = [
     @apply !text-[#6c5f3c] font-semibold;
   }
 
+  /* Heading Styles */
   .prose :global(h2) {
-    @apply text-[#6c5f3c] text-5xl font-medium mt-12 opacity-70;
+    @apply text-[#6c5f3c] text-3xl font-semibold mt-12;
     @apply [&:not(:first-of-type)]:mt-24;
     @apply [&:not(:last-of-type)]:mb-6;
   }
@@ -94,11 +136,7 @@ const breadcrumbs = [
     text-transform: none;
   }
 
-  .prose :global(ul),
-  .prose :global(ol) {
-    @apply text-[#6c5f3c] list-disc space-y-2;
-  }
-
+  /* List Styles */
   .prose :global(ul) {
     padding-inline-start: 2px;
   }
@@ -117,15 +155,20 @@ const breadcrumbs = [
     }
   }
 
-  .prose :global(strong) {
-    @apply text-[#6c5f3c] font-semibold text-ink-secondary;
+  /* Figure and Media Styles */
+  .prose :global(figure) {
+    @apply w-full text-[#6c5f3c] py-4;
   }
 
-  .prose :global(blockquote) {
-    @apply text-[#6c5f3c] font-normal;
+  .prose :global(figure > img) {
+    @apply w-full;
   }
 
-  /* Notion-specific styles */
+  .prose :global(figcaption) {
+    @apply text-[#6c5f3c] text-sm italic;
+  }
+
+  /* Notion-specific Styles */
   .prose :global(.callout) {
     @apply p-4 rounded-lg flex gap-3 my-6 bg-paper-green;
   }
@@ -138,15 +181,7 @@ const breadcrumbs = [
     @apply absolute inset-0 w-full h-full rounded-lg;
   }
 
-  .loading-overlay {
-    transition: opacity 0.3s ease-out;
-  }
-
-  .artwork-wrapper img {
-    transition: opacity 0.3s ease-out;
-  }
-
-  /* Code styles */
+  /* Code Styles */
   .prose :global(:not(pre) code),
   .prose :global(.notion-inline-code:not(pre *)) {
     @apply text-sm px-1.5 py-0.5 font-semibold rounded font-mono bg-[#6c5f3c]/15 text-[#6c5f3c];
@@ -158,6 +193,18 @@ const breadcrumbs = [
 
   .prose :global(pre.astro-code),
   .prose :global(pre) {
-    @apply text-sm p-5 rounded-none font-mono border border-[#6c5f3c]/10 border-t-[#6c5f3c]/50 border-t-4 shadow-lg shadow-[#6c5f3c]/10;
+    @apply text-sm p-5 rounded-none font-mono 
+      border border-[#6c5f3c]/10 
+      border-t-[#6c5f3c]/50 border-t-4 
+      shadow-lg shadow-[#6c5f3c]/10;
+  }
+
+  /* Animation Styles */
+  .loading-overlay {
+    transition: opacity 0.3s ease-out;
+  }
+
+  .artwork-wrapper img {
+    transition: opacity 0.3s ease-out;
   }
 </style>
