@@ -11,30 +11,24 @@ interface Props {
   date: string;
   description?: string;
   showcase?: string;
-  source?: 'notion' | 'markdown';
+  source?: "notion" | "markdown";
 }
 
 // Props Destructuring
-const { 
-  title, 
-  date, 
-  description, 
-  showcase, 
-  source 
-} = Astro.props;
+const { title, date, description, showcase, source } = Astro.props;
 
 // Navigation Configuration
 const breadcrumbs = [
-  { 
-    text: "Back to thoughts", 
-    href: "/thoughts", 
-    showArrow: true 
+  {
+    text: "Back to thoughts",
+    href: "/thoughts",
+    showArrow: true,
   },
 ];
 ---
 
-<Layout 
-  pageTitle={title} 
+<Layout
+  pageTitle={title}
   pageDescription={description || "Thoughts - Karina Tovar"}
 >
   {/* Navigation */}
@@ -48,28 +42,30 @@ const breadcrumbs = [
     <h2 class="text-2xl opacity-70 my-0">{date}</h2>
 
     {/* Source Attribution */}
-    {source === 'notion' && (
-      <p class="text-sm mb-0 opacity-60">
-        Published via Notion
-      </p>
-    )}
+    {
+      source === "notion" && (
+        <p class="text-sm mb-0 opacity-60">Published via Notion</p>
+      )
+    }
   </section>
 
   {/* Showcase Image (if provided) */}
-  {showcase && (
-    <div class="artwork-wrapper content-section">
-      <img
-        src={showcase}
-        alt={title}
-        class="w-full h-auto rounded-lg z-[1] relative"
-        loading="eager"
-      />
-      <div class="absolute inset-0 flex items-center justify-center gap-2">
-        <ScribbleLoop class="w-6 h-6 animate-spin opacity-50" />
-        <span class="text-sm animate-pulse">Drawing...</span>
+  {
+    showcase && (
+      <div class="artwork-wrapper content-section">
+        <img
+          src={showcase}
+          alt={title}
+          class="w-full h-auto rounded-lg z-[1] relative"
+          loading="eager"
+        />
+        <div class="absolute inset-0 flex items-center justify-center gap-2">
+          <ScribbleLoop class="w-6 h-6 animate-spin opacity-50" />
+          <span class="text-sm animate-pulse">Drawing...</span>
+        </div>
       </div>
-    </div>
-  )}
+    )
+  }
 
   {/* Main Content */}
   <article class="prose">
@@ -197,10 +193,10 @@ const breadcrumbs = [
 
   .prose :global(pre.astro-code),
   .prose :global(pre) {
-    @apply text-sm p-5 rounded-none font-mono 
-      border border-[#6c5f3c]/10 
-      border-t-[#6c5f3c]/50 border-t-4 
-      shadow-lg shadow-[#6c5f3c]/10;
+    @apply text-sm p-5 rounded-md font-mono 
+      border border-white border-t-purple-500 
+      border-t-4 
+      shadow-lg shadow-[#6c5f3c]/20;
   }
 
   /* Animation Styles */
