@@ -1,12 +1,18 @@
 ---
-import Logo from "../components/elements/Logo.astro";
 import bgImage from "../assets/bgtest.jpg";
+import StickyNav from "../components/elements/StickyNav.astro";
+import { Image } from "astro:assets";
+import trees from "../assets/landscape/trees.png";
 
 interface Props {
-  title?: string;
+  pageTitle?: string;
+  pageDescription?: string;
 }
 
-const { title = "Karina Tovar" } = Astro.props;
+const {
+  pageTitle = "Karina Tovar",
+  pageDescription = "Pixel Philosopher Cautious Technologist",
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -14,7 +20,8 @@ const { title = "Karina Tovar" } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>{title}</title>
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -25,19 +32,7 @@ const { title = "Karina Tovar" } = Astro.props;
   <body>
     <div class="root">
       <main class="main">
-        <nav class="nav">
-          <div class="nav-container">
-            <a href="/" class="nav-home">
-              <Logo classes="w-10 h-10" />
-            </a>
-            <div class="nav-links">
-              <a href="/about">About</a>
-              <a href="/work">Work</a>
-              <a href="/thoughts">Thoughts</a>
-            </div>
-          </div>
-          <div class="nav-fade"></div>
-        </nav>
+        <StickyNav />
 
         <div class="content">
           <slot />
@@ -45,9 +40,9 @@ const { title = "Karina Tovar" } = Astro.props;
       </main>
 
       <footer class="footer">
-        <div class="footer-content">
-          <span class="footer-text">Shine, constantly and steadily.</span>
-          <span class="footer-year">2024</span>
+        <div class="footer-content relative">
+          <span class="footer-text">Pushing happy pixels.</span>
+          <span class="footer-year">&copy; 2024 Karina Tovar</span>
           <div class="footer-clock-wrapper">
             <div class="clock" aria-hidden="true">
               <div class="hand second"></div>
@@ -56,6 +51,11 @@ const { title = "Karina Tovar" } = Astro.props;
             </div>
           </div>
         </div>
+        <Image
+          src={trees}
+          alt="landscape"
+          class="w-full opacity-25 rounded-lg mx-auto absolute -bottom-8 mix-blend-multiply blur"
+        />
       </footer>
     </div>
   </body>
@@ -100,33 +100,8 @@ const { title = "Karina Tovar" } = Astro.props;
   }
 
   .main {
-    @apply mx-auto max-w-2xl px-6 pb-10 flex flex-col justify-center items-center;
+    @apply mx-auto max-w-2xl px-6 pb-10 flex flex-col justify-center items-center z-10 relative;
     min-height: calc(100vh - var(--footer-height));
-  }
-
-  .nav {
-    @apply w-full flex flex-col justify-between items-center sticky top-0;
-  }
-
-  .nav-container {
-    @apply flex items-center justify-between w-full bg-paper-base pt-10 pb-2;
-  }
-
-  .nav-home {
-    @apply text-neutral-900 font-medium flex items-center justify-center;
-  }
-
-  .nav-links {
-    @apply flex items-center gap-6;
-  }
-
-  .nav-links a {
-    @apply text-neutral-600 underline-offset-4 transition-all;
-    @apply hover:text-neutral-900 hover:underline;
-  }
-
-  .nav-fade {
-    @apply w-full h-8 bg-gradient-to-t from-paper-base to-transparent rotate-180;
   }
 
   .content {
@@ -169,7 +144,7 @@ const { title = "Karina Tovar" } = Astro.props;
 
   /* Footer styles */
   .footer {
-    @apply flex justify-center items-center;
+    @apply flex justify-center items-center relative;
     height: var(--footer-height);
   }
 
@@ -182,7 +157,7 @@ const { title = "Karina Tovar" } = Astro.props;
   }
 
   .footer-year {
-    @apply font-mono;
+    @apply font-normal;
   }
 
   /* Clock styles */

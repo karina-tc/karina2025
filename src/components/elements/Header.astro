@@ -1,0 +1,27 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+}
+
+const { title, subtitle } = Astro.props;
+---
+
+<header class="header-container">
+  <h1>{title}</h1>
+  {subtitle && <h2>{subtitle}</h2>}
+</header>
+
+<style>
+  .header-container {
+    @apply flex flex-col items-start justify-start gap-16 pt-10 pb-20;
+
+    h1, h2 {
+      @apply my-0;
+    }
+
+    h2 {
+      @apply text-3xl font-medium tracking-tight opacity-50;
+    }
+  }
+</style>

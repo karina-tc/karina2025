@@ -1,15 +1,15 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import AtomSymbol from "../components/structure/AtomSymbol.astro";
-
+import Header from "../components/elements/Header.astro";
 ---
 
-<Layout title="Karina Tovar">
-  <AtomSymbol include_classes="w-20 h-20 my-10 hidden" />
-  <h1 class="mb-16">Pixel Philosopher, Cautious Technologist</h1>
-  <h2 class="text-3xl font-medium tracking-tight mb-8">
-    Hi, my name is Karina Tovar.
-  </h2>
+<Layout pageTitle="Karina Tovar">
+  <AtomSymbol include_classes="w-20 h-20 mt-10 hidden" />
+  <Header 
+    title="Pixel Philosopher, Cautious Technologist" 
+    subtitle="Hi, friend. My name is Karina." 
+  />
 
   <p class="mb-10">
     My motivation is to build products that aim to help people have happier

@@ -1,0 +1,44 @@
+---
+import Logo from "./Logo.astro";
+---
+
+<nav class="nav">
+  <div class="nav-container">
+    <a href="/" class="nav-home">
+      <Logo classes="w-10 h-10" />
+    </a>
+    <div class="nav-links">
+      <a href="/about">About</a>
+      <a href="/work">Work</a>
+      <a href="/thoughts">Thoughts</a>
+    </div>
+  </div>
+  <div class="nav-fade"></div>
+</nav>
+
+<style>
+  .nav {
+    @apply w-full flex flex-col justify-between items-center sticky top-0 z-10;
+  }
+
+  .nav-container {
+    @apply flex items-center justify-between w-full bg-paper-base pt-10 pb-2;
+  }
+
+  .nav-home {
+    @apply text-neutral-900 font-medium flex items-center justify-center;
+  }
+
+  .nav-links {
+    @apply flex items-center gap-6;
+  }
+
+  .nav-links a {
+    @apply text-neutral-600 underline-offset-4 transition-all;
+    @apply hover:text-neutral-900 hover:underline;
+  }
+
+  .nav-fade {
+    @apply w-full h-8 bg-gradient-to-t from-paper-base to-transparent rotate-180;
+  }
+</style>

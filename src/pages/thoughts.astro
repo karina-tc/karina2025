@@ -1,14 +1,14 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import AtomSymbol from "../components/structure/AtomSymbol.astro";
+import Header from "../components/elements/Header.astro";
 ---
 
-<Layout title="Karina Tovar">
-  <AtomSymbol include_classes="w-20 h-20 my-10 hidden" />
-  <h1 class="mb-16">Mental notes and deep thoughts</h1>
-  <h2 class="text-3xl font-medium tracking-tight mb-8">
-    Diary of a pixel philosopher
-  </h2>
+<Layout pageTitle="Thoughts - Karina Tovar" pageDescription="Mental Notes and Deep Thoughts">
+  <Header 
+    title="Mental Notes and Deep Thoughts" 
+    subtitle="Diary of a pixel philosopher" 
+  />
 
   <p class="mb-10">
     My motivation is to build products that aim to help people have happier
@@ -74,14 +74,14 @@ import AtomSymbol from "../components/structure/AtomSymbol.astro";
   }
 
   .writing-title {
-    @apply text-neutral-900 z-10 group-hover:text-white transition-colors;
+    @apply text-neutral-900 z-10 group-hover:text-purple-800 transition-colors;
   }
 
   .writing-date {
-    @apply text-neutral-500 text-sm z-10 group-hover:text-white transition-colors;
+    @apply text-neutral-500 text-sm z-10 group-hover:text-purple-800 transition-colors;
   }
 
   .writing-hover-overlay {
-    @apply absolute inset-0 bg-black w-0 opacity-0 group-hover:w-full group-hover:opacity-100 transition-all;
+    @apply absolute inset-0 bg-[#cab9ff]/25 w-0 opacity-0 group-hover:w-full group-hover:opacity-100 transition-all;
   }
 </style>
