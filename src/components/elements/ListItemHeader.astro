@@ -1,0 +1,22 @@
+---
+interface Props {
+  leftLabel: string;
+  rightLabel: string;
+}
+
+const { 
+  leftLabel = "Left Label", 
+  rightLabel = "Right Label" 
+} = Astro.props;
+---
+
+<div class="list-item-header">
+  <span>{leftLabel}</span>
+  <span>{rightLabel}</span>
+</div>
+
+<style>
+  .list-item-header {
+    @apply flex justify-between font-mono uppercase text-xs text-neutral-500 py-4 bg-paper-base;
+  }
+</style> 

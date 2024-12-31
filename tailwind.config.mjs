@@ -6,6 +6,7 @@ export default {
       fontFamily: {
         'instrument-serif': ['Instrument Serif', 'serif'],
         'safiro': ['Safiro-Regular', 'sans-serif'],
+        'homemade-apple': ['Homemade Apple', 'sans-serif'],
       },
       colors: {
         'paper': {

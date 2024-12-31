@@ -1,74 +1,150 @@
 ---
+// Layout and Components
 import Layout from "../layouts/Layout.astro";
-import karina from "../assets/brand/karina-profile.webp";
-import SectionHeader from "../components/structure/SectionHeader.astro";
+import Header from "../components/elements/Header.astro";
+import Timeline from "../components/elements/Timeline.astro";
+import TrayArrowDown from "phosphor-astro/TrayArrowDown.astro";
+import Signature from "../components/elements/Signature.astro";
+// Data
+import { timelineItems } from "../data/timeline";
+
+// Assets
+import { Image } from "astro:assets";
+import avatarBackground from "../assets/avatars/avatar-4.png";
+import karina from "../assets/brand/karina-profile.png";
+import notion from "../assets/logos/notion.png";
+import cursor from "../assets/logos/cursor.png";
+import figma from "../assets/logos/figma.png";
+import life from "../assets/bubbles/bubble-1.png";
 ---
 
 <Layout
   pageTitle="About - Karina Tovar"
   pageDescription="Pixel Philosopher Cautious Technologist"
-  eyelash_text="About Me"
-  title_text="Designing for human prosperity"
-  header_visual_image={karina}
-  header_visual_alt_text="Karina Tovar"
-  header_visual_classes="mt-10"
-  header_visual_width={473}
-  horizon_height="455px"
 >
-  <div class="divider--small"></div>
+  {/* Hero Section */}
+  <Header
+    title="Hello Stranger"
+    subtitle="I am an artist turned product designer working on the intersection of technology and human happiness."
+  />
 
-  <section class="section-wrapper mt-10 content-section">
-    <SectionHeader eyebrow="Background" title="Artist turned product designer">
-      <div slot="section-header-content" class="flex flex-col gap-5 text-left">
-        <p class="text-base text-ink-secondary">
-          I had my first encounter with technology playing around with Photoshop
-          for art class. Never did I think that a tool I just played with would
-          show me what I wanted to do for a living. I currently live in the East
-          Cost my wife, daughter, and a really hyper pooch.
-        </p>
-        <p class="text-base text-ink-secondary">
-          I have a background in the Fine Arts, with a MFA from the
-          Massachusetts College of Art & Design. There I was part of the Studio
-          for Interrelated Media where I made artwork focused on performative
-          technology. That just means that I obsessed over the intersection of
-          technology and human happiness. I worked on a lot of performance art
-          pieces that lived outside of the museum so I could create room for joy
-          in the mundane.
-        </p>
-      </div>
-    </SectionHeader>
-  </section>
-
-  <div class="divider--large"></div>
-
-  <section class="section-wrapper mt-10 content-section">
-    <SectionHeader
-      eyebrow="RATIONALE"
-      title="Anthro-technologist"
-      description="As an artist, I always look for the meaning on the things I work. Part of that is always trying to establish the tangible benefit of what we build—whether that is in design systems, ux flows, or business strategy."
-      descriptionAlign="left"
+  {/* Profile Image */}
+  <figure class="rounded-t-full overflow-hidden relative">
+    <Image
+      src={karina}
+      alt="Karina Tovar"
+      class="absolute bottom-0 translate-x-5 karina-profile"
     />
+    <Image src={avatarBackground} alt="Noise" />
+  </figure>
+
+  {/* Introduction */}
+  <section id="introduction" class="mt-10">
+    <h2>Building for Joy</h2>
+    <p class="text-lg">
+      I have a background in the Fine Arts, with a MFA from the Massachusetts
+      College of Art & Design. There I was part of the Studio for Interrelated
+      Media where I made artwork focused on performative technology. That just
+      means that I obsessed over the intersection of technology and human
+      happiness. I worked on a lot of performance art pieces that lived outside
+      of the museum so I could create room for joy in the mundane.
+    </p>
   </section>
 
   <div class="divider--large"></div>
 
-  <section class="section-wrapper mt-10 content-section">
-    <SectionHeader eyebrow="IN REAL LIFE" title="Perpetual learner">
-      <div slot="section-header-content" class="flex flex-col gap-5 text-left">
-        <p class="text-base text-ink-secondary">
-          I started designing emails and later on I learned to code them. Once I
-          got my first product gig, I pushed my curiosity about coding by
-          learning basic front-end languages. While I am not a seasoned dev, I
-          enjoy turning pixels into code and find it rather soothing.
-        </p>
-        <p class="text-base text-ink-secondary">
-          Outside of work, I enjoy listening to music and exploring the world
-          through my daughter’s eyes. She is always teaching me new things by
-          always having fun.
-        </p>
+  {/* Experience Section */}
+  <section id="experience">
+    <div class="flex justify-between items-center flex-wrap gap-4 pt-10 mb-5 group">
+      <h2 class="m-0">A Decade of Experience</h2>
+      <a href="#" class="resume-link text-sm">
+        <TrayArrowDown class="w-6 h-6" />
+        <span class="underline-offset-4 group-hover:underline"
+          >Download Resume</span
+        >
+      </a>
+    </div>
+    <Timeline items={timelineItems} />
+  </section>
+
+  <div class="divider--large"></div>
+
+  {/* Tools Section */}
+  <section id="tools">
+    <h2 class="pt-10">My Preferred Stack</h2>
+    <p>Stack I use to build products</p>
+
+    <div class="stack-grid">
+      <div class="stack-item--cell">
+        <div class="stack-item--icon"></div>
+        <span>Pen & Paper</span>
       </div>
-    </SectionHeader>
+      <div class="stack-item--cell">
+        <div class="stack-item--icon">
+          <Image src={notion} alt="Notion" class="w-6 h-6" />
+        </div>
+        <span>Notion</span>
+      </div>
+      <div class="stack-item--cell">
+        <div class="stack-item--icon">
+          <Image src={figma} alt="Figma" class="w-4" />
+        </div>
+        <span>Figma</span>
+      </div>
+      <div class="stack-item--cell">
+        <div class="stack-item--icon">
+          <Image src={cursor} alt="Cursor" class="w-9" />
+        </div>
+        <span>Cursor</span>
+      </div>
+    </div>
   </section>
 
   <div class="divider--large"></div>
+
+  {/* Personal Section */}
+  <section id="personal">
+    <h2 class="pt-10">Outside of Work</h2>
+
+    <p>
+      I like to watch dark psychological thrillers that are too much for some
+      people. Like, I've watched Melancholia way more than needed. I also enjoy
+      watching soccer, reading the occasional book, and playing with my kiddo
+      and crazy dog.
+    </p>
+
+    <figure class="flex justify-center w-full h-[450px] bg-neutral-100 border-[5px] border-white rounded-lg shadow-lg">
+    </figure>
+
+    <Signature text="Life is good!" includeClasses="mt-10" />
+  </section>
+
 </Layout>
+
+<style>
+  /* Grid Layout */
+  .stack-grid {
+    @apply grid grid-cols-4 max-md:grid-cols-2 max-sm:grid-cols-1 gap-6;
+  }
+
+  /* Stack Items */
+  .stack-item--cell {
+    @apply flex flex-col items-center gap-2 p-4;
+  }
+
+  .stack-item--icon {
+    @apply w-12 h-12 bg-neutral-100 rounded-full flex items-center justify-center;
+    @apply bg-paper-base rounded-lg shadow-md mb-2;
+  }
+
+  /* Profile Image */
+  .karina-profile {
+    @apply drop-shadow-[0_8px_20px_rgb(70,46,15)] mix-blend-overlay;
+  }
+
+  /* Resume Link */
+  .resume-link {
+    @apply flex items-center gap-2 w-fit py-3 bg-paper-base rounded-full transition-all duration-300;
+    @apply hover:shadow-lg hover:shadow-neutral-300/50 hover:pl-3 hover:pr-4 hover:bg-[#6c5f3c] hover:text-white;
+  }
+</style>

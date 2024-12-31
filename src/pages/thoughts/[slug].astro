@@ -1,35 +1,31 @@
 ---
-import Base from "../../layouts/thoughts/Base.astro";
+import ThoughtLayout from "../../layouts/ThoughtLayout.astro";
 import { getThoughtContent } from "../../lib/notion";
 import { renderNotionBlocks } from "../../lib/notionRenderer";
 
-// Enable server-side rendering
 export const prerender = false;
 
-// Get the slug from URL params
 const { slug } = Astro.params;
-// Handle case where slug is not provided
+
 if (!slug) {
   return Astro.redirect("/404");
 }
 
 const thought = await getThoughtContent(slug);
-// Handle case where thought is null
+
 if (!thought) {
   return Astro.redirect("/404");
 }
 
-console.log('Server-side showcase URL:', thought?.showcase);
-
-// Convert Notion blocks to HTML
 const contentHtml = renderNotionBlocks(thought.content);
 ---
 
-<Base
-  title={thought?.title}
-  date={thought?.date}
-  readingTime={thought?.content ? Math.ceil(thought.content.length / 200) : 0}
-  showcase={thought?.showcase}
+<ThoughtLayout
+  title={thought.title}
+  date={thought.date}
+  showcase={thought.showcase}
+  source="notion"
+  currentSlug={slug}
 >
   <Fragment set:html={contentHtml} />
-</Base>
+</ThoughtLayout>

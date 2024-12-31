@@ -1,0 +1,56 @@
+---
+import { Image } from "astro:assets";
+import bubble from "../../assets/bubbles/bubble-1.png";
+
+interface Props {
+  isLink: boolean;
+  label: string;
+  detail: string;
+  href?: string;
+  icon?: ImageMetadata;
+}
+
+const { isLink = false, label, detail, href, icon = bubble } = Astro.props;
+---
+
+{
+  isLink ? (
+    <a href={href} class="listing-item group relative">
+      {icon && <Image src={icon} alt="" class="w-10 h-10 z-[1]" />}
+      <span class="listing-label">{label}</span>
+      <span class="listing-dots" />
+      <span class="listing-detail">{detail}</span>
+      <div class="listing-hover-overlay" />
+    </a>
+  ) : (
+    <div class="listing-item group relative">
+      {icon && <Image src={icon} alt="" class="w-10 h-10 z-[1]" />}
+      <span class="listing-label">{label}</span>
+      <span class="listing-dots" />
+      <span class="listing-detail">{detail}</span>
+      <div class="listing-hover-overlay" />
+    </div>
+  )
+}
+
+<style>
+  .listing-item {
+    @apply flex items-center gap-4 py-3 -mx-3 px-3 rounded-lg;
+  }
+
+  .listing-label {
+    @apply z-[1] shrink-0;
+  }
+
+  .listing-dots {
+    @apply grow border-b border-dotted border-neutral-300 h-3 z-10;
+  }
+
+  .listing-detail {
+    @apply text-neutral-500 text-sm z-[1] shrink-0;
+  }
+
+  .listing-hover-overlay {
+    @apply absolute inset-0 bg-neutral-100 w-0 opacity-0 transition-all duration-300 group-hover:w-full group-hover:opacity-100;
+  }
+</style>

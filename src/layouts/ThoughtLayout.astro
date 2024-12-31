@@ -1,0 +1,214 @@
+---
+// Component Imports
+import Layout from "./Layout.astro";
+import Header from "../components/elements/Header.astro";
+import Breadcrumbs from "../components/structure/Breadcrumbs.astro";
+import Signature from "../components/elements/Signature.astro";
+import ScribbleLoop from "phosphor-astro/ScribbleLoop.astro";
+import PostNavigation from "../components/elements/PostNavigation.astro";
+
+// Type Definitions
+interface Props {
+  title: string;
+  date: string;
+  description?: string;
+  showcase?: string;
+  source?: "notion" | "markdown";
+  currentSlug: string;
+}
+
+// Props Destructuring
+const { title, date, description, showcase, source, currentSlug } = Astro.props;
+
+// Navigation Configuration
+const breadcrumbs = [
+  {
+    text: "Back to thoughts",
+    href: "/thoughts",
+    showArrow: true,
+  },
+];
+---
+
+<Layout
+  pageTitle={title}
+  pageDescription={description || "Thoughts - Karina Tovar"}
+>
+  {/* Navigation */}
+  <Breadcrumbs crumbs={breadcrumbs} />
+
+  {/* Header */}
+  <Header title={title} />
+
+  <section class="flex flex-col items-start gap-2 mb-10">
+    {/* Date */}
+    <h2 class="text-2xl opacity-70 my-0">{date}</h2>
+
+    {/* Source Attribution */}
+    {
+      source === "notion" && (
+        <p class="text-sm mb-0 opacity-60">Published via Notion</p>
+      )
+    }
+  </section>
+
+  {/* Showcase Image (if provided) */}
+  {
+    showcase && (
+      <div class="artwork-wrapper content-section">
+        <img
+          src={showcase}
+          alt={title}
+          class="w-full h-auto rounded-lg z-[1] relative"
+          loading="eager"
+        />
+        <div class="absolute inset-0 flex items-center justify-center gap-2">
+          <ScribbleLoop class="w-6 h-6 animate-spin opacity-50" />
+          <span class="text-sm animate-pulse">Drawing...</span>
+        </div>
+      </div>
+    )
+  }
+
+  {/* Main Content */}
+  <article class="prose">
+    <slot />
+  </article>
+
+  <Signature includeClasses="mt-10" text="Byeeeeee!" />
+  
+  <PostNavigation currentSlug={currentSlug} />
+</Layout>
+
+<style>
+  /* Layout Components */
+  .artwork-wrapper {
+    @apply relative mb-12 rounded-lg overflow-hidden bg-stone-100;
+  }
+
+  /* Prose Base Styles */
+  .prose {
+    @apply font-safiro
+      prose-headings:text-ink-primary
+      prose-h4:font-medium
+      prose-a:text-orange-600 
+      prose-a:no-underline 
+      hover:prose-a:underline;
+  }
+
+  /* Prose Block Elements */
+  .prose {
+    /* Blockquotes */
+    @apply prose-blockquote:border-l-4
+      prose-blockquote:border-stone-300
+      prose-blockquote:pl-4
+      prose-blockquote:italic
+      prose-blockquote:text-[#6c5f3c]
+      prose-blockquote:font-normal;
+
+    /* Images */
+    @apply prose-img:rounded-lg;
+
+    /* Lists */
+    @apply prose-ul:text-[#6c5f3c]
+      prose-ul:list-disc
+      prose-ul:space-y-2
+      prose-ol:text-[#6c5f3c]
+      prose-ol:space-y-2;
+  }
+
+  /* Typography Styles */
+  .prose :global(p) {
+    @apply text-[#6c5f3c] text-base leading-loose;
+  }
+
+  .prose :global(strong) {
+    @apply !text-[#6c5f3c] font-semibold;
+  }
+
+  /* Heading Styles */
+  .prose :global(h2) {
+    @apply text-[#6c5f3c] text-3xl font-semibold mt-12;
+    @apply [&:not(:first-of-type)]:mt-24;
+    @apply [&:not(:last-of-type)]:mb-6;
+  }
+
+  .prose :global(h3) {
+    @apply text-[#6c5f3c] text-xl font-semibold mt-8 tracking-normal opacity-70;
+    @apply [&:not(:first-of-type)]:mt-8;
+    @apply [&:not(:last-of-type)]:mb-6;
+    text-transform: none;
+  }
+
+  /* List Styles */
+  .prose :global(ul) {
+    padding-inline-start: 2px;
+  }
+
+  .prose :global(ol) {
+    padding-inline-start: 1em;
+  }
+
+  .prose :global(ul li) {
+    @apply pl-0;
+    padding-inline-start: 1rem;
+    text-indent: -1rem;
+
+    &::marker {
+      @apply text-[#6c5f3c];
+    }
+  }
+
+  /* Figure and Media Styles */
+  .prose :global(figure) {
+    @apply w-full text-[#6c5f3c] py-4;
+  }
+
+  .prose :global(figure > img) {
+    @apply w-full;
+  }
+
+  .prose :global(figcaption) {
+    @apply text-[#6c5f3c] text-sm italic;
+  }
+
+  /* Notion-specific Styles */
+  .prose :global(.callout) {
+    @apply p-4 rounded-lg flex gap-3 my-6 bg-paper-green;
+  }
+
+  .prose :global(.video-wrapper) {
+    @apply relative w-full my-6 aspect-video;
+  }
+
+  .prose :global(.video-wrapper iframe) {
+    @apply absolute inset-0 w-full h-full rounded-lg;
+  }
+
+  /* Code Styles */
+  .prose :global(:not(pre) code),
+  .prose :global(.notion-inline-code:not(pre *)) {
+    @apply text-sm px-1.5 py-0.5 font-semibold rounded font-mono bg-[#6c5f3c]/15 text-[#6c5f3c];
+    &::before,
+    &::after {
+      content: none;
+    }
+  }
+
+  .prose :global(pre.astro-code),
+  .prose :global(pre) {
+    @apply text-sm p-5 rounded-md font-mono 
+      border border-white border-t-purple-500 
+      border-t-4 
+      shadow-lg shadow-[#6c5f3c]/20;
+  }
+
+  /* Animation Styles */
+  .loading-overlay {
+    transition: opacity 0.3s ease-out;
+  }
+
+  .artwork-wrapper img {
+    transition: opacity 0.3s ease-out;
+  }
+</style>

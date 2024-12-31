@@ -1,8 +1,7 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content';
-import Template from '../../layouts/thoughts/Template.astro';
+import ThoughtLayout from '../../layouts/ThoughtLayout.astro';
 
-// Generate static paths for all notebooks
 export async function getStaticPaths() {
   const notebooks = await getCollection('notebooks');
   return notebooks.map((post: CollectionEntry<'notebooks'>) => ({
@@ -11,20 +10,17 @@ export async function getStaticPaths() {
   }));
 }
 
-// Get the post data
 const { post } = Astro.props as { post: CollectionEntry<'notebooks'> };
 const { Content } = await post.render();
-console.log('Rendered content:', Content);
-
-// Get frontmatter data
 const { title, description, date } = post.data;
 ---
 
-<Template 
+<ThoughtLayout
   title={title}
-  description={description}
   date={date}
+  description={description}
   source="markdown"
+  currentSlug={post.slug}
 >
   <Content />
-</Template> 
+</ThoughtLayout> 

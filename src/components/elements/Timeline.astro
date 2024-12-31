@@ -1,0 +1,156 @@
+---
+interface Props {
+  items: {
+    title: string;
+    company: string;
+    companyUrl?: string;
+    startDate?: string;
+    endDate?: string;
+    description: string;
+    avatar: ImageMetadata;
+    categories: string[];
+  }[];
+}
+
+import { Image } from "astro:assets";
+const { items } = Astro.props;
+---
+
+<ul class="timeline">
+  {
+    items.map((item, index) => (
+      <li class={`timeline-item group ${index === 0 ? "focused" : ""}`}>
+        {/* Logo Section */}
+        <div class="timeline-item--logo">
+          <Image src={item.avatar} alt={`${item.company} logo`} />
+        </div>
+
+        {/* Content Section */}
+        <div class="timeline-item--content">
+          {/* Title */}
+          <div class="timeline-item--content--title">
+            {item.companyUrl ? (
+              <span>
+                {item.title} at{" "}
+                <a
+                  href={item.companyUrl}
+                  target="_blank"
+                  class="group-hover:underline underline-offset-4 decoration-neutral-300"
+                  rel="noopener noreferrer"
+                >
+                  {item.company}
+                </a>
+              </span>
+            ) : (
+              <span>{item.title} at {item.company}</span>
+            )}
+          </div>
+
+          {/* Dates */}
+          <div class="timeline-item--content--dates">
+            {item.startDate} &mdash; {item.endDate}
+          </div>
+
+          {/* Description */}
+          <div class="timeline-item--description">
+            <span class="pt-3 inline-block">{item.description}</span>
+          </div>
+
+          {/* Categories */}
+          <ul class="timeline-item--content--list">
+            {item.categories.map((category) => (
+              <li>{category}</li>
+            ))}
+          </ul>
+        </div>
+      </li>
+    ))
+  }
+</ul>
+
+<script>
+  // Handle focus states
+  const timelineItems = document.querySelectorAll('.timeline-item');
+  
+  timelineItems.forEach(item => {
+    item.addEventListener('mouseenter', () => {
+      timelineItems.forEach(i => i.classList.remove('focused'));
+    });
+
+    item.addEventListener('mouseleave', () => {
+      timelineItems[0].classList.add('focused');
+    });
+  });
+</script>
+
+<style>
+  /* Base Timeline Styles */
+  .timeline {
+    @apply flex flex-col;
+  }
+
+  /* Timeline Item */
+  .timeline-item {
+    @apply grid grid-cols-[40px_1fr] gap-5 p-5 cursor-default transition-all duration-300;
+
+    &:hover {
+      @apply bg-neutral-100;
+    }
+
+    &.focused {
+      @apply bg-neutral-100;
+      
+      .timeline-item--logo {
+        @apply scale-110;
+      }
+      
+      .timeline-item--description {
+        @apply h-auto opacity-100 py-2;
+      }
+      
+      .timeline-item--content--list li {
+        @apply bg-white;
+      }
+    }
+  }
+
+  /* Logo Styles */
+  .timeline-item--logo {
+    @apply w-12 h-12 min-w-12 min-h-12 border border-neutral-200 bg-white rounded-xl;
+    @apply shadow-md shadow-neutral-200/50;
+    @apply flex items-center justify-center transition-all duration-300;
+    @apply group-hover:scale-110;
+  }
+
+  /* Content Styles */
+  .timeline-item--content {
+    @apply flex flex-col;
+  }
+
+  .timeline-item--content--title {
+    @apply text-base font-semibold pl-2;
+  }
+
+  .timeline-item--content--dates {
+    @apply text-sm text-neutral-500 pl-2;
+  }
+
+  /* Description Styles */
+  .timeline-item--description {
+    @apply text-sm h-0 opacity-0 p-0 overflow-hidden transition-all duration-300;
+    @apply group-hover:h-auto group-hover:opacity-100 group-hover:py-2;
+
+    span {
+      @apply whitespace-pre-line pl-2;
+    }
+  }
+
+  /* Categories List */
+  .timeline-item--content--list {
+    @apply flex flex-wrap gap-2 mt-5 text-xs group-hover:[&>li]:bg-white;
+
+    li {
+      @apply bg-neutral-100 px-3 py-1.5 rounded-full transition-all duration-300;
+    }
+  }
+</style>

@@ -1,0 +1,87 @@
+---
+import { Image } from "astro:assets";
+import seal from "../assets/seal.svg";
+import earth from "../assets/landscape/earth.png";
+---
+
+<footer class="footer" id="main-footer">
+  <div class="bg-paper-darker w-full p-14 absolute left-0 top-0"></div>
+  <div class="footer-content">
+    <h4>Thank you for visiting</h4>
+    <span class="day-text">have a <em>nice</em> day!</span>
+  </div>
+  <Image
+    src={seal}
+    alt="Seal"
+    class="w-[140px] h-[141px] animate-fade-in-down delay-1000"
+  />
+  <p class="mt-5 text-sm">Building for a prosperous humanity</p>
+  <div class="footer-bottom">
+    <p>© 2024 Karina Tovar</p>
+    <p>Colophon</p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    @apply fixed h-full bottom-0 left-0 right-0 
+      flex flex-col items-center justify-end 
+      p-10 pb-20 bg-paper-dark text-white text-center
+      z-[-1];
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+  }
+
+  .footer-content {
+    @apply flex flex-col items-center justify-center my-10 w-full;
+  }
+
+  .footer-content h4 {
+    @apply uppercase tracking-widest;
+  }
+
+  .day-text {
+    @apply text-[10rem] leading-[1] font-instrument-serif max-w-full overflow-hidden;
+    /* Adjusted line height and added overflow control */
+
+    em {
+      @apply text-[#ab93fd];
+    }
+  }
+
+  .footer-bottom {
+    @apply w-full max-w-[880px] mt-10 text-sm text-ink-secondary 
+      flex flex-row items-center justify-between;
+  }
+
+  @media (max-width: 768px) {
+    .day-text {
+      @apply text-[5rem]; /* Smaller text on mobile */
+    }
+  }
+</style>
+
+<script>
+  function updateBodyPadding() {
+    const footer = document.getElementById("main-footer");
+    if (!footer) return;
+
+    const footerHeight = footer.getBoundingClientRect().height;
+    requestAnimationFrame(() => {
+      document.body.style.marginBottom = `${footerHeight}px`;
+    });
+  }
+
+  // Run on initial load
+  updateBodyPadding();
+
+  // Run after all content is loaded
+  window.addEventListener("load", updateBodyPadding);
+
+  // Run when fonts are loaded
+  document.fonts.ready.then(updateBodyPadding);
+
+  // Run on resize
+  window.addEventListener("resize", updateBodyPadding);
+</script>

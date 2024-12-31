@@ -1,44 +1,190 @@
 ---
-import "../styles/global.css";
-import type { HeaderProps } from "../types/HeaderProps";
-import NavWrapper from "../components/header/NavWrapper.astro";
-import Clouds from "../components/background/Clouds.astro";
-import HeaderHero from "../components/structure/HeaderHero.astro";
-import Footer from "../components/structure/Footer.astro";
-import LoadingBar from "../components/elements/LoadingBar.astro";
-import CommonHead from "../components/structure/CommonHead.astro";
+import bgImage from "../assets/bgtest.jpg";
+import StickyNav from "../components/elements/StickyNav.astro";
+import { Image } from "astro:assets";
+import trees from "../assets/landscape/trees.png";
 
-interface Props extends HeaderProps {
-  pageTitle: string;
-  pageDescription: string;
-  showBackToTop?: boolean;
+interface Props {
+  pageTitle?: string;
+  pageDescription?: string;
 }
 
 const {
   pageTitle = "Karina Tovar",
   pageDescription = "Pixel Philosopher Cautious Technologist",
-  showBackToTop = true,
-  ...headerProps
 } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <CommonHead pageTitle={pageTitle} pageDescription={pageDescription} />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Homemade+Apple&family=Instrument+Serif:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body class="w-full h-screen p-0 m-0 overflow-x-hidden relative">
-    <NavWrapper />
-    <HeaderHero {...headerProps}>
-      <slot name="title-content" slot="title-content" />
-    </HeaderHero>
-    <main class="flex-1 relative">
-      <slot />
-    </main>
-    <Footer showBackToTop={showBackToTop} />
+  <body>
+    <div class="root">
+      <main class="main">
+        <StickyNav />
+
+        <div class="content">
+          <slot />
+        </div>
+      </main>
+
+      <footer class="footer">
+        <div class="footer-content relative">
+          <span class="footer-text">Pushing happy pixels.</span>
+          <span class="footer-year">&copy; 2024 Karina Tovar</span>
+          <div class="footer-clock-wrapper">
+            <div class="clock" aria-hidden="true">
+              <div class="hand second"></div>
+              <div class="hand minute"></div>
+              <div class="hand hour"></div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
   </body>
 </html>
 
 <script>
-  import "../scripts/controllers/intersection-controller";
+  function updateClock() {
+    const now = new Date();
+    const seconds = now.getSeconds();
+    const minutes = now.getMinutes();
+    const hours = now.getHours();
+
+    document.documentElement.style.setProperty("--now-s", seconds.toString());
+    document.documentElement.style.setProperty("--now-m", minutes.toString());
+    document.documentElement.style.setProperty("--now-h", hours.toString());
+  }
+
+  setInterval(updateClock, 1000);
+  updateClock();
 </script>
+
+<style define:vars={{ bgImage }}>
+  :root {
+    --font-sans: "Safiro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    --footer-height: 60px;
+  }
+
+  body,
+  html {
+    @apply min-h-screen;
+    color: #6c5f3c;
+  }
+  .root {
+    @apply antialiased bg-paper-base;
+    font-family: var(--font-sans);
+    /*
+    background-image: url('/src/assets/bgtest.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    */
+  }
+
+  .main {
+    @apply mx-auto w-full max-w-2xl px-10 pb-10 flex flex-col justify-center items-center z-10 relative;
+    min-height: calc(100vh - var(--footer-height));
+  }
+
+  .content {
+    @apply max-w-none w-full;
+  }
+
+  /* Typography */
+  :global(h1) {
+    @apply text-[100px] leading-[90px] font-medium tracking-tight mb-8;
+  }
+
+  :global(h2) {
+    @apply text-xl font-medium tracking-tight mt-12 mb-4;
+  }
+
+  :global(p) {
+    @apply leading-relaxed mb-6;
+  }
+
+  :global(em) {
+    @apply font-normal not-italic text-neutral-900;
+  }
+
+  /* Global styles */
+  :global(body) {
+    @apply text-base leading-relaxed;
+  }
+
+  :global(a) {
+    @apply text-inherit underline-offset-4;
+  }
+
+  :global(em) {
+    @apply text-inherit italic;
+  }
+
+  :global(*) {
+    @apply border-neutral-200;
+  }
+
+  /* Footer styles */
+  .footer {
+    @apply w-full flex justify-center items-center relative;
+    height: var(--footer-height);
+  }
+
+  .footer-content {
+    @apply flex items-center gap-3 text-sm text-neutral-500;
+  }
+
+  .footer-text {
+    @apply font-normal;
+  }
+
+  .footer-year {
+    @apply font-normal;
+  }
+
+  /* Clock styles */
+  .clock {
+    @apply relative w-4 h-4 rounded-full border border-neutral-200;
+  }
+
+  .hand {
+    @apply absolute top-1/2 left-1/2 origin-left bg-neutral-400;
+    width: 35%;
+    height: 1px;
+  }
+
+  .second {
+    transform: rotate(calc(var(--now-s) * 6deg));
+    @apply bg-neutral-300;
+  }
+
+  .minute {
+    transform: rotate(calc(var(--now-m) * 6deg));
+    @apply bg-neutral-400;
+  }
+
+  .hour {
+    transform: rotate(calc(var(--now-h) * 30deg));
+    width: 25%;
+    @apply bg-neutral-500;
+  }
+
+  /* Update footer spacing */
+  .content {
+    @apply mb-auto w-full;
+  }
+</style>

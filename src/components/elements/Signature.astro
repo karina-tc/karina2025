@@ -1,0 +1,15 @@
+---
+interface Props {
+  text?: string;
+  includeClasses?: string;
+}
+
+const { 
+  text = "Life is good!", 
+  includeClasses = "" 
+} = Astro.props;
+---
+
+<div class={`font-homemade-apple text-4xl py-20 ${includeClasses}`}>
+  <span>- {text}</span>
+</div> 
