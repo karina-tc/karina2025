@@ -1,7 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import AtomSymbol from "../components/structure/AtomSymbol.astro";
+import { Image } from "astro:assets";
 import Header from "../components/elements/Header.astro";
+import bubble from "../assets/bubbles/bubble-1.png";
 ---
 
 <Layout pageTitle="Thoughts - Karina Tovar" pageDescription="Mental Notes and Deep Thoughts">
@@ -23,18 +25,21 @@ import Header from "../components/elements/Header.astro";
   </div>
   <div class="writing-list">
     <a href="/post-1" class="writing-item group relative">
+      <Image src={bubble} alt="Bubble" class="w-10 h-10" />
       <span class="writing-title">Some Post Name Here</span>
       <span class="writing-dots"></span>
       <span class="writing-date">2024</span>
       <div class="writing-hover-overlay"></div>
     </a>
     <a href="/post-1" class="writing-item group relative">
+      <Image src={bubble} alt="Bubble" class="w-10 h-10" />
       <span class="writing-title">Some Post Name Here</span>
       <span class="writing-dots"></span>
       <span class="writing-date">2024</span>
       <div class="writing-hover-overlay"></div>
     </a>
     <a href="/post-1" class="writing-item group relative">
+      <Image src={bubble} alt="Bubble" class="w-10 h-10" />
       <span class="writing-title">Some Post Name Here</span>
       <span class="writing-dots"></span>
       <span class="writing-date">2024</span>
@@ -49,12 +54,14 @@ import Header from "../components/elements/Header.astro";
   </div>
   <div class="writing-list">
     <a href="/post-1" class="writing-item group relative">
+      <Image src={bubble} alt="Bubble" class="w-10 h-10" />
       <span class="writing-title">Some Post Name Here</span>
       <span class="writing-dots"></span>
       <span class="writing-date">2024</span>
       <div class="writing-hover-overlay"></div>
     </a>
     <a href="/post-1" class="writing-item group relative">
+      <Image src={bubble} alt="Bubble" class="w-10 h-10" />
       <span class="writing-title">Some Post Name Here</span>
       <span class="writing-dots"></span>
       <span class="writing-date">2024</span>

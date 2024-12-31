@@ -72,19 +72,13 @@ const timelineItems = [
 
   <h2 class="mt-0">I'm an artist turned product designer</h2>
 
-  <p>
+  <p class="text-lg">
     I have a background in the Fine Arts, with a MFA from the Massachusetts
     College of Art & Design. There I was part of the Studio for Interrelated
     Media where I made artwork focused on performative technology. That just
     means that I obsessed over the intersection of technology and human
     happiness. I worked on a lot of performance art pieces that lived outside of
     the museum so I could create room for joy in the mundane.
-  </p>
-  <p>
-    I had my first encounter with technology playing around with Photoshop for
-    art class. Never did I think that a tool I just played with would show me
-    what I wanted to do for a living. I currently live in the East Cost my wife,
-    daughter, and a really hyper pooch.
   </p>
 
   <div class="divider--large"></div>
@@ -105,23 +99,39 @@ const timelineItems = [
 
   <h2 class="pt-10">My preferred stack</h2>
 
-  <div
-    class="grid grid-cols-4 -space-x-[1px] max-md:grid-cols-2 max-md:space-y-[1px] max-sm:grid-cols-1 max-sm:space-y-[1px]"
-  >
-    <div class="flex flex-col items-center gap-2 border border-neutral-300 p-4">
-      <div class="w-10 h-10 bg-neutral-100 rounded-full"></div>
+  <p>Stack I use to build products</p>
+
+  <div class="stack-grid">
+    <div class="stack-item--cell">
+      <div class="stack-item--icon"></div>
+      <span>Notion</span>
+    </div>
+    <div class="stack-item--cell">
+      <div class="stack-item--icon"></div>
+      <span>Cursor</span>
+    </div>
+    <div class="stack-item--cell">
+      <div class="stack-item--icon"></div>
       <span>Figma</span>
     </div>
-    <div class="flex flex-col items-center gap-2 border border-neutral-300 p-4">
-      <div class="w-10 h-10 bg-neutral-100 rounded-full"></div>
+    <div class="stack-item--cell">
+      <div class="stack-item--icon"></div>
       <span>Figma</span>
     </div>
-    <div class="flex flex-col items-center gap-2 border border-neutral-300 p-4">
-      <div class="w-10 h-10 bg-neutral-100 rounded-full"></div>
+    <div class="stack-item--cell">
+      <div class="stack-item--icon"></div>
+      <span>Notion</span>
+    </div>
+    <div class="stack-item--cell">
+      <div class="stack-item--icon"></div>
+      <span>Cursor</span>
+    </div>
+    <div class="stack-item--cell">
+      <div class="stack-item--icon"></div>
       <span>Figma</span>
     </div>
-    <div class="flex flex-col items-center gap-2 border border-neutral-300 p-4">
-      <div class="w-10 h-10 bg-neutral-100 rounded-full"></div>
+    <div class="stack-item--cell">
+      <div class="stack-item--icon"></div>
       <span>Figma</span>
     </div>
   </div>
@@ -140,3 +150,18 @@ const timelineItems = [
 
   <Image src={avatar1} alt="Karina Tovar" />
 </Layout>
+
+<style>
+  .stack-grid {
+    @apply grid grid-cols-4 max-md:grid-cols-2 max-sm:grid-cols-1 gap-6;
+  }
+
+  .stack-item--cell {
+    @apply flex flex-col items-center gap-2 p-4 bg-paper-base rounded-lg shadow-md transition-all duration-300;
+    @apply hover:shadow-lg hover:scale-105 shadow-neutral-300/50;
+  }
+
+  .stack-item--icon {
+    @apply w-10 h-10 bg-neutral-100 rounded-full;
+  }
+</style>
