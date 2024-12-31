@@ -51,11 +51,6 @@ const {
             </div>
           </div>
         </div>
-        <Image
-          src={trees}
-          alt="landscape"
-          class="w-full opacity-25 rounded-lg mx-auto absolute -bottom-8 mix-blend-multiply blur"
-        />
       </footer>
     </div>
   </body>
@@ -87,9 +82,10 @@ const {
   body,
   html {
     @apply min-h-screen;
+    color: #6c5f3c;
   }
   .root {
-    @apply antialiased bg-paper-base text-ink-primary;
+    @apply antialiased bg-paper-base;
     font-family: var(--font-sans);
     /*
     background-image: url('/src/assets/bgtest.jpg');
@@ -110,7 +106,7 @@ const {
 
   /* Typography */
   :global(h1) {
-    @apply text-[100px] leading-[90px] font-medium tracking-tight font-instrument-serif mb-8;
+    @apply text-[100px] leading-[90px] font-medium tracking-tight mb-8;
   }
 
   :global(h2) {
