@@ -1,0 +1,79 @@
+---
+interface Props {
+  items: {
+    title: string;
+    company: string;
+    description: string;
+    avatar: ImageMetadata;
+    skills: string[];
+  }[];
+}
+
+import { Image } from "astro:assets";
+const { items } = Astro.props;
+---
+
+<ul class="timeline">
+  {
+    items.map((item) => (
+      <li class="timeline-item group">
+        <div class="timeline-item--logo">
+          <Image src={item.avatar} alt={`${item.company} logo`} />
+        </div>
+        <div class="timeline-item--content">
+          <span class="timeline-item--content--title">{item.title}</span>
+          <span class="timeline-item--content--company">{item.company}</span>
+          <div class="timeline-item--description">
+            <span class="pl-2 pt-3 inline-block">{item.description}</span>
+          </div>
+          <ul class="timeline-item--content--list">
+            {item.skills.map((skill) => (
+              <li>{skill}</li>
+            ))}
+          </ul>
+        </div>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .timeline {
+    @apply flex flex-col;
+  }
+
+  .timeline-item {
+    @apply flex gap-4 p-5 border-l-2 border-neutral-200 hover:bg-neutral-100 cursor-default transition-all duration-300;
+  }
+
+  .timeline-item--logo {
+    @apply w-12 h-12 min-w-12 min-h-12 border border-neutral-200 bg-white rounded-xl shadow-md shadow-neutral-200/50;
+    @apply flex items-center justify-center transition-all duration-300;
+    @apply group-hover:scale-110;
+  }
+
+  .timeline-item--content {
+    @apply flex flex-col pt-2;
+  }
+
+  .timeline-item--content--title {
+    @apply text-base font-medium pl-2;
+  }
+
+  .timeline-item--content--company {
+    @apply text-sm mt-1 pl-2;
+  }
+
+  .timeline-item--description {
+    @apply text-sm h-0 opacity-0 p-0 overflow-hidden transition-all duration-300;
+    @apply group-hover:h-auto group-hover:opacity-100 group-hover:py-2;
+  }
+
+  .timeline-item--content--list {
+    @apply flex gap-1 flex-wrap text-sm mt-3;
+
+    li {
+      @apply bg-neutral-100 px-2 py-1 rounded-full;
+    }
+  }
+</style> 

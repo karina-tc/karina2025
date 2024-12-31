@@ -1,67 +1,142 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import SectionHeader from "../components/structure/SectionHeader.astro";
+import { Image } from "astro:assets";
 import Header from "../components/elements/Header.astro";
+import Timeline from "../components/elements/Timeline.astro";
+import avatar1 from "../assets/avatars/avatar-1.png";
+import avatar2 from "../assets/avatars/avatar-2.png";
+import avatar3 from "../assets/avatars/avatar-3.png";
+import avatar4 from "../assets/avatars/avatar-4.png";
+import avatar5 from "../assets/avatars/avatar-5.png";
+
+const timelineItems = [
+  {
+    title: "Lead Product Designer",
+    company: "Tropic App",
+    description:
+      "I was the lead product designer at Tropic App. I was responsible for the product design and branding of the app. I was also responsible for the design of the app. I was also responsible for the design of the app. I was also responsible for the design of the app. I was also responsible for the design of the app. I was also responsible for the design of the app.",
+    avatar: avatar1,
+    skills: [
+      "Product Design",
+      "Design Systems",
+      "UX Research",
+      "Design Engineering",
+    ],
+  },
+  {
+    title: "Senior Product Designer",
+    company: "Glue",
+    description:
+      "I was the lead product designer at Tropic App. I was responsible for the product design and branding of the app. I was also responsible for the design of the app. I was also responsible for the design of the app. I was also responsible for the design of the app. I was also responsible for the design of the app. I was also responsible for the design of the app.",
+    avatar: avatar2,
+    skills: ["Product Design", "Branding", "UX Research", "Design Engineering"],
+  },
+  {
+    title: "Staff Product Designer",
+    company: "Teikametrics",
+    description:
+      "I was the lead product designer at Tropic App. I was responsible for the product design and branding of the app. I was also responsible for the design of the app. I was also responsible for the design of the app. I was also responsible for the design of the app. I was also responsible for the design of the app. I was also responsible for the design of the app.",
+    avatar: avatar3,
+    skills: ["Product Design", "Design Systems", "UX Research"],
+  },
+  {
+    title: "Product Owner",
+    company: "Rejoiner",
+    description:
+      "I was the lead product designer at Tropic App. I was responsible for the product design and branding of the app. I was also responsible for the design of the app. I was also responsible for the design of the app. I was also responsible for the design of the app. I was also responsible for the design of the app. I was also responsible for the design of the app.",
+    avatar: avatar4,
+    skills: [
+      "Product Design",
+      "Branding",
+      "UX Research",
+      "Design Engineering",
+      "Product Management",
+    ],
+  },
+  {
+    title: "Lead Designer",
+    company: "Venly",
+    description:
+      "I was the lead product designer at Tropic App. I was responsible for the product design and branding of the app. I was also responsible for the design of the app. I was also responsible for the design of the app. I was also responsible for the design of the app. I was also responsible for the design of the app. I was also responsible for the design of the app.",
+    avatar: avatar5,
+    skills: ["Branding"],
+  },
+];
 ---
 
 <Layout
   pageTitle="About - Karina Tovar"
   pageDescription="Pixel Philosopher Cautious Technologist"
 >
-  <Header title="Hello Stranger" />
+  <Header title="Hello Stranger" subtitle="A little about me" />
 
-  <section class="section-wrapper mt-10 content-section">
-    <SectionHeader eyebrow="Background" title="Artist turned product designer">
-      <div slot="section-header-content" class="flex flex-col gap-5 text-left">
-        <p class="text-base text-ink-secondary">
-          I had my first encounter with technology playing around with Photoshop
-          for art class. Never did I think that a tool I just played with would
-          show me what I wanted to do for a living. I currently live in the East
-          Cost my wife, daughter, and a really hyper pooch.
-        </p>
-        <p class="text-base text-ink-secondary">
-          I have a background in the Fine Arts, with a MFA from the
-          Massachusetts College of Art & Design. There I was part of the Studio
-          for Interrelated Media where I made artwork focused on performative
-          technology. That just means that I obsessed over the intersection of
-          technology and human happiness. I worked on a lot of performance art
-          pieces that lived outside of the museum so I could create room for joy
-          in the mundane.
-        </p>
-      </div>
-    </SectionHeader>
-  </section>
+  <h2 class="mt-0">I'm an artist turned product designer</h2>
+
+  <p>
+    I have a background in the Fine Arts, with a MFA from the Massachusetts
+    College of Art & Design. There I was part of the Studio for Interrelated
+    Media where I made artwork focused on performative technology. That just
+    means that I obsessed over the intersection of technology and human
+    happiness. I worked on a lot of performance art pieces that lived outside of
+    the museum so I could create room for joy in the mundane.
+  </p>
+  <p>
+    I had my first encounter with technology playing around with Photoshop for
+    art class. Never did I think that a tool I just played with would show me
+    what I wanted to do for a living. I currently live in the East Cost my wife,
+    daughter, and a really hyper pooch.
+  </p>
 
   <div class="divider--large"></div>
 
-  <section class="section-wrapper mt-10 content-section">
-    <SectionHeader
-      eyebrow="RATIONALE"
-      title="Anthro-technologist"
-      description="As an artist, I always look for the meaning on the things I work. Part of that is always trying to establish the tangible benefit of what we build—whether that is in design systems, ux flows, or business strategy."
-      descriptionAlign="left"
-    />
-  </section>
+  <h2 class="pt-10">I have a decade of experience</h2>
+
+  <div class="flex flex-col gap-8">
+    <Timeline items={timelineItems} />
+    <a
+      href="#"
+      class="text-sm underline-offset-4 hover:underline transition-all duration-300"
+    >
+      See more in Read.CV
+    </a>
+  </div>
 
   <div class="divider--large"></div>
 
-  <section class="section-wrapper mt-10 content-section">
-    <SectionHeader eyebrow="IN REAL LIFE" title="Perpetual learner">
-      <div slot="section-header-content" class="flex flex-col gap-5 text-left">
-        <p class="text-base text-ink-secondary">
-          I started designing emails and later on I learned to code them. Once I
-          got my first product gig, I pushed my curiosity about coding by
-          learning basic front-end languages. While I am not a seasoned dev, I
-          enjoy turning pixels into code and find it rather soothing.
-        </p>
-        <p class="text-base text-ink-secondary">
-          Outside of work, I enjoy listening to music and exploring the world
-          through my daughter’s eyes. She is always teaching me new things by
-          always having fun.
-        </p>
-      </div>
-    </SectionHeader>
-  </section>
+  <h2 class="pt-10">My preferred stack</h2>
+
+  <div
+    class="grid grid-cols-4 -space-x-[1px] max-md:grid-cols-2 max-md:space-y-[1px] max-sm:grid-cols-1 max-sm:space-y-[1px]"
+  >
+    <div class="flex flex-col items-center gap-2 border border-neutral-300 p-4">
+      <div class="w-10 h-10 bg-neutral-100 rounded-full"></div>
+      <span>Figma</span>
+    </div>
+    <div class="flex flex-col items-center gap-2 border border-neutral-300 p-4">
+      <div class="w-10 h-10 bg-neutral-100 rounded-full"></div>
+      <span>Figma</span>
+    </div>
+    <div class="flex flex-col items-center gap-2 border border-neutral-300 p-4">
+      <div class="w-10 h-10 bg-neutral-100 rounded-full"></div>
+      <span>Figma</span>
+    </div>
+    <div class="flex flex-col items-center gap-2 border border-neutral-300 p-4">
+      <div class="w-10 h-10 bg-neutral-100 rounded-full"></div>
+      <span>Figma</span>
+    </div>
+  </div>
 
   <div class="divider--large"></div>
+
+  <h2 class="pt-10">Outside of work</h2>
+  <p>
+    I have a background in the Fine Arts, with a MFA from the Massachusetts
+    College of Art & Design. There I was part of the Studio for Interrelated
+    Media where I made artwork focused on performative technology. That just
+    means that I obsessed over the intersection of technology and human
+    happiness. I worked on a lot of performance art pieces that lived outside of
+    the museum so I could create room for joy in the mundane.
+  </p>
+
+  <Image src={avatar1} alt="Karina Tovar" />
 </Layout>
