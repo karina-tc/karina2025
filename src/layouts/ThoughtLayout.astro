@@ -4,7 +4,7 @@ import Layout from "./Layout.astro";
 import Header from "../components/elements/Header.astro";
 import Breadcrumbs from "../components/structure/Breadcrumbs.astro";
 import Signature from "../components/elements/Signature.astro";
-
+import ScribbleLoop from "phosphor-astro/ScribbleLoop.astro";
 // Type Definitions
 interface Props {
   title: string;
@@ -61,9 +61,13 @@ const breadcrumbs = [
       <img
         src={showcase}
         alt={title}
-        class="w-full h-auto rounded-lg"
+        class="w-full h-auto rounded-lg z-[1] relative"
         loading="eager"
       />
+      <div class="absolute inset-0 flex items-center justify-center gap-2">
+        <ScribbleLoop class="w-6 h-6 animate-spin opacity-50" />
+        <span class="text-sm animate-pulse">Drawing...</span>
+      </div>
     </div>
   )}
 
