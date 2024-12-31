@@ -1,125 +1,112 @@
 ---
+{
+  /* Components */
+}
 import Layout from "../layouts/Layout.astro";
-import AtomSymbol from "../components/structure/AtomSymbol.astro";
-import { Image } from "astro:assets";
 import Header from "../components/elements/Header.astro";
+import ListItem from "../components/elements/ListItem.astro";
+import ListItemHeader from "../components/elements/ListItemHeader.astro";
+{
+  /* Assets */
+}
+import { Image } from "astro:assets";
 import bubble from "../assets/bubbles/bubble-1.png";
 ---
 
-<Layout pageTitle="Thoughts - Karina Tovar" pageDescription="Mental Notes and Deep Thoughts">
-  <Header 
-    title="Notes & Deep Thoughts" 
-  />
+<Layout
+  pageTitle="Thoughts - Karina Tovar"
+  pageDescription="Mental Notes and Deep Thoughts"
+>
+  {/* Header */}
+  <Header title="Notes & Deep Thoughts" />
 
-  <h2 class="mt-0 text-3xl font-medium">Diary of a pixel philosopher</h2>
+  {/* Intro */}
+  <section>
+    <h2 class="mt-0 text-3xl font-medium">Diary of a pixel philosopher</h2>
 
-  <p class="text-lg">
-    This is where I keep my thoughts and ideas. I write about design,
-    technology, and human happiness.
-  </p>
+    <p class="text-lg">
+      This is where I keep my thoughts and ideas. I write about design,
+      technology, and human happiness.
+    </p>
+  </section>
 
-  <h3 class="mt-20 mb-5 text-5xl font-medium opacity-50">Notebooks</h3>
-  <div class="writing-list-header">
-    <span>TITLE</span>
-    <span>DATE</span>
-  </div>
-  <div class="writing-list">
-    <a href="/post-1" class="writing-item group relative">
-      <Image src={bubble} alt="Bubble" class="w-10 h-10 z-[1]" />
-      <span class="writing-title">How to Make Tails with Ruby on Rails</span>
-      <span class="writing-dots"></span>
-      <span class="writing-date">2024</span>
-      <div class="writing-hover-overlay"></div>
-    </a>
-    <a href="/post-1" class="writing-item group relative">
-      <Image src={bubble} alt="Bubble" class="w-10 h-10 z-[1]" />
-      <span class="writing-title">Writing Better Prompts</span>
-      <span class="writing-dots"></span>
-      <span class="writing-date">2024</span>
-      <div class="writing-hover-overlay"></div>
-    </a>
-  </div>
+  {/* Notebooks */}
+  <section>
+    <h3 class="mt-20 mb-5 text-5xl font-medium opacity-50">Notebooks</h3>
 
-  <h3 class="mt-20 mb-5 text-5xl font-medium opacity-50">2024</h3>
-  <div class="writing-list-header">
-    <span>TITLE</span>
-    <span>DATE</span>
-  </div>
-  <div class="writing-list">
-    <a href="/post-1" class="writing-item group relative">
-      <Image src={bubble} alt="Bubble" class="w-10 h-10 z-[1]" />
-      <span class="writing-title">Some Post Name Here</span>
-      <span class="writing-dots"></span>
-      <span class="writing-date">2024</span>
-      <div class="writing-hover-overlay"></div>
-    </a>
-    <a href="/post-1" class="writing-item group relative">
-      <Image src={bubble} alt="Bubble" class="w-10 h-10 z-[1]" />
-      <span class="writing-title">Some Post Name Here</span>
-      <span class="writing-dots"></span>
-      <span class="writing-date">2024</span>
-      <div class="writing-hover-overlay"></div>
-    </a>
-    <a href="/post-1" class="writing-item group relative">
-      <Image src={bubble} alt="Bubble" class="w-10 h-10 z-[1]" />
-      <span class="writing-title">Some Post Name Here</span>
-      <span class="writing-dots"></span>
-      <span class="writing-date">2024</span>
-      <div class="writing-hover-overlay"></div>
-    </a>
-  </div>
+    <div class="writing-list">
+      <ListItem
+        isLink={true}
+        label="How to Make Tails with Ruby on Rails"
+        detail="2024"
+        href="/post-1"
+        icon={bubble}
+      />
+      <ListItem
+        isLink={true}
+        label="Writing Better Prompts"
+        detail="2024"
+        href="/post-1"
+        icon={bubble}
+      />
+    </div>
+  </section>
 
-  <h3 class="mt-20 mb-5 text-5xl font-medium opacity-50">2023</h3>
-  <div class="writing-list-header">
-    <span>TITLE</span>
-    <span>DATE</span>
-  </div>
-  <div class="writing-list">
-    <a href="/post-1" class="writing-item group relative">
-      <Image src={bubble} alt="Bubble" class="w-10 h-10 z-[1]" />
-      <span class="writing-title">Some Post Name Here</span>
-      <span class="writing-dots"></span>
-      <span class="writing-date">2024</span>
-      <div class="writing-hover-overlay"></div>
-    </a>
-    <a href="/post-1" class="writing-item group relative">
-      <Image src={bubble} alt="Bubble" class="w-10 h-10 z-[1]" />
-      <span class="writing-title">Some Post Name Here</span>
-      <span class="writing-dots"></span>
-      <span class="writing-date">2024</span>
-      <div class="writing-hover-overlay"></div>
-    </a>
-  </div>
+  {/* 2024 */}
+  <section>
+    <h3 class="mt-20 mb-5 text-5xl font-medium opacity-50">2024</h3>
+    <ListItemHeader leftLabel="TITLE" rightLabel="DATE" />
+    <div class="writing-list">
+      <ListItem
+        isLink={true}
+        label="Some Post Name Here"
+        detail="2024"
+        href="/post-1"
+        icon={bubble}
+      />
+      <ListItem
+        isLink={true}
+        label="Some Post Name Here"
+        detail="2024"
+        href="/post-1"
+        icon={bubble}
+      />
+      <ListItem
+        isLink={true}
+        label="Some Post Name Here"
+        detail="2024"
+        href="/post-1"
+        icon={bubble}
+      />
+    </div>
+  </section>
+
+  {/* 2023 */}
+  <section>
+    <h3 class="mt-20 mb-5 text-5xl font-medium opacity-50">2023</h3>
+    <ListItemHeader leftLabel="TITLE" rightLabel="DATE" />
+    <div class="writing-list">
+      <ListItem
+        isLink={true}
+        label="Some Post Name Here"
+        detail="2024"
+        href="/post-1"
+        icon={bubble}
+      />
+      <ListItem
+        isLink={true}
+        label="Some Post Name Here"
+        detail="2024"
+        href="/post-1"
+        icon={bubble}
+      />
+    </div>
+  </section>
 </Layout>
 
 <style>
   /* Writing list */
-
-  .writing-list-header {
-    @apply flex justify-between font-mono uppercase text-xs text-neutral-500 py-4 bg-paper-base;
-  }
-
   .writing-list {
     @apply space-y-3 mt-2 relative;
-  }
-
-  .writing-item {
-    @apply flex items-center gap-4 py-3 -mx-3 px-3 rounded-lg;
-  }
-
-  .writing-title {
-    @apply text-neutral-900 z-[1] shrink-0;
-  }
-
-  .writing-dots {
-    @apply grow border-b border-dotted border-neutral-300 h-3 z-10;
-  }
-
-  .writing-date {
-    @apply text-neutral-500 text-sm z-[1] shrink-0;
-  }
-
-  .writing-hover-overlay {
-    @apply absolute inset-0 bg-neutral-100 w-0 opacity-0 transition-all duration-300 group-hover:w-full group-hover:opacity-100;
   }
 </style>
