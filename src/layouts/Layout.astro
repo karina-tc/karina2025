@@ -25,15 +25,18 @@ const { title = "Karina Tovar" } = Astro.props;
   <body>
     <div class="root">
       <main class="main">
-        <nav class="nav flex justify-between items-center">
-          <a href="/" class="nav-home">
-            <Logo classes="w-10 h-10" />
-          </a>
-          <div class="nav-links">
-            <a href="/about">About</a>
-            <a href="/work">Work</a>
-            <a href="/thoughts">Thoughts</a>
+        <nav class="nav">
+          <div class="nav-container">
+            <a href="/" class="nav-home">
+              <Logo classes="w-10 h-10" />
+            </a>
+            <div class="nav-links">
+              <a href="/about">About</a>
+              <a href="/work">Work</a>
+              <a href="/thoughts">Thoughts</a>
+            </div>
           </div>
+          <div class="nav-fade"></div>
         </nav>
 
         <div class="content">
@@ -81,8 +84,12 @@ const { title = "Karina Tovar" } = Astro.props;
     --footer-height: 60px;
   }
 
+  body,
+  html {
+    @apply min-h-screen;
+  }
   .root {
-    @apply antialiased min-h-screen bg-paper-base text-ink-primary;
+    @apply antialiased bg-paper-base text-ink-primary;
     font-family: var(--font-sans);
     /*
     background-image: url('/src/assets/bgtest.jpg');
@@ -98,7 +105,11 @@ const { title = "Karina Tovar" } = Astro.props;
   }
 
   .nav {
-    @apply w-full flex items-center justify-between my-10;
+    @apply w-full flex flex-col justify-between items-center sticky top-0;
+  }
+
+  .nav-container {
+    @apply flex items-center justify-between w-full bg-paper-base pt-10 pb-2;
   }
 
   .nav-home {
@@ -106,11 +117,16 @@ const { title = "Karina Tovar" } = Astro.props;
   }
 
   .nav-links {
-    @apply flex gap-6;
+    @apply flex items-center gap-6;
   }
 
   .nav-links a {
-    @apply text-neutral-600 hover:text-neutral-900 transition-colors;
+    @apply text-neutral-600 underline-offset-4 transition-all;
+    @apply hover:text-neutral-900 hover:underline;
+  }
+
+  .nav-fade {
+    @apply w-full h-8 bg-gradient-to-t from-paper-base to-transparent rotate-180;
   }
 
   .content {

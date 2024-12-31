@@ -1,121 +1,87 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import art from "../assets/brand/art-thoughts.png";
-import { getThoughts } from "../lib/notion";
-import type { ThoughtPost } from "../lib/notion";
-import { getCollection } from 'astro:content';
-
-// Get content collection posts for sidenotes
-const contentPosts = await getCollection('notebooks');
-const sideNotes = contentPosts;
-
-// Get Notion posts for main content
-const notionPosts = await getThoughts();
-const mainPosts = notionPosts.filter((post: ThoughtPost) => !post.categories.includes("Briefs"));
-
-// Group main posts by year
-const years = [
-  ...new Set(mainPosts.map((post) => new Date(post.date).getFullYear())),
-].sort((a, b) => b - a);
-
-const getPostsForYear = (year: number) =>
-  mainPosts.filter((post) => new Date(post.date).getFullYear() === year);
+import AtomSymbol from "../components/structure/AtomSymbol.astro";
 ---
 
-<Layout
-  pageTitle="Thoughts - Karina Tovar"
-  pageDescription="Pixel Philosopher Cautious Technologist"
-  eyelash_text="Diary of a pixel philosopher"
-  title_text="Mental notes and deep thoughts"
-  header_visual_image={art}
-  header_visual_alt_text="Tools"
-  header_visual_classes="mt-10 mix-blend-multiply"
-  header_visual_width={280}
->
-  <div class="divider--large"></div>
+<Layout title="Karina Tovar">
+  <AtomSymbol include_classes="w-20 h-20 my-10 hidden" />
+  <h1 class="mb-16">Mental notes and deep thoughts</h1>
+  <h2 class="text-3xl font-medium tracking-tight mb-8">
+    Diary of a pixel philosopher
+  </h2>
 
-  <section class="w-full mx-auto h-full main-grid">
-    <!-- Sidenotes -->
-    <aside
-      class="[&>p]:text-sm [&>p]:text-ink-primary [&>p]:mb-2 max-md:px-2 content-section"
-    >
-      <h3 class="mb-4 text-sm">Notebooks</h3>
-      {
-        sideNotes.map((post: { slug: string; data: { title: string } }) => (
-          <p>
-            <a href={`/notebooks/${post.slug}`} class="hover:underline underline-offset-4">
-              {post.data.title}
-            </a>
-          </p>
-        ))
-      }
-    </aside>
+  <p class="mb-10">
+    My motivation is to build products that aim to help people have happier
+    days. Life is too short to be ruined by awful experiences. Every product
+    needs to be crafted for human joy.
+  </p>
 
-    <!-- Main posts -->
-    <div class="flex flex-col items-start gap-5">
-      {
-        years.map((year) => {
-          const postsForYear = getPostsForYear(year);
-          return (
-            <>
-              <div class="w-full flex items-center justify-between flex-wrap px-2 [&:not(:first-child)]:mt-20 content-section">
-                <h2>{year}</h2>
-                <p class="text-ink-secondary text-base max-md:text-xs">
-                  {postsForYear.length} published {postsForYear.length === 1 ? "thought" : "thoughts"}
-                </p>
-              </div>
-              <ul class="w-full flex flex-col items-start mt-2.5 [&>li]:w-full content-section">
-                {postsForYear.map((post) => (
-                  <li class="group">
-                    <a
-                      href={post.href}
-                      rel="prefetch"
-                      class="w-full flex max-md:flex-col items-center max-md:items-start gap-2 max-md:gap-1.5 justify-between flex-wrap text-base outline-none transition-all duration-300 px-2 py-5 border-b border-dashed border-stone-200 hover:bg-paper-green/50 hover:px-4"
-                    >
-                      <span class="text-ink-primary group-hover:underline underline-offset-4">
-                        {post.title}
-                      </span>
-                      <div class="flex items-center justify-end gap-1 text-ink-secondary max-md:text-xs">
-                        <span>{post.categories[0]}</span>
-                        <span>·</span>
-                        <span>{Math.ceil(post.content.length / 200)} mins</span>
-                      </div>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </>
-          );
-        })
-      }
-    </div>
+  <h2>2024</h2>
+  <div class="writing-list-header">
+    <span>TITLE</span>
+    <span>DATE</span>
+  </div>
+  <div class="writing-list">
+    <a href="/post-1" class="writing-item group relative">
+      <span class="writing-title">Some Post Name Here</span>
+      <span class="writing-date">2024</span>
+      <div class="writing-hover-overlay"></div>
+    </a>
+    <a href="/post-1" class="writing-item group relative">
+      <span class="writing-title">Some Post Name Here</span>
+      <span class="writing-date">2024</span>
+      <div class="writing-hover-overlay"></div>
+    </a>
+    <a href="/post-1" class="writing-item group relative">
+      <span class="writing-title">Some Post Name Here</span>
+      <span class="writing-date">2024</span>
+      <div class="writing-hover-overlay"></div>
+    </a>
+  </div>
 
-
-  </section>
-
-  <div class="divider--extra-large"></div>
+  <h2>2023</h2>
+  <div class="writing-list-header">
+    <span>TITLE</span>
+    <span>DATE</span>
+  </div>
+  <div class="writing-list">
+    <a href="/post-1" class="writing-item group relative">
+      <span class="writing-title">Some Post Name Here</span>
+      <span class="writing-date">2024</span>
+      <div class="writing-hover-overlay"></div>
+    </a>
+    <a href="/post-1" class="writing-item group relative">
+      <span class="writing-title">Some Post Name Here</span>
+      <span class="writing-date">2024</span>
+      <div class="writing-hover-overlay"></div>
+    </a>
+  </div>
 </Layout>
 
 <style>
-  .main-grid {
-    @apply w-full max-w-7xl grid gap-y-10 px-4 sm:px-6;
-    /* Mobile first - single column */
-    grid-template-columns: 1fr;
+  /* Writing list */
+
+  .writing-list-header {
+    @apply flex justify-between font-mono uppercase text-xs text-neutral-500 border-b border-neutral-200 py-4 sticky top-0 bg-paper-base z-20;
   }
 
-  /* Medium screens - two columns with sidenotes on left */
-  @media (min-width: 768px) {
-    .main-grid {
-      grid-template-columns: 200px 1fr;
-      gap-x: 2rem;
-    }
+  .writing-list {
+    @apply space-y-3 mt-2 relative;
   }
 
-  /* Large screens - three columns */
-  @media (min-width: 1024px) {
-    .main-grid {
-      grid-template-columns: 200px 1fr 200px;
-      gap-x: 2.5rem;
-    }
+  .writing-item {
+    @apply flex items-center justify-between py-3 -mx-3 px-3 rounded-lg;
+  }
+
+  .writing-title {
+    @apply text-neutral-900 z-10 group-hover:text-white transition-colors;
+  }
+
+  .writing-date {
+    @apply text-neutral-500 text-sm z-10 group-hover:text-white transition-colors;
+  }
+
+  .writing-hover-overlay {
+    @apply absolute inset-0 bg-black w-0 opacity-0 group-hover:w-full group-hover:opacity-100 transition-all;
   }
 </style>
