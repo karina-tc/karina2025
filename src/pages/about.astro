@@ -69,11 +69,9 @@ import karina from "../assets/brand/karina-profile.png";
     <AtomSymbol include_classes="w-20 h-20 mb-10" />
     <div class="flex justify-between items-center flex-wrap gap-4 mb-10 group">
       <h2 class="m-0 text-3xl">A Decade of Experience</h2>
-      <a href="#" class="resume-link text-sm">
+      <a href="#" class="resume-link">
         <TrayArrowDown class="w-6 h-6" />
-        <span class="underline-offset-4 group-hover:underline"
-          >Download Resume</span
-        >
+        <span>Download Resume</span>
       </a>
     </div>
     <Timeline items={timelineItems} />
@@ -85,3 +83,15 @@ import karina from "../assets/brand/karina-profile.png";
   {/* Personal Section */}
   <PersonalSection />
 </Layout>
+
+<style>
+  .resume-link {
+    @apply flex items-center gap-2 w-fit text-sm transition-all duration-300;
+    span {
+      @apply underline-offset-4;
+    }
+    &:hover span {
+      @apply underline;
+    }
+  }
+</style>
