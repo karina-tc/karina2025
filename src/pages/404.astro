@@ -14,34 +14,22 @@ import home from "../assets/other/home-view.png";
   <section class="flex justify-start">
     <a href="/" class="button group">
       <span class="button-text">Return Home</span>
-      <Image src={home} alt="Home" class="button-image animate-pulse" />
+      <Image src={home} alt="Home" class="button-image" />
     </a>
   </section>
 </Layout>
 
 <style>
   .button {
-    @apply px-6 py-3 flex flex-row items-center justify-center relative overflow-hidden rounded-full;
-    @apply border border-white shadow-md backdrop-blur-sm;
+    @apply w-full h-[300px] flex flex-row items-center justify-center relative overflow-hidden shadow-2xl rounded-xl border border-white;
 
     .button-text {
-      @apply relative transition-all z-10 bg-white/80 backdrop-blur-sm py-1 px-2 rounded-xl;
+      @apply relative transition-all z-10 bg-white/80 backdrop-blur-sm px-6 py-3 rounded-xl;
+      @apply hover:bg-black hover:text-white;
     }
 
     .button-image {
       @apply w-full absolute top-0 left-0 transition-all;
-    }
-
-    &:hover {
-      @apply w-full h-[300px] shadow-xl rounded-xl;
-
-      .button-image {
-        @apply !opacity-100;
-      }
-
-      .button-text {
-        @apply px-4 py-3 hover:bg-black hover:text-white;
-      }
     }
   }
 </style>
