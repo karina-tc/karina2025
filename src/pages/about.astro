@@ -17,7 +17,6 @@ import { tenets } from "../data/tenets";
 import { Image } from "astro:assets";
 import avatarBackground from "../assets/avatars/avatar-4.png";
 import karina from "../assets/brand/karina-profile.png";
-
 ---
 
 <Layout
@@ -101,7 +100,9 @@ import karina from "../assets/brand/karina-profile.png";
   .fade-up {
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    transition:
+      opacity 0.6s ease-out,
+      transform 0.6s ease-out;
   }
 
   .fade-up.visible {
@@ -113,25 +114,31 @@ import karina from "../assets/brand/karina-profile.png";
     --delay: 0s;
     transition-delay: var(--delay);
   }
-  
-  section:nth-child(2) { --delay: 0.1s; }
-  section:nth-child(3) { --delay: 0.2s; }
-  /* ... and so on */
+
+  section:nth-child(2) {
+    --delay: 0.1s;
+  }
+  section:nth-child(3) {
+    --delay: 0.2s;
+  }
 </style>
 
 <script>
-  const sections = document.querySelectorAll('section');
-  
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.2 }); // Section's % threshold to be considered visible
+  const sections = document.querySelectorAll("section");
 
-  sections.forEach(section => {
-    section.classList.add('fade-up');
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    },
+    { threshold: 0.2 },
+  ); // Section's % threshold to be considered visible
+
+  sections.forEach((section) => {
+    section.classList.add("fade-up");
     observer.observe(section);
   });
 </script>
