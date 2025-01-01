@@ -9,23 +9,27 @@ export const tenets = [
     title: "Team Ideation",
     description: "Ideas can come from anywhere. Don't let ego get in the way of your team's success.",
     image: image1,
+    image_text: "Plant"
   },
   {
     number: "02",
     title: "Diligent Speed",
     description: "Work as fast as you can to understand the problem and deliver a worthwhile economic solution.",
-    image: image2
+    image: image2,
+    image_text: "Clipboard"
   },
   {
     number: "03",
     title: "Inclusivity",
     description: "Design should be accessible to everyone. It's the right thing and it brings true usability to your solution.",
-    image: image3
+    image: image3,
+    image_text: "Cup"
   },
   {
     number: "04",
     title: "Keep Playing",
     description: "Go further than building delight. Think of the long term and how your solution can grow.",
-    image: image4
+    image: image4,
+    image_text: "Notes"
   }
 ]; 

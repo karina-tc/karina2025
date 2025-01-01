@@ -7,7 +7,7 @@ interface Props {
     title: string;
     description: string;
     image?: ImageMetadata;
-    background?: ImageMetadata;
+    image_text?: string;
   }[];
 }
 
@@ -19,10 +19,10 @@ const { items } = Astro.props;
     items.map((item, index) => (
       <li class={`tenet-card group ${index === 0 ? "focused" : ""}`}>
         {item.image && (
-          <div class="tenet-card--image" style={`background-image: url(${item.background?.src})`}>
+          <div class="tenet-card--image">
             <Image
               src={item.image}
-              alt={item.title}
+              alt={item.image_text ?? "Artwork"}
               class="rounded-xl"
               height={140}
               width={140}
@@ -61,6 +61,7 @@ const { items } = Astro.props;
 
   .tenet-card {
     @apply relative flex items-center rounded-2xl transition-all duration-300 overflow-hidden;
+    @apply max-sm:flex-col max-sm:bg-neutral-100;
 
     &.focused {
       @apply bg-neutral-100;
@@ -77,12 +78,11 @@ const { items } = Astro.props;
 
   .tenet-card--image {
     @apply flex items-center justify-center p-3 pr-1 transition-all delay-100;
-    @apply max-w-[120px] max-h-[120px] min-w-[120px] min-h-[120px] overflow-hidden;
-    @apply bg-center bg-no-repeat;
-    background-size: 150%;
+    @apply sm:max-w-[120px] max-h-[120px] min-w-[120px] min-h-[120px] overflow-hidden;
+    @apply max-sm:bg-stone-200 max-sm:w-full;
 
     img {
-      @apply w-full h-full object-cover;
+      @apply w-full h-full object-cover max-sm:w-[100px] max-sm:h-[100px] max-sm:mr-auto;
     }
   }
 
