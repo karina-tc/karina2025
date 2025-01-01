@@ -124,21 +124,6 @@ import karina from "../assets/brand/karina-profile.png";
 </style>
 
 <script>
-  const sections = document.querySelectorAll("section");
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-        }
-      });
-    },
-    { threshold: 0.2 },
-  ); // Section's % threshold to be considered visible
-
-  sections.forEach((section) => {
-    section.classList.add("fade-up");
-    observer.observe(section);
-  });
+  import { initFadeAnimation } from "../utils/fade-animation";
+  document.addEventListener("DOMContentLoaded", () => initFadeAnimation());
 </script>
