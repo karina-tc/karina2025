@@ -1,32 +1,47 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Header from "../components/elements/Header.astro";
+import { Image } from "astro:assets";
+import home from "../assets/other/home-view.png";
 ---
 
-<Layout
-  pageTitle="404"
-  pageDescription="Page not found"
-  eyelash_text="TIME FOR A BREAK"
-  title_text="This Page Is Lost"
-  description_text="But you shouldn't. Go outside and enjoy the sun."
-  showBackToTop={false}
->
-  <div slot="title-content" class="flex justify-center z-base">
+<Layout pageTitle="404" pageDescription="Page not found">
+  <Header
+    title="Oh no!"
+    subtitle="This page seems to be lost"
+    description="But you shouldn't. Go outside and enjoy the sun."
+  />
+  <section class="flex justify-start">
     <a href="/" class="button group">
       <span class="button-text">Return Home</span>
+      <Image src={home} alt="Home" class="button-image animate-pulse" />
     </a>
-  </div>
+  </section>
 </Layout>
 
 <style>
   .button {
-    @apply px-6 py-3 bg-orange-700 text-white flex flex-row items-center justify-center relative overflow-hidden rounded-full border border-white shadow-md backdrop-blur-sm transition-all duration-200;
+    @apply px-6 py-3 flex flex-row items-center justify-center relative overflow-hidden rounded-full;
+    @apply border border-white shadow-md backdrop-blur-sm;
+
+    .button-text {
+      @apply relative transition-all z-10 bg-white/80 backdrop-blur-sm py-1 px-2 rounded-xl;
+    }
+
+    .button-image {
+      @apply w-full absolute top-0 left-0 transition-all;
+    }
 
     &:hover {
-      @apply bg-orange-600 -mt-1 mb-1 shadow-xl;
-    }
-  }
+      @apply w-full h-[300px] shadow-xl rounded-xl;
 
-  .button-text {
-    @apply relative transition-all;
+      .button-image {
+        @apply !opacity-100;
+      }
+
+      .button-text {
+        @apply px-4 py-3 hover:bg-black hover:text-white;
+      }
+    }
   }
 </style>
