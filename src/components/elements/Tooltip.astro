@@ -16,6 +16,39 @@ const { text } = Astro.props;
   </span>
 </span>
 
+<script>
+  import { createPopper } from "@popperjs/core";
+
+  class Tooltip {
+    constructor(element: HTMLElement) {
+      const trigger = element.querySelector(".tooltip-trigger") as HTMLElement;
+      const content = element.querySelector(".tooltip-content") as HTMLElement;
+
+      createPopper(trigger, content, {
+        placement: "top",
+        modifiers: [
+          {
+            name: "offset",
+            options: {
+              offset: [0, 8],
+            },
+          },
+          {
+            name: "flip",
+            options: {
+              fallbackPlacements: ["bottom", "right", "left"],
+            },
+          },
+        ],
+      });
+    }
+  }
+
+  document.querySelectorAll(".tooltip-wrapper").forEach((tooltip) => {
+    new Tooltip(tooltip as HTMLElement);
+  });
+</script>
+
 <style>
   .tooltip-wrapper {
     @apply inline-block relative;
