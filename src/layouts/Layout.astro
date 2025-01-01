@@ -38,12 +38,13 @@ const {
           <slot />
         </div>
       </main>
+      <div class="p-20"></div>
       <Footer />
     </div>
   </body>
 </html>
 
-<style define:vars={{ bgImage }}>
+<style>
   :root {
     --font-sans: "Safiro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
       Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
@@ -56,7 +57,7 @@ const {
     color: #6c5f3c;
   }
   .root {
-    @apply antialiased bg-paper-base;
+    @apply antialiased bg-white;
     font-family: var(--font-sans);
     /*
     background-image: url("https://cdn.midjourney.com/7ccf011d-615d-4a62-9c28-68f919ce4e0e/0_1.png");
@@ -76,7 +77,7 @@ const {
 
   /* Typography */
   :global(h1) {
-    @apply text-[100px] leading-[90px] font-medium tracking-tight mb-8;
+    @apply text-[100px] leading-[90px] font-medium tracking-tighter mb-8;
   }
 
   :global(h2) {

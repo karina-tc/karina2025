@@ -6,11 +6,6 @@ import Breadcrumbs from "../components/structure/Breadcrumbs.astro";
 import Signature from "../components/elements/Signature.astro";
 import ScribbleLoop from "phosphor-astro/ScribbleLoop.astro";
 import PostNavigation from "../components/elements/PostNavigation.astro";
-import { Image } from "astro:assets";
-
-// Asset Imports
-import article from "../assets/other/post.png";
-import notebook from "../assets/other/clipboard.png";
 
 // Type Definitions
 interface Props {
@@ -41,14 +36,6 @@ const breadcrumbs = [
 >
   {/* Navigation */}
   <Breadcrumbs crumbs={breadcrumbs} />
-
-  {source === "notion" && (
-    <Image src={article} alt="" class={`w-20 h-20 mt-10`} />
-  )}
-
-  {source === "markdown" && (
-    <Image src={notebook} alt="" class={`w-20 h-20 mt-10`} />
-  )}
 
   {/* Header */}
   <Header title={title} />

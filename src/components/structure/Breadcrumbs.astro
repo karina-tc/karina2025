@@ -12,7 +12,7 @@ interface Props {
 const { crumbs } = Astro.props;
 ---
 
-<nav class="breadcrumbs max-3xl:px-0">
+<nav class="breadcrumbs max-3xl:px-0 py-10">
   {
     crumbs.map((crumb) => (
       <a href={crumb.href} class="crumb">
