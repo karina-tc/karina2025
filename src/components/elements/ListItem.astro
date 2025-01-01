@@ -8,15 +8,25 @@ interface Props {
   detail: string;
   href?: string;
   icon?: ImageMetadata;
+  iconWidth?: number;
+  iconHeight?: number;
 }
 
-const { isLink = false, label, detail, href, icon = bubble } = Astro.props;
+const { 
+  isLink = false, 
+  label, 
+  detail, 
+  href,
+  icon = bubble, 
+  iconWidth = 10, 
+  iconHeight = 10 
+  } = Astro.props;
 ---
 
 {
   isLink ? (
     <a href={href} class="listing-item group relative">
-      {icon && <Image src={icon} alt="" class="w-10 h-10 z-[1]" />}
+      {icon && <Image src={icon} alt="" class={`w-${iconWidth} h-${iconHeight} z-[1]`} />}
       <span class="listing-label">{label}</span>
       <span class="listing-dots" />
       <span class="listing-detail">{detail}</span>
@@ -24,7 +34,7 @@ const { isLink = false, label, detail, href, icon = bubble } = Astro.props;
     </a>
   ) : (
     <div class="listing-item group relative">
-      {icon && <Image src={icon} alt="" class="w-10 h-10 z-[1]" />}
+      {icon && <Image src={icon} alt="" class={`w-${iconWidth} h-${iconHeight} z-[1]`} />}
       <span class="listing-label">{label}</span>
       <span class="listing-dots" />
       <span class="listing-detail">{detail}</span>

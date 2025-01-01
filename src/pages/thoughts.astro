@@ -6,8 +6,8 @@ import ListItem from "../components/elements/ListItem.astro";
 import ListItemHeader from "../components/elements/ListItemHeader.astro";
 
 // Asset Imports
-import { Image } from "astro:assets";
-import bubble from "../assets/bubbles/bubble-1.png";
+import article from "../assets/other/post.png";
+import notebook from "../assets/other/clipboard.png";
 
 // Data Fetching
 import { getThoughts } from "../lib/notion";
@@ -68,7 +68,9 @@ const formatDate = (dateString: string) => {
           label={post.data.title}
           detail={new Date().getFullYear().toString()}
           href={`/notebooks/${post.slug}`}
-          icon={bubble}
+          icon={notebook}
+          iconWidth={12}
+          iconHeight={12}
         />
       ))}
     </div>
@@ -93,7 +95,9 @@ const formatDate = (dateString: string) => {
               label={post.title}
               detail={formatDate(post.date)}
               href={post.href}
-              icon={bubble}
+              icon={article}
+              iconWidth={10}
+              iconHeight={10}
             />
           ))}
         </div>
