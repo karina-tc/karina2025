@@ -1,0 +1,108 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+  items: {
+    number: string;
+    title: string;
+    description: string;
+    image?: ImageMetadata;
+    background?: ImageMetadata;
+  }[];
+}
+
+const { items } = Astro.props;
+---
+
+<ul class="tenets">
+  {
+    items.map((item, index) => (
+      <li class={`tenet-card group ${index === 0 ? "focused" : ""}`}>
+        {item.image && (
+          <div class="tenet-card--image" style={`background-image: url(${item.background?.src})`}>
+            <Image
+              src={item.image}
+              alt={item.title}
+              class="rounded-xl"
+              height={140}
+              width={140}
+            />
+          </div>
+        )}
+        <div class="tenet-card--content">
+          <span>{item.number}</span>
+          <h3>{item.title}</h3>
+          <p>{item.description}</p>
+        </div>
+      </li>
+    ))
+  }
+</ul>
+
+<script>
+  // Handle focus states
+  const tenetCards = document.querySelectorAll(".tenet-card");
+
+  tenetCards.forEach((item) => {
+    item.addEventListener("mouseenter", () => {
+      tenetCards.forEach((i) => i.classList.remove("focused"));
+    });
+
+    item.addEventListener("mouseleave", () => {
+      tenetCards[0].classList.add("focused");
+    });
+  });
+</script>
+
+<style>
+  .tenets {
+    @apply flex flex-col items-start gap-4;
+  }
+
+  .tenet-card {
+    @apply relative flex items-center rounded-2xl transition-all duration-300 overflow-hidden;
+
+    &.focused {
+      @apply bg-neutral-100;
+
+      span {
+        @apply opacity-100 text-[#6c4ec9];
+      }
+    }
+
+    &:hover {
+      @apply bg-neutral-100;
+    }
+  }
+
+  .tenet-card--image {
+    @apply flex items-center justify-center p-3 pr-1 transition-all delay-100;
+    @apply max-w-[120px] max-h-[120px] min-w-[120px] min-h-[120px] overflow-hidden;
+    @apply bg-center bg-no-repeat;
+    background-size: 150%;
+
+    img {
+      @apply w-full h-full object-cover;
+    }
+  }
+
+  .tenet-card--content {
+    @apply flex flex-col items-start p-3;
+  }
+
+  .tenet-card span {
+    @apply text-xl mb-2 opacity-50 transition-all duration-300;
+  }
+
+  .tenet-card h3 {
+    @apply font-semibold mb-2;
+  }
+
+  .tenet-card p {
+    @apply text-sm mb-2;
+  }
+
+  .tenet-card:hover span {
+    @apply opacity-100 text-[#6c4ec9];
+  }
+</style>

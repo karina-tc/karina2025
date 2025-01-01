@@ -2,26 +2,32 @@
 interface Props {
   title: string;
   subtitle?: string;
+  description?: string;
 }
 
-const { title, subtitle } = Astro.props;
+const { title, subtitle, description } = Astro.props;
 ---
 
 <header class="header-container">
   <h1>{title}</h1>
   {subtitle && <h2>{subtitle}</h2>}
+  {description && <p>{description}</p>}
 </header>
 
 <style>
   .header-container {
-    @apply w-full flex flex-col items-start justify-start gap-16 pt-10 pb-20;
+    @apply w-full flex flex-col items-start justify-start py-10;
 
-    h1, h2 {
+    h1, h2, p {
       @apply my-0;
     }
 
     h2 {
-      @apply text-3xl font-medium tracking-tight;
+      @apply text-3xl font-medium tracking-tight mt-16;
+    }
+
+    p {
+      @apply text-lg mt-5;
     }
   }
 </style>
