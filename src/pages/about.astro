@@ -7,7 +7,7 @@ import TrayArrowDown from "phosphor-astro/TrayArrowDown.astro";
 import Signature from "../components/elements/Signature.astro";
 import Tooltip from "../components/elements/Tooltip.astro";
 import TenetCard from "../components/elements/TenetCard.astro";
-
+import Music from "../components/elements/Music.astro";
 // Data
 import { timelineItems } from "../data/timeline";
 import { tenets } from "../data/tenets";
@@ -126,7 +126,6 @@ import AtomSymbol from "../components/structure/AtomSymbol.astro";
   <section id="personal" class="pt-10 pb-16">
     <AtomSymbol include_classes="w-20 h-20 mb-10" />
     <h2 class="text-3xl mt-0">Outside of Work</h2>
-
     <p>
       I like to watch dark psychological thrillers that are too much to watch
       more than once. Don't ask me why I've watched
@@ -157,6 +156,11 @@ import AtomSymbol from "../components/structure/AtomSymbol.astro";
     <figcaption class="text-left text-sm mt-4">
       <span>Working tirelessly for them.</span>
     </figcaption>
+
+    <h3 class="text-2xl mt-10">Currently Listening</h3>
+    <div class="mt-5 mb-10">
+      <Music />
+    </div>
 
     <Signature text="Life is good!" includeClasses="mt-10" />
   </section>
