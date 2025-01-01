@@ -31,14 +31,16 @@ import karina from "../assets/brand/karina-profile.png";
   />
 
   {/* Profile Image */}
-  <figure class="rounded-t-full overflow-hidden relative mt-10">
-    <Image
-      src={karina}
-      alt="Karina Tovar"
-      class="absolute bottom-0 translate-x-5 karina-profile mix-blend-overlay"
-    />
-    <Image src={avatarBackground} alt="Noise" />
-  </figure>
+  <div id="profile" class="mt-10 animate-fade-in">
+    <figure class="rounded-t-full overflow-hidden relative">
+      <Image
+        src={karina}
+        alt="Karina Tovar"
+        class="absolute bottom-0 translate-x-5 karina-profile mix-blend-overlay"
+      />
+      <Image src={avatarBackground} alt="Noise" />
+    </figure>
+  </div>
 
   {/* Introduction */}
   <section id="introduction" class="pt-10 pb-16">
