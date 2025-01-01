@@ -1,0 +1,51 @@
+---
+// Elements
+import { Image } from "astro:assets";
+import AtomSymbol from "../../structure/AtomSymbol.astro";
+import Tooltip from "../../elements/Tooltip.astro";
+
+// Data
+import { tools } from "../../../data/tools";
+---
+
+<section id="tools" class="pt-10 pb-16">
+  <AtomSymbol include_classes="w-20 h-20 mb-10" />
+  <h2 class="text-3xl mt-0">My Preferred Stack</h2>
+  <p>Some of my favorite things to make things and poke around.</p>
+
+  <div class="stack-grid">
+    {
+      tools.map((tool) => (
+        <div class="stack-item--cell">
+          <div class="stack-item--icon">
+            <Image src={tool.icon} alt={tool.name} class={tool.iconSize} />
+          </div>
+          <Tooltip text={tool.name}>
+            <span class="inline-block mb-2 text-left">{tool.description}</span>
+            <Image
+              src={tool.gif}
+              alt={tool.name}
+              class="w-[200px]"
+              loading="lazy"
+            />
+          </Tooltip>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .stack-grid {
+    @apply grid grid-cols-1 md:grid-cols-3 max-sm:grid-cols-1 gap-3;
+  }
+
+  .stack-item--cell {
+    @apply flex flex-col items-center gap-2 bg-stone-100 rounded-lg px-4 py-6;
+  }
+
+  .stack-item--icon {
+    @apply w-12 h-12 bg-neutral-100 rounded-full flex items-center justify-center;
+    @apply bg-paper-base rounded-lg shadow-md mb-2;
+  }
+</style> 

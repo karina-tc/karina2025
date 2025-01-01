@@ -4,10 +4,11 @@ import Layout from "../layouts/Layout.astro";
 import Header from "../components/elements/Header.astro";
 import Timeline from "../components/elements/Timeline.astro";
 import TrayArrowDown from "phosphor-astro/TrayArrowDown.astro";
-import Signature from "../components/elements/Signature.astro";
-import Tooltip from "../components/elements/Tooltip.astro";
 import TenetCard from "../components/elements/TenetCard.astro";
-import Music from "../components/elements/Music.astro";
+import AtomSymbol from "../components/structure/AtomSymbol.astro";
+import PersonalSection from "../components/sections/about/PersonalSection.astro";
+import ToolsSection from "../components/sections/about/ToolsSection.astro";
+
 // Data
 import { timelineItems } from "../data/timeline";
 import { tenets } from "../data/tenets";
@@ -16,13 +17,7 @@ import { tenets } from "../data/tenets";
 import { Image } from "astro:assets";
 import avatarBackground from "../assets/avatars/avatar-4.png";
 import karina from "../assets/brand/karina-profile.png";
-import notion from "../assets/logos/notion.png";
-import cursor from "../assets/logos/cursor.png";
-import figma from "../assets/logos/figma.png";
-import life from "../assets/other/life.png";
-import melancholia from "../assets/other/melancholia.png";
-import book from "../assets/other/book.png";
-import AtomSymbol from "../components/structure/AtomSymbol.astro";
+
 ---
 
 <Layout
@@ -85,110 +80,8 @@ import AtomSymbol from "../components/structure/AtomSymbol.astro";
   </section>
 
   {/* Tools Section */}
-  <section id="tools" class="pt-10 pb-16">
-    <AtomSymbol include_classes="w-20 h-20 mb-10" />
-    <h2 class="text-3xl mt-0">My Preferred Stack</h2>
-    <p>Some of my favorite things to make things and poke around.</p>
-
-    <div class="stack-grid">
-      <div class="stack-item--cell">
-        <div class="stack-item--icon"></div>
-        <span>Pen & Paper</span>
-      </div>
-      <div class="stack-item--cell">
-        <div class="stack-item--icon">
-          <Image src={notion} alt="Notion" class="w-6 h-6" />
-        </div>
-        <span>Notion</span>
-      </div>
-      <div class="stack-item--cell">
-        <div class="stack-item--icon">
-          <Image src={figma} alt="Figma" class="w-4" />
-        </div>
-        <span>Figma</span>
-      </div>
-      <div class="stack-item--cell">
-        <div class="stack-item--icon">
-          <Image src={cursor} alt="Cursor" class="w-9" />
-        </div>
-        <span>Cursor</span>
-      </div>
-      <div class="stack-item--cell">
-        <div class="stack-item--icon">
-          <Image src={cursor} alt="Cursor" class="w-9" />
-        </div>
-        <span>Cursor</span>
-      </div>
-    </div>
-  </section>
+  <ToolsSection />
 
   {/* Personal Section */}
-  <section id="personal" class="pt-10 pb-16">
-    <AtomSymbol include_classes="w-20 h-20 mb-10" />
-    <h2 class="text-3xl mt-0">Outside of Work</h2>
-    <p>
-      I like to watch dark psychological thrillers that are too much to watch
-      more than once. Don't ask me why I've watched
-      <Tooltip text="Melancholia">
-        <span class="inline-block mb-2 text-left"
-          >A Danish psychological thriller film written and directed by Lars von
-          Trier.</span
-        >
-        <Image src={melancholia} alt="Melancholia" class="w-[200px]" />
-      </Tooltip>
-      way more than needed. I also enjoy watching soccer, reading the occasional
-      <Tooltip text="book">
-        <span class="flex items-center gap-2">
-          <span class="inline-block mb-2 text-left"
-            >Currently reading The Anthropocene Reviewed by John Green.</span
-          >
-          <Image src={book} alt="Book" class="w-20" />
-        </span>
-      </Tooltip>, and playing with my kiddo and crazy dog.
-    </p>
-
-    <figure
-      class="flex justify-center w-full h-[600px] bg-neutral-100 border-[5px] border-white rounded-lg shadow-lg"
-    >
-      <Image src={life} alt="Life" class="w-full" />
-    </figure>
-
-    <figcaption class="text-left text-sm mt-4">
-      <span>Working tirelessly for them.</span>
-    </figcaption>
-
-    <h3 class="text-2xl mt-10">Currently Listening</h3>
-    <div class="mt-5 mb-10">
-      <Music />
-    </div>
-
-    <Signature text="Life is good!" includeClasses="mt-10" />
-  </section>
+  <PersonalSection />
 </Layout>
-
-<style>
-  /* Grid Layout */
-  .stack-grid {
-    @apply grid grid-cols-5 max-md:grid-cols-2 max-sm:grid-cols-1 gap-6;
-  }
-
-  /* Stack Items */
-  .stack-item--cell {
-    @apply flex flex-col items-start gap-2;
-  }
-
-  .stack-item--icon {
-    @apply w-12 h-12 bg-neutral-100 rounded-full flex items-center justify-center;
-    @apply bg-paper-base rounded-lg shadow-md mb-2;
-  }
-
-  /* Profile Image */
-  .karina-profile {
-    @apply drop-shadow-[0_8px_20px_rgb(70,46,15)] mix-blend-overlay;
-  }
-
-  /* Resume Link */
-  .resume-link {
-    @apply flex items-center gap-2 w-fit transition-all duration-300;
-  }
-</style>
