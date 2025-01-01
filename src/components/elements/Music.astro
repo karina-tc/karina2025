@@ -1,38 +1,44 @@
 ---
 import { Image } from "astro:assets";
 import record from "../../assets/other/record.png";
+import SpotifyLogo from "phosphor-astro/SpotifyLogo.astro";
 ---
 
 <div class="music-container group" id="music-container">
   <div class="music-details">
     <div class="flex flex-row gap-3">
-      <div class="album-cover group/album">
-        <div class="album-hole"></div>
-        {
-          record ? (
-            <Image
-              class="album-art"
-              src={record}
-              alt="Album Art"
-              draggable="false"
-              width={100}
-              height={100}
-            />
-          ) : (
-            <div class="album-art-placeholder" />
-          )
-        }
+      <div class="album-art-container">
+        <div class="album-art-cover">
+          <div class="album-equalizer">
+            <div class="album-equalizer-column">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+        </div>
+        <div class="album-vinyl">
+          <Image
+            class="album-art"
+            src={record}
+            alt="Album Art"
+            draggable="false"
+            width={100}
+            height={100}
+          />
+        </div>
       </div>
       <div class="text-info">
         <span class="song-name">Some song</span>
         <span class="artist-name">Some artist</span>
         <a
           href="#"
-          class="spotify-badge w-fit"
+          class="spotify-badge"
           target="_blank"
-          rel="noopener noreferrer"
-        >
-          Play on Spotify
+          rel="noopener noreferrer">
+          <SpotifyLogo class="w-6 h-6" />
+          <span>Play on Spotify</span>
         </a>
       </div>
     </div>
@@ -47,12 +53,17 @@ import record from "../../assets/other/record.png";
   .music-details {
     @apply w-full p-4 bg-stone-100 rounded-xl transition-all duration-200;
 
-    .album-cover {
-      @apply w-20 h-20 rounded-full overflow-hidden relative shadow-md border border-white animate-fade-in-right;
+    .album-art-container {
+      @apply w-32 h-20 relative;
+    }
 
-      .album-hole {
-        @apply w-5 h-5 bg-white rounded-full absolute inset-0 m-auto z-base;
-      }
+    .album-art-cover {
+      @apply w-20 h-full bg-slate-200 border border-white rounded-lg overflow-hidden relative z-10;
+    }
+
+    .album-vinyl {
+      @apply w-20 h-20 rounded-full overflow-hidden relative shadow-md border border-white;
+      @apply absolute top-0 left-1/3 scale-[0.8];
 
       .album-art {
         @apply w-full h-full object-cover transition-all duration-[1500ms];
@@ -73,7 +84,34 @@ import record from "../../assets/other/record.png";
       }
 
       .spotify-badge {
-        @apply mt-2 px-3 py-1 text-xs text-white bg-green-700 rounded-full hover:bg-green-900 transition-colors duration-200;
+        @apply flex flex-row gap-1 items-center w-fit mt-3 pr-3.5 pl-2 py-1;
+        @apply text-xs font-medium bg-stone-200 rounded-full hover:bg-white transition-colors duration-200;
+      }
+    }
+  }
+
+  .album-equalizer {
+    @apply flex gap-1 justify-center items-center w-full h-full;
+
+    .album-equalizer-column {
+      @apply flex flex-col gap-0.5 -rotate-90;
+
+      span {
+        @apply w-2 h-0.5 bg-slate-400 origin-left;
+        animation: equalize 1s ease-in-out infinite;
+      }
+
+      span:nth-child(1) {
+        animation-delay: 0s;
+      }
+      span:nth-child(2) {
+        animation-delay: 0.35s;
+      }
+      span:nth-child(3) {
+        animation-delay: 0.7s;
+      }
+      span:nth-child(4) {
+        animation-delay: 1.05s;
       }
     }
   }
@@ -84,6 +122,16 @@ import record from "../../assets/other/record.png";
     }
     to {
       transform: rotate(360deg);
+    }
+  }
+
+  @keyframes equalize {
+    0%,
+    100% {
+      transform: scaleX(0.5);
+    }
+    50% {
+      transform: scaleX(2);
     }
   }
 </style>
