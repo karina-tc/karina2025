@@ -3,6 +3,11 @@ import avatar2 from "../assets/avatars/avatar-2.png";
 import avatar3 from "../assets/avatars/avatar-3.png";
 import avatar4 from "../assets/avatars/avatar-4.png";
 import avatar5 from "../assets/avatars/avatar-5.png";
+import avatar6 from "../assets/avatars/avatar-6.png";
+import avatar7 from "../assets/avatars/avatar-7.png";
+import avatar8 from "../assets/avatars/avatar-8.png";
+import avatar9 from "../assets/avatars/avatar-9.png";
+import avatar10 from "../assets/avatars/avatar-10.png";
 
 export interface TimelineItem {
   title: string;
@@ -35,7 +40,7 @@ export const timelineItems: TimelineItem[] = [
     description: `Currently leading design and product strategy on Tropic's new Procurement Intelligence product and AI efforts.
 
     I have also worked on the engineering side through front-end code helping push polish into our application.`,
-    avatar: avatar1,
+    avatar: avatar3,
     categories: ["AI", "FinTech"],
   },
   {
@@ -46,7 +51,7 @@ export const timelineItems: TimelineItem[] = [
     endDate: "2022",
     description:
       "I was responsible for the product design and branding of the app. I was also responsible for the design of the app. I was also responsible for the design of the app. I was also responsible for the design of the app. I was also responsible for the design of the app. I was also responsible for the design of the app.",
-    avatar: avatar2,
+    avatar: avatar7,
     categories: ["HR Tech"],
   },
   {
