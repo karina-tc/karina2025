@@ -2,18 +2,29 @@
 interface Props {
   id?: string;
   include_classes?: string;
-  size?: 'large' | 'small';
-  spacing?: 'xs' | 'sm' | 'md' | 'lg';
+  size?: "large" | "small";
+  spacing?: "xs" | "sm" | "md" | "lg";
 }
 
-const { id, include_classes, size = 'large', spacing = 'sm' }: Props = Astro.props;
+const {
+  id,
+  include_classes,
+  size = "large",
+  spacing = "sm",
+}: Props = Astro.props;
 ---
 
-<section id={id} class={`grid-container spacing-${spacing} ${include_classes}`}>
+<section id={id} class={`grid-container spacing-${spacing} ${include_classes} fade-up`}>
   <div class={`grid-container--item-${size}`}>
     <slot />
   </div>
 </section>
+
+<script>
+  import { initFadeAnimation } from "../../utils/fade-animation";
+  document.addEventListener("DOMContentLoaded", () => initFadeAnimation());
+  document.addEventListener("astro:page-load", () => initFadeAnimation());
+</script>
 
 <style>
   .grid-container {
@@ -60,7 +71,7 @@ const { id, include_classes, size = 'large', spacing = 'sm' }: Props = Astro.pro
     }
   }
   .spacing-xs {
-    @apply py-4;  
+    @apply py-4;
   }
   .spacing-sm {
     @apply py-6;
@@ -78,5 +89,27 @@ const { id, include_classes, size = 'large', spacing = 'sm' }: Props = Astro.pro
     .mobile-hide {
       display: grid;
     }
+  }
+  section {
+    --delay: 0s;
+    transition-delay: var(--delay);
+  }
+
+  section:nth-child(2) {
+    --delay: 0.1s;
+  }
+  section:nth-child(3) {
+    --delay: 0.2s;
+  }
+
+  .fade-up {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 </style>

@@ -4,15 +4,15 @@ import MoonStars from "phosphor-astro/MoonStars.astro";
 
 const currentHour = new Date().getHours();
 const isDaytime = currentHour >= 6 && currentHour < 18;
-const greeting = isDaytime ? "have a nice day" : "have a good night";
+const greeting = isDaytime ? "have a nice day" : "good night owl";
 ---
 
-<footer class="footer">
-  <div class={`footer-greeting ${isDaytime ? "" : "night"}`}>
+<footer class="footer opacity-0" data-footer>
+  <div class="footer-greeting relative z-base">
     {isDaytime ? <Sun class="animate-spin-slow" /> : <MoonStars />}
     <span class="footer-greeting--text">{greeting}</span>
   </div>
-  <div class="footer-links">
+  <div class="footer-links relative z-base">
     <div class="footer-links--column colophon">
       &copy; {new Date().getFullYear()} Karina Tovar · Colophon
     </div>
@@ -37,16 +37,44 @@ const greeting = isDaytime ? "have a nice day" : "have a good night";
       </div>
     </div>
   </div>
+  <div class="footer-background"></div>
 </footer>
+
+<script>
+  const footer = document.querySelector("[data-footer]");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("animate-footer-reveal");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.1,
+    },
+  );
+
+  if (footer) {
+    observer.observe(footer);
+  }
+</script>
 
 <style>
   /* Base footer layout */
   .footer {
-    @apply w-full flex flex-col justify-center items-center gap-10 relative z-base py-20 px-10 bg-stone-100;
+    @apply w-full flex flex-col justify-center items-center gap-10 relative z-base py-20 px-10 opacity-0;
+    @apply overflow-hidden transition-all duration-1000 ease-out transform translate-y-10;
+  }
+
+  .footer-background {
+    @apply absolute inset-0 w-full bg-stone-100 translate-y-full transition-all duration-1000 ease-out transform;
   }
 
   .footer-greeting {
-    @apply flex items-center gap-3 w-fit mx-auto opacity-20 overflow-hidden;
+    @apply flex items-center gap-3 w-fit mx-auto overflow-hidden opacity-0 transition-all duration-1000 ease-out delay-500;
     @apply max-sm:flex-col max-sm:gap-2;
     font-size: 10vw;
     line-height: 10vw;
@@ -68,7 +96,7 @@ const greeting = isDaytime ? "have a nice day" : "have a good night";
 
   /* Links grid layout */
   .footer-links {
-    @apply w-full max-w-screen-base mx-auto text-sm text-neutral-500 grid grid-cols-26;
+    @apply w-full max-w-screen-base mx-auto text-sm text-neutral-500 grid grid-cols-26 opacity-0 transition-all duration-1000 ease-out delay-500;
   }
 
   /* Common column styles */
@@ -108,6 +136,22 @@ const greeting = isDaytime ? "have a nice day" : "have a good night";
 
     & > a {
       @apply underline-offset-4 decoration-dotted decoration-neutral-400 transition-all duration-300 hover:underline;
+    }
+  }
+
+  /* Animation styles */
+  .animate-footer-reveal {
+    @apply opacity-100;
+
+    & .footer-greeting {
+      @apply opacity-20;
+    }
+    & .footer-links {
+      @apply opacity-100;
+    }
+
+    & .footer-background {
+      @apply -translate-y-0 h-full;
     }
   }
 </style>

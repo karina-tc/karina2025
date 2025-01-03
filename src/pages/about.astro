@@ -114,21 +114,4 @@ import karina from "../assets/brand/karina-profile.png";
     opacity: 1;
     transform: translateY(0);
   }
-
-  section {
-    --delay: 0s;
-    transition-delay: var(--delay);
-  }
-
-  section:nth-child(2) {
-    --delay: 0.1s;
-  }
-  section:nth-child(3) {
-    --delay: 0.2s;
-  }
 </style>
-
-<script>
-  import { initFadeAnimation } from "../utils/fade-animation";
-  document.addEventListener("DOMContentLoaded", () => initFadeAnimation());
-</script>
