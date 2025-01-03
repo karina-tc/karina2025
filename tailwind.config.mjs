@@ -41,6 +41,7 @@ export default {
         'fade-in-left': 'fade-in-left 0.5s ease-in-out',
         'fade-in-right': 'fade-in-right 0.5s ease-in-out',
         'slow-fade-in': 'slow-fade-in 1.5s ease-in-out',
+        'spin-slow': 'spin 10s linear infinite',
       },
       keyframes: {
         'fade-in': {
@@ -66,6 +67,10 @@ export default {
         'slow-fade-in': {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' },
+        },
+        'spin-slow': {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
         },
       },
     },
