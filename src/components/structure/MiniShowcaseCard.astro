@@ -16,6 +16,7 @@ const { title, thumbnail, targetUrl, metadata } = Astro.props;
     rel="noopener noreferrer"
     class="content-link"
   >
+    <span>view</span>
     <div class="thumbnail">
       <img src={thumbnail} alt={title} loading="lazy" />
     </div>
@@ -32,7 +33,15 @@ const { title, thumbnail, targetUrl, metadata } = Astro.props;
   }
 
   .content-link {
-    @apply flex-1 flex justify-center items-center no-underline;
+    @apply flex-1 flex justify-center items-center no-underline relative;
+
+    span {
+      @apply opacity-0 absolute top-0 right-0 bg-white px-2 py-1 text-xs uppercase font-medium tracking-wider rounded-full transition-all duration-300;
+    }
+
+    &:hover span {
+      @apply opacity-100;
+    }
   }
 
   .thumbnail {
