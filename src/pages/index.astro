@@ -1,43 +1,112 @@
 ---
+// Components
 import Layout from "../layouts/Layout.astro";
 import AtomSymbol from "../components/elements/AtomSymbol.astro";
 import Header from "../components/structure/Header.astro";
+import GridContainer from "../components/structure/GridContainer.astro";
+import Details from "../components/elements/Details.astro";
+import Showcase from "../components/structure/Showcase.astro";
+
+// Data
+import { projects } from "../data/projects";
 ---
 
 <Layout pageTitle="Karina Tovar">
-  <AtomSymbol include_classes="w-20 h-20 mt-10 hidden" />
-  <Header 
-    title="Pixel Philosopher, Cautious Technologist" 
-    subtitle="Hi, friend. My name is Karina." 
-  />
+  <GridContainer>
+    <AtomSymbol include_classes="w-20 h-20 mt-10" />
+    <Header
+      title="Pixel Philosopher, Cautious Technologist"
+      subtitle="Hi, friend. My name is Karina and I am a product designer and coder who loves to build products that aim to make people's lives happier."
+    />
+  </GridContainer>
 
-  <p class="mb-10">
-    My motivation is to build products that aim to help people have happier
-    days. Life is too short to be ruined by awful experiences. Every product
-    needs to be crafted for human joy.
-  </p>
+  <GridContainer>
+    <h2 class="text-4xl font-semibold opacity-50">What I've Done</h2>
+  </GridContainer>
 
-  <p class="mb-10">
-    My motivation is to build products that aim to help people have happier
-    days. Life is too short to be ruined by awful experiences. Every product
-    needs to be crafted for human joy.
-  </p>
+  <section class="showcase-container">
+    {projects.map((project) => <Showcase {...project} />)}
+  </section>
 
-  <p class="mb-10">
-    My motivation is to build products that aim to help people have happier
-    days. Life is too short to be ruined by awful experiences. Every product
-    needs to be crafted for human joy.
-  </p>
+  <GridContainer>
+    <div class="flex flex-col gap-4 [&>p]:text-2xl">
+      <h2 class="text-4xl font-semibold opacity-50">What I Believe</h2>
+      <p class="!text-[4rem] !leading-[4rem] font-semibold">
+        Life is too short to put poorly thought-out products out into the world.
+      </p>
+      <p>
+        For most of us in tech, our products are used by hundreds of people, if
+        not more. So why give them something that doesn't work?
+      </p>
+      <p>
+        Customers are paying you to make sure they can get their job done. So
+        your company's success should be enshrined in the success and happiness
+        of your customers.
+      </p>
+      <p>
+        Today, with all the tools available to our disposal, we have no excuse
+        to not reach validation faster and iterate quickly on the solutions that
+        can be life changing for our customers. Every customer&mdash;regardless
+        of your product's category&mdash;is in pain. You must give them a
+        solution that changes their life for the better. That in turn makes your
+        product worth it.
+      </p>
+      <p>
+        The future of design is not one just in pushing pretty pixels, but in
+        delivering actual value to customers. That value is in their happiness
+        and that hapiness will be rewarded in your product's financial success.
+      </p>
+    </div>
+  </GridContainer>
 
-  <p class="mb-10">
-    I'm currently building <em>something amazing</em> where I focus on creating delightful
-    user experiences.
-  </p>
+  <GridContainer>
+    <h2 class="text-4xl font-semibold opacity-50">What I Can Do</h2>
+    <div class="flex flex-col gap-2 [&>details]:-mb-[9px]">
+      <Details
+        html_data={{ open: true }}
+        summary_text="Full-stack product builder"
+      >
+        I've helped startup companies of all sizes build products from the
+        ground up. Focusing on strategy, design and dabbling in front-end
+        development.
+      </Details>
+      <Details summary_text="Bring polish to your product">
+        While I cannot claim to be a master of design, I can help you bring
+        delight and the right brand aesthetics to your product. All while
+        keeping your product's functionality in mind and building long-lasting
+        systems.
+      </Details>
+      <Details summary_text="Build for now and later">
+        I will help you attain focused, right-sized versions of your product as
+        I also help you imagine what your product can be based on customer
+        feedback and market signals.
+      </Details>
+    </div>
+  </GridContainer>
 
-  <p class="mb-10">
-    Previously, I worked at <em>Company X</em> as a product designer, and at <em
-      >Company Y</em
-    > where I helped build their design system.
-  </p>
+  <GridContainer>
+    <h2 class="text-4xl font-semibold opacity-50">What Others Say</h2>
+  </GridContainer>
 
+  <div class="flex flex-col gap-4">
+    <div class="flex flex-col gap-1">
+      <p>
+        Karina is a great designer. She has a great sense of design and is able
+        to deliver products that are both functional and beautiful.
+      </p>
+      <p>John Doe</p>
+    </div>
+  </div>
 </Layout>
+
+<style>
+  .showcase-container {
+    @apply w-[calc(100vw-4em)] overflow-x-scroll p-10 h-fit flex gap-4 scroll-smooth mb-10;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    scroll-snap-type: x mandatory;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    scroll-padding: 1rem;
+  }
+</style>

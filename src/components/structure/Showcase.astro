@@ -1,0 +1,73 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  mainImage: ImageMetadata;
+  backgroundImage?: string;
+  icon?: string;
+  link?: string;
+}
+
+const {
+  title,
+  description,
+  mainImage,
+  backgroundImage,
+  icon = "X",
+  link = "#"
+} = Astro.props;
+---
+
+<div class="showcase group">
+  <a href={link}>
+    <div
+      class="showcase--image"
+      style={backgroundImage
+        ? `background-image: url(${backgroundImage})`
+        : undefined}>
+      <img src={mainImage.src} alt={title} />
+    </div>
+  </a>
+  <div class="showcase--content">
+    <div class="showcase--logo">{icon}</div>
+    <div class="showcase--description">
+      <h3>{title}</h3>
+      <p>{description}</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .showcase {
+    @apply w-fit flex flex-col gap-8;
+  }
+
+  .showcase--image {
+    @apply w-fit relative p-5 overflow-hidden rounded-xl shadow-xl border border-white;
+    @apply group-hover:shadow-2xl transition-all duration-300;
+
+    & img {
+      @apply min-w-[700px] m-auto;
+    }
+  }
+
+  .showcase--content {
+    @apply flex items-start gap-4;
+  }
+
+  .showcase--logo {
+    @apply flex items-center justify-center w-10 h-10 text-white bg-ink-primary rounded-full mt-1;
+  }
+
+  .showcase--description {
+    @apply flex flex-col gap-2;
+
+    & h3 {
+      @apply text-2xl font-semibold;
+    }
+
+    & p {
+      @apply text-sm font-medium;
+    }
+  }
+</style>

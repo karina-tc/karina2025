@@ -1,0 +1,57 @@
+---
+interface Props {
+  title: string;
+  thumbnail: string;
+  targetUrl: string;
+  metadata: string;
+}
+
+const { title, thumbnail, targetUrl, metadata } = Astro.props;
+---
+
+<div class="content-card">
+  <a
+    href={targetUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="content-link"
+  >
+    <div class="thumbnail">
+      <img src={thumbnail} alt={title} loading="lazy" />
+    </div>
+  </a>
+  <div class="content-card--details">
+    <h3 class="title">{title}</h3>
+    <p class="metadata">{metadata}</p>
+  </div>
+</div>
+
+<style>
+  .content-card {
+    @apply bg-stone-100 p-5 min-h-[500px] flex flex-col rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg;
+  }
+
+  .content-link {
+    @apply flex-1 flex justify-center items-center no-underline;
+  }
+
+  .thumbnail {
+    @apply flex-1 w-full;
+
+    img {
+      @apply w-[300px] m-auto rounded-xl overflow-hidden;
+    }
+  }
+
+  .content-card--details {
+    @apply flex flex-col gap-1 mt-4;
+  }
+
+  .title {
+    @apply font-medium text-gray-900;
+  }
+
+  .metadata {
+    @apply text-sm text-gray-600 mb-0;
+  }
+</style>

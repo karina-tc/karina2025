@@ -5,6 +5,21 @@ import MoonStars from "phosphor-astro/MoonStars.astro";
 const currentHour = new Date().getHours();
 const isDaytime = currentHour >= 6 && currentHour < 18;
 const greeting = isDaytime ? "have a nice day" : "good night owl";
+
+const socialLinks = [
+  {
+    name: "Github",
+    url: "https://github.com/karina-tc",
+  },
+  {
+    name: "LinkedIn",
+    url: "https://www.linkedin.com/in/karina-tovar-castro/",
+  },
+  {
+    name: "Threads",
+    url: "https://threads.net/karinatovar",
+  },
+] as const;
 ---
 
 <footer class="footer opacity-0" data-footer>
@@ -53,11 +68,13 @@ const greeting = isDaytime ? "have a nice day" : "good night owl";
     <div class="footer-links--column social">
       <span class="footer-links--title">Everywhere Else</span>
       <div class="footer-links--text">
-        <a href="https://github.com/karinatovar" target="_blank">Github</a>
-        <a href="https://linkedin.com/in/karinatovar" target="_blank"
-          >LinkedIn</a
-        >
-        <a href="https://threads.net/karinatovar" target="_blank">Threads</a>
+        {
+          socialLinks.map(({ name, url }) => (
+            <a href={url} target="_blank">
+              {name}
+            </a>
+          ))
+        }
       </div>
     </div>
   </div>

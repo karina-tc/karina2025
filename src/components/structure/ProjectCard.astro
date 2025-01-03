@@ -1,0 +1,103 @@
+---
+import { Image } from "astro:assets";
+
+interface ProjectCardProps {
+  href: string;
+  title: string;
+  tags: string[];
+  imageSrc: string;
+  imageAlt: string;
+  delayClass?: string;
+  extraClasses?: string;
+}
+
+const {
+  href,
+  title,
+  tags,
+  imageSrc,
+  imageAlt,
+  delayClass = "",
+  extraClasses = "",
+} = Astro.props;
+---
+
+<a
+  class={`column-classes group ${delayClass} ${extraClasses} opacity-100`}
+  href={href}
+>
+  <figure class="figure-classes group/figure">
+    <!-- Corner decorations -->
+    {
+      [
+        {
+          top: "-top-0.5",
+          left: "-left-0.5",
+          hovered: "group-hover:-top-2 group-hover:-left-2",
+        },
+        {
+          top: "-top-0.5",
+          left: "-right-0.5",
+          hovered: "group-hover:-top-2 group-hover:-right-2",
+        },
+        {
+          top: "-bottom-0.5",
+          left: "-left-0.5",
+          hovered: "group-hover:-bottom-2 group-hover:-left-2",
+        },
+        {
+          top: "-bottom-0.5",
+          left: "-right-0.5",
+          hovered: "group-hover:-bottom-2 group-hover:-right-2",
+        },
+      ].map((pos) => (
+        <div
+          class={`decoration-classes ${pos.top} ${pos.left} ${pos.hovered}`}
+        />
+      ))
+    }
+
+    <Image
+      src="/images/projects/sierra.png"
+      alt="Project Image"
+      class="image-classes"
+      width={300}
+      height={300}
+    />
+  </figure>
+  <div class="pt-4">
+    <p class="font-heading-2 flex gap-1">{title}</p>
+    <ul class="list-classes" aria-label="Tags">
+      {
+        tags.map((tag: unknown, index: number) => (
+          <li class="text-ink-secondary text-sm">
+            {tag}
+            {index < tags.length - 1 && <span aria-hidden="true">,</span>}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</a>
+
+<style>
+  .column-classes {
+    @apply col-span-12 outline-none md:col-span-6 lg:col-span-3 duration-500 2xl:col-span-3;
+  }
+
+  .figure-classes {
+    @apply relative aspect-square border-2 border-paper-green bg-paper-green/10 group-hover:border-paper-green transition-all duration-300 ease-in-out;
+  }
+
+  .decoration-classes {
+    @apply absolute z-minimal w-4 h-4 border-2 border-paper-green bg-paper-base group-hover:border-paper-green transition-all duration-300 ease-in-out;
+  }
+
+  .image-classes {
+    @apply w-full h-full object-cover mix-blend-luminosity group-hover:mix-blend-normal;
+  }
+
+  .list-classes {
+    @apply flex flex-wrap gap-1 py-2 text-ink-primary opacity-100 group-hover:opacity-100 md:opacity-0;
+  }
+</style>

@@ -1,0 +1,42 @@
+---
+// Components
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/structure/Header.astro";
+import GridContainer from "../components/structure/GridContainer.astro";
+import Showcase from "../components/structure/Showcase.astro";
+import MiniShowcaseCard from "../components/structure/MiniShowcaseCard.astro";
+
+// Data
+import { projects } from "../data/projects";
+import { miniShowcases } from "../data/miniShowcase";
+---
+
+<Layout pageTitle="Case Studies - Karina Tovar">
+  <GridContainer>
+    <Header title="Work Showcase" />
+  </GridContainer>
+
+  <GridContainer>
+    <h2 class="text-4xl font-semibold opacity-50">Case Studies</h2>
+    <div class="showcase-container">
+      {projects.map((project) => <Showcase {...project} />)}
+    </div>
+  </GridContainer>
+
+  <GridContainer>
+    <h2 class="text-4xl font-semibold opacity-50 mt-20">Little Pixels Showcase</h2>
+  </GridContainer>
+  <div class="mini-showcase-grid">
+    {miniShowcases.map((showcase) => <MiniShowcaseCard {...showcase} />)}
+  </div>
+</Layout>
+
+<style>
+  .showcase-container {
+    @apply flex flex-col gap-20;
+  }
+
+  .mini-showcase-grid {
+    @apply max-w-screen-base mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8;
+  }
+</style>

@@ -1,0 +1,51 @@
+---
+interface Props {
+  html_data?: Record<string, string>;
+  summary_text: string;
+  include_classes?: string;
+}
+
+const { html_data = {}, summary_text, include_classes = "" } = Astro.props;
+---
+
+<details class={`details-wrapper group ${include_classes}`} {...html_data}>
+  <summary class="summary-wrapper">
+    <div id="icon" class="summary-wrapper--icon">
+      <span class="icon--horz-line"></span>
+      <span class="icon--vert-line"></span>
+    </div>
+    <span class="-mt-0.5">{summary_text}</span>
+  </summary>
+  <div class="details-wrapper--content">
+    <slot />
+  </div>
+</details>
+
+<style>
+  .details-wrapper {
+    @apply flex flex-col;
+  }
+
+  .summary-wrapper {
+    @apply flex items-center gap-4 py-6 border-t border-b border-gray-200;
+    @apply text-2xl font-bold cursor-pointer list-none;
+    @apply group-open:border-b-0;
+  }
+
+  .summary-wrapper--icon {
+    @apply flex items-center w-6 h-6 relative;
+  }
+
+  .icon--horz-line {
+    @apply w-full h-0.5 bg-ink-primary;
+  }
+
+  .icon--vert-line {
+    @apply w-0.5 h-full bg-ink-primary absolute top-0 left-3 transition-all duration-300;
+    @apply group-open:rotate-90;
+  }
+
+  .details-wrapper--content {
+    @apply -mt-3 pb-6 pl-10 text-xl border-b border-gray-200 opacity-0 group-open:opacity-100 transition-all duration-300;
+  }
+</style>
