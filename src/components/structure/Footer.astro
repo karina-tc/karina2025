@@ -14,7 +14,31 @@ const greeting = isDaytime ? "have a nice day" : "good night owl";
   </div>
   <div class="footer-links relative z-base">
     <div class="footer-links--column colophon">
-      &copy; {new Date().getFullYear()} Karina Tovar · Colophon
+      <div class="flex items-center gap-2">
+        <span>&copy; {new Date().getFullYear()} Karina Tovar · </span>
+        <button class="colophon-button" popovertarget="colophonPopover"
+          >Colophon</button
+        >
+      </div>
+      <div id="colophonPopover" popover="auto" class="colophon-popover">
+        <img
+          src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmRhaTNnN2RoNzZ0YW5pa255cXZpcHVuYXFxODgzMnlzMzdkajRodiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3oKIPnAiaMCws8nOsE/giphy.webp"
+          alt="coding"
+          class="w-full mb-4"
+          draggable="false"
+        />
+        <p>
+          This website was coded with love, sweat, and tears using <a
+            class="underline"
+            href="https://astro.build"
+            target="_blank">AstroJs</a
+          >, TypeScript, and Tailwind CSS. I'm using <a
+            href="https://www.atipofoundry.com/fonts/safiro"
+            class="underline"
+            target="_blank">Safiro</a
+          > as a font.
+        </p>
+      </div>
     </div>
     <div class="footer-links--column contact">
       <span class="footer-links--title">Get in Touch</span>
@@ -75,7 +99,7 @@ const greeting = isDaytime ? "have a nice day" : "good night owl";
 
   .footer-greeting {
     @apply flex items-center gap-3 w-fit mx-auto overflow-hidden opacity-0 transition-all duration-1000 ease-out delay-500;
-    @apply max-sm:flex-col max-sm:gap-2;
+    @apply max-sm:flex-col max-sm:gap-2 scale-75;
     font-size: 10vw;
     line-height: 10vw;
 
@@ -144,7 +168,7 @@ const greeting = isDaytime ? "have a nice day" : "good night owl";
     @apply opacity-100;
 
     & .footer-greeting {
-      @apply opacity-20;
+      @apply opacity-20 scale-100;
     }
     & .footer-links {
       @apply opacity-100;
@@ -153,5 +177,19 @@ const greeting = isDaytime ? "have a nice day" : "good night owl";
     & .footer-background {
       @apply -translate-y-0 h-full;
     }
+  }
+
+  /* Add these new styles */
+  .colophon-button {
+    @apply bg-stone-200 px-2 py-1 rounded-md transition-all duration-300 hover:bg-white;
+  }
+
+  .colophon-popover {
+    @apply bg-white p-4 rounded-lg shadow-lg max-w-xs text-sm;
+    @apply border border-neutral-200;
+  }
+
+  .colophon-popover p {
+    @apply mb-2 last:mb-0;
   }
 </style>

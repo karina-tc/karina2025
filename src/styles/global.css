@@ -1,8 +1,8 @@
 @font-face {
-    font-family: 'Safiro-Regular';
-    src: url('/fonts/Safiro-Regular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'Safiro-Regular';
+  src: url('/fonts/Safiro-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
 }
 
 @tailwind base;
