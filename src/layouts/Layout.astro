@@ -1,9 +1,7 @@
 ---
-import bgImage from "../assets/bgtest.jpg";
+import CommonHead from "../components/structure/CommonHead.astro";
 import StickyNav from "../components/elements/StickyNav.astro";
-import Footer from "../components/elements/Footer.astro";
-import { Image } from "astro:assets";
-import trees from "../assets/landscape/trees.png";
+import Footer from "../components/structure/Footer.astro";
 
 interface Props {
   pageTitle?: string;
@@ -18,17 +16,7 @@ const {
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>{pageTitle}</title>
-    <meta name="description" content={pageDescription} />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Homemade+Apple&family=Instrument+Serif:ital@0;1&display=swap"
-      rel="stylesheet"
-    />
+  <CommonHead {pageTitle} {pageDescription} />
   </head>
   <body>
     <div class="root">

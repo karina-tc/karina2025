@@ -1,12 +1,12 @@
 ---
 // Layout and Components
 import Layout from "../layouts/Layout.astro";
-import Header from "../components/elements/Header.astro";
-import GridContainer from "../components/elements/GridContainer.astro";
+import Header from "../components/structure/Header.astro";
+import GridContainer from "../components/structure/GridContainer.astro";
 import Timeline from "../components/elements/Timeline.astro";
 import TrayArrowDown from "phosphor-astro/TrayArrowDown.astro";
 import TenetCard from "../components/elements/TenetCard.astro";
-import AtomSymbol from "../components/structure/AtomSymbol.astro";
+import AtomSymbol from "../components/elements/AtomSymbol.astro";
 import PersonalSection from "../components/sections/about/PersonalSection.astro";
 import ToolsSection from "../components/sections/about/ToolsSection.astro";
 
@@ -34,7 +34,12 @@ import karina from "../assets/brand/karina-profile.png";
   />
 
   {/* Profile Image */}
-  <GridContainer id="profile" spacing="lg" size="small" include_classes="animate-fade-in">
+  <GridContainer
+    id="profile"
+    spacing="lg"
+    size="small"
+    include_classes="animate-fade-in"
+  >
     <figure class="rounded-t-full overflow-hidden relative">
       <Image
         src={karina}

@@ -1,5 +1,4 @@
 ---
-
 interface Props {
   pageTitle: string;
   pageDescription: string;
@@ -8,16 +7,12 @@ interface Props {
 const { pageTitle, pageDescription } = Astro.props;
 ---
 
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-<meta name="generator" content={Astro.generator} />
-<title>{pageTitle}</title>
-<meta name="description" content={pageDescription} />
-
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap"
-    rel="stylesheet"
-/>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>{pageTitle}</title>
+  <meta name="description" content={pageDescription} />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Homemade+Apple&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"/></head
+>

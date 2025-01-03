@@ -1,6 +1,6 @@
 ---
 import Tooltip from "../../elements/Tooltip.astro";
-import AtomSymbol from "../../structure/AtomSymbol.astro";
+import AtomSymbol from "../../elements/AtomSymbol.astro";
 import Signature from "../../elements/Signature.astro";
 import Music from "../../elements/Music.astro";
 import { Image } from "astro:assets";
@@ -9,41 +9,47 @@ import book from "../../../assets/other/book.png";
 import life from "../../../assets/other/life.png";
 ---
 
-
-  <AtomSymbol include_classes="w-20 h-20 mb-10" />
-  <h2 class="text-3xl mt-0">Outside of Work</h2>
-  <p>
-    I like to watch dark psychological thrillers that are too much to watch more
-    than once. Don't ask me why I've watched
-    <Tooltip text="Melancholia">
+<AtomSymbol include_classes="w-20 h-20 mb-10" />
+<h2 class="text-3xl mt-0">Outside of Work</h2>
+<p>
+  I like to watch dark psychological thrillers that are too much to watch more
+  than once. Don't ask me why I've watched
+  <Tooltip text="Melancholia">
+    <span class="inline-block mb-2 text-left"
+      >A Danish psychological thriller film written and directed by Lars von
+      Trier.</span
+    >
+    <Image
+      src={melancholia}
+      alt="Melancholia"
+      class="w-[200px]"
+      loading="lazy"
+    />
+  </Tooltip>
+  way more than needed. I also enjoy watching soccer, reading the occasional
+  <Tooltip text="book">
+    <span class="flex items-center gap-2">
       <span class="inline-block mb-2 text-left"
-        >A Danish psychological thriller film written and directed by Lars von
-        Trier.</span
+        >Currently reading The Anthropocene Reviewed by John Green.</span
       >
-      <Image src={melancholia} alt="Melancholia" class="w-[200px]" loading="lazy" />
-    </Tooltip>
-    way more than needed. I also enjoy watching soccer, reading the occasional
-    <Tooltip text="book">
-      <span class="flex items-center gap-2">
-        <span class="inline-block mb-2 text-left"
-          >Currently reading The Anthropocene Reviewed by John Green.</span
-        >
-        <Image src={book} alt="Book" class="w-20" loading="lazy" />
-      </span>
-    </Tooltip>, and playing with my kiddo and crazy dog.
-  </p>
+      <Image src={book} alt="Book" class="w-20" loading="lazy" />
+    </span>
+  </Tooltip>, and playing with my kiddo and crazy dog.
+</p>
 
-  <figure class="flex justify-center w-fit bg-neutral-100 border-[5px] border-white rounded-lg shadow-lg">
-    <Image src={life} alt="Life" class="w-[600px]" loading="lazy" />
-  </figure>
+<figure
+  class="flex justify-center w-fit bg-neutral-100 border-[5px] border-white rounded-lg shadow-lg"
+>
+  <Image src={life} alt="Life" class="w-[600px]" loading="lazy" />
+</figure>
 
-  <figcaption class="text-left text-sm mt-4">
-    <span>Working tirelessly for them.</span>
-  </figcaption>
+<figcaption class="text-left text-sm mt-4">
+  <span>Working tirelessly for them.</span>
+</figcaption>
 
-  <h3 class="text-2xl mt-10">Currently Listening</h3>
-  <div class="mt-5 mb-10">
-    <Music />
-  </div>
+<h3 class="text-2xl mt-10">Currently Listening</h3>
+<div class="mt-5 mb-10">
+  <Music />
+</div>
 
-  <Signature text="Life is good!" includeClasses="mt-10" />
+<Signature text="Life is good!" includeClasses="mt-10" />
