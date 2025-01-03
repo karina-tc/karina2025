@@ -7,7 +7,7 @@ export function initFadeAnimation(threshold = 0.2) {
                 }
             });
         },
-        { threshold: 0.2 }
+        { threshold: 0.1 }
     );
 
     document.querySelectorAll("section").forEach((section) => {
