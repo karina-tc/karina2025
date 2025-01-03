@@ -28,6 +28,12 @@ export default {
         'navigation': '20',
         'menu': '30',
       },
+      gridTemplateColumns: {
+        '26': 'repeat(26, minmax(0, 1fr))',
+      },
+      screens: {
+        'base': '1600px',
+      },
       animation: {
         'fade-in': 'fade-in 0.5s ease-in-out',
         'fade-in-up': 'fade-in-up 0.5s ease-in-out',

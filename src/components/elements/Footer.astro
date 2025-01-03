@@ -1,16 +1,33 @@
 ---
-
+import Sun from "phosphor-astro/Sun.astro";
 ---
 
-<footer class="footer relative z-base">
-  <div class="footer-content relative">
-    <span class="footer-text">Pushing happy pixels.</span>
-    <span class="footer-year">&copy; 2024 Karina Tovar</span>
-    <div class="footer-clock-wrapper">
-      <div class="clock" aria-hidden="true">
-        <div class="hand second"></div>
-        <div class="hand minute"></div>
-        <div class="hand hour"></div>
+<footer class="footer">
+  <div class="footer-title">
+    <Sun />
+    <span class="footer-title--text">have a nice day</span>
+  </div>
+  <div class="footer-links">
+    <div class="footer-links--column colophon">
+      &copy; {new Date().getFullYear()} Karina Tovar · Colophon
+    </div>
+    <div class="footer-links--column contact">
+      <span class="footer-links--title">Get in Touch</span>
+      <div class="footer-links--text">
+        <span>hello@karinatovar.com</span>
+        <span>Book me</span>
+      </div>
+    </div>
+    <div class="footer-links--column social">
+      <span class="footer-links--title">Everywhere Else</span>
+      <div class="footer-links--text">
+        <a href="https://www.instagram.com/karinatovar/" target="_blank"
+          >Github</a
+        >
+        <a href="https://www.linkedin.com/in/karinatovar/" target="_blank"
+          >LinkedIn</a
+        >
+        <a href="https://www.x.com/karinatovar/" target="_blank">Threads</a>
       </div>
     </div>
   </div>
@@ -19,62 +36,63 @@
 <style>
   /* Footer styles */
   .footer {
-    @apply w-full flex justify-center items-center relative;
-    height: var(--footer-height);
+    @apply w-full flex flex-col justify-center items-center gap-10 relative z-base py-20 px-10 bg-stone-100;
   }
 
-  .footer-content {
-    @apply flex items-center gap-3 text-sm text-neutral-500;
+  .footer-title {
+    @apply flex items-center gap-3 w-fit mx-auto opacity-20 overflow-hidden;
+    @apply max-sm:flex-col max-sm:gap-2;
+    font-size: 10vw;
+    line-height: 10vw;
   }
 
-  .footer-text {
-    @apply font-normal;
+  /* Ensure the Sun icon maintains its size and doesn't shrink */
+  .footer-title :global(svg) {
+    @apply h-[1em] w-[1em] flex-shrink-0;
   }
 
-  .footer-year {
-    @apply font-normal;
+  .footer-title--text {
+    @apply uppercase tracking-tight whitespace-nowrap;
   }
 
-  /* Clock styles */
-  .clock {
-    @apply relative w-4 h-4 rounded-full border border-neutral-200;
+  .footer-links {
+    @apply w-full max-w-screen-base mx-auto text-sm text-neutral-500 grid grid-cols-26;
   }
 
-  .hand {
-    @apply absolute top-1/2 left-1/2 origin-left bg-neutral-400;
-    width: 35%;
-    height: 1px;
+  .footer-links--column {
+    @apply flex flex-col gap-2 h-full items-start justify-start;
+
+    &.colophon {
+      @apply col-span-full py-8
+             md:py-0 md:col-start-1 md:col-span-10;
+    }
+
+    &.contact {
+      @apply col-span-full py-8
+             sm:col-start-1 sm:col-span-11
+             md:py-0 md:col-start-12 md:col-span-8;
+    }
+
+    &.social {
+      @apply col-span-full
+             sm:col-start-12 sm:col-span-full
+             md:col-start-[20] md:col-span-7;
+    }
   }
 
-  .second {
-    transform: rotate(calc(var(--now-s) * 6deg));
-    @apply bg-neutral-300;
+  .footer-links--title {
+    @apply text-sm font-medium;
   }
 
-  .minute {
-    transform: rotate(calc(var(--now-m) * 6deg));
-    @apply bg-neutral-400;
-  }
+  .footer-links--text {
+    @apply text-xl;
 
-  .hour {
-    transform: rotate(calc(var(--now-h) * 30deg));
-    width: 25%;
-    @apply bg-neutral-500;
+    & > * {
+      @apply block mb-2;
+    }
+
+    & > a {
+      @apply underline-offset-4 decoration-dashed transition-all duration-300 hover:underline;
+    }
   }
 </style>
-
-<script>
-  function updateClock() {
-    const now = new Date();
-    const seconds = now.getSeconds();
-    const minutes = now.getMinutes();
-    const hours = now.getHours();
-
-    document.documentElement.style.setProperty("--now-s", seconds.toString());
-    document.documentElement.style.setProperty("--now-m", minutes.toString());
-    document.documentElement.style.setProperty("--now-h", hours.toString());
-  }
-
-  setInterval(updateClock, 1000);
-  updateClock();
-</script>

@@ -3,22 +3,25 @@ import Sun from "phosphor-astro/Sun.astro";
 import Moon from "phosphor-astro/Moon.astro";
 ---
 
-<div 
+<div
   data-controller="greeting"
   data-greeting-target="container"
-  class="greeting-container" 
+  class="greeting-container"
 >
   <div class="icon-container">
     <Sun class="w-4 h-4 hidden" data-greeting-target="sunIcon" />
     <Moon class="w-4 h-4 hidden" data-greeting-target="moonIcon" />
   </div>
-  <span class="text-base leading-6 m-auto w-fit" data-greeting-target="text"></span>
+  <span class="text-base leading-6 m-auto w-fit" data-greeting-target="text"
+  ></span>
 </div>
 
 <script>
-  const controller = 'greeting';
+  const controller = "greeting";
   const elements = {
-    container: document.querySelector(`[data-${controller}-target="container"]`),
+    container: document.querySelector(
+      `[data-${controller}-target="container"]`,
+    ),
     text: document.querySelector(`[data-${controller}-target="text"]`),
     sunIcon: document.querySelector(`[data-${controller}-target="sunIcon"]`),
     moonIcon: document.querySelector(`[data-${controller}-target="moonIcon"]`),
@@ -27,47 +30,51 @@ import Moon from "phosphor-astro/Moon.astro";
   function getNextUpdateTime() {
     const now = new Date();
     const hour = now.getHours();
-    
+
     let nextHour;
-    if (hour < 5) nextHour = 5;         // Next change at 5 AM
-    else if (hour < 12) nextHour = 12;  // Next change at 12 PM
-    else if (hour < 18) nextHour = 18;  // Next change at 6 PM
-    else nextHour = 29;                 // Next change at 5 AM following day (24 + 5)
+    if (hour < 5)
+      nextHour = 5; // Next change at 5 AM
+    else if (hour < 12)
+      nextHour = 12; // Next change at 12 PM
+    else if (hour < 18)
+      nextHour = 18; // Next change at 6 PM
+    else nextHour = 29; // Next change at 5 AM following day (24 + 5)
 
     const nextUpdate = new Date(now);
     nextUpdate.setHours(nextHour, 0, 0, 0);
-    
+
     return nextUpdate.getTime() - now.getTime();
   }
 
   function updateGreeting() {
     const hour = new Date().getHours();
     let greetingTime;
-    
+
     if (hour >= 5 && hour < 12) {
-      greetingTime = 'morning';
+      greetingTime = "morning";
     } else if (hour >= 12 && hour < 18) {
-      greetingTime = 'afternoon';
+      greetingTime = "afternoon";
     } else {
-      greetingTime = 'night';
+      greetingTime = "night";
     }
     // Update container and text
     if (elements.container && elements.text) {
-      elements.container.setAttribute('data-greeting-time', greetingTime);
-      elements.text.textContent = greetingTime === 'morning'
-        ? 'Morning, sunshine!'
-        : greetingTime === 'afternoon'
-        ? 'Afternoon, friend!'
-        : 'Hello, night owl!';
+      elements.container.setAttribute("data-greeting-time", greetingTime);
+      elements.text.textContent =
+        greetingTime === "morning"
+          ? "Morning, sunshine!"
+          : greetingTime === "afternoon"
+            ? "Afternoon, friend!"
+            : "Hello, night owl!";
     }
 
     // Update icons
-    if (greetingTime === 'morning' || greetingTime === 'afternoon') {
-      elements.sunIcon?.classList.remove('hidden');
-      elements.moonIcon?.classList.add('hidden');
+    if (greetingTime === "morning" || greetingTime === "afternoon") {
+      elements.sunIcon?.classList.remove("hidden");
+      elements.moonIcon?.classList.add("hidden");
     } else {
-      elements.moonIcon?.classList.remove('hidden');
-      elements.sunIcon?.classList.add('hidden');
+      elements.moonIcon?.classList.remove("hidden");
+      elements.sunIcon?.classList.add("hidden");
     }
 
     // Schedule next update
