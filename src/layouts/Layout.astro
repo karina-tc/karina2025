@@ -55,6 +55,10 @@ const {
   html {
     @apply min-h-screen;
     color: #6c5f3c;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
   .root {
     @apply antialiased bg-white;
@@ -67,8 +71,9 @@ const {
   }
 
   .main {
-    @apply mx-auto w-full max-w-2xl px-10 pb-10 flex flex-col justify-center items-center z-10 relative;
+    @apply mx-auto w-full px-10 pb-10 flex flex-col justify-center items-center z-10 relative;
     min-height: calc(100vh - var(--footer-height));
+    /* max-w-2xl */
   }
 
   .content {

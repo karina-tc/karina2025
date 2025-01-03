@@ -12,10 +12,10 @@ interface Props {
 const { crumbs } = Astro.props;
 ---
 
-<nav class="breadcrumbs max-3xl:px-0 py-10">
+<nav class="breadcrumbs">
   {
     crumbs.map((crumb) => (
-      <a href={crumb.href} class="crumb">
+      <a href={crumb.href} class="crumb group">
         {crumb.showArrow && <span class="arrow">←</span>}
         <span class="label">{crumb.text}</span>
       </a>
@@ -25,18 +25,19 @@ const { crumbs } = Astro.props;
 
 <style>
   .breadcrumbs {
-    @apply flex items-center gap-2;
+    @apply flex items-center gap-2 py-10;
   }
 
   .crumb {
     @apply flex items-center gap-2 transition-all;
+  }
 
-    &:hover span.label {
-      @apply underline underline-offset-4;
-    }
+  .label {
+    @apply underline-offset-4 font-semibold group-hover:underline;
   }
 
   .arrow {
-    @apply opacity-80;
+    @apply w-10 h-10 flex items-center justify-center bg-stone-200 rounded-full;
+    @apply group-hover:bg-stone-700 group-hover:text-white transition-all duration-300;
   }
 </style>

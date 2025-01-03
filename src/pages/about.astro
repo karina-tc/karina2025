@@ -2,6 +2,7 @@
 // Layout and Components
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/elements/Header.astro";
+import GridContainer from "../components/elements/GridContainer.astro";
 import Timeline from "../components/elements/Timeline.astro";
 import TrayArrowDown from "phosphor-astro/TrayArrowDown.astro";
 import TenetCard from "../components/elements/TenetCard.astro";
@@ -25,13 +26,15 @@ import karina from "../assets/brand/karina-profile.png";
 >
   {/* Hero Section */}
   <Header
+    type="grid"
+    size="small"
     title="Hello Stranger"
     subtitle="I am an artist turned product designer"
     description=""
   />
 
   {/* Profile Image */}
-  <div id="profile" class="mt-10 animate-fade-in">
+  <GridContainer id="profile" spacing="lg" size="small" include_classes="animate-fade-in">
     <figure class="rounded-t-full overflow-hidden relative">
       <Image
         src={karina}
@@ -40,10 +43,10 @@ import karina from "../assets/brand/karina-profile.png";
       />
       <Image src={avatarBackground} alt="Noise" />
     </figure>
-  </div>
+  </GridContainer>
 
   {/* Introduction */}
-  <section id="introduction" class="pt-10 pb-16">
+  <GridContainer id="introduction" spacing="lg" size="small">
     <h2 class="text-3xl">Building for Joy</h2>
     <p class="text-lg">
       I have a background in the Fine Arts, with a MFA from the Massachusetts
@@ -53,19 +56,19 @@ import karina from "../assets/brand/karina-profile.png";
       happiness. I worked on a lot of performance art pieces that lived outside
       of the museum so I could create room for joy in the mundane.
     </p>
-  </section>
+  </GridContainer>
 
   {/* Tenets Section */}
-  <section id="tenets" class="pb-16">
+  <GridContainer id="tenets" spacing="lg" size="small">
     <AtomSymbol include_classes="w-20 h-20 mb-10" />
     <h2 class="text-3xl mt-0">My Design Tenets</h2>
-    <div class="grid grid-cols-1 gap-8 mt-8">
+    <div class="grid grid-cols-1 gap-8 mt-8 w-full">
       <TenetCard items={tenets} />
     </div>
-  </section>
+  </GridContainer>
 
   {/* Experience Section */}
-  <section id="experience" class="pt-10 pb-16">
+  <GridContainer id="experience" spacing="lg" size="small">
     <AtomSymbol include_classes="w-20 h-20 mb-10" />
     <div class="flex justify-between items-center flex-wrap gap-4 mb-10 group">
       <h2 class="m-0 text-3xl">A Decade of Experience</h2>
@@ -75,17 +78,17 @@ import karina from "../assets/brand/karina-profile.png";
       </a>
     </div>
     <Timeline items={timelineItems} />
-  </section>
+  </GridContainer>
 
   {/* Tools Section */}
-  <section id="tools" class="pt-10 pb-16">
+  <GridContainer id="tools" spacing="lg" size="small">
     <ToolsSection />
-  </section>
+  </GridContainer>
 
   {/* Personal Section */}
-  <section id="personal" class="pt-10">
+  <GridContainer id="personal" spacing="lg" size="small">
     <PersonalSection />
-  </section>
+  </GridContainer>
 </Layout>
 
 <style>

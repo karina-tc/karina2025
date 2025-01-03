@@ -1,0 +1,82 @@
+---
+interface Props {
+  id?: string;
+  include_classes?: string;
+  size?: 'large' | 'small';
+  spacing?: 'xs' | 'sm' | 'md' | 'lg';
+}
+
+const { id, include_classes, size = 'large', spacing = 'sm' }: Props = Astro.props;
+---
+
+<section id={id} class={`grid-container spacing-${spacing} ${include_classes}`}>
+  <div class={`grid-container--item-${size}`}>
+    <slot />
+  </div>
+</section>
+
+<style>
+  .grid-container {
+    display: grid;
+    max-width: 1600px;
+    margin: 0 auto;
+    width: 100%;
+    grid-template-columns: repeat(24, 1fr);
+  }
+
+  .grid-container--item-large {
+    display: grid;
+    grid-column-start: 1;
+    grid-column-end: 26;
+    width: 100%;
+  }
+
+  .grid-container--item-small {
+    display: grid;
+    grid-column-start: 3;
+    grid-column-end: 24;
+    width: 100%;
+  }
+  @media (min-width: 768px) {
+    .grid-container--item-large {
+      grid-column-start: 2;
+      grid-column-end: 24;
+    }
+    .grid-container--item-small {
+      grid-column-start: 4;
+      grid-column-end: 22;
+    }
+  }
+  @media (min-width: 1200px) {
+    .grid-container--item-large {
+      grid-column-start: 6;
+      grid-column-end: 20;
+      margin: 0 auto;
+      @apply max-w-screen-md;
+    }
+    .grid-container--item-small {
+      grid-column-start: 9;
+      grid-column-end: 17;
+    }
+  }
+  .spacing-xs {
+    @apply py-4;  
+  }
+  .spacing-sm {
+    @apply py-6;
+  }
+  .spacing-md {
+    @apply py-8;
+  }
+  .spacing-lg {
+    @apply py-12;
+  }
+  .mobile-hide {
+    display: none;
+  }
+  @media (min-width: 544px) {
+    .mobile-hide {
+      display: grid;
+    }
+  }
+</style>

@@ -1,6 +1,7 @@
 ---
 // Component Imports
 import Layout from "./Layout.astro";
+import GridContainer from "../components/elements/GridContainer.astro";
 import Header from "../components/elements/Header.astro";
 import Breadcrumbs from "../components/structure/Breadcrumbs.astro";
 import Signature from "../components/elements/Signature.astro";
@@ -23,7 +24,7 @@ const { title, date, description, showcase, source, currentSlug } = Astro.props;
 // Navigation Configuration
 const breadcrumbs = [
   {
-    text: "Back to thoughts",
+    text: "Go back",
     href: "/thoughts",
     showArrow: true,
   },
@@ -34,50 +35,49 @@ const breadcrumbs = [
   pageTitle={title}
   pageDescription={description || "Thoughts - Karina Tovar"}
 >
-  {/* Navigation */}
-  <Breadcrumbs crumbs={breadcrumbs} />
-
   {/* Header */}
-  <Header title={title} />
+  <GridContainer size="large">
+    <Breadcrumbs crumbs={breadcrumbs} />
 
-  <section class="flex flex-col items-start gap-2 mb-10">
-    {/* Date */}
-    <h2 class="text-2xl opacity-70 my-0">{date}</h2>
+    <Header title={title} />
 
-    {/* Source Attribution */}
+    {/* Date and Source */}
+    <div class="flex flex-col items-start gap-2 mb-10">
+      {/* Date */}
+      <h2 class="text-2xl opacity-70 my-0">{date}</h2>
+
+      {/* Source Attribution */}
+      {
+        source === "notion" && (
+          <p class="text-sm mb-0 opacity-60">Published via Notion</p>
+        )
+      }
+    </div>
+
+    {/* Showcase Image (if provided) */}
     {
-      source === "notion" && (
-        <p class="text-sm mb-0 opacity-60">Published via Notion</p>
+      showcase && (
+        <div class="artwork-wrapper content-section">
+          <img
+            src={showcase}
+            alt={title}
+            class="w-full h-auto rounded-lg z-[1] relative"
+            loading="eager"
+          />
+          <div class="absolute inset-0 flex items-center justify-center gap-2">
+            <ScribbleLoop class="w-6 h-6 animate-spin opacity-50" />
+            <span class="text-sm animate-pulse">Drawing...</span>
+          </div>
+        </div>
       )
     }
-  </section>
-
-  {/* Showcase Image (if provided) */}
-  {
-    showcase && (
-      <div class="artwork-wrapper content-section">
-        <img
-          src={showcase}
-          alt={title}
-          class="w-full h-auto rounded-lg z-[1] relative"
-          loading="eager"
-        />
-        <div class="absolute inset-0 flex items-center justify-center gap-2">
-          <ScribbleLoop class="w-6 h-6 animate-spin opacity-50" />
-          <span class="text-sm animate-pulse">Drawing...</span>
-        </div>
-      </div>
-    )
-  }
-
-  {/* Main Content */}
-  <article class="prose">
-    <slot />
-  </article>
-
-  <Signature includeClasses="mt-10" text="Byeeeeee!" />
-
-  <PostNavigation currentSlug={currentSlug} />
+    {/* Main Content */}
+    <article class="prose">
+      <slot />
+    </article>
+    <Signature includeClasses="mt-10" text="Byeeeeee!" />
+    <PostNavigation currentSlug={currentSlug} />
+  </GridContainer>
 </Layout>
 
 <style>
@@ -88,7 +88,7 @@ const breadcrumbs = [
 
   /* Prose Base Styles */
   .prose {
-    @apply font-safiro
+    @apply font-safiro min-w-full
       prose-headings:text-ink-primary
       prose-h4:font-medium
       prose-a:text-orange-600 

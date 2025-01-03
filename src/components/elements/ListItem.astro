@@ -1,13 +1,13 @@
 ---
 import { Image } from "astro:assets";
-import bubble from "../../assets/bubbles/bubble-1.png";
 
 interface Props {
   isLink: boolean;
   label: string;
   detail: string;
   href?: string;
-  icon?: ImageMetadata;
+  icon?: boolean;
+  icon_art?: ImageMetadata;
   iconWidth?: number;
   iconHeight?: number;
 }
@@ -17,7 +17,8 @@ const {
   label,
   detail,
   href,
-  icon = bubble,
+  icon = false,
+  icon_art,
   iconWidth = 10,
   iconHeight = 10,
 } = Astro.props;
@@ -28,7 +29,7 @@ const {
     <a href={href} class="listing-item group relative">
       {icon && (
         <Image
-          src={icon}
+          src={icon_art!}
           alt=""
           class={`w-${iconWidth} h-${iconHeight} z-[1]`}
         />
@@ -42,7 +43,7 @@ const {
     <div class="listing-item group relative">
       {icon && (
         <Image
-          src={icon}
+          src={icon_art!}
           alt=""
           class={`w-${iconWidth} h-${iconHeight} z-[1]`}
         />
@@ -57,7 +58,8 @@ const {
 
 <style>
   .listing-item {
-    @apply flex items-center gap-4 py-3 -mx-3 px-3 rounded-lg;
+    @apply flex items-center gap-4 py-3 px-1 rounded-xl w-full overflow-hidden;
+    @apply hover:px-3 transition-all duration-300;
   }
 
   .listing-label {

@@ -1,22 +1,23 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import GridContainer from "../components/elements/GridContainer.astro";
 import Header from "../components/elements/Header.astro";
 import { Image } from "astro:assets";
 import home from "../assets/other/home-view.png";
 ---
 
 <Layout pageTitle="404" pageDescription="Page not found">
-  <Header
-    title="Oh no!"
-    subtitle="This page seems to be lost"
-    description="But you shouldn't. Go outside and enjoy the sun."
-  />
-  <section class="flex justify-start">
+  <GridContainer size="small" spacing="lg">
+    <Header
+      title="Oh no!"
+      subtitle="This page seems to be lost"
+      description="But you shouldn't. Go outside and enjoy the sun."
+    />
     <a href="/" class="button group">
       <span class="button-text">Return Home</span>
       <Image src={home} alt="Home" class="button-image" />
     </a>
-  </section>
+  </GridContainer>
 </Layout>
 
 <style>

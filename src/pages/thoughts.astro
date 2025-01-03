@@ -1,14 +1,10 @@
 ---
 // Component Imports
-import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/elements/Header.astro";
+import GridContainer from "../components/elements/GridContainer.astro";
 import ListItem from "../components/elements/ListItem.astro";
 import ListItemHeader from "../components/elements/ListItemHeader.astro";
-
-// Asset Imports
-import article from "../assets/other/post.png";
-import notebook from "../assets/other/clipboard.png";
 
 // Data Fetching
 import { getThoughts } from "../lib/notion";
@@ -49,53 +45,55 @@ const formatDate = (dateString: string) => {
 >
   {/* Page Header */}
   <Header
+    type="grid"
+    size="small"
     title="Notes & Deep Thoughts"
     subtitle="Diary of a pixel philosopher"
     description="This is where I keep my thoughts and ideas. I write about design, technology, and human happiness."
   />
 
   {/* Notebooks Section */}
-  <section>
-    <h3 class="mt-20 mb-5 text-5xl font-medium opacity-50">Notebooks</h3>
+  <GridContainer id="notebooks" size="small" spacing="lg">
+    <h3 class="mt-0 mb-5 text-5xl font-medium opacity-50">Notebooks</h3>
     <div class="writing-list">
       {
         sideNotes.map((post) => (
           <ListItem
+            icon={false}
             isLink={true}
             label={post.data.title}
             detail={new Date().getFullYear().toString()}
             href={`/notebooks/${post.slug}`}
-            icon={notebook}
             iconWidth={12}
             iconHeight={12}
           />
         ))
       }
     </div>
-  </section>
+  </GridContainer>
 
   {/* Yearly Posts Sections */}
   {
     years.map((year) => {
       const postsForYear = getPostsForYear(year);
       return (
-        <section>
-          <h3 class="mt-20 mb-5 text-5xl font-medium opacity-50">{year}</h3>
+        <GridContainer id={`year-${year}`} size="small" spacing="lg">
+          <h3 class="mt-0 mb-5 text-5xl font-medium opacity-50">{year}</h3>
           <ListItemHeader leftLabel="TITLE" rightLabel="DATE" />
           <div class="writing-list">
             {postsForYear.map((post) => (
               <ListItem
+                icon={false}
                 isLink={true}
                 label={post.title}
                 detail={formatDate(post.date)}
                 href={post.href}
-                icon={article}
                 iconWidth={10}
                 iconHeight={10}
               />
             ))}
           </div>
-        </section>
+        </GridContainer>
       );
     })
   }
@@ -103,7 +101,7 @@ const formatDate = (dateString: string) => {
 
 <style>
   .writing-list {
-    @apply space-y-3 mt-2 relative;
+    @apply space-y-3 mt-2 relative w-full;
   }
 
   .fade-up {

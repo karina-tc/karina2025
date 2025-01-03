@@ -1,17 +1,30 @@
 ---
+import GridContainer from './GridContainer.astro';
 interface Props {
+  type?: 'default' | 'grid';
+  size?: 'large' | 'small';
   title: string;
   subtitle?: string;
   description?: string;
 }
 
-const { title, subtitle, description } = Astro.props;
+const { type = 'default', size = 'large', title, subtitle, description } = Astro.props;
 ---
 
 <header class="header-container">
-  <h1>{title}</h1>
-  {subtitle && <h2>{subtitle}</h2>}
-  {description && <p>{description}</p>}
+  {type === 'grid' ? (
+    <GridContainer size={size}>
+      <h1>{title}</h1>
+      {subtitle && <h2>{subtitle}</h2>}
+      {description && <p>{description}</p>}
+    </GridContainer>
+  ) : (
+    <>
+      <h1>{title}</h1>
+      {subtitle && <h2>{subtitle}</h2>}
+      {description && <p>{description}</p>}
+    </>
+  )}
 </header>
 
 <style>

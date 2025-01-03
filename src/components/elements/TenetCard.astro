@@ -56,12 +56,12 @@ const { items } = Astro.props;
 
 <style>
   .tenets {
-    @apply flex flex-col items-start gap-4;
+    @apply flex flex-col items-start gap-4 w-full;
   }
 
   .tenet-card {
     @apply relative flex items-center rounded-2xl transition-all duration-300 overflow-hidden;
-    @apply max-sm:flex-col max-sm:bg-neutral-100;
+    @apply max-sm:flex-col max-sm:bg-neutral-100 w-full;
 
     &.focused {
       @apply bg-neutral-100;
