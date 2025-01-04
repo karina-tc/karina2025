@@ -103,38 +103,38 @@ const breadcrumbs = [
       prose-blockquote:border-stone-300
       prose-blockquote:pl-4
       prose-blockquote:italic
-      prose-blockquote:text-[#6c5f3c]
+      prose-blockquote:text-ink-primary
       prose-blockquote:font-normal;
 
     /* Images */
     @apply prose-img:rounded-lg;
 
     /* Lists */
-    @apply prose-ul:text-[#6c5f3c]
+    @apply prose-ul:text-ink-primary
       prose-ul:list-disc
       prose-ul:space-y-2
-      prose-ol:text-[#6c5f3c]
+      prose-ol:text-ink-primary
       prose-ol:space-y-2;
   }
 
   /* Typography Styles */
   .prose :global(p) {
-    @apply text-[#6c5f3c] text-base leading-loose;
+    @apply text-ink-primary text-base leading-loose;
   }
 
   .prose :global(strong) {
-    @apply !text-[#6c5f3c] font-semibold;
+    @apply !text-ink-primary font-semibold;
   }
 
   /* Heading Styles */
   .prose :global(h2) {
-    @apply text-[#6c5f3c] text-3xl font-semibold mt-12;
+    @apply text-ink-primary text-3xl font-semibold mt-12;
     @apply [&:not(:first-of-type)]:mt-24;
     @apply [&:not(:last-of-type)]:mb-6;
   }
 
   .prose :global(h3) {
-    @apply text-[#6c5f3c] text-xl font-semibold mt-8 tracking-normal opacity-70;
+    @apply text-ink-primary text-xl font-semibold mt-8 tracking-normal opacity-70;
     @apply [&:not(:first-of-type)]:mt-8;
     @apply [&:not(:last-of-type)]:mb-6;
     text-transform: none;
@@ -155,13 +155,13 @@ const breadcrumbs = [
     text-indent: -1rem;
 
     &::marker {
-      @apply text-[#6c5f3c];
+      @apply text-ink-primary;
     }
   }
 
   /* Figure and Media Styles */
   .prose :global(figure) {
-    @apply w-full text-[#6c5f3c] py-4;
+    @apply w-full text-ink-primary py-4;
   }
 
   .prose :global(figure > img) {
@@ -169,12 +169,12 @@ const breadcrumbs = [
   }
 
   .prose :global(figcaption) {
-    @apply text-[#6c5f3c] text-sm italic;
+    @apply text-ink-primary text-sm italic;
   }
 
   /* Notion-specific Styles */
   .prose :global(.callout) {
-    @apply p-4 rounded-lg flex gap-3 my-6 bg-paper-green;
+    @apply p-4 rounded-lg flex gap-3 my-6 bg-stone-100;
   }
 
   .prose :global(.video-wrapper) {
@@ -188,7 +188,7 @@ const breadcrumbs = [
   /* Code Styles */
   .prose :global(:not(pre) code),
   .prose :global(.notion-inline-code:not(pre *)) {
-    @apply text-sm px-1.5 py-0.5 font-semibold rounded font-mono bg-[#6c5f3c]/15 text-[#6c5f3c];
+    @apply text-sm px-1.5 py-0.5 font-semibold rounded font-mono bg-paper-dark/15 text-ink-primary;
     &::before,
     &::after {
       content: none;

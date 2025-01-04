@@ -10,16 +10,12 @@ export default {
       },
       colors: {
         'paper': {
-          'base': '#FCFCFC',
-          'green': '#EAF4EA',
-          'dark': '#271E29'
+          'base': '#FCFCFC', //#f3fff8
+          'dark': '#6c5f3c', //#1d414e
         },
         'ink': {
-          'primary': '#271E29',
+          'primary': '#6c5f3c',
           'secondary': '#554f56',
-          'tertiary': '#878188',
-          'highlight-orange': '#FF7945',
-          'highlight-green': '#4A6E72'
         }
       },
       zIndex: {

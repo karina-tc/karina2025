@@ -42,25 +42,18 @@ const {
   body,
   html {
     @apply min-h-screen;
-    color: #6c5f3c;
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
   }
   .root {
-    @apply antialiased bg-white;
+    @apply antialiased bg-white text-ink-primary;
     font-family: var(--font-sans);
-    /*
-    background-image: url("https://cdn.midjourney.com/7ccf011d-615d-4a62-9c28-68f919ce4e0e/0_1.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-    */
   }
 
   .main {
     @apply mx-auto w-full px-10 pb-10 flex flex-col justify-center items-center z-10 relative min-h-fit;
-    /* max-w-2xl */
   }
 
   .content {
