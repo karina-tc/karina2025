@@ -1,16 +1,36 @@
 ---
 import Logo from "./Logo.astro";
+const { pathname } = Astro.url;
+
+const navItems = [
+  { href: "/", label: "Intro", paths: ["/"] },
+  { href: "/about", label: "About", paths: ["/about"] },
+  { href: "/work", label: "Work", paths: ["/work"] },
+  { href: "/thoughts", label: "Thoughts", paths: ["/thoughts", "/notebooks"] }
+];
+
+const isActive = (paths: string[]) => {
+  if (paths.includes("/")) {
+    return pathname === "/";
+  }
+  return paths.some(path => pathname.startsWith(path));
+};
 ---
 
 <nav class="nav">
   <div class="nav-container">
     <a href="/" class="nav-home">
       <Logo classes="w-10 h-10" />
+      <span class="nav-home-text animate-fade-in"> Karina Tovar</span>
     </a>
     <div class="nav-links">
-      <a href="/about">About</a>
-      <a href="/work">Work</a>
-      <a href="/thoughts">Thoughts</a>
+      {
+        navItems.map(({ href, label, paths }) => (
+          <a href={href} class={isActive(paths) ? "active" : ""}>
+            {label}
+          </a>
+        ))
+      }
     </div>
   </div>
   <div class="nav-fade"></div>
@@ -26,15 +46,24 @@ import Logo from "./Logo.astro";
   }
 
   .nav-home {
-    @apply text-neutral-900 font-medium flex items-center justify-center;
+    @apply font-medium flex items-center justify-center;
+  }
+
+  .nav-home-text {
+    @apply text-2xl font-medium ml-4 transition-all duration-300 ease-out;
   }
 
   .nav-links {
-    @apply flex items-center gap-6 bg-[#6c5f3c] rounded-full px-6 py-2 text-white !mt-0;
+    @apply flex items-center gap-2 !mt-0;
   }
 
   .nav-links a {
-    @apply underline-offset-4 transition-all hover:underline;
+    @apply px-3 py-1 rounded-full underline-offset-4 transition-all;
+    @apply hover:bg-stone-100 hover:shadow-inner hover:shadow-stone-300 hover:underline;
+  }
+
+  .nav-links a.active {
+    @apply bg-[#6c5f3c] text-white shadow-md;
   }
 
   .nav-fade {

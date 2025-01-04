@@ -6,9 +6,11 @@ import Header from "../components/structure/Header.astro";
 import GridContainer from "../components/structure/GridContainer.astro";
 import Details from "../components/elements/Details.astro";
 import Showcase from "../components/structure/Showcase.astro";
+import TestimonialCard from "../components/elements/TestimonialCard.astro";
 
 // Data
 import { projects } from "../data/projects";
+import { testimonials } from "../data/testimonials";
 ---
 
 <Layout pageTitle="Karina Tovar">
@@ -60,8 +62,8 @@ import { projects } from "../data/projects";
   </GridContainer>
 
   <GridContainer>
-    <h2 class="text-4xl font-semibold opacity-50">What I Can Do</h2>
-    <div class="flex flex-col gap-2 [&>details]:-mb-[9px]">
+    <h2 class="subheading">What I Can Do</h2>
+    <div class="skills-container [&>details]:-mb-[9px]">
       <Details
         html_data={{ open: true }}
         summary_text="Full-stack product builder"
@@ -85,21 +87,19 @@ import { projects } from "../data/projects";
   </GridContainer>
 
   <GridContainer>
-    <h2 class="text-4xl font-semibold opacity-50">What Others Say</h2>
+    <h2 class="subheading">What Others Say</h2>
   </GridContainer>
 
-  <div class="flex flex-col gap-4">
-    <div class="flex flex-col gap-1">
-      <p>
-        Karina is a great designer. She has a great sense of design and is able
-        to deliver products that are both functional and beautiful.
-      </p>
-      <p>John Doe</p>
-    </div>
+  <div class="testimonials-container">
+    {testimonials.map((testimonial) => <TestimonialCard {...testimonial} />)}
   </div>
 </Layout>
 
 <style>
+  .subheading {
+    @apply text-4xl font-semibold opacity-50;
+  }
+
   .showcase-container {
     @apply w-[calc(100vw-4em)] overflow-x-scroll p-10 h-fit flex gap-4 scroll-smooth mb-10;
     -webkit-overflow-scrolling: touch;
@@ -108,5 +108,13 @@ import { projects } from "../data/projects";
     scroll-snap-align: start;
     scroll-snap-stop: always;
     scroll-padding: 1rem;
+  }
+
+  .skills-container {
+    @apply flex flex-col gap-2;
+  }
+
+  .testimonials-container {
+    @apply grid grid-cols-[repeat(auto-fill,minmax(400px,1fr))] gap-10 max-w-screen-base-md mx-auto;
   }
 </style>

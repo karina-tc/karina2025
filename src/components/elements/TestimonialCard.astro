@@ -1,0 +1,104 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+  title: string;
+  content: string;
+  author: string;
+  role: string;
+  company: string;
+  avatar: ImageMetadata;
+}
+
+const { title, content, author, role, company, avatar } = Astro.props;
+---
+
+<div class="testimonial-card group">
+  <div class="testimonial-card--content">
+    <span class="content-title">{title}</span>
+    <span class="content-text">{content}</span>
+  </div>
+  <div class="testimonial-card--author">
+    <div class="author-avatar-wrapper">
+      <Image
+        src={avatar}
+        alt={author}
+        class="author-avatar"
+        width={100}
+        height={100}
+      />
+    </div>
+    <div class="author-name-wrapper">
+      <span class="author-name">{author}</span>
+      <div class="author-role-wrapper">
+        <div class="author-role-container">
+          <span class="author-role">{role}</span>
+          <span class="author-past">Worked together at {company}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .testimonial-card {
+    @apply flex flex-col justify-between gap-1 bg-stone-100 p-8 rounded-xl min-h-[450px];
+    @apply border-[4px] border-transparent transition-all duration-[250ms] ease-out transform;
+    @apply hover:shadow-lg hover:shadow-stone-200 hover:border-white;
+  }
+
+  .testimonial-card--content {
+    @apply flex flex-col gap-2;
+  }
+
+  .content-title {
+    @apply text-2xl font-semibold tracking-tight mb-2;
+  }
+
+  .content-text {
+    @apply text-base leading-7;
+  }
+
+  .testimonial-card--author {
+    @apply flex items-center gap-4 overflow-hidden;
+  }
+
+  .author-avatar-wrapper {
+    @apply w-14 h-14 min-w-14 min-h-14 rounded-3xl border-2 border-white overflow-hidden;
+    @apply opacity-0 transition-all duration-[250ms] ease-out;
+    @apply -translate-x-14 group-hover:translate-x-0 group-hover:opacity-100 group-hover:delay-100;
+  }
+
+  .author-name-wrapper {
+    @apply w-full flex flex-col -translate-x-[4.5em] transition-all duration-500 ease-out transform;
+    @apply group-hover:translate-x-0;
+  }
+
+  .author-name {
+    @apply text-sm font-semibold;
+  }
+
+  .author-role-wrapper {
+    @apply flex flex-col w-full h-5 overflow-hidden;
+    perspective: 100px;
+  }
+
+  .author-role-container {
+    @apply relative flex flex-col transition-all duration-500 ease-in-out;
+  }
+
+  .author-role {
+    @apply text-sm h-5;
+    transform-origin: center;
+    backface-visibility: hidden;
+    @apply transition-all duration-[400ms] ease-in-out;
+    @apply group-hover:[transform:rotateX(-90deg)] group-hover:opacity-0;
+  }
+
+  .author-past {
+    @apply text-sm h-5;
+    @apply absolute top-5 left-0 opacity-0;
+    @apply transition-all duration-[400ms] ease-in-out;
+    @apply group-hover:-translate-y-5 group-hover:opacity-100 group-hover:delay-500;
+  }
+</style>

@@ -33,6 +33,7 @@ export default {
       },
       screens: {
         'base': '1600px',
+        'base-md': '1200px',
       },
       animation: {
         'fade-in': 'fade-in 0.5s ease-in-out',

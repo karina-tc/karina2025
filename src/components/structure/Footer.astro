@@ -23,7 +23,7 @@ const socialLinks = [
 ---
 
 <footer class="footer opacity-0" data-footer>
-  <div class="footer-greeting relative z-base">
+  <div class={`footer-greeting relative z-base ${isDaytime ? 'day' : 'night'}`}>
     {isDaytime ? <Sun class="animate-spin-slow" /> : <MoonStars />}
     <span class="footer-greeting--text">{greeting}</span>
   </div>
@@ -116,14 +116,14 @@ const socialLinks = [
 
   .footer-greeting {
     @apply flex items-center gap-3 w-fit mx-auto overflow-hidden opacity-0 transition-all duration-1000 ease-out delay-500;
-    @apply max-sm:flex-col max-sm:gap-2 scale-75;
+    @apply max-sm:flex-col max-sm:gap-2 scale-75 tracking-[-20px];
     font-size: 10vw;
     line-height: 10vw;
+  }
 
-    &.night {
-      font-size: 8vw;
-      line-height: 8vw;
-    }
+  .footer-greeting.night {
+    font-size: 9.25vw;
+    line-height: 9.25vw;
   }
 
   /* Ensure the Sun icon maintains its size and doesn't shrink */
@@ -137,7 +137,7 @@ const socialLinks = [
 
   /* Links grid layout */
   .footer-links {
-    @apply w-full max-w-screen-base mx-auto text-sm text-neutral-500 grid grid-cols-26 opacity-0 transition-all duration-1000 ease-out delay-500;
+    @apply w-full max-w-screen-base mx-auto text-sm grid grid-cols-26 opacity-0 transition-all duration-1000 ease-out delay-500;
   }
 
   /* Common column styles */
