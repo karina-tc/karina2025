@@ -77,15 +77,31 @@ body {
 
 /* Typography */
 h1 {
-  @apply text-[100px] leading-[90px] font-semibold tracking-tight mb-8;
+  @apply text-[64px] leading-[68px] lg:text-[100px] lg:leading-[90px];
+  @apply font-semibold tracking-tight mb-4 sm:mb-6 lg:mb-8;
 }
 
 h2 {
-  @apply text-xl font-medium tracking-tight mt-12 mb-4;
+  @apply text-3xl xl:text-4xl;
+  @apply font-semibold tracking-tight opacity-75;
+  @apply mt-8 lg:mt-12;
+  @apply mb-4 lg:mb-6;
+}
+
+h3 {
+  @apply text-2xl;
+  @apply font-semibold tracking-tight opacity-75;
+  @apply mt-8 lg:mt-12;
+  @apply mb-4 lg:mb-6;
 }
 
 p {
-  @apply leading-relaxed mb-6;
+  @apply text-base leading-relaxed;
+  @apply mb-4 lg:mb-8;
+}
+
+p.copy-large {
+  @apply text-2xl font-semibold;
 }
 
 em {

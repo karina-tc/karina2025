@@ -65,7 +65,7 @@ const formatDate = (dateString: string) => {
         <Image
           src={colbg}
           alt="Thoughts Background"
-          class="theme-image m-auto max-w-[500px] opacity-90"
+          class="theme-image m-auto max-w-[300px] sm:max-w-[400px] lg:max-w-[500px] opacity-50 xl:opacity-90"
           width={600}
           height={600}
           id="themeImage"
@@ -73,8 +73,8 @@ const formatDate = (dateString: string) => {
       </div>
 
       {/* Notebooks Section */}
-      <SectionContainer id="notebooks" spacing="lg">
-        <h3 class="mt-0 mb-5 text-5xl font-medium opacity-50">Notebooks</h3>
+      <SectionContainer id="notebooks" spacing="lg" include_classes="z-base">
+        <h2>Notebooks</h2>
         <div class="writing-list">
           {
             sideNotes.map((post) => (
@@ -98,7 +98,7 @@ const formatDate = (dateString: string) => {
           const postsForYear = getPostsForYear(year);
           return (
             <SectionContainer id={`year-${year}`} spacing="lg">
-              <h3 class="mt-0 mb-5 text-5xl font-medium opacity-50">{year}</h3>
+              <h2>{year}</h2>
               <ListItemHeader leftLabel="TITLE" rightLabel="DATE" />
               <div class="writing-list">
                 {postsForYear.map((post) => (

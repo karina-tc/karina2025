@@ -28,7 +28,10 @@ import framebg from "../assets/avatars/avatar-4.png";
     <div class="layout--two-columns__left glued">
       {/* Hero Section */}
       <Header type="default" size="small" title="Hello Stranger" />
-      <figure class="profile-frame" style={`background-image: url(${framebg.src})`}>
+      <figure
+        class="profile-frame"
+        style={`background-image: url(${framebg.src})`}
+      >
         <Image
           src={karina}
           alt="Karina Tovar"
@@ -43,12 +46,12 @@ import framebg from "../assets/avatars/avatar-4.png";
     <div class="layout--two-columns__right relative">
       {/* Introduction */}
       <SectionContainer id="introduction">
-        <h2 class="text-5xl font-semibold">
+        <h2>My Background</h2>
+        <p class="copy-large mt-6">
           I am an artist, turned product designer, who likes to code and make
           things
-        </h2>
-        <h2 class="text-3xl">My Background</h2>
-        <p class="text-lg">
+        </p>
+        <p>
           I have a background in the Fine Arts, with a MFA from the
           Massachusetts College of Art & Design. There I was part of the Studio
           for Interrelated Media where I made artwork focused on performative
@@ -62,7 +65,7 @@ import framebg from "../assets/avatars/avatar-4.png";
       {/* Tenets Section */}
       <SectionContainer id="tenets" spacing="lg">
         <AtomSymbol include_classes="w-20 h-20 mb-10" />
-        <h2 class="text-3xl mt-0">My Design Tenets</h2>
+        <h2>My Design Tenets</h2>
         <div class="grid grid-cols-1 gap-8 mt-8 w-full">
           <TenetCard items={tenets} />
         </div>
@@ -72,9 +75,8 @@ import framebg from "../assets/avatars/avatar-4.png";
       <SectionContainer id="experience" spacing="lg">
         <AtomSymbol include_classes="w-20 h-20 mb-10" />
         <div
-          class="flex justify-between items-center flex-wrap gap-4 mb-10 group"
-        >
-          <h2 class="m-0 text-3xl">A Decade of Experience</h2>
+          class="flex justify-between items-baseline flex-wrap gap-4 mb-10 group">
+          <h2>A Decade of Experience</h2>
           <a href="#" class="resume-link">
             <TrayArrowDown class="w-6 h-6" />
             <span>Download Resume</span>
@@ -106,7 +108,7 @@ import framebg from "../assets/avatars/avatar-4.png";
   }
 
   .resume-link {
-    @apply flex items-center gap-2 w-fit text-sm transition-all duration-300;
+    @apply flex items-center gap-2 h-5 w-fit text-sm transition-all duration-300;
     span {
       @apply underline-offset-4;
     }

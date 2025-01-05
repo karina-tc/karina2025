@@ -32,6 +32,10 @@ const { html_data = {}, summary_text, include_classes = "" } = Astro.props;
     @apply group-open:border-b-0;
   }
 
+  .summary-wrapper::-webkit-details-marker {
+    @apply hidden;
+  }
+
   .summary-wrapper--icon {
     @apply flex items-center w-6 h-6 relative;
   }

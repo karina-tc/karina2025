@@ -22,21 +22,26 @@ const { title, thumbnail, targetUrl, metadata } = Astro.props;
     </div>
   </a>
   <div class="content-card--details">
-    <h3 class="title">{title}</h3>
-    <p class="metadata">{metadata}</p>
+    <span class="title">{title}</span>
+    <span class="metadata">{metadata}</span>
   </div>
 </div>
 
 <style>
   .content-card {
-    @apply bg-theme-surface-light p-5 min-h-[500px] flex flex-col rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg;
+    @apply flex flex-col rounded-xl overflow-hidden;
+    @apply bg-theme-surface-light p-5 min-h-[500px];
+    @apply transition-all duration-300 hover:shadow-lg;
   }
 
   .content-link {
     @apply flex-1 flex justify-center items-center no-underline relative;
 
     span {
-      @apply opacity-0 absolute top-0 right-0 bg-theme-paper px-2 py-1 text-xs uppercase font-medium tracking-wider rounded-full transition-all duration-300;
+      @apply opacity-0 absolute top-0 right-0;
+      @apply bg-theme-paper px-2 py-1 rounded-full;
+      @apply text-xs uppercase font-medium tracking-wider;
+      @apply transition-all duration-300;
     }
 
     &:hover span {
@@ -57,7 +62,7 @@ const { title, thumbnail, targetUrl, metadata } = Astro.props;
   }
 
   .title {
-    @apply font-medium;
+    @apply font-semibold;
   }
 
   .metadata {
