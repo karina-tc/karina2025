@@ -8,19 +8,32 @@ import SectionContainer from "../components/structure/SectionContainer.astro";
 import Details from "../components/elements/Details.astro";
 import Showcase from "../components/structure/Showcase.astro";
 import TestimonialCard from "../components/elements/TestimonialCard.astro";
+import SubSection from "../components/structure/SubSection.astro";
 
 // Assets
 import { Image } from "astro:assets";
-import karina from "../assets/brand/karina-profile.png";
-import avatarBackground from "../assets/avatars/avatar-4.png";
-
+import colbg from "../assets/illustrations/thoughts-dark.png";
 // Data
 import { projects } from "../data/projects";
 import { testimonials } from "../data/testimonials";
 ---
 
 <Layout pageTitle="Karina Tovar">
-  <SectionContainer include_classes="max-w-screen-base-md mx-auto h-[80vh] flex flex-col justify-center items-center border-b border-theme-stroke">
+  <SectionContainer
+    include_classes="max-w-screen-base-md mx-auto h-[80vh] flex flex-col justify-center items-center"
+  >
+    <div
+      class="flex justify-center items-center absolute inset-0 animate-slow-fade-in"
+    >
+      <Image
+        src={colbg}
+        alt="Thoughts Background"
+        class="theme-image m-auto max-w-[300px] sm:max-w-[400px] lg:max-w-[500px] opacity-50 xl:opacity-90"
+        width={600}
+        height={600}
+        id="themeImage"
+      />
+    </div>
     <AtomSymbol include_classes="w-20 h-20 mt-10" />
     <Header
       title="Pixel Philosopher, Cautious Technologist"
@@ -28,18 +41,10 @@ import { testimonials } from "../data/testimonials";
     />
   </SectionContainer>
 
-  <GridContainer>
-    <h2>What I've Done</h2>
-  </GridContainer>
-
-  <section class="showcase-container">
-    {projects.map((project) => <Showcase {...project} />)}
-  </section>
-
-  <GridContainer>
-    <div class="flex flex-col gap-4 [&>p]:text-2xl">
+  <SectionContainer include_classes="manifesto-section">
+    <GridContainer spacing="md" include_classes="[&>p]:text-2xl max-w-3xl pb-0">
       <h2>What I Believe</h2>
-      <p class="!text-[4rem] !leading-[4rem] font-semibold">
+      <p class="copy-extra-large">
         Life is too short to put poorly thought-out products out into the world.
       </p>
       <p>
@@ -57,53 +62,75 @@ import { testimonials } from "../data/testimonials";
         can be life changing for our customers. Every customer&mdash;regardless
         of your product's category&mdash;is in pain. You must give them a
         solution that changes their life for the better. That in turn makes your
-        product worth it.
+        product worth it. That in turn makes your product worth it.
       </p>
       <p>
         The future of design is not one just in pushing pretty pixels, but in
         delivering actual value to customers. That value is in their happiness
         and that hapiness will be rewarded in your product's financial success.
       </p>
+    </GridContainer>
+
+    <GridContainer include_classes="pt-0">
+      <h2>What I Can Do</h2>
+      <div class="skills-container [&>details]:-mb-[9px]">
+        <Details
+          html_data={{ open: true }}
+          summary_text="Full-stack product builder"
+        >
+          I've helped startup companies of all sizes build products from the
+          ground up. Focusing on strategy, design and dabbling in front-end
+          development.
+        </Details>
+        <Details summary_text="Bring polish to your product">
+          While I cannot claim to be a master of design, I can help you bring
+          delight and the right brand aesthetics to your product. All while
+          keeping your product's functionality in mind and building long-lasting
+          systems.
+        </Details>
+        <Details summary_text="Build for now and later">
+          I will help you attain focused, right-sized versions of your product
+          as I also help you imagine what your product can be based on customer
+          feedback and market signals.
+        </Details>
+      </div>
+    </GridContainer>
+  </SectionContainer>
+
+  <SectionContainer include_classes="max-w-screen-base-md mx-auto">
+    <SubSection
+      label="Work"
+      title="Most recent projects"
+      show_link={true}
+      link_label="See All Work"
+      link_hover_label="View Case Studies"
+      link_href="/work"
+    />
+
+    <section class="showcase-container">
+      {projects.map((project) => <Showcase {...project} />)}
+    </section>
+  </SectionContainer>
+
+  <SectionContainer include_classes="max-w-screen-base-md mx-auto my-20">
+    <SubSection
+      label="Testimonials"
+      title="What people say"
+      show_link={true}
+      link_label="See More"
+      link_hover_label="View in Linkedin"
+      link_href="/testimonials"
+    />
+
+    <div class="testimonials-container">
+      {testimonials.map((testimonial) => <TestimonialCard {...testimonial} />)}
     </div>
-  </GridContainer>
-
-  <GridContainer>
-    <h2>What I Can Do</h2>
-    <div class="skills-container [&>details]:-mb-[9px]">
-      <Details
-        html_data={{ open: true }}
-        summary_text="Full-stack product builder"
-      >
-        I've helped startup companies of all sizes build products from the
-        ground up. Focusing on strategy, design and dabbling in front-end
-        development.
-      </Details>
-      <Details summary_text="Bring polish to your product">
-        While I cannot claim to be a master of design, I can help you bring
-        delight and the right brand aesthetics to your product. All while
-        keeping your product's functionality in mind and building long-lasting
-        systems.
-      </Details>
-      <Details summary_text="Build for now and later">
-        I will help you attain focused, right-sized versions of your product as
-        I also help you imagine what your product can be based on customer
-        feedback and market signals.
-      </Details>
-    </div>
-  </GridContainer>
-
-  <GridContainer>
-    <h2>What Others Say</h2>
-  </GridContainer>
-
-  <div class="testimonials-container">
-    {testimonials.map((testimonial) => <TestimonialCard {...testimonial} />)}
-  </div>
+  </SectionContainer>
 </Layout>
 
 <style>
   .showcase-container {
-    @apply w-[calc(100vw-4em)] overflow-x-scroll p-10 h-fit flex gap-4 scroll-smooth mb-10;
+    @apply w-full overflow-x-scroll py-10 h-fit flex flex-col gap-4 scroll-smooth mb-10;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     scroll-snap-type: x mandatory;
@@ -113,10 +140,14 @@ import { testimonials } from "../data/testimonials";
   }
 
   .skills-container {
-    @apply flex flex-col gap-2;
+    @apply flex flex-col gap-2 pb-28;
   }
 
   .testimonials-container {
-    @apply grid grid-cols-[repeat(auto-fill,minmax(400px,1fr))] gap-10 max-w-screen-base-md mx-auto;
+    @apply grid grid-cols-[repeat(auto-fill,minmax(400px,1fr))] gap-10 pt-10 max-w-screen-base-md mx-auto;
+  }
+
+  .manifesto-section {
+    @apply my-20 bg-theme-surface-dark text-white max-xl:px-10 !-ml-10 min-w-[100vw];
   }
 </style>

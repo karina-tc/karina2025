@@ -104,6 +104,10 @@ p.copy-large {
   @apply text-2xl font-semibold;
 }
 
+p.copy-extra-large {
+  @apply text-3xl md:text-5xl font-semibold;
+}
+
 em {
   @apply font-normal not-italic text-neutral-900;
 }
