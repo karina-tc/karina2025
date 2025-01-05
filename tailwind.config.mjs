@@ -112,7 +112,7 @@ export default {
         'fade-in-left': 'fade-in-left 0.5s ease-in-out',
         'fade-in-right': 'fade-in-right 0.5s ease-in-out',
         'slow-fade-in': 'slow-fade-in 1.5s ease-in-out',
-        'spin-slow': 'spin 10s linear infinite',
+        'spin-slow': 'spin 20s linear infinite',
       },
       keyframes: {
         'fade-in': {

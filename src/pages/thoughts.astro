@@ -7,6 +7,10 @@ import SectionContainer from "../components/structure/SectionContainer.astro";
 import ListItem from "../components/elements/ListItem.astro";
 import ListItemHeader from "../components/elements/ListItemHeader.astro";
 
+// Images
+import { Image } from "astro:assets";
+import colbg from "../assets/illustrations/thoughts-light.png";
+import colbgDark from "../assets/illustrations/thoughts-dark.png";
 // Data Fetching
 import { getThoughts } from "../lib/notion";
 import type { ThoughtPost } from "../lib/notion";
@@ -56,7 +60,18 @@ const formatDate = (dateString: string) => {
       />
     </div>
 
-    <div class="layout--two-columns__right">
+    <div class="layout--two-columns__right relative">
+      <div class="flex justify-center items-center absolute inset-0 animate-slow-fade-in">
+        <Image
+          src={colbg}
+          alt="Thoughts Background"
+          class="theme-image m-auto max-w-[500px] opacity-90"
+          width={600}
+          height={600}
+          id="themeImage"
+        />
+      </div>
+
       {/* Notebooks Section */}
       <SectionContainer id="notebooks" spacing="lg">
         <h3 class="mt-0 mb-5 text-5xl font-medium opacity-50">Notebooks</h3>
@@ -111,3 +126,12 @@ const formatDate = (dateString: string) => {
     @apply space-y-3 mt-2 relative w-full;
   }
 </style>
+
+<script>
+  import { initThemeImageSwitcher } from '../utils/themeImageSwitcher';
+  
+  initThemeImageSwitcher('themeImage', {
+    light: '/src/assets/illustrations/thoughts-light.png',
+    dark: '/src/assets/illustrations/thoughts-dark.png'
+  });
+</script>

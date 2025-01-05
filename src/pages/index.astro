@@ -4,9 +4,15 @@ import Layout from "../layouts/Layout.astro";
 import AtomSymbol from "../components/elements/AtomSymbol.astro";
 import Header from "../components/structure/Header.astro";
 import GridContainer from "../components/structure/GridContainer.astro";
+import SectionContainer from "../components/structure/SectionContainer.astro";
 import Details from "../components/elements/Details.astro";
 import Showcase from "../components/structure/Showcase.astro";
 import TestimonialCard from "../components/elements/TestimonialCard.astro";
+
+// Assets
+import { Image } from "astro:assets";
+import karina from "../assets/brand/karina-profile.png";
+import avatarBackground from "../assets/avatars/avatar-4.png";
 
 // Data
 import { projects } from "../data/projects";
@@ -14,13 +20,13 @@ import { testimonials } from "../data/testimonials";
 ---
 
 <Layout pageTitle="Karina Tovar">
-  <GridContainer>
+  <SectionContainer include_classes="max-w-screen-base-md mx-auto h-[80vh] flex flex-col justify-center items-center border-b border-theme-stroke">
     <AtomSymbol include_classes="w-20 h-20 mt-10" />
     <Header
       title="Pixel Philosopher, Cautious Technologist"
       subtitle="Hi, friend. My name is Karina and I am a product designer and coder who loves to build products that aim to make people's lives happier."
     />
-  </GridContainer>
+  </SectionContainer>
 
   <GridContainer>
     <h2 class="text-4xl font-semibold opacity-50">What I've Done</h2>
