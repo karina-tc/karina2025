@@ -41,7 +41,9 @@ import { testimonials } from "../data/testimonials";
     />
   </SectionContainer>
 
-  <SectionContainer include_classes="manifesto-section">
+  <SectionContainer
+    include_classes="my-20 bg-theme-surface-dark text-white max-xl:px-10 !-ml-10 min-w-[100vw]"
+  >
     <GridContainer spacing="md" include_classes="[&>p]:text-2xl max-w-3xl pb-0">
       <h2>What I Believe</h2>
       <p class="copy-extra-large">
@@ -145,9 +147,5 @@ import { testimonials } from "../data/testimonials";
 
   .testimonials-container {
     @apply grid grid-cols-[repeat(auto-fill,minmax(400px,1fr))] gap-10 pt-10 max-w-screen-base-md mx-auto;
-  }
-
-  .manifesto-section {
-    @apply my-20 bg-theme-surface-dark text-white max-xl:px-10 !-ml-10 min-w-[100vw];
   }
 </style>
