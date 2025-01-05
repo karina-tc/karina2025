@@ -9,6 +9,7 @@ import TenetCard from "../components/elements/TenetCard.astro";
 import AtomSymbol from "../components/elements/AtomSymbol.astro";
 import PersonalSection from "../components/sections/about/PersonalSection.astro";
 import ToolsSection from "../components/sections/about/ToolsSection.astro";
+import LinkButton from "../components/elements/LinkButton.astro";
 
 // Data
 import { timelineItems } from "../data/timeline";
@@ -75,7 +76,8 @@ import framebg from "../assets/avatars/avatar-4.png";
       <SectionContainer id="experience" spacing="lg">
         <AtomSymbol include_classes="w-20 h-20 mb-10" />
         <div
-          class="flex justify-between items-baseline flex-wrap gap-4 mb-10 group">
+          class="flex justify-between items-baseline flex-wrap gap-4 mb-10 group"
+        >
           <h2>A Decade of Experience</h2>
           <a href="#" class="resume-link">
             <TrayArrowDown class="w-6 h-6" />
@@ -83,6 +85,13 @@ import framebg from "../assets/avatars/avatar-4.png";
           </a>
         </div>
         <Timeline items={timelineItems} />
+        <LinkButton
+          href="https://www.youtube.com/"
+          label="Get My Resume"
+          hover_label="Download PDF"
+          include_classes="mt-10 ml-5"
+          html_data={{ target: "_blank" }}
+        />
       </SectionContainer>
 
       {/* Tools Section */}

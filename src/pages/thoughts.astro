@@ -11,6 +11,7 @@ import ListItemHeader from "../components/elements/ListItemHeader.astro";
 import { Image } from "astro:assets";
 import colbg from "../assets/illustrations/thoughts-light.png";
 import colbgDark from "../assets/illustrations/thoughts-dark.png";
+
 // Data Fetching
 import { getThoughts } from "../lib/notion";
 import type { ThoughtPost } from "../lib/notion";
@@ -127,11 +128,14 @@ const formatDate = (dateString: string) => {
   }
 </style>
 
-<script>
+<script define:vars={{ 
+  optimizedLightImage: colbg,
+  optimizedDarkImage: colbgDark 
+}}>
   import { initThemeImageSwitcher } from '../utils/themeImageSwitcher';
   
   initThemeImageSwitcher('themeImage', {
-    light: '/src/assets/illustrations/thoughts-light.png',
-    dark: '/src/assets/illustrations/thoughts-dark.png'
+    light: optimizedLightImage.src,
+    dark: optimizedDarkImage.src
   });
 </script>

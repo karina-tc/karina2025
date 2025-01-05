@@ -1,0 +1,47 @@
+---
+interface Props {
+  label: string;
+  hover_label: string;
+  include_classes?: string;
+  html_data?: Record<string, string>;
+}
+
+const {
+  label,
+  hover_label,
+  include_classes,
+  html_data = {},
+} = Astro.props;
+---
+
+<button type="button" class={`theme-button group ${include_classes}`} {...html_data}>
+  <div aria-hidden="true" class="theme-button--content">
+    <div class="theme-button--content__top">
+      {label}
+    </div>
+    <div class="theme-button--content__bottom">
+      <span>{hover_label}</span>
+      <span aria-hidden="true">→</span>
+    </div>
+  </div>
+</button>
+
+<style>
+  .theme-button {
+    @apply overflow-hidden rounded-md h-12 px-4 transition-all duration-300 relative;
+    @apply bg-theme-highlight-orange text-theme-ink-reverse;
+    @apply hover:bg-theme-highlight-orange;
+  }
+
+  .theme-button--content {
+    @apply transition-transform duration-300 group-hover:-translate-y-12 font-medium;
+  }
+
+  .theme-button--content__top {
+    @apply h-12 flex items-center w-fit mx-auto p-0 font-semibold;
+  }
+
+  .theme-button--content__bottom {
+    @apply h-12 w-fit mx-auto flex items-center gap-2 font-semibold;
+  }
+</style>
