@@ -61,25 +61,25 @@ const { items } = Astro.props;
 
   .tenet-card {
     @apply relative flex items-center rounded-2xl transition-all duration-300 overflow-hidden;
-    @apply max-sm:flex-col max-sm:bg-neutral-100 w-full;
+    @apply max-sm:flex-col max-sm:bg-theme-surface-light w-full;
 
     &.focused {
-      @apply bg-neutral-100;
+      @apply bg-theme-surface-light;
 
       span {
-        @apply opacity-100 text-[#6c4ec9];
+        @apply opacity-100;
       }
     }
 
     &:hover {
-      @apply bg-neutral-100;
+      @apply bg-theme-surface-light;
     }
   }
 
   .tenet-card--image {
     @apply flex items-center justify-center p-3 pr-1 transition-all delay-100;
     @apply sm:max-w-[120px] max-h-[120px] min-w-[120px] min-h-[120px] overflow-hidden;
-    @apply max-sm:bg-stone-200 max-sm:w-full;
+    @apply max-sm:bg-theme-surface-light max-sm:w-full;
 
     img {
       @apply w-full h-full object-cover max-sm:w-[100px] max-sm:h-[100px] max-sm:mr-auto;
@@ -103,6 +103,6 @@ const { items } = Astro.props;
   }
 
   .tenet-card:hover span {
-    @apply opacity-100 text-[#6c4ec9];
+    @apply opacity-100;
   }
 </style>

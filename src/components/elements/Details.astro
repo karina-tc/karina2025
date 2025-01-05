@@ -27,7 +27,7 @@ const { html_data = {}, summary_text, include_classes = "" } = Astro.props;
   }
 
   .summary-wrapper {
-    @apply flex items-center gap-4 py-6 border-t border-b border-gray-200;
+    @apply flex items-center gap-4 py-6 border-t border-b border-theme-stroke;
     @apply text-2xl font-bold cursor-pointer list-none;
     @apply group-open:border-b-0;
   }
@@ -37,15 +37,15 @@ const { html_data = {}, summary_text, include_classes = "" } = Astro.props;
   }
 
   .icon--horz-line {
-    @apply w-full h-0.5 bg-ink-primary;
+    @apply w-full h-0.5 bg-theme-surface-dark;
   }
 
   .icon--vert-line {
-    @apply w-0.5 h-full bg-ink-primary absolute top-0 left-3 transition-all duration-300;
+    @apply w-0.5 h-full bg-theme-surface-dark absolute top-0 left-3 transition-all duration-300;
     @apply group-open:rotate-90;
   }
 
   .details-wrapper--content {
-    @apply -mt-3 pb-6 pl-10 text-xl border-b border-gray-200 opacity-0 group-open:opacity-100 transition-all duration-300;
+    @apply -mt-3 pb-6 pl-10 text-xl border-b border-theme-stroke opacity-0 group-open:opacity-100 transition-all duration-300;
   }
 </style>

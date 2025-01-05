@@ -1,4 +1,8 @@
 ---
+// Global Styles
+import '../styles/global.css';
+
+// Components
 import CommonHead from "../components/structure/CommonHead.astro";
 import StickyNav from "../components/elements/StickyNav.astro";
 import Footer from "../components/structure/Footer.astro";
@@ -15,7 +19,7 @@ const {
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
   <CommonHead {pageTitle} {pageDescription} />
 
   <body>
@@ -31,71 +35,3 @@ const {
     </div>
   </body>
 </html>
-
-<style>
-  :root {
-    --font-sans: "Safiro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-    --footer-height: 60px;
-  }
-
-  body,
-  html {
-    @apply min-h-screen;
-    box-sizing: border-box;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-  }
-  .root {
-    @apply antialiased bg-white text-ink-primary;
-    font-family: var(--font-sans);
-  }
-
-  .main {
-    @apply mx-auto w-full px-10 pb-10 flex flex-col justify-center items-center z-10 relative min-h-fit;
-  }
-
-  .content {
-    @apply max-w-none w-full;
-  }
-
-  /* Typography */
-  :global(h1) {
-    @apply text-[100px] leading-[90px] font-medium tracking-tighter mb-8;
-  }
-
-  :global(h2) {
-    @apply text-xl font-medium tracking-tight mt-12 mb-4;
-  }
-
-  :global(p) {
-    @apply leading-relaxed mb-6;
-  }
-
-  :global(em) {
-    @apply font-normal not-italic text-neutral-900;
-  }
-
-  /* Global styles */
-  :global(body) {
-    @apply text-base leading-relaxed;
-  }
-
-  :global(a) {
-    @apply text-inherit underline-offset-4;
-  }
-
-  :global(em) {
-    @apply text-inherit italic;
-  }
-
-  :global(*) {
-    @apply border-neutral-200;
-  }
-
-  /* Update footer spacing */
-  .content {
-    @apply mb-auto w-full;
-  }
-</style>

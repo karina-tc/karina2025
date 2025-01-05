@@ -42,7 +42,7 @@ const isActive = (paths: string[]) => {
   }
 
   .nav-container {
-    @apply flex items-center justify-between w-full flex-wrap space-y-10 bg-paper-base pt-10 pb-2 px-4;
+    @apply flex items-center justify-between w-full flex-wrap space-y-10 bg-theme-paper pt-10 pb-2 px-4;
   }
 
   .nav-home {
@@ -59,14 +59,14 @@ const isActive = (paths: string[]) => {
 
   .nav-links a {
     @apply px-3 py-1 rounded-full underline-offset-4 transition-all;
-    @apply hover:bg-stone-100 hover:shadow-inner hover:shadow-stone-300 hover:underline;
+    @apply hover:bg-theme-surface-light hover:underline;
   }
 
   .nav-links a.active {
-    @apply bg-paper-dark text-white shadow-md;
+    @apply text-theme-ink bg-theme-surface-light shadow-md;
   }
 
   .nav-fade {
-    @apply w-full h-8 bg-gradient-to-t from-paper-base to-transparent rotate-180;
+    @apply w-full h-8 bg-gradient-to-t from-theme-paper to-transparent rotate-180;
   }
 </style>

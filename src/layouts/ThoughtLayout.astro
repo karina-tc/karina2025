@@ -1,5 +1,8 @@
 ---
-// Component Imports
+// Global Styles
+import '../styles/global.css';
+
+// Components
 import Layout from "./Layout.astro";
 import GridContainer from "../components/structure/GridContainer.astro";
 import Header from "../components/structure/Header.astro";
@@ -89,7 +92,7 @@ const breadcrumbs = [
   /* Prose Base Styles */
   .prose {
     @apply font-safiro min-w-full
-      prose-headings:text-ink-primary
+      prose-headings:text-theme-ink
       prose-h4:font-medium
       prose-a:text-orange-600 
       prose-a:no-underline 
@@ -100,41 +103,41 @@ const breadcrumbs = [
   .prose {
     /* Blockquotes */
     @apply prose-blockquote:border-l-4
-      prose-blockquote:border-stone-300
+      prose-blockquote:border-theme-stroke
       prose-blockquote:pl-4
       prose-blockquote:italic
-      prose-blockquote:text-ink-primary
+      prose-blockquote:text-theme-ink
       prose-blockquote:font-normal;
 
     /* Images */
     @apply prose-img:rounded-lg;
 
     /* Lists */
-    @apply prose-ul:text-ink-primary
+    @apply prose-ul:text-theme-ink
       prose-ul:list-disc
       prose-ul:space-y-2
-      prose-ol:text-ink-primary
+      prose-ol:text-theme-ink
       prose-ol:space-y-2;
   }
 
   /* Typography Styles */
   .prose :global(p) {
-    @apply text-ink-primary text-base leading-loose;
+    @apply text-theme-ink text-base leading-loose;
   }
 
   .prose :global(strong) {
-    @apply !text-ink-primary font-semibold;
+    @apply !text-theme-ink font-semibold;
   }
 
   /* Heading Styles */
   .prose :global(h2) {
-    @apply text-ink-primary text-3xl font-semibold mt-12;
+    @apply text-theme-ink text-3xl font-semibold mt-12;
     @apply [&:not(:first-of-type)]:mt-24;
     @apply [&:not(:last-of-type)]:mb-6;
   }
 
   .prose :global(h3) {
-    @apply text-ink-primary text-xl font-semibold mt-8 tracking-normal opacity-70;
+    @apply text-theme-ink text-xl font-semibold mt-8 tracking-normal opacity-70;
     @apply [&:not(:first-of-type)]:mt-8;
     @apply [&:not(:last-of-type)]:mb-6;
     text-transform: none;
@@ -155,13 +158,13 @@ const breadcrumbs = [
     text-indent: -1rem;
 
     &::marker {
-      @apply text-ink-primary;
+      @apply text-theme-ink;
     }
   }
 
   /* Figure and Media Styles */
   .prose :global(figure) {
-    @apply w-full text-ink-primary py-4;
+    @apply w-full text-theme-ink py-4;
   }
 
   .prose :global(figure > img) {
@@ -169,7 +172,7 @@ const breadcrumbs = [
   }
 
   .prose :global(figcaption) {
-    @apply text-ink-primary text-sm italic;
+    @apply text-theme-ink text-sm italic;
   }
 
   /* Notion-specific Styles */
@@ -188,7 +191,7 @@ const breadcrumbs = [
   /* Code Styles */
   .prose :global(:not(pre) code),
   .prose :global(.notion-inline-code:not(pre *)) {
-    @apply text-sm px-1.5 py-0.5 font-semibold rounded font-mono bg-paper-dark/15 text-ink-primary;
+    @apply text-sm px-1.5 py-0.5 font-semibold rounded font-mono text-theme-ink bg-theme-surface-light;
     &::before,
     &::after {
       content: none;
@@ -198,7 +201,7 @@ const breadcrumbs = [
   .prose :global(pre.astro-code),
   .prose :global(pre) {
     @apply text-sm p-5 rounded-md font-mono 
-      border border-white border-t-purple-500 
+      border border-white border-t-theme-stroke 
       border-t-4 
       shadow-lg shadow-[#6c5f3c]/20;
   }

@@ -1,0 +1,89 @@
+  @font-face {
+      font-family: "Reckless-Bold";
+      src:
+          url("/fonts/RecklessNeue/RecklessNeueTRIAL-Bold.woff2") format("woff2"),
+          url("/fonts/RecklessNeue/RecklessNeueTRIAL-Bold.woff") format("woff");
+      font-weight: normal;
+      font-style: normal;
+  }
+
+  @font-face {
+      font-family: "Reckless-Bold-Italic";
+      src:
+          url("/fonts/RecklessNeue/RecklessNeueTRIAL-BoldItalic.woff2") format("woff2"),
+          url("/fonts/RecklessNeue/RecklessNeueTRIAL-BoldItalic.woff") format("woff");
+      font-weight: normal;
+      font-style: normal;
+  }
+
+  @font-face {
+      font-family: "Reckless-Medium";
+      src:
+          url("/fonts/RecklessNeue/RecklessNeueTRIAL-Medium.woff2") format("woff2"),
+          url("/fonts/RecklessNeue/RecklessNeueTRIAL-Medium.woff") format("woff");
+      font-weight: normal;
+      font-style: normal;
+  }
+
+  @font-face {
+      font-family: "Reckless-Medium-Italic";
+      src:
+          url("/fonts/RecklessNeue/RecklessNeueTRIAL-MediumItalic.woff2") format("woff2"),
+          url("/fonts/RecklessNeue/RecklessNeueTRIAL-MediumItalic.woff") format("woff");
+      font-weight: normal;
+      font-style: normal;
+  }
+  
+  @font-face {
+      font-family: "Reckless-Regular";
+      src:
+          url("/fonts/RecklessNeue/RecklessNeueTRIAL-Regular.woff2") format("woff2"),
+          url("/fonts/RecklessNeue/RecklessNeueTRIAL-Regular.woff") format("woff");
+      font-weight: normal;
+      font-style: normal;
+  }
+
+  @font-face {
+      font-family: "Reckless-Regular-Italic";
+      src:
+          url("/fonts/RecklessNeue/RecklessNeueTRIAL-RegularItalic.woff2") format("woff2"),
+          url("/fonts/RecklessNeue/RecklessNeueTRIAL-RegularItalic.woff") format("woff");
+      font-weight: normal;
+      font-style: normal;
+  }
+
+  @font-face {
+      font-family: "Reckless-Thin";
+      src:
+          url("/fonts/RecklessNeue/RecklessNeueTRIAL-Thin.woff2") format("woff2"),
+          url("/fonts/RecklessNeue/RecklessNeueTRIAL-Thin.woff") format("woff");
+      font-weight: normal;
+      font-style: normal;
+  }
+
+  @font-face {
+      font-family: "Reckless-Thin-Italic";
+      src:
+          url("/fonts/RecklessNeue/RecklessNeueTRIAL-ThinItalic.woff2") format("woff2"),
+          url("/fonts/RecklessNeue/RecklessNeueTRIAL-ThinItalic.woff") format("woff");
+      font-weight: normal;
+      font-style: normal;
+  }
+
+  @font-face {
+      font-family: "Reckless-Semibold";
+      src:
+          url("/fonts/RecklessNeue/RecklessNeueTRIAL-Semibold.woff2") format("woff2"),
+          url("/fonts/RecklessNeue/RecklessNeueTRIAL-Semibold.woff") format("woff");
+      font-weight: normal;
+      font-style: normal;
+  }
+
+  @font-face {
+      font-family: "Reckless-Semibold-Italic";
+      src:
+          url("/fonts/RecklessNeue/RecklessNeueTRIAL-SemiboldItalic.woff2") format("woff2"),
+          url("/fonts/RecklessNeue/RecklessNeueTRIAL-SemiboldItalic.woff") format("woff");
+      font-weight: normal;
+      font-style: normal;
+  }

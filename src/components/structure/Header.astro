@@ -1,5 +1,9 @@
 ---
+// Components
 import GridContainer from '../structure/GridContainer.astro';
+import SectionContainer from '../structure/SectionContainer.astro';
+
+// Props
 interface Props {
   type?: 'default' | 'grid';
   size?: 'large' | 'small';
@@ -19,11 +23,11 @@ const { type = 'default', size = 'large', title, subtitle, description } = Astro
       {description && <p>{description}</p>}
     </GridContainer>
   ) : (
-    <>
+    <SectionContainer>
       <h1>{title}</h1>
       {subtitle && <h2>{subtitle}</h2>}
       {description && <p>{description}</p>}
-    </>
+    </SectionContainer>
   )}
 </header>
 

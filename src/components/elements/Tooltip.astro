@@ -55,20 +55,20 @@ const { text } = Astro.props;
   }
 
   .tooltip-trigger {
-    @apply cursor-pointer px-1.5 py-0.5 bg-stone-200 relative rounded-md overflow-hidden;
+    @apply cursor-pointer px-1.5 py-0.5 bg-theme-highlight-mint relative rounded-md overflow-hidden;
   }
 
   .tooltip-trigger--text {
-    @apply w-full h-full relative z-[1] hover:text-white transition-all duration-200;
+    @apply w-full h-full relative z-[1] hover:underline underline-offset-4 transition-all duration-200;
   }
 
   .tooltip-trigger--highlight {
-    @apply absolute inset-0 w-0 opacity-0 bg-paper-dark rounded-md transition-all duration-200;
+    @apply absolute inset-0 w-0 opacity-0 text-theme-ink rounded-md transition-all duration-200;
     @apply group-hover:opacity-100 group-hover:w-full;
   }
 
   .tooltip-content {
-    @apply bg-[#191408] text-white text-sm rounded-lg shadow-lg p-3 absolute z-10 invisible opacity-0;
+    @apply bg-theme-surface-dark text-theme-ink-reverse text-sm rounded-lg shadow-lg p-3 absolute z-10 invisible opacity-0;
     @apply -translate-y-1 transition-all duration-200 w-56 text-center bottom-full left-1/2 -translate-x-1/2 mb-2;
   }
 

@@ -29,14 +29,14 @@ const { title, thumbnail, targetUrl, metadata } = Astro.props;
 
 <style>
   .content-card {
-    @apply bg-stone-100 p-5 min-h-[500px] flex flex-col rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg;
+    @apply bg-theme-surface-light p-5 min-h-[500px] flex flex-col rounded-xl overflow-hidden transition-all duration-300 hover:shadow-lg;
   }
 
   .content-link {
     @apply flex-1 flex justify-center items-center no-underline relative;
 
     span {
-      @apply opacity-0 absolute top-0 right-0 bg-white px-2 py-1 text-xs uppercase font-medium tracking-wider rounded-full transition-all duration-300;
+      @apply opacity-0 absolute top-0 right-0 bg-theme-paper px-2 py-1 text-xs uppercase font-medium tracking-wider rounded-full transition-all duration-300;
     }
 
     &:hover span {

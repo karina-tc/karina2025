@@ -3,6 +3,7 @@
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/structure/Header.astro";
 import GridContainer from "../components/structure/GridContainer.astro";
+import SectionContainer from "../components/structure/SectionContainer.astro";
 import ListItem from "../components/elements/ListItem.astro";
 import ListItemHeader from "../components/elements/ListItemHeader.astro";
 
@@ -43,60 +44,66 @@ const formatDate = (dateString: string) => {
   pageTitle="Thoughts - Karina Tovar"
   pageDescription="Mental Notes and Deep Thoughts"
 >
-  {/* Page Header */}
-  <Header
-    type="grid"
-    size="small"
-    title="Notes & Deep Thoughts"
-    subtitle="Diary of a pixel philosopher"
-    description="This is where I keep my thoughts and ideas. I write about design, technology, and human happiness."
-  />
-
-  {/* Notebooks Section */}
-  <GridContainer id="notebooks" size="small" spacing="lg">
-    <h3 class="mt-0 mb-5 text-5xl font-medium opacity-50">Notebooks</h3>
-    <div class="writing-list">
-      {
-        sideNotes.map((post) => (
-          <ListItem
-            icon={false}
-            isLink={true}
-            label={post.data.title}
-            detail={new Date().getFullYear().toString()}
-            href={`/notebooks/${post.slug}`}
-            iconWidth={12}
-            iconHeight={12}
-          />
-        ))
-      }
+  <div class="layout--two-columns">
+    <div class="layout--two-columns__left glued">
+      {/* Page Header */}
+      <Header
+        type="default"
+        size="small"
+        title="Notes & Deep Thoughts"
+        subtitle="Diary of a pixel philosopher"
+        description="This is where I keep my thoughts and ideas. I write about design, technology, and human happiness."
+      />
     </div>
-  </GridContainer>
 
-  {/* Yearly Posts Sections */}
-  {
-    years.map((year) => {
-      const postsForYear = getPostsForYear(year);
-      return (
-        <GridContainer id={`year-${year}`} size="small" spacing="lg">
-          <h3 class="mt-0 mb-5 text-5xl font-medium opacity-50">{year}</h3>
-          <ListItemHeader leftLabel="TITLE" rightLabel="DATE" />
-          <div class="writing-list">
-            {postsForYear.map((post) => (
+    <div class="layout--two-columns__right">
+      {/* Notebooks Section */}
+      <SectionContainer id="notebooks" spacing="lg">
+        <h3 class="mt-0 mb-5 text-5xl font-medium opacity-50">Notebooks</h3>
+        <div class="writing-list">
+          {
+            sideNotes.map((post) => (
               <ListItem
                 icon={false}
                 isLink={true}
-                label={post.title}
-                detail={formatDate(post.date)}
-                href={post.href}
-                iconWidth={10}
-                iconHeight={10}
+                label={post.data.title}
+                detail={new Date().getFullYear().toString()}
+                href={`/notebooks/${post.slug}`}
+                iconWidth={12}
+                iconHeight={12}
               />
-            ))}
-          </div>
-        </GridContainer>
-      );
-    })
-  }
+            ))
+          }
+        </div>
+      </SectionContainer>
+
+      {/* Yearly Posts Sections */}
+      {
+        years.map((year) => {
+          const postsForYear = getPostsForYear(year);
+          return (
+            <SectionContainer id={`year-${year}`} spacing="lg">
+              <h3 class="mt-0 mb-5 text-5xl font-medium opacity-50">{year}</h3>
+              <ListItemHeader leftLabel="TITLE" rightLabel="DATE" />
+              <div class="writing-list">
+                {postsForYear.map((post) => (
+                  <ListItem
+                    icon={false}
+                    isLink={true}
+                    label={post.title}
+                    detail={formatDate(post.date)}
+                    href={post.href}
+                    iconWidth={10}
+                    iconHeight={10}
+                  />
+                ))}
+              </div>
+            </SectionContainer>
+          );
+        })
+      }
+    </div>
+  </div>
 </Layout>
 
 <style>

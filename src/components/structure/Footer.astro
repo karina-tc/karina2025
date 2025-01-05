@@ -1,166 +1,129 @@
 ---
-import Sun from "phosphor-astro/Sun.astro";
-import MoonStars from "phosphor-astro/MoonStars.astro";
+interface SocialLink {
+  name: string;
+  url: string;
+}
 
-const currentHour = new Date().getHours();
-const isDaytime = currentHour >= 6 && currentHour < 18;
-const greeting = isDaytime ? "have a nice day" : "good night owl";
+interface FooterColumn {
+  title: string;
+  links: Array<{ text: string; url?: string; isEmail?: boolean }>;
+}
 
-const socialLinks = [
+// Configuration
+const year = new Date().getFullYear();
+
+const socialLinks: SocialLink[] = [
+  { name: "Github", url: "https://github.com/karina-tc" },
+  { name: "LinkedIn", url: "https://www.linkedin.com/in/karina-tovar-castro/" },
+  { name: "Threads", url: "https://threads.net/karinatovar" },
+];
+
+const footerColumns: FooterColumn[] = [
   {
-    name: "Github",
-    url: "https://github.com/karina-tc",
+    title: "Get in Touch",
+    links: [
+      { text: "Email me", isEmail: true },
+      { text: "Book me", url: "https://cal.com/karina-tovar-djofxs/quick-chat?month=2025-01&date=2025-01-28" }
+    ]
   },
   {
-    name: "LinkedIn",
-    url: "https://www.linkedin.com/in/karina-tovar-castro/",
-  },
-  {
-    name: "Threads",
-    url: "https://threads.net/karinatovar",
-  },
-] as const;
+    title: "Everywhere Else",
+    links: socialLinks.map(({ name, url }) => ({ text: name, url }))
+  }
+];
+
+const colophonData = {
+  image: "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmRhaTNnN2RoNzZ0YW5pa255cXZpcHVuYXFxODgzMnlzMzdkajRodiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3oKIPnAiaMCws8nOsE/giphy.webp",
+  links: [
+    { text: "AstroJs", url: "https://astro.build" },
+    { text: "Safiro", url: "https://www.atipofoundry.com/fonts/safiro" }
+  ]
+};
 ---
 
-<footer class="footer opacity-0" data-footer>
-  <div class={`footer-greeting relative z-base ${isDaytime ? 'day' : 'night'}`}>
-    {isDaytime ? <Sun class="animate-spin-slow" /> : <MoonStars />}
-    <span class="footer-greeting--text">{greeting}</span>
-  </div>
-  <div class="footer-links relative z-base">
-    <div class="footer-links--column colophon">
+<footer class="footer">
+  <div class="layout--two-columns footer-links relative z-base">
+    <div class="layout--two-columns__left footer-links--column">
       <div class="flex items-center gap-2">
-        <span>&copy; {new Date().getFullYear()} Karina Tovar · </span>
-        <button class="colophon-button" popovertarget="colophonPopover"
-          >Colophon</button
-        >
+        <span>&copy; {year} Karina Tovar · </span>
+        <button class="colophon-button" popovertarget="colophonPopover">
+          Colophon
+        </button>
       </div>
       <div id="colophonPopover" popover="auto" class="colophon-popover">
         <img
-          src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmRhaTNnN2RoNzZ0YW5pa255cXZpcHVuYXFxODgzMnlzMzdkajRodiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3oKIPnAiaMCws8nOsE/giphy.webp"
+          src={colophonData.image}
           alt="coding"
           class="w-full mb-4"
           draggable="false"
         />
         <p>
-          This website was coded with love, sweat, and tears using <a
-            class="underline"
-            href="https://astro.build"
-            target="_blank">AstroJs</a
-          >, TypeScript, and Tailwind CSS. I'm using <a
-            href="https://www.atipofoundry.com/fonts/safiro"
-            class="underline"
-            target="_blank">Safiro</a
-          > as a font.
+          This website was coded with love, sweat, and tears using 
+          {colophonData.links.map(({ text, url }, index) => (
+            <>
+              <a href={url} class="underline" target="_blank">{text}</a>
+              {index === 0 && ", TypeScript, and Tailwind CSS. I'm using "}
+              {index === 1 && " as a font."}
+            </>
+          ))}
         </p>
       </div>
     </div>
-    <div class="footer-links--column contact">
-      <span class="footer-links--title">Get in Touch</span>
-      <div class="footer-links--text">
-        <span>hello@karinatovar.com</span>
-        <a
-          href="https://cal.com/karina-tovar-djofxs/quick-chat?month=2025-01&date=2025-01-28"
-          target="_blank">Book me</a
-        >
-      </div>
-    </div>
-    <div class="footer-links--column social">
-      <span class="footer-links--title">Everywhere Else</span>
-      <div class="footer-links--text">
-        {
-          socialLinks.map(({ name, url }) => (
-            <a href={url} target="_blank">
-              {name}
-            </a>
-          ))
-        }
-      </div>
+    
+    <div class="layout--two-columns__right footer-links--column-right">
+      {footerColumns.map(({ title, links }) => (
+        <div class="footer-links--column">
+          <span class="footer-links--title">{title}</span>
+          <div class="footer-links--text">
+            {links.map(({ text, url, isEmail }) => 
+              isEmail ? (
+                <button
+                  class="copy-email-btn group"
+                  data-email="hello@karinatovar.com"
+                  onclick="copyEmail(this)"
+                >
+                  <span class="copy-email-btn--text">{text}</span>
+                  <span class="copy-email-btn--message">Copied address!</span>
+                </button>
+              ) : (
+                <a href={url} target="_blank">{text}</a>
+              )
+            )}
+          </div>
+        </div>
+      ))}
     </div>
   </div>
-  <div class="footer-background"></div>
 </footer>
 
-<script>
-  const footer = document.querySelector("[data-footer]");
+<script is:inline>
+  function copyEmail(button) {
+    var email = button.dataset.email;
+    navigator.clipboard.writeText(email).then(function () {
+      button.classList.add("copied");
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("animate-footer-reveal");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    {
-      threshold: 0.1,
-    },
-  );
-
-  if (footer) {
-    observer.observe(footer);
+      setTimeout(function () {
+        button.classList.remove("copied");
+      }, 3000);
+    });
   }
 </script>
 
 <style>
   /* Base footer layout */
   .footer {
-    @apply w-full flex flex-col justify-center items-center gap-10 relative z-base py-20 px-10 opacity-0;
-    @apply overflow-hidden transition-all duration-1000 ease-out transform translate-y-10;
-  }
-
-  .footer-background {
-    @apply absolute inset-0 w-full bg-stone-100 translate-y-full transition-all duration-1000 ease-out transform;
-  }
-
-  .footer-greeting {
-    @apply flex items-center gap-3 w-fit mx-auto overflow-hidden opacity-0 transition-all duration-1000 ease-out delay-500;
-    @apply max-sm:flex-col max-sm:gap-2 scale-75 tracking-[-20px];
-    font-size: 10vw;
-    line-height: 10vw;
-  }
-
-  .footer-greeting.night {
-    font-size: 9.25vw;
-    line-height: 9.25vw;
-  }
-
-  /* Ensure the Sun icon maintains its size and doesn't shrink */
-  .footer-greeting :global(svg) {
-    @apply h-[1em] w-[1em] flex-shrink-0;
-  }
-
-  .footer-greeting--text {
-    @apply uppercase tracking-tight whitespace-nowrap;
-  }
-
-  /* Links grid layout */
-  .footer-links {
-    @apply w-full max-w-screen-base mx-auto text-sm grid grid-cols-26 opacity-0 transition-all duration-1000 ease-out delay-500;
+    @apply w-full flex flex-col justify-center items-center gap-10 relative z-base py-20 px-10;
+    @apply overflow-hidden bg-theme-surface-light;
   }
 
   /* Common column styles */
   .footer-links--column {
-    @apply flex flex-col gap-2 h-full items-start justify-start;
+    @apply flex flex-col gap-2 h-full items-start justify-start max-xl:order-2;
   }
 
-  /* Individual column layouts */
-  .footer-links--column.colophon {
-    @apply col-span-full py-8
-           md:py-0 md:col-start-1 md:col-span-10;
-  }
-
-  .footer-links--column.contact {
-    @apply col-span-full py-8
-           sm:col-start-1 sm:col-span-11
-           md:py-0 md:col-start-12 md:col-span-8;
-  }
-
-  .footer-links--column.social {
-    @apply col-span-full
-           sm:col-start-12 sm:col-span-full
-           md:col-start-[20] md:col-span-7;
+  .footer-links--column-right {
+    @apply flex flex-col xl:flex-row gap-6 h-full items-start justify-start;
+    @apply [&>div]:flex-1 max-xl:order-1 max-xl:-mt-5 max-xl:pb-6;
   }
 
   /* Text styles */
@@ -180,33 +143,34 @@ const socialLinks = [
     }
   }
 
-  /* Animation styles */
-  .animate-footer-reveal {
-    @apply opacity-100;
-
-    & .footer-greeting {
-      @apply opacity-20 scale-100;
-    }
-    & .footer-links {
-      @apply opacity-100;
-    }
-
-    & .footer-background {
-      @apply -translate-y-0 h-full;
-    }
-  }
-
   /* Add these new styles */
   .colophon-button {
-    @apply bg-stone-200 px-2 py-1 rounded-md transition-all duration-300 hover:bg-white;
+    @apply bg-theme-paper px-2 py-1 rounded-md transition-all duration-300 hover:underline underline-offset-4;
   }
 
   .colophon-popover {
     @apply bg-white p-4 rounded-lg shadow-lg max-w-xs text-sm;
-    @apply border border-neutral-200;
+    @apply border border-theme-stroke;
   }
 
   .colophon-popover p {
     @apply mb-2 last:mb-0;
+  }
+
+  .copy-email-btn {
+    @apply !flex items-center justify-between h-6 gap-2 mb-2;
+
+    &.copied .copy-email-btn--message {
+      @apply opacity-70 translate-x-0;
+    }
+  }
+
+  .copy-email-btn--text {
+    @apply inline-block underline-offset-4 decoration-dotted decoration-neutral-400 group-hover:underline transition-all duration-300;
+  }
+
+  .copy-email-btn--message {
+    @apply inline-block pt-1 opacity-0 text-xs font-semibold tracking-widest uppercase font-mono;
+    @apply -translate-x-20 transition-all duration-300;
   }
 </style>

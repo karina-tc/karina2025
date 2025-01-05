@@ -1,70 +1,128 @@
-@font-face {
-  font-family: 'Safiro-Regular';
-  src: url('/fonts/Safiro-Regular.woff2') format('woff2');
-  font-weight: normal;
-  font-style: normal;
-}
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  :root {
-  }
+/* Themes */
+[data-theme="dark"] {
+  --color-paper: theme('colors.dark.paper');
+  --color-ink: theme('colors.dark.ink');
+  --color-ink-secondary: theme('colors.dark.ink-secondary');
+  --color-ink-reverse: theme('colors.dark.ink-reverse');
+  --color-ink-dark: theme('colors.dark.ink-dark');
+  --color-stroke: theme('colors.dark.stroke');
+  --color-surface-light: theme('colors.dark.surface-light');
+  --color-surface-medium: theme('colors.dark.surface-medium');
+  --color-surface-dark: theme('colors.dark.surface-dark'); 
+  --color-surface-white: theme('colors.dark.surface-white');
+  --color-highlight-lilac: theme('colors.dark.highlight-lilac'); 
+  --color-highlight-pink: theme('colors.dark.highlight-pink');
+  --color-highlight-orange: theme('colors.dark.highlight-orange');
+  --color-highlight-mint: theme('colors.dark.highlight-mint');
 }
 
-@layer utilities {
-  .divider--extra-large {
-    @apply w-full h-32;
-  }
-  .divider--large {
-    @apply w-full h-20;
-  }
-  .divider--small {
-    @apply w-full h-10;
-  }
+[data-theme="light"] {
+  --color-paper: theme('colors.light.paper');
+  --color-ink: theme('colors.light.ink');
+  --color-ink-secondary: theme('colors.light.ink-secondary');
+  --color-ink-reverse: theme('colors.light.ink-reverse');
+  --color-ink-dark: theme('colors.light.ink-dark');
+  --color-stroke: theme('colors.light.stroke');
+  --color-surface-light: theme('colors.light.surface-light');
+  --color-surface-medium: theme('colors.light.surface-medium');
+  --color-surface-dark: theme('colors.light.surface-dark');
+  --color-surface-white: theme('colors.light.surface-white');
+  --color-highlight-lilac: theme('colors.light.highlight-lilac');
+  --color-highlight-pink: theme('colors.light.highlight-pink');
+  --color-highlight-orange: theme('colors.light.highlight-orange');
+  --color-highlight-mint: theme('colors.light.highlight-mint');
+}
+
+[data-theme="grape"] {
+  --color-paper: theme('colors.grape.paper');
+  --color-ink: theme('colors.grape.ink');
+  --color-ink-secondary: theme('colors.grape.ink-secondary');
+  --color-ink-reverse: theme('colors.grape.ink-reverse');
+  --color-ink-dark: theme('colors.grape.ink-dark');
+  --color-stroke: theme('colors.grape.stroke');
+  --color-surface-light: theme('colors.grape.surface-light');
+  --color-surface-medium: theme('colors.grape.surface-medium');
+  --color-surface-dark: theme('colors.grape.surface-dark');
+  --color-surface-white: theme('colors.grape.surface-white');
+  --color-highlight-lilac: theme('colors.grape.highlight-lilac');
+  --color-highlight-pink: theme('colors.grape.highlight-pink');
+  --color-highlight-orange: theme('colors.grape.highlight-orange');
+  --color-highlight-mint: theme('colors.grape.highlight-mint');
 }
 
 /* Base styles */
-html {
-  scroll-behavior: smooth;
-  -webkit-font-smoothing: antialiased;
-}
-
+html,
 body {
-  @apply min-h-screen bg-paper-base text-ink-primary font-safiro font-normal;
+  @apply min-h-screen;
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
+.root {
+  @apply antialiased;
+  @apply bg-theme-paper text-theme-ink;
+  @apply font-safiro font-normal;
+}
+
+.main {
+  @apply mx-auto w-full px-10 pb-10 flex flex-col justify-center items-center z-10 relative min-h-fit;
+}
+
+/* Typography */
 h1 {
-  @apply font-instrument-serif text-6xl lg:text-8xl tracking-tight text-ink-primary font-medium;
+  @apply text-[100px] leading-[90px] font-semibold tracking-tight mb-8;
 }
 
 h2 {
-  @apply font-instrument-serif text-4xl lg:text-5xl tracking-tight text-ink-primary font-medium;
-}
-
-h3 {
-  @apply font-safiro text-base font-semibold text-ink-tertiary tracking-widest uppercase;
+  @apply text-xl font-medium tracking-tight mt-12 mb-4;
 }
 
 p {
-  @apply text-xl leading-8 text-ink-secondary;
+  @apply leading-relaxed mb-6;
 }
 
-.section-wrapper {
-  @apply px-10 w-full max-w-3xl m-auto;
+em {
+  @apply font-normal not-italic text-neutral-900;
 }
 
-.content-section {
-  opacity: 0;
-  transform: translateY(20px);
-  transition:
-    opacity 0.6s ease-out,
-    transform 0.6s ease-out;
+/* Global styles */
+body {
+  @apply text-base leading-relaxed;
 }
 
-.content-section.visible {
-  opacity: 1;
-  transform: translateY(0);
+a {
+  @apply text-inherit underline-offset-4;
+}
+
+em {
+  @apply text-inherit italic;
+}
+
+/* Update footer spacing */
+.content {
+  @apply mb-auto w-full;
+}
+
+/* Layouts */
+.layout--two-columns {
+  @apply w-full max-w-screen-base mx-auto grid grid-cols-1 xl:grid-cols-24;
+}
+
+.layout--two-columns__left {
+  @apply xl:col-start-1 xl:col-end-8;
+}
+
+.layout--two-columns__left.glued {
+  @apply xl:sticky xl:top-0 xl:h-fit xl:pt-20 xl:-mt-20;
+}
+
+.layout--two-columns__right {
+  @apply xl:col-start-12 xl:col-end-22;
 }

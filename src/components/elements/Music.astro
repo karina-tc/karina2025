@@ -47,18 +47,18 @@ import SpotifyLogo from "phosphor-astro/SpotifyLogo.astro";
 
 <style>
   .music-container {
-    @apply relative flex items-center justify-end text-stone-600;
+    @apply relative flex items-center justify-end text-theme-ink;
   }
 
   .music-details {
-    @apply w-full p-4 bg-stone-100 rounded-xl transition-all duration-200;
+    @apply w-full p-4 bg-theme-highlight-lilac rounded-xl transition-all duration-200;
 
     .album-art-container {
       @apply w-32 h-20 relative;
     }
 
     .album-art-cover {
-      @apply w-20 h-full bg-slate-200 border border-white rounded-lg overflow-hidden relative z-10;
+      @apply w-20 h-full bg-theme-highlight-orange border border-white rounded-lg overflow-hidden relative z-10;
     }
 
     .album-vinyl {
@@ -76,16 +76,16 @@ import SpotifyLogo from "phosphor-astro/SpotifyLogo.astro";
       @apply flex flex-col justify-center;
 
       .song-name {
-        @apply text-stone-900 text-sm font-medium;
+        @apply text-sm font-medium text-theme-ink-dark;
       }
 
       .artist-name {
-        @apply text-xs text-stone-600;
+        @apply text-lg text-theme-ink-dark font-medium;
       }
 
       .spotify-badge {
         @apply flex flex-row gap-1 items-center w-fit mt-3 pr-3.5 pl-2 py-1;
-        @apply text-xs font-medium bg-stone-200 rounded-full hover:bg-white transition-colors duration-200;
+        @apply text-xs font-medium bg-theme-paper rounded-full transition-colors duration-200;
       }
     }
   }
@@ -97,7 +97,7 @@ import SpotifyLogo from "phosphor-astro/SpotifyLogo.astro";
       @apply flex flex-col gap-0.5 -rotate-90;
 
       span {
-        @apply w-2 h-0.5 bg-slate-400 origin-left;
+        @apply w-2 h-0.5 bg-white origin-left;
         animation: equalize 1s ease-in-out infinite;
       }
 

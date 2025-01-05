@@ -14,7 +14,10 @@ const {
 }: Props = Astro.props;
 ---
 
-<section id={id} class={`grid-container spacing-${spacing} ${include_classes} fade-up`}>
+<section
+  id={id}
+  class={`grid-container spacing-${spacing} ${include_classes} fade-up`}
+>
   <div class={`grid-container--item-${size}`}>
     <slot />
   </div>
@@ -105,7 +108,9 @@ const {
   .fade-up {
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    transition:
+      opacity 0.6s ease-out,
+      transform 0.6s ease-out;
   }
 
   .fade-up.visible {

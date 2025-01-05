@@ -58,8 +58,8 @@ const {
 
 <style>
   .listing-item {
-    @apply flex items-center gap-4 py-3 px-1 rounded-xl w-full overflow-hidden;
-    @apply hover:px-3 transition-all duration-300;
+    @apply flex items-center gap-4 py-3 rounded-xl w-full overflow-hidden;
+    @apply hover:px-3 hover:-ml-3 hover:w-[calc(100%+1.5rem)] transition-all duration-300;
   }
 
   .listing-label {
@@ -67,14 +67,14 @@ const {
   }
 
   .listing-dots {
-    @apply grow border-b border-dotted border-neutral-300 h-3 z-10;
+    @apply grow border-b border-dotted border-theme-stroke h-3 z-10;
   }
 
   .listing-detail {
-    @apply text-neutral-500 text-sm z-[1] shrink-0;
+    @apply text-theme-ink text-sm z-[1] shrink-0;
   }
 
   .listing-hover-overlay {
-    @apply absolute inset-0 bg-neutral-100 w-0 opacity-0 transition-all duration-300 group-hover:w-full group-hover:opacity-100;
+    @apply absolute inset-0 bg-theme-surface-light w-0 opacity-0 transition-all duration-300 group-hover:w-full group-hover:opacity-100;
   }
 </style>

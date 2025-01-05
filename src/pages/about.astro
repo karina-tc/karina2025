@@ -3,6 +3,7 @@
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/structure/Header.astro";
 import GridContainer from "../components/structure/GridContainer.astro";
+import SectionContainer from "../components/structure/SectionContainer.astro";
 import Timeline from "../components/elements/Timeline.astro";
 import TrayArrowDown from "phosphor-astro/TrayArrowDown.astro";
 import TenetCard from "../components/elements/TenetCard.astro";
@@ -24,76 +25,77 @@ import karina from "../assets/brand/karina-profile.png";
   pageTitle="About - Karina Tovar"
   pageDescription="Pixel Philosopher Cautious Technologist"
 >
-  {/* Hero Section */}
-  <Header
-    type="grid"
-    size="small"
-    title="Hello Stranger"
-    subtitle="I am an artist turned product designer"
-    description=""
-  />
-
-  {/* Profile Image */}
-  <GridContainer
-    id="profile"
-    spacing="lg"
-    size="small"
-    include_classes="animate-fade-in"
-  >
-    <figure class="rounded-t-full overflow-hidden relative">
-      <Image
-        src={karina}
-        alt="Karina Tovar"
-        class="absolute bottom-0 translate-x-5 karina-profile mix-blend-overlay"
+  <div class="layout--two-columns">
+    <div class="layout--two-columns__left glued">
+      {/* Hero Section */}
+      <Header
+        type="default"
+        size="small"
+        title="Hello Stranger"
+        subtitle="I'm an artist turned product designer who likes to code and make things"
       />
-      <Image src={avatarBackground} alt="Noise" />
-    </figure>
-  </GridContainer>
 
-  {/* Introduction */}
-  <GridContainer id="introduction" spacing="lg" size="small">
-    <h2 class="text-3xl">Building for Joy</h2>
-    <p class="text-lg">
-      I have a background in the Fine Arts, with a MFA from the Massachusetts
-      College of Art & Design. There I was part of the Studio for Interrelated
-      Media where I made artwork focused on performative technology. That just
-      means that I obsessed over the intersection of technology and human
-      happiness. I worked on a lot of performance art pieces that lived outside
-      of the museum so I could create room for joy in the mundane.
-    </p>
-  </GridContainer>
-
-  {/* Tenets Section */}
-  <GridContainer id="tenets" spacing="lg" size="small">
-    <AtomSymbol include_classes="w-20 h-20 mb-10" />
-    <h2 class="text-3xl mt-0">My Design Tenets</h2>
-    <div class="grid grid-cols-1 gap-8 mt-8 w-full">
-      <TenetCard items={tenets} />
+      {/* Profile Image */}
+      <SectionContainer id="profile" include_classes="animate-fade-in">
+        <figure class="rounded-t-full overflow-hidden relative">
+          <Image
+            src={karina}
+            alt="Karina Tovar"
+            class="absolute bottom-0 translate-x-5 karina-profile mix-blend-overlay"
+          />
+          <Image src={avatarBackground} alt="Noise" />
+        </figure>
+      </SectionContainer>
     </div>
-  </GridContainer>
 
-  {/* Experience Section */}
-  <GridContainer id="experience" spacing="lg" size="small">
-    <AtomSymbol include_classes="w-20 h-20 mb-10" />
-    <div class="flex justify-between items-center flex-wrap gap-4 mb-10 group">
-      <h2 class="m-0 text-3xl">A Decade of Experience</h2>
-      <a href="#" class="resume-link">
-        <TrayArrowDown class="w-6 h-6" />
-        <span>Download Resume</span>
-      </a>
+    <div class="layout--two-columns__right">
+      {/* Introduction */}
+      <SectionContainer id="introduction">
+        <h2 class="text-3xl">Building for Joy</h2>
+        <p class="text-lg">
+          I have a background in the Fine Arts, with a MFA from the
+          Massachusetts College of Art & Design. There I was part of the Studio
+          for Interrelated Media where I made artwork focused on performative
+          technology. That just means that I obsessed over the intersection of
+          technology and human happiness. I worked on a lot of performance art
+          pieces that lived outside of the museum so I could create room for joy
+          in the mundane.
+        </p>
+      </SectionContainer>
+
+      {/* Tenets Section */}
+      <SectionContainer id="tenets" spacing="lg">
+        <AtomSymbol include_classes="w-20 h-20 mb-10" />
+        <h2 class="text-3xl mt-0">My Design Tenets</h2>
+        <div class="grid grid-cols-1 gap-8 mt-8 w-full">
+          <TenetCard items={tenets} />
+        </div>
+      </SectionContainer>
+
+      {/* Experience Section */}
+      <SectionContainer id="experience" spacing="lg">
+        <AtomSymbol include_classes="w-20 h-20 mb-10" />
+        <div class="flex justify-between items-center flex-wrap gap-4 mb-10 group">
+          <h2 class="m-0 text-3xl">A Decade of Experience</h2>
+          <a href="#" class="resume-link">
+            <TrayArrowDown class="w-6 h-6" />
+            <span>Download Resume</span>
+          </a>
+        </div>
+        <Timeline items={timelineItems} />
+      </SectionContainer>
+
+      {/* Tools Section */}
+      <SectionContainer id="tools" spacing="lg">
+        <ToolsSection />
+      </SectionContainer>
+
+      {/* Personal Section */}
+      <SectionContainer id="personal" spacing="lg">
+        <PersonalSection />
+      </SectionContainer>
     </div>
-    <Timeline items={timelineItems} />
-  </GridContainer>
-
-  {/* Tools Section */}
-  <GridContainer id="tools" spacing="lg" size="small">
-    <ToolsSection />
-  </GridContainer>
-
-  {/* Personal Section */}
-  <GridContainer id="personal" spacing="lg" size="small">
-    <PersonalSection />
-  </GridContainer>
+  </div>
 </Layout>
 
 <style>

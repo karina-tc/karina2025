@@ -42,15 +42,18 @@ import { tools } from "../../../data/tools";
   }
 
   .stack-item--cell {
-    @apply flex flex-col items-center gap-2 bg-stone-100 rounded-lg px-4 py-6 cursor-pointer transition-all duration-200 hover:bg-stone-200;
+    @apply flex flex-col items-center gap-2 bg-theme-surface-light rounded-lg px-4 py-6;
+    @apply cursor-pointer transition-all duration-200 hover:bg-theme-surface-medium;
   }
 
   .stack-item--name {
-    @apply inline-block mb-2 text-left underline-offset-4 decoration-dashed decoration-neutral-300 transition-all duration-200 group-hover:underline;
+    @apply inline-block mb-2 text-left underline-offset-4 decoration-dashed decoration-neutral-300;
+    @apply transition-all duration-200 group-hover:underline;
   }
 
   .stack-item--icon {
-    @apply w-12 h-12 bg-neutral-100 rounded-full flex items-center justify-center;
-    @apply bg-paper-base rounded-lg shadow-md mb-2;
+    @apply w-12 h-12 bg-theme-surface-light rounded-full;
+    @apply flex items-center justify-center;
+    @apply text-theme-ink rounded-lg shadow-md mb-2;
   }
 </style>
