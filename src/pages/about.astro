@@ -4,12 +4,11 @@ import Layout from "../layouts/Layout.astro";
 import Header from "../components/structure/Header.astro";
 import SectionContainer from "../components/structure/SectionContainer.astro";
 import Timeline from "../components/elements/Timeline.astro";
-import TrayArrowDown from "phosphor-astro/TrayArrowDown.astro";
 import TenetCard from "../components/elements/TenetCard.astro";
 import AtomSymbol from "../components/elements/AtomSymbol.astro";
 import PersonalSection from "../components/sections/about/PersonalSection.astro";
 import ToolsSection from "../components/sections/about/ToolsSection.astro";
-import LinkButton from "../components/elements/LinkButton.astro";
+import SubSection from "../components/structure/SubSection.astro";
 
 // Data
 import { timelineItems } from "../data/timeline";
@@ -74,24 +73,16 @@ import framebg from "../assets/avatars/avatar-4.png";
 
       {/* Experience Section */}
       <SectionContainer id="experience" spacing="lg">
-        <AtomSymbol include_classes="w-20 h-20 mb-10" />
-        <div
-          class="flex justify-between items-baseline flex-wrap gap-4 mb-10 group"
-        >
-          <h2>A Decade of Experience</h2>
-          <a href="#" class="resume-link">
-            <TrayArrowDown class="w-6 h-6" />
-            <span>Download Resume</span>
-          </a>
-        </div>
-        <Timeline items={timelineItems} />
-        <LinkButton
-          href="https://www.youtube.com/"
-          label="Get My Resume"
-          hover_label="Download PDF"
-          include_classes="mt-10 ml-5"
-          html_data={{ target: "_blank" }}
+        <SubSection
+          label="RESUME"
+          title="A Decade of Experience"
+          show_link={true}
+          link_label="Get Resume"
+          link_hover_label="Download PDF"
+          link_href="/resume"
+          include_classes="mb-10"
         />
+        <Timeline items={timelineItems} />
       </SectionContainer>
 
       {/* Tools Section */}
@@ -113,7 +104,7 @@ import framebg from "../assets/avatars/avatar-4.png";
   }
 
   .profile-frame--image {
-    @apply mx-auto xl:mx-0 xl:max-w-[50vh] mix-blend-overlay translate-x-8;
+    @apply mx-auto xl:mx-0 xl:max-w-[45vh] mix-blend-overlay translate-x-8;
   }
 
   .resume-link {

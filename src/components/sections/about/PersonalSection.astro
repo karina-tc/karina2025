@@ -1,16 +1,22 @@
 ---
 import Tooltip from "../../elements/Tooltip.astro";
 import AtomSymbol from "../../elements/AtomSymbol.astro";
-import Signature from "../../elements/Signature.astro";
 import Music from "../../elements/Music.astro";
 import { Image } from "astro:assets";
 import melancholia from "../../../assets/other/melancholia.png";
 import book from "../../../assets/other/book.png";
 import life from "../../../assets/other/life.png";
+import SubSection from "../../structure/SubSection.astro";
+
 ---
 
 <AtomSymbol include_classes="w-20 h-20 mb-10" />
-<h2>Outside of Work</h2>
+<SubSection
+  label="Personal"
+  title="Outside of Work"
+  show_link={false}
+  include_classes="mb-10"
+/>
 <p>
   I like to watch dark psychological thrillers that are too much to watch more
   than once. Don't ask me why I've watched
