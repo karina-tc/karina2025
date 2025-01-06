@@ -6,7 +6,8 @@ import SpotifyLogo from "phosphor-astro/SpotifyLogo.astro";
 
 <div class="music-container group" id="music-container">
   <div class="music-details">
-    <div class="flex flex-row gap-3">
+    <div class="flex flex-row flex-wrap items-center gap-3">
+      {/* Album Art */}
       <div class="album-art-container">
         <div class="album-art-cover">
           <div class="album-equalizer">
@@ -29,18 +30,18 @@ import SpotifyLogo from "phosphor-astro/SpotifyLogo.astro";
           />
         </div>
       </div>
-      <div class="text-info">
+
+      {/* Text Info */}
+      <div class="text-info flex-1">
         <span class="song-name">Some song</span>
         <span class="artist-name">Some artist</span>
-        <a
-          href="#"
-          class="spotify-badge"
-          target="_blank"
-          rel="noopener noreferrer">
-          <SpotifyLogo class="w-6 h-6" />
-          <span>Play on Spotify</span>
-        </a>
       </div>
+
+      {/* Spotify Badge */}
+      <a href="#" class="spotify-badge" target="_blank" rel="noopener noreferrer">
+        <SpotifyLogo class="w-6 h-6" />
+        <span class="hover:underline underline-offset-4 transition-all duration-200">Listen With Me</span>
+      </a>
     </div>
   </div>
 </div>
@@ -76,17 +77,17 @@ import SpotifyLogo from "phosphor-astro/SpotifyLogo.astro";
       @apply flex flex-col justify-center;
 
       .song-name {
-        @apply text-sm font-medium text-theme-ink-dark;
+        @apply text-sm font-medium text-theme-ink-dark line-clamp-2;
       }
 
       .artist-name {
         @apply text-lg text-theme-ink-dark font-medium;
       }
+    }
 
-      .spotify-badge {
-        @apply flex flex-row gap-1 items-center w-fit mt-3 pr-3.5 pl-2 py-1;
-        @apply text-xs font-medium bg-theme-paper rounded-full transition-colors duration-200;
-      }
+    .spotify-badge {
+      @apply flex flex-row gap-1 items-center w-fit pr-3.5 pl-2 h-9 max-sm:ml-[130px] max-sm:-mt-4;
+      @apply text-sm font-medium bg-theme-paper rounded-full transition-colors duration-200;
     }
   }
 

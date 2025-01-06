@@ -37,7 +37,7 @@ export const timelineItems: TimelineItem[] = [
     companyUrl: "https://tropicapp.io",
     startDate: "2023",
     endDate: "Present",
-    description: `Currently leading design and product strategy on Tropic's new Procurement Intelligence product and AI efforts.
+    description: `Currently leading design and product strategy on Tropic's new Procurement Intelligence product and AI efforts. Which has already helped increase retention and revenue.
 
     I have also worked on the engineering side through front-end code helping push polish into our application.`,
     avatar: avatar3,
@@ -50,7 +50,7 @@ export const timelineItems: TimelineItem[] = [
     startDate: "2023",
     endDate: "2022",
     description:
-      "I was responsible for the product design and branding of the app. I was also responsible for the design of the app. I was also responsible for the design of the app. I was also responsible for the design of the app. I was also responsible for the design of the app. I was also responsible for the design of the app.",
+      "I was responsible for product design and branding. Worked on maintaining and improving their experiences features while helping develop their HR tech product.",
     avatar: avatar7,
     categories: ["HR Tech"],
   },
@@ -61,7 +61,7 @@ export const timelineItems: TimelineItem[] = [
     startDate: "2020",
     endDate: "2022",
     description:
-      "I was the lead product designer at Tropic App. I was responsible for the product design and branding of the app. I was also responsible for the design of the app. I was also responsible for the design of the app. I was also responsible for the design of the app. I was also responsible for the design of the app. I was also responsible for the design of the app.",
+      "Worked on a product overhaul by redesigning their core product and helping develop the initial advertising intelligence features. Plus, I helped develop Teikametrics' first design system and design language.",
     avatar: avatar3,
     categories: ["MarTech", "AI", "eCommerce", "Advertising"],
   },
@@ -72,7 +72,7 @@ export const timelineItems: TimelineItem[] = [
     startDate: "2014",
     endDate: "2020",
     description:
-      "I was the lead product designer at Tropic App. I was responsible for the product design and branding of the app. I was also responsible for the design of the app. I was also responsible for the design of the app. I was also responsible for the design of the app. I was also responsible for the design of the app. I was also responsible for the design of the app.",
+      "Owned the product roadmap and worked on the initial product design and strategy for Rejoiner's reshaping of their core offering.",
     avatar: avatar4,
     categories: ["eCommerce", "Email Marketing"],
   },
@@ -83,7 +83,7 @@ export const timelineItems: TimelineItem[] = [
     startDate: "2013",
     endDate: "2014",
     description:
-      "I was the lead product designer at Tropic App. I was responsible for the product design and branding of the app. I was also responsible for the design of the app. I was also responsible for the design of the app. I was also responsible for the design of the app. I was also responsible for the design of the app. I was also responsible for the design of the app.",
+      "Led efforts on Venly's strategy and helped build branding and websites for their customers who were small local businesses charted in the greater Boston area.",
     avatar: avatar5,
     categories: ["Local Commerce"],
   },

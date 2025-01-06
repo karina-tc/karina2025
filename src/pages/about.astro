@@ -46,26 +46,38 @@ import framebg from "../assets/avatars/avatar-4.png";
     <div class="layout--two-columns__right relative">
       {/* Introduction */}
       <SectionContainer id="introduction">
-        <h2>My Background</h2>
+        <SubSection
+          label="brief history"
+          title="My Background"
+          show_link={false}
+          include_classes="lg:mt-10"
+        />
         <p class="copy-large mt-6">
           I am an artist, turned product designer, who likes to code and make
-          things
+          things.
         </p>
         <p>
           I have a background in the Fine Arts, with a MFA from the
           Massachusetts College of Art & Design. There I was part of the Studio
           for Interrelated Media where I made artwork focused on performative
-          technology. That just means that I obsessed over the intersection of
-          technology and human happiness. I worked on a lot of performance art
-          pieces that lived outside of the museum so I could create room for joy
-          in the mundane.
+          technology. There I made a lot of performanc based pieces that lived
+          outside of the museum so I could create room for joy in the mundane.
+        </p>
+        <p>
+          All in all, that just means that I am obsessed over how technology can
+          be used to make people truly happier. One pixel, one bit, one thought
+          at a time.
         </p>
       </SectionContainer>
 
       {/* Tenets Section */}
       <SectionContainer id="tenets" spacing="lg">
-        <AtomSymbol include_classes="w-20 h-20 mb-10" />
-        <h2>My Design Tenets</h2>
+        <SubSection
+          label="philosophy"
+          title="My Design Tenets"
+          show_link={false}
+          include_classes="mt-10"
+        />
         <div class="grid grid-cols-1 gap-8 mt-8 w-full">
           <TenetCard items={tenets} />
         </div>

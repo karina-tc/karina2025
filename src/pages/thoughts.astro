@@ -2,7 +2,6 @@
 // Component Imports
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/structure/Header.astro";
-import GridContainer from "../components/structure/GridContainer.astro";
 import SectionContainer from "../components/structure/SectionContainer.astro";
 import ListItem from "../components/elements/ListItem.astro";
 import ListItemHeader from "../components/elements/ListItemHeader.astro";
@@ -72,7 +71,7 @@ const formatDate = (dateString: string) => {
       </figure>
 
       {/* Notebooks Section */}
-      <SectionContainer id="notebooks" spacing="lg" include_classes="z-base">
+      <SectionContainer id="notebooks" spacing="xs" include_classes="z-base">
         <h2>Notebooks</h2>
         <div class="writing-list">
           {
@@ -96,7 +95,7 @@ const formatDate = (dateString: string) => {
         years.map((year) => {
           const postsForYear = getPostsForYear(year);
           return (
-            <SectionContainer id={`year-${year}`} spacing="lg">
+            <SectionContainer id={`year-${year}`} spacing="xs">
               <h2>{year}</h2>
               <ListItemHeader leftLabel="TITLE" rightLabel="DATE" />
               <div class="writing-list">

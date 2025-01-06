@@ -8,6 +8,7 @@ interface Props {
     description: string;
     image?: ImageMetadata;
     image_text?: string;
+    image_classes?: string;
   }[];
 }
 
@@ -23,7 +24,7 @@ const { items } = Astro.props;
             <Image
               src={item.image}
               alt={item.image_text ?? "Artwork"}
-              class="rounded-xl"
+              class={item.image_classes}
               height={140}
               width={140}
             />
@@ -78,11 +79,11 @@ const { items } = Astro.props;
 
   .tenet-card--image {
     @apply flex items-center justify-center p-3 pr-1 transition-all delay-100;
-    @apply sm:max-w-[120px] max-h-[120px] min-w-[120px] min-h-[120px] overflow-hidden;
+    @apply sm:max-w-[100px] max-h-[100px] min-w-[100px] min-h-[100px] overflow-hidden;
     @apply max-sm:bg-theme-surface-light max-sm:w-full;
 
     img {
-      @apply w-full h-full object-cover max-sm:w-[100px] max-sm:h-[100px] max-sm:mr-auto;
+      @apply w-full h-full object-cover scale-75 max-sm:mr-auto;
     }
   }
 
