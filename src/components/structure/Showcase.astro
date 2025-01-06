@@ -43,7 +43,8 @@ const {
   }
 
   .showcase--image {
-    @apply w-fit relative p-5 overflow-hidden rounded-xl shadow-xl border border-white;
+    @apply w-fit relative p-5 overflow-hidden;
+    @apply rounded-xl shadow-xl border-2 border-white/20;
     @apply group-hover:shadow-2xl transition-all duration-300;
 
     & img {
@@ -56,18 +57,19 @@ const {
   }
 
   .showcase--logo {
-    @apply flex items-center justify-center w-10 h-10 text-white bg-theme-surface-light rounded-full mt-1;
+    @apply flex items-center justify-center w-10 h-10;
+    @apply text-white bg-theme-surface-light rounded-full;
   }
 
   .showcase--description {
-    @apply flex flex-col gap-2;
+    @apply flex flex-col gap-2 [&>*]:my-0;
 
     & h3 {
-      @apply text-2xl font-semibold;
+      @apply font-semibold;
     }
 
     & p {
-      @apply text-sm font-medium;
+      @apply font-medium;
     }
   }
 </style>

@@ -3,6 +3,7 @@
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/structure/Header.astro";
 import GridContainer from "../components/structure/GridContainer.astro";
+import SectionContainer from "../components/structure/SectionContainer.astro";
 import Showcase from "../components/structure/Showcase.astro";
 import MiniShowcaseCard from "../components/structure/MiniShowcaseCard.astro";
 
@@ -11,23 +12,35 @@ import { projects } from "../data/projects";
 import { miniShowcases } from "../data/miniShowcase";
 ---
 
-<Layout pageTitle="Case Studies - Karina Tovar">
-  <GridContainer size="small">
-    <Header title="Work Showcase" />
-    <h2 class="text-4xl font-semibold opacity-50">Case Studies</h2>
-  </GridContainer>
+<Layout pageTitle="Case Studies - Karina Tovar" pageBottomPadding={false}>
+  <div class="layout--two-columns">
+    <div class="layout--two-columns__left glued">
+      <SectionContainer>
+        <Header
+          title="Work Showcase"
+          subtitle="Case Studies"
+        />
+      </SectionContainer>
+    </div>
 
-  <div class="showcase-container">
-    {projects.map((project) => <Showcase {...project} />)}
+    <div class="layout--two-columns__right">
+      <div class="showcase-container">
+        {projects.map((project) => <Showcase {...project} />)}
+      </div>
+    </div>
   </div>
 
-  <GridContainer size="small">
-    <h2 class="text-4xl font-semibold opacity-50 mt-20">Little Pixels Showcase</h2>
-  </GridContainer>
-
-  <div class="mini-showcase-grid">
-    {miniShowcases.map((showcase) => <MiniShowcaseCard {...showcase} />)}
-  </div>
+  <SectionContainer include_classes="mt-20">
+    <div class="mini-showcase-container">
+      <h2>
+        Little Pixels Showcase
+      </h2>
+      <div class="mini-showcase-grid">
+        {miniShowcases.map((showcase) => <MiniShowcaseCard {...showcase} />)}
+      </div>
+      <div class="w-full p-10"></div>
+    </div>
+  </SectionContainer>
 </Layout>
 
 <style>
@@ -35,7 +48,14 @@ import { miniShowcases } from "../data/miniShowcase";
     @apply flex flex-col items-center gap-20 mx-auto max-w-screen-base;
   }
 
+
+  .mini-showcase-container {
+    @apply flex flex-col gap-10 py-10 px-10;
+    @apply lg:px-20 bg-theme-surface-dark;
+    @apply w-screen lg:-ml-20 ml-10 -mb-16;
+  }
+
   .mini-showcase-grid {
-    @apply max-w-screen-base mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8;
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-8;
   }
 </style>

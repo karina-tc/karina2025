@@ -14,11 +14,13 @@ import texture from "../assets/backgrounds/2-texture.png";
 interface Props {
   pageTitle?: string;
   pageDescription?: string;
+  pageBottomPadding?: boolean;
 }
 
 const {
   pageTitle = "Karina Tovar",
   pageDescription = "Pixel Philosopher Cautious Technologist",
+  pageBottomPadding = true,
 } = Astro.props;
 
 // Get the current path
@@ -38,7 +40,7 @@ const isHomePage = currentPath === "/";
           <slot />
         </div>
       </main>
-      <div class="p-20"></div>
+      {pageBottomPadding && <div class="p-20"></div>}
       <Footer />
     </div>
   </body>
