@@ -72,7 +72,9 @@ body {
 }
 
 .main {
-  @apply mx-auto w-full px-10 pb-10 flex flex-col justify-center items-center z-10 relative min-h-fit;
+  @apply mx-auto w-full px-10 lg:px-20 pb-10;
+  @apply flex flex-col justify-center items-center;
+  @apply z-10 relative min-h-fit;
 }
 
 /* Typography */
@@ -145,4 +147,17 @@ em {
 
 .layout--two-columns__right {
   @apply xl:col-start-12 xl:col-end-22;
+}
+
+/* Thoughts */
+.artwork-wrapper {
+  @apply relative mb-12 rounded-lg overflow-hidden bg-theme-surface-dark;
+}
+
+.loading-overlay {
+  transition: opacity 0.3s ease-out;
+}
+  
+.artwork-wrapper img {
+  transition: opacity 0.3s ease-out;
 }

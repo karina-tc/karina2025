@@ -1,0 +1,63 @@
+---
+// Props
+interface Props {
+  classes?: string;
+}
+
+const { classes = "" } = Astro.props;
+---
+
+<div id="splash-logo" class={classes}>
+  <svg
+    width="520"
+    height="520"
+    viewBox="0 0 520 520"
+    fill="red"
+    class="splash-logo-stroke animate-path"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M134.66 15.1387C47.9158 2.32967 35.2461 98.198 23.4286 178.109C-21.4652 481.683 56.3273 506.028 108.132 509.803C177.997 514.893 184.632 420.306 233.631 369.2C300.73 299.217 467.361 488.239 505.851 369.2C536.443 274.59 389.025 290.591 352.804 240.102C316.583 189.613 456.961 182.712 469.63 121.868C478.285 80.3039 455.838 35.8758 416.064 15.1387C340.052 -24.4913 278.525 178.109 233.631 178.109C188.737 178.109 251.041 32.3238 134.66 15.1387Z"
+      stroke="#cab9ff"
+      stroke-width="20"
+    >
+    </path>
+  </svg>
+</div>
+
+<style>
+  #splash-logo {
+    @apply relative;
+  }
+
+  .splash-logo-stroke {
+    @apply w-full h-full absolute inset-0;
+  }
+
+  .animate-path {
+    stroke: currentColor;
+    fill: transparent;
+    stroke-dasharray: 100000;
+    stroke-dashoffset: 100000;
+    animation:
+      drawPath 2s cubic-bezier(0.4, 0, 0.2, 1) forwards,
+      fillIn 0.5s ease forwards 1.8s;
+  }
+
+  @keyframes drawPath {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes fillIn {
+    from {
+      fill: transparent;
+      stroke: currentColor;
+    }
+    to {
+      fill: #cab9ff;
+      stroke: #cab9ff;
+    }
+  }
+</style>

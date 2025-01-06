@@ -22,14 +22,14 @@ const {
 ---
 
 <!doctype html>
-<html lang="en" data-theme="grape">
+<html lang="en" data-theme="dark">
   <CommonHead {pageTitle} {pageDescription} />
 
   <body>
     <!-- Background style={`background-image: url(${texture.src})`} -->
     <div class="root bg-contain bg-repeat">
+      <StickyNav />
       <main class="main">
-        <StickyNav />
         <div class="content">
           <slot />
         </div>

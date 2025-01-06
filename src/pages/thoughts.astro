@@ -9,8 +9,7 @@ import ListItemHeader from "../components/elements/ListItemHeader.astro";
 
 // Images
 import { Image } from "astro:assets";
-import colbg from "../assets/illustrations/thoughts-light.png";
-import colbgDark from "../assets/illustrations/thoughts-dark.png";
+import colbg from "../assets/illustrations/thoughts-dark.png";
 
 // Data Fetching
 import { getThoughts } from "../lib/notion";
@@ -62,16 +61,15 @@ const formatDate = (dateString: string) => {
     </div>
 
     <div class="layout--two-columns__right relative">
-      <div class="flex justify-center items-center absolute inset-0 animate-slow-fade-in">
+      <figure class="background-collage">
         <Image
           src={colbg}
           alt="Thoughts Background"
-          class="theme-image m-auto max-w-[300px] sm:max-w-[400px] lg:max-w-[500px] opacity-50 xl:opacity-90"
           width={600}
           height={600}
           id="themeImage"
         />
-      </div>
+      </figure>
 
       {/* Notebooks Section */}
       <SectionContainer id="notebooks" spacing="lg" include_classes="z-base">
@@ -126,16 +124,13 @@ const formatDate = (dateString: string) => {
   .writing-list {
     @apply space-y-3 mt-2 relative w-full;
   }
-</style>
 
-<script define:vars={{ 
-  optimizedLightImage: colbg,
-  optimizedDarkImage: colbgDark 
-}}>
-  import { initThemeImageSwitcher } from '../utils/themeImageSwitcher';
-  
-  initThemeImageSwitcher('themeImage', {
-    light: optimizedLightImage.src,
-    dark: optimizedDarkImage.src
-  });
-</script>
+  .background-collage {
+    @apply flex justify-center items-center absolute inset-0 animate-slow-fade-in;
+    filter: drop-shadow(0px 8px 12px black);
+
+    img {
+      @apply max-w-[300px] sm:max-w-[400px] lg:max-w-[500px] opacity-50 xl:opacity-50;
+    }
+  }
+</style>

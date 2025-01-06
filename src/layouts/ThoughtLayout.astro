@@ -1,6 +1,6 @@
 ---
 // Global Styles
-import '../styles/global.css';
+import "../styles/global.css";
 
 // Components
 import Layout from "./Layout.astro";
@@ -84,11 +84,6 @@ const breadcrumbs = [
 </Layout>
 
 <style>
-  /* Layout Components */
-  .artwork-wrapper {
-    @apply relative mb-12 rounded-lg overflow-hidden bg-stone-100;
-  }
-
   /* Prose Base Styles */
   .prose {
     @apply font-safiro min-w-full
@@ -131,13 +126,15 @@ const breadcrumbs = [
 
   /* Heading Styles */
   .prose :global(h2) {
-    @apply text-theme-ink text-3xl font-semibold mt-12;
+    @apply text-theme-ink font-semibold mt-12;
+    @apply text-3xl;
     @apply [&:not(:first-of-type)]:mt-24;
     @apply [&:not(:last-of-type)]:mb-6;
   }
 
   .prose :global(h3) {
-    @apply text-theme-ink text-xl font-semibold mt-8 tracking-normal opacity-70;
+    @apply text-theme-ink text-xl font-semibold;
+    @apply mt-8 tracking-normal opacity-70;
     @apply [&:not(:first-of-type)]:mt-8;
     @apply [&:not(:last-of-type)]:mb-6;
     text-transform: none;
@@ -191,7 +188,8 @@ const breadcrumbs = [
   /* Code Styles */
   .prose :global(:not(pre) code),
   .prose :global(.notion-inline-code:not(pre *)) {
-    @apply text-sm px-1.5 py-0.5 font-semibold rounded font-mono text-theme-ink bg-theme-surface-light;
+    @apply text-sm px-1.5 py-0.5 font-semibold rounded;
+    @apply font-mono text-theme-ink bg-theme-surface-light;
     &::before,
     &::after {
       content: none;
@@ -204,14 +202,5 @@ const breadcrumbs = [
       border border-white border-t-theme-stroke 
       border-t-4 
       shadow-lg shadow-[#6c5f3c]/20;
-  }
-
-  /* Animation Styles */
-  .loading-overlay {
-    transition: opacity 0.3s ease-out;
-  }
-
-  .artwork-wrapper img {
-    transition: opacity 0.3s ease-out;
   }
 </style>

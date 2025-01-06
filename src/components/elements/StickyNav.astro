@@ -1,26 +1,32 @@
 ---
+// Components
 import Logo from "./Logo.astro";
+import SplashLogo from "./SplashLogo.astro";
+
+// Props
 const { pathname } = Astro.url;
 
+// Nav Items
 const navItems = [
   { href: "/", label: "Intro", paths: ["/"] },
   { href: "/about", label: "About", paths: ["/about"] },
   { href: "/work", label: "Work", paths: ["/work"] },
-  { href: "/thoughts", label: "Thoughts", paths: ["/thoughts", "/notebooks"] }
+  { href: "/thoughts", label: "Thoughts", paths: ["/thoughts", "/notebooks"] },
 ];
 
+// Defines Active State for Nav Items
 const isActive = (paths: string[]) => {
   if (paths.includes("/")) {
     return pathname === "/";
   }
-  return paths.some(path => pathname.startsWith(path));
+  return paths.some((path) => pathname.startsWith(path));
 };
 ---
 
 <nav class="nav">
   <div class="nav-container">
     <a href="/" class="nav-home">
-      <Logo classes="w-10 h-10" />
+      <SplashLogo classes="w-12 h-12" />
       <span class="nav-home-text animate-fade-in"> Karina Tovar</span>
     </a>
     <div class="nav-links">
@@ -38,11 +44,14 @@ const isActive = (paths: string[]) => {
 
 <style>
   .nav {
-    @apply w-[calc(100%+2rem)] flex flex-col justify-between items-center sticky top-0 z-navigation;
+    @apply w-full flex flex-col justify-between items-center;
+    @apply sticky top-0 z-navigation;
   }
 
   .nav-container {
-    @apply flex items-center justify-between w-full flex-wrap space-y-10 bg-theme-paper pt-10 pb-2 px-4;
+    @apply flex items-center justify-between flex-wrap;
+    @apply w-full space-y-10 bg-theme-paper;
+    @apply pt-10 pb-2 px-10 xl:px-20;
   }
 
   .nav-home {
