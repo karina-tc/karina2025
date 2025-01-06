@@ -7,7 +7,7 @@ interface Props {
 const { classes = "" } = Astro.props;
 ---
 
-<div id="splash-logo" class={classes}>
+<div id="splash-logo" class={`${classes}`}>
   <svg
     width="520"
     height="520"
@@ -27,11 +27,22 @@ const { classes = "" } = Astro.props;
 
 <style>
   #splash-logo {
-    @apply relative;
+    @apply flex items-center justify-center h-16 w-16 relative -translate-x-3 -mr-3;
+    @apply bg-theme-paper rounded-full transition-all duration-300;
+
+    &:hover {
+      @apply bg-theme-highlight-lilac;
+
+      svg {
+        @apply w-10 h-10;
+        fill: #031b1a !important;
+      }
+    }
   }
 
   .splash-logo-stroke {
-    @apply w-full h-full absolute inset-0;
+    @apply w-10 h-10 absolute inset-0 transition-all duration-300;
+    @apply translate-x-[14px] translate-y-[12px];
   }
 
   .animate-path {
@@ -40,8 +51,8 @@ const { classes = "" } = Astro.props;
     stroke-dasharray: 100000;
     stroke-dashoffset: 100000;
     animation:
-      drawPath 2s cubic-bezier(0.4, 0, 0.2, 1) forwards,
-      fillIn 0.5s ease forwards 1.8s;
+      drawPath 4s cubic-bezier(0.4, 0, 0.2, 1) forwards,
+      fillIn 0.3s ease forwards 1s;
   }
 
   @keyframes drawPath {
