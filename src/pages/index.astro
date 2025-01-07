@@ -28,7 +28,7 @@ const linkedInTestimonials =
 
 <Layout pageTitle="Karina Tovar">
   <SectionContainer
-    include_classes="h-[70vh] lg:h-[90vh] md:min-w-fit flex flex-col justify-center items-center text-center overflow-hidden"
+    include_classes="min-h-[70vh] lg:h-[90vh] md:min-w-fit flex flex-col justify-center items-center text-center overflow-hidden"
   >
     <div class="hp-image">
       <div class="columns-container">
@@ -37,6 +37,8 @@ const linkedInTestimonials =
           src={columnOutline}
           alt="Column Outline"
           loading="eager"
+          width={260}
+          height={500}
         />
         <Image
           class="column-one"
@@ -63,12 +65,12 @@ const linkedInTestimonials =
           loading="lazy"
         />
       </div>
-      <Image class="arch" src={archbg} alt="Arch" loading="eager" />
+      <Image class="arch" src={archbg} alt="Arch" loading="eager" width={500} height={500} />
     </div>
     <div class="hp-headline">
       <h1>Pixel Philosopher</h1>
       <span>Cautious Technologist</span>
-      <p>
+      <p class="px-4 md:px-0">
         Hi, friend. My name is Karina and I am a product designer and coder who
         loves to build products that aim to make people's lives happier.
       </p>
@@ -82,9 +84,7 @@ const linkedInTestimonials =
     </div>
   </SectionContainer>
 
-  <SectionContainer
-    include_classes="my-20 bg-theme-surface-dark text-white max-xl:px-20 !-ml-20 min-w-[100vw]"
-  >
+  <SectionContainer>
     <GridContainer spacing="md" include_classes="[&>p]:text-2xl max-w-3xl pb-0">
       <h2>What I Believe</h2>
       <p class="copy-extra-large">
@@ -173,6 +173,42 @@ const linkedInTestimonials =
 </Layout>
 
 <style>
+  :root {
+    --badge-animation-duration: 3s;
+    --column-width-desktop: 260px;
+    --column-width-mobile: 220px;
+  }
+
+  .columns-container img {
+    will-change: opacity, transform;
+    @apply w-[500px] transition-all duration-1000;
+  }
+
+  .badge {
+    will-change: transform;
+    transform: rotate(var(--rotation)) translateY(var(--float-offset, 0));
+  }
+
+  @keyframes float {
+    0%, 100% {
+      --float-offset: 0px;
+    }
+    50% {
+      --float-offset: -10px;
+    }
+  }
+
+  .testimonials-container {
+    container-type: inline-size;
+    @apply grid gap-10 pt-10 max-w-screen-base-md mx-auto;
+  }
+
+  @container (min-width: 400px) {
+    .testimonials-container {
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    }
+  }
+
   .showcase-container {
     @apply w-full overflow-x-scroll py-10 h-fit flex flex-col gap-32 scroll-smooth mb-10;
     -webkit-overflow-scrolling: touch;
@@ -348,34 +384,117 @@ const linkedInTestimonials =
     animation-delay: 2s;
     --rotation: -15deg;
   }
+
+  /* Responsive typography using clamp */
+  .hp-headline h1 {
+    @apply mb-0 font-bold;
+    font-size: clamp(3rem, 8vw, 10rem);
+    line-gradient: var(--gradient-primary);
+  }
+
+  .hp-headline span {
+    font-size: clamp(1.5rem, 4vw, 3rem);
+  }
+
+  /* Improved responsive image handling */
+  .hp-image {
+    @apply flex justify-center items-center animate-slow-fade-in absolute inset-0;
+  }
+
+  .hp-image img.arch {
+    width: clamp(280px, 50vw, 500px);
+    @apply absolute opacity-15 lg:opacity-30;
+    transform: translateY(clamp(-8px, -1vw, -16px));
+  }
+
+  .columns-container {
+    @apply flex justify-center items-center relative z-10;
+    
+    img.column-outline {
+      width: clamp(180px, 30vw, 260px);
+      @apply absolute z-[1];
+    }
+  }
+
+  /* Responsive badge positioning */
+  .hp-badges {
+    @apply relative z-10 w-full px-4 md:w-[80%] mx-auto;
+    height: clamp(150px, 30vh, 200px);
+  }
+
+  .badge {
+    @apply px-3 py-1.5 md:px-4 md:py-2 rounded-md absolute;
+    font-size: clamp(0.65rem, 1.5vw, 0.875rem);
+  }
+
+  /* Responsive badge positions */
+  @media (max-width: 640px) {
+    .badge-1 { @apply left-[2%] top-[10%] rotate-[-8deg]; }
+    .badge-2 { @apply left-[45%] top-[20%] rotate-[5deg]; }
+    .badge-3 { @apply left-[10%] top-[45%] rotate-[-3deg]; }
+    .badge-4 { @apply left-[35%] top-[60%] rotate-[6deg]; }
+    .badge-5 { @apply left-[15%] top-[75%] rotate-[-10deg]; }
+  }
+
+  @media (min-width: 641px) and (max-width: 1023px) {
+    .badge-1 { @apply left-[5%] top-[15%] rotate-[-10deg]; }
+    .badge-2 { @apply left-[60%] top-[25%] rotate-[6deg]; }
+    .badge-3 { @apply left-[25%] top-[40%] rotate-[-4deg]; }
+    .badge-4 { @apply left-[55%] top-[60%] rotate-[8deg]; }
+    .badge-5 { @apply left-[20%] top-[70%] rotate-[-12deg]; }
+  }
+
+  /* Responsive grid layouts */
+  .testimonials-container {
+    container-type: inline-size;
+    @apply grid gap-5 md:gap-10 pt-5 md:pt-10;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
+  }
+
+  .showcase-container {
+    @apply w-full py-5 md:py-10 gap-16 md:gap-32;
+  }
+
+  /* Improved text readability on mobile */
+  .skills-container {
+    @apply flex flex-col gap-2 pb-16 md:pb-28 px-4 md:px-0;
+  }
+
+  /* Add smooth transitions for responsive changes */
+  .columns-container,
+  .hp-headline,
+  .badge {
+    @apply transition-all duration-300 ease-in-out;
+  }
 </style>
 
 <script>
   function cycleColumns() {
-    const columns = [
-      document.querySelector(".column-one"),
-      document.querySelector(".column-two"),
-      document.querySelector(".column-three"),
-      document.querySelector(".column-four"),
-    ];
-
+    const columns = Array.from(document.querySelectorAll('.column-one, .column-two, .column-three, .column-four'));
     let currentIndex = 0;
+    let previousTime = 0;
+    const INTERVAL = 1000;
 
     // Set initial state
-    columns[0]?.classList.add("active");
+    columns[0]?.classList.add('active');
 
-    setInterval(() => {
-      // Remove active class from current column
-      columns[currentIndex]?.classList.remove("active");
+    function animate(currentTime: number) {
+      if (currentTime - previousTime >= INTERVAL) {
+        columns[currentIndex]?.classList.remove('active');
+        currentIndex = (currentIndex + 1) % columns.length;
+        columns[currentIndex]?.classList.add('active');
+        previousTime = currentTime;
+      }
+      requestAnimationFrame(animate);
+    }
 
-      // Move to next column
-      currentIndex = (currentIndex + 1) % columns.length;
-
-      // Add active class to next column
-      columns[currentIndex]?.classList.add("active");
-    }, 1000); // Change every 1 second
+    requestAnimationFrame(animate);
   }
 
-  // Start the animation when the page loads
-  document.addEventListener("DOMContentLoaded", cycleColumns);
+  // Use more efficient event listener
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', cycleColumns);
+  } else {
+    cycleColumns();
+  }
 </script>
