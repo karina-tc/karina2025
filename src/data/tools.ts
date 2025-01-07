@@ -1,4 +1,4 @@
-import paper from "../assets/other/paper.png";
+import paper from "../assets/other/book.png";
 import notion from "../assets/logos/notion.png";
 import figma from "../assets/logos/figma.png";
 import cursor from "../assets/logos/cursor.png";

@@ -44,9 +44,9 @@ export default {
         },
         dark: {
           'paper': '#031B1A',
-          'ink': '#E1FED4',
+          'ink': '#E7FDD7',
           'ink-secondary': '#5b5376',
-          'ink-reverse': '#E1FED4',
+          'ink-reverse': '#E7FDD7',
           'ink-dark': '#031B1A',
           'stroke': '#cdd9cf',
           'surface-light': '#042928',

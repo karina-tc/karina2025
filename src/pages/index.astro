@@ -1,8 +1,6 @@
 ---
 // Components
 import Layout from "../layouts/Layout.astro";
-import AtomSymbol from "../components/elements/AtomSymbol.astro";
-import Header from "../components/structure/Header.astro";
 import GridContainer from "../components/structure/GridContainer.astro";
 import SectionContainer from "../components/structure/SectionContainer.astro";
 import Details from "../components/elements/Details.astro";
@@ -12,33 +10,76 @@ import SubSection from "../components/structure/SubSection.astro";
 
 // Assets
 import { Image } from "astro:assets";
-import colbg from "../assets/illustrations/thoughts-dark.png";
+import archbg from "../assets/backgrounds/arch.png";
+import columnOutline from "../assets/backgrounds/column-outline.svg";
+import columnOne from "../assets/backgrounds/Column-1.png";
+import columnTwo from "../assets/backgrounds/Column-2.png";
+import columnThree from "../assets/backgrounds/Column-3.png";
+import columnFour from "../assets/backgrounds/Column-4.png";
+
 // Data
 import { projects } from "../data/projects";
 import { testimonials } from "../data/testimonials";
+
+// Links
+const linkedInTestimonials =
+  "https://www.linkedin.com/in/karina-tovar-castro/details/recommendations/?detailScreenTabIndex=0";
 ---
 
 <Layout pageTitle="Karina Tovar">
   <SectionContainer
-    include_classes="max-w-screen-base-md mx-auto h-[80vh] flex flex-col justify-center items-center"
+    include_classes="h-[70vh] lg:h-[90vh] md:min-w-fit flex flex-col justify-center items-center text-center overflow-hidden"
   >
-    <div
-      class="flex justify-center items-center absolute inset-0 animate-slow-fade-in"
-    >
-      <Image
-        src={colbg}
-        alt="Thoughts Background"
-        class="theme-image m-auto max-w-[300px] sm:max-w-[400px] lg:max-w-[500px] opacity-50 xl:opacity-90"
-        width={600}
-        height={600}
-        id="themeImage"
-      />
+    <div class="hp-image">
+      <div class="columns-container">
+        <Image
+          class="column-outline"
+          src={columnOutline}
+          alt="Column Outline"
+          loading="eager"
+        />
+        <Image
+          class="column-one"
+          src={columnOne}
+          alt="Column One"
+          loading="eager"
+        />
+        <Image
+          class="column-two"
+          src={columnTwo}
+          alt="Column Two"
+          loading="lazy"
+        />
+        <Image
+          class="column-three"
+          src={columnThree}
+          alt="Column Three"
+          loading="lazy"
+        />
+        <Image
+          class="column-four"
+          src={columnFour}
+          alt="Column Four"
+          loading="lazy"
+        />
+      </div>
+      <Image class="arch" src={archbg} alt="Arch" loading="eager" />
     </div>
-    <AtomSymbol include_classes="w-20 h-20 mt-10" />
-    <Header
-      title="Pixel Philosopher, Cautious Technologist"
-      subtitle="Hi, friend. My name is Karina and I am a product designer and coder who loves to build products that aim to make people's lives happier."
-    />
+    <div class="hp-headline">
+      <h1>Pixel Philosopher</h1>
+      <span>Cautious Technologist</span>
+      <p>
+        Hi, friend. My name is Karina and I am a product designer and coder who
+        loves to build products that aim to make people's lives happier.
+      </p>
+    </div>
+    <div class="hp-badges">
+      <span class="badge badge-1">Product Designer</span>
+      <span class="badge badge-2">Design Engineer</span>
+      <span class="badge badge-3">Strategy Divination</span>
+      <span class="badge badge-4">Systems Thinker</span>
+      <span class="badge badge-5">Joy Evangelist</span>
+    </div>
   </SectionContainer>
 
   <SectionContainer
@@ -77,7 +118,7 @@ import { testimonials } from "../data/testimonials";
       <h2>What I Can Do</h2>
       <div class="skills-container [&>details]:-mb-[9px]">
         <Details
-          html_data={{ open: true }}
+          html_data={{ open: "true" }}
           summary_text="Full-stack product builder"
         >
           I've helped startup companies of all sizes build products from the
@@ -102,7 +143,7 @@ import { testimonials } from "../data/testimonials";
   <SectionContainer include_classes="max-w-screen-base-md mx-auto">
     <SubSection
       label="Work"
-      title="Most recent projects"
+      title="Most Recent Projects"
       show_link={true}
       link_label="See All Work"
       link_hover_label="View Case Studies"
@@ -117,11 +158,12 @@ import { testimonials } from "../data/testimonials";
   <SectionContainer include_classes="max-w-screen-base-md mx-auto my-20">
     <SubSection
       label="Testimonials"
-      title="What people say"
+      title="What People Say"
       show_link={true}
       link_label="See More"
       link_hover_label="View in Linkedin"
-      link_href="/testimonials"
+      link_href={linkedInTestimonials}
+      link_html_attributes={{ target: "_blank" }}
     />
 
     <div class="testimonials-container">
@@ -132,7 +174,7 @@ import { testimonials } from "../data/testimonials";
 
 <style>
   .showcase-container {
-    @apply w-full overflow-x-scroll py-10 h-fit flex flex-col gap-4 scroll-smooth mb-10;
+    @apply w-full overflow-x-scroll py-10 h-fit flex flex-col gap-32 scroll-smooth mb-10;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     scroll-snap-type: x mandatory;
@@ -148,4 +190,192 @@ import { testimonials } from "../data/testimonials";
   .testimonials-container {
     @apply grid grid-cols-[repeat(auto-fill,minmax(400px,1fr))] gap-10 pt-10 max-w-screen-base-md mx-auto;
   }
+
+  .hp-headline {
+    @apply flex flex-col justify-center items-center gap-5 relative z-10;
+
+    h1 {
+      @apply text-[5rem] md:text-[6rem] lg:text-[10rem] mb-0 font-bold;
+      filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+    }
+
+    span {
+      @apply text-5xl;
+    }
+
+    p {
+      @apply max-w-xl mx-auto;
+    }
+  }
+
+  .hp-image {
+    @apply flex justify-center items-center animate-slow-fade-in absolute inset-0;
+
+    img.arch {
+      @apply w-[380px] lg:w-[500px] absolute opacity-15 lg:opacity-30 lg:-mt-16;
+    }
+  }
+
+  .columns-container {
+    @apply flex justify-center items-center gap-10 relative z-10;
+    @apply transition-all duration-300 mix-blend-multiply;
+
+    img {
+      @apply w-[500px] transition-all duration-1000;
+    }
+
+    img.column-outline {
+      @apply w-[220px] lg:w-[260px] absolute z-[1] translate-x-[10px];
+    }
+
+    img.column-one {
+      @apply opacity-50 lg:opacity-90;
+    }
+
+    img.column-two,
+    img.column-three,
+    img.column-four {
+      @apply opacity-0 absolute inset-0;
+    }
+
+    img.active {
+      @apply opacity-35 lg:opacity-90;
+    }
+  }
+
+  .hp-badges {
+    @apply relative z-10 w-[80%] mx-auto h-48;
+    @apply flex justify-center items-center relative;
+  }
+
+  .badge {
+    @apply px-4 py-2 rounded-md absolute;
+    @apply text-center text-xs lg:text-sm font-semibold text-white;
+    @apply uppercase tracking-wider border border-white/80 drop-shadow-xl;
+    @apply backdrop-blur-md transition-all duration-500 transform-gpu;
+    white-space: nowrap;
+  }
+
+  /* Desktop positions */
+
+  .badge-1 {
+    @apply left-[5%] top-[15%] rotate-[-12deg];
+    @apply bg-gradient-to-r from-green-500 to-blue-500;
+  }
+
+  .badge-2 {
+    @apply left-[75%] top-[20%] rotate-[8deg];
+    @apply bg-gradient-to-r from-yellow-500 to-orange-500;
+  }
+
+  .badge-3 {
+    @apply left-[40%] top-[35%] rotate-[-5deg];
+    @apply bg-gradient-to-r from-pink-500 to-purple-500;
+  }
+
+  .badge-4 {
+    @apply left-[70%] top-[65%] rotate-[10deg];
+    @apply bg-gradient-to-r from-indigo-500 to-yellow-500;
+  }
+
+  .badge-5 {
+    @apply left-[20%] top-[70%] rotate-[-15deg];
+    @apply bg-gradient-to-r from-indigo-500 to-pink-500;
+  }
+
+  /* Mobile positions - more centered */
+  @media (max-width: 1023px) {
+    .badge-1 {
+      @apply left-[0%] top-[10%];
+      transform: rotate(-8deg);
+    }
+
+    .badge-2 {
+      @apply left-[50%] top-[25%];
+      transform: rotate(5deg);
+    }
+
+    .badge-3 {
+      @apply left-[15%] top-[40%];
+      transform: rotate(-3deg);
+    }
+
+    .badge-4 {
+      @apply left-[40%] top-[55%];
+      transform: rotate(6deg);
+    }
+
+    .badge-5 {
+      @apply left-[25%] top-[70%];
+      transform: rotate(-10deg);
+    }
+  }
+
+  @keyframes float {
+    0% {
+      transform: rotate(var(--rotation)) translateY(0px);
+    }
+    50% {
+      transform: rotate(var(--rotation)) translateY(-10px);
+    }
+    100% {
+      transform: rotate(var(--rotation)) translateY(0px);
+    }
+  }
+
+  .badge {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  /* Stagger the animations and set rotations */
+  .badge-1 {
+    animation-delay: 0s;
+    --rotation: -12deg;
+  }
+  .badge-2 {
+    animation-delay: 0.5s;
+    --rotation: 8deg;
+  }
+  .badge-3 {
+    animation-delay: 1s;
+    --rotation: -5deg;
+  }
+  .badge-4 {
+    animation-delay: 1.5s;
+    --rotation: 10deg;
+  }
+  .badge-5 {
+    animation-delay: 2s;
+    --rotation: -15deg;
+  }
 </style>
+
+<script>
+  function cycleColumns() {
+    const columns = [
+      document.querySelector(".column-one"),
+      document.querySelector(".column-two"),
+      document.querySelector(".column-three"),
+      document.querySelector(".column-four"),
+    ];
+
+    let currentIndex = 0;
+
+    // Set initial state
+    columns[0]?.classList.add("active");
+
+    setInterval(() => {
+      // Remove active class from current column
+      columns[currentIndex]?.classList.remove("active");
+
+      // Move to next column
+      currentIndex = (currentIndex + 1) % columns.length;
+
+      // Add active class to next column
+      columns[currentIndex]?.classList.add("active");
+    }, 1000); // Change every 1 second
+  }
+
+  // Start the animation when the page loads
+  document.addEventListener("DOMContentLoaded", cycleColumns);
+</script>

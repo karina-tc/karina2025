@@ -44,7 +44,7 @@ const { title, content, author, role, company, avatar } = Astro.props;
   .testimonial-card {
     @apply flex flex-col justify-between gap-1 bg-theme-surface-light p-8 rounded-xl min-h-[450px];
     @apply border-[2px] border-transparent transition-all duration-[250ms] ease-out transform;
-    @apply hover:border-white;
+    @apply hover:border-white/20;
   }
 
   .testimonial-card--content {
@@ -64,7 +64,7 @@ const { title, content, author, role, company, avatar } = Astro.props;
   }
 
   .author-avatar-wrapper {
-    @apply w-14 h-14 min-w-14 min-h-14 rounded-3xl border-2 border-white overflow-hidden;
+    @apply w-14 h-14 min-w-14 min-h-14 rounded-3xl overflow-hidden;
     @apply opacity-0 transition-all duration-[250ms] ease-out;
     @apply -translate-x-14 group-hover:translate-x-0 group-hover:opacity-100 group-hover:delay-100;
   }
