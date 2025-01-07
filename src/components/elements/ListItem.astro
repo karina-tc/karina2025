@@ -58,12 +58,19 @@ const {
 
 <style>
   .listing-item {
-    @apply flex items-center gap-4 py-3 rounded-xl w-full overflow-hidden;
-    @apply hover:px-3 hover:-ml-3 hover:w-[calc(100%+1.5rem)] transition-all duration-300;
+    @apply flex items-center gap-4 py-3 px-3 -ml-3 mb-3 rounded-xl;
+    @apply overflow-hidden w-[calc(100%+1.5rem)];
+  }
+
+  @screen md {
+    .listing-item {
+      @apply px-0 -ml-0 mb-0 w-full transition-all duration-300;
+      @apply hover:px-3 hover:-ml-3 hover:w-[calc(100%+1.5rem)] transition-all duration-300;
+    }
   }
 
   .listing-label {
-    @apply z-[1] shrink-0;
+    @apply z-[1] shrink-0 max-xl:group-hover:underline;
   }
 
   .listing-dots {
@@ -75,6 +82,13 @@ const {
   }
 
   .listing-hover-overlay {
-    @apply absolute inset-0 bg-theme-surface-light w-0 opacity-0 transition-all duration-300 group-hover:w-full group-hover:opacity-100;
+    @apply absolute inset-0 bg-theme-surface-light w-full opacity-0;
+  }
+
+  @screen md {
+    .listing-hover-overlay {
+      @apply absolute inset-0 bg-theme-surface-light w-0 opacity-0;
+      @apply transition-all duration-300 group-hover:w-full group-hover:opacity-100;
+    }
   }
 </style>

@@ -9,6 +9,7 @@ import AtomSymbol from "../components/elements/AtomSymbol.astro";
 import PersonalSection from "../components/sections/about/PersonalSection.astro";
 import ToolsSection from "../components/sections/about/ToolsSection.astro";
 import SubSection from "../components/structure/SubSection.astro";
+import ProfileFrame from "../components/elements/ProfileFrame.astro";
 
 // Data
 import { timelineItems } from "../data/timeline";
@@ -32,6 +33,7 @@ import framebg from "../assets/avatars/avatar-4.png";
         class="profile-frame"
         style={`background-image: url(${framebg.src})`}
       >
+        <ProfileFrame />
         <Image
           src={karina}
           alt="Karina Tovar"
@@ -112,7 +114,20 @@ import framebg from "../assets/avatars/avatar-4.png";
 
 <style>
   .profile-frame {
-    @apply flex justify-center items-center w-fit pt-20 rounded-t-full bg-theme-highlight-orange overflow-hidden bg-cover bg-center;
+    @apply flex justify-center items-center w-fit pt-20;
+    @apply rounded-t-full bg-theme-highlight-orange;
+    @apply overflow-hidden bg-cover bg-center relative;
+    @apply xl:mx-0 md:ml-[15%] max-xl:mb-10 ;
+  }
+
+  .profile-frame--svg {
+    @apply absolute top-0 left-0 w-full h-full xl:max-w-[45vh];
+    @apply flex justify-center items-end;
+    @apply max-xl:max-w-[85%] max-xl:ml-[12%] max-xl:mt-11;
+
+    svg {
+      @apply w-full h-full xl:max-w-[38vh] xl:h-auto xl:ml-[12%];
+    }
   }
 
   .profile-frame--image {

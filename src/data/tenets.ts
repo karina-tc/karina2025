@@ -10,7 +10,7 @@ export const tenets = [
     description: "Ideas can come from anywhere. Don't let ego get in the way and let your team's success blossom.",
     image: image1,
     image_text: "Flower",
-    image_classes: "max-w-[80px]"
+    image_classes: "max-w-[70px] min-w-[70px]"
   },
   {
     number: "02",
@@ -18,7 +18,7 @@ export const tenets = [
     description: "Work as fast as you can to understand the problem and deliver a worthwhile strategic solution.",
     image: image2,
     image_text: "Paper",
-    image_classes: "max-w-[70px]"
+    image_classes: "min-w-[60px] max-w-[60px]"
   },
   {
     number: "03",
@@ -26,13 +26,14 @@ export const tenets = [
     description: "Design should be accessible to everyone. It's the right thing and it makes your product feel more human.",
     image: image3,
     image_text: "Hand",
-    image_classes: "min-w-[80px]"
+    image_classes: "min-w-[80px] max-w-[80px]"
   },
   {
     number: "04",
     title: "Keep Playing",
     description: "Sketch, sketch, sketch. Go further than building delight. Think of the long term and how your solution can grow.",
     image: image4,
-    image_text: "Scribble"
+    image_text: "Scribble",
+    image_classes: "min-w-[80px] max-w-[80px]"
   }
 ]; 
