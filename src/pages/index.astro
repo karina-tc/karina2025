@@ -69,18 +69,10 @@ const linkedInTestimonials =
     </div>
     <div class="hp-headline">
       <h1>Pixel Philosopher</h1>
-      <span>Cautious Technologist</span>
-      <p class="px-4 md:px-0">
-        Hi, friend. My name is Karina and I am a product designer and coder who
-        loves to build products that aim to make people's lives happier.
+      <h1>Cautious Technologist</h1>
+      <p class="copy-large !font-normal">
+        My motivation is to build products that aim to help people have happier days. Life is to short to be ruined by awful experiences. Every product needs to be crafted for human joy.
       </p>
-    </div>
-    <div class="hp-badges">
-      <span class="badge badge-1">Product Designer</span>
-      <span class="badge badge-2">Design Engineer</span>
-      <span class="badge badge-3">Strategy Divination</span>
-      <span class="badge badge-4">Systems Thinker</span>
-      <span class="badge badge-5">Joy Evangelist</span>
     </div>
   </SectionContainer>
 
@@ -174,7 +166,6 @@ const linkedInTestimonials =
 
 <style>
   :root {
-    --badge-animation-duration: 3s;
     --column-width-desktop: 260px;
     --column-width-mobile: 220px;
   }
@@ -182,20 +173,6 @@ const linkedInTestimonials =
   .columns-container img {
     will-change: opacity, transform;
     @apply w-[500px] transition-all duration-1000;
-  }
-
-  .badge {
-    will-change: transform;
-    transform: rotate(var(--rotation)) translateY(var(--float-offset, 0));
-  }
-
-  @keyframes float {
-    0%, 100% {
-      --float-offset: 0px;
-    }
-    50% {
-      --float-offset: -10px;
-    }
   }
 
   .testimonials-container {
@@ -240,7 +217,7 @@ const linkedInTestimonials =
     }
 
     p {
-      @apply max-w-xl mx-auto;
+      @apply max-w-3xl mx-auto;
     }
   }
 
@@ -279,112 +256,6 @@ const linkedInTestimonials =
     }
   }
 
-  .hp-badges {
-    @apply relative z-10 w-[80%] mx-auto h-48;
-    @apply flex justify-center items-center relative;
-  }
-
-  .badge {
-    @apply px-4 py-2 rounded-md absolute;
-    @apply text-center text-xs lg:text-sm font-semibold text-white;
-    @apply uppercase tracking-wider border border-white/80 drop-shadow-xl;
-    @apply backdrop-blur-md transition-all duration-500 transform-gpu;
-    white-space: nowrap;
-  }
-
-  /* Desktop positions */
-
-  .badge-1 {
-    @apply left-[5%] top-[15%] rotate-[-12deg];
-    @apply bg-gradient-to-r from-green-500 to-blue-500;
-  }
-
-  .badge-2 {
-    @apply left-[75%] top-[20%] rotate-[8deg];
-    @apply bg-gradient-to-r from-yellow-500 to-orange-500;
-  }
-
-  .badge-3 {
-    @apply left-[40%] top-[35%] rotate-[-5deg];
-    @apply bg-gradient-to-r from-pink-500 to-purple-500;
-  }
-
-  .badge-4 {
-    @apply left-[70%] top-[65%] rotate-[10deg];
-    @apply bg-gradient-to-r from-indigo-500 to-yellow-500;
-  }
-
-  .badge-5 {
-    @apply left-[20%] top-[70%] rotate-[-15deg];
-    @apply bg-gradient-to-r from-indigo-500 to-pink-500;
-  }
-
-  /* Mobile positions - more centered */
-  @media (max-width: 1023px) {
-    .badge-1 {
-      @apply left-[0%] top-[10%];
-      transform: rotate(-8deg);
-    }
-
-    .badge-2 {
-      @apply left-[50%] top-[25%];
-      transform: rotate(5deg);
-    }
-
-    .badge-3 {
-      @apply left-[15%] top-[40%];
-      transform: rotate(-3deg);
-    }
-
-    .badge-4 {
-      @apply left-[40%] top-[55%];
-      transform: rotate(6deg);
-    }
-
-    .badge-5 {
-      @apply left-[25%] top-[70%];
-      transform: rotate(-10deg);
-    }
-  }
-
-  @keyframes float {
-    0% {
-      transform: rotate(var(--rotation)) translateY(0px);
-    }
-    50% {
-      transform: rotate(var(--rotation)) translateY(-10px);
-    }
-    100% {
-      transform: rotate(var(--rotation)) translateY(0px);
-    }
-  }
-
-  .badge {
-    animation: float 3s ease-in-out infinite;
-  }
-
-  /* Stagger the animations and set rotations */
-  .badge-1 {
-    animation-delay: 0s;
-    --rotation: -12deg;
-  }
-  .badge-2 {
-    animation-delay: 0.5s;
-    --rotation: 8deg;
-  }
-  .badge-3 {
-    animation-delay: 1s;
-    --rotation: -5deg;
-  }
-  .badge-4 {
-    animation-delay: 1.5s;
-    --rotation: 10deg;
-  }
-  .badge-5 {
-    animation-delay: 2s;
-    --rotation: -15deg;
-  }
-
   /* Responsive typography using clamp */
   .hp-headline h1 {
     @apply mb-0 font-bold;
@@ -416,34 +287,6 @@ const linkedInTestimonials =
     }
   }
 
-  /* Responsive badge positioning */
-  .hp-badges {
-    @apply relative z-10 w-full px-4 md:w-[80%] mx-auto;
-    height: clamp(150px, 30vh, 200px);
-  }
-
-  .badge {
-    @apply px-3 py-1.5 md:px-4 md:py-2 rounded-md absolute;
-    font-size: clamp(0.65rem, 1.5vw, 0.875rem);
-  }
-
-  /* Responsive badge positions */
-  @media (max-width: 640px) {
-    .badge-1 { @apply left-[2%] top-[10%] rotate-[-8deg]; }
-    .badge-2 { @apply left-[45%] top-[20%] rotate-[5deg]; }
-    .badge-3 { @apply left-[10%] top-[45%] rotate-[-3deg]; }
-    .badge-4 { @apply left-[35%] top-[60%] rotate-[6deg]; }
-    .badge-5 { @apply left-[15%] top-[75%] rotate-[-10deg]; }
-  }
-
-  @media (min-width: 641px) and (max-width: 1023px) {
-    .badge-1 { @apply left-[5%] top-[15%] rotate-[-10deg]; }
-    .badge-2 { @apply left-[60%] top-[25%] rotate-[6deg]; }
-    .badge-3 { @apply left-[25%] top-[40%] rotate-[-4deg]; }
-    .badge-4 { @apply left-[55%] top-[60%] rotate-[8deg]; }
-    .badge-5 { @apply left-[20%] top-[70%] rotate-[-12deg]; }
-  }
-
   /* Responsive grid layouts */
   .testimonials-container {
     container-type: inline-size;
@@ -462,8 +305,7 @@ const linkedInTestimonials =
 
   /* Add smooth transitions for responsive changes */
   .columns-container,
-  .hp-headline,
-  .badge {
+  .hp-headline {
     @apply transition-all duration-300 ease-in-out;
   }
 </style>
