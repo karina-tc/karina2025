@@ -1,0 +1,75 @@
+---
+interface Props {
+  title: string;
+  thumbnail: string;
+  targetUrl: string;
+  metadata: string;
+}
+
+const { title, thumbnail, targetUrl, metadata } = Astro.props;
+---
+
+<div class="content-card group">
+  <a
+    href={targetUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="content-link"
+  >
+    <span>view</span>
+    <div class="thumbnail">
+      <img src={thumbnail} alt={title} loading="lazy" />
+    </div>
+  </a>
+  <div class="content-card--details">
+    <span class="title">{title}</span>
+    <span class="metadata">{metadata}</span>
+  </div>
+</div>
+
+<style>
+  .content-card {
+    @apply flex flex-col rounded-xl overflow-hidden;
+    @apply bg-theme-paper p-5 min-h-[500px];
+    @apply transition-all duration-300;
+    @apply border-transparent border-2;
+    @apply hover:border-white/20;
+  }
+
+  .content-link {
+    @apply flex-1 flex justify-center items-center no-underline relative;
+
+    span {
+      @apply opacity-0 absolute top-0 right-0;
+      @apply bg-theme-highlight-orange px-2 py-1 rounded-full;
+      @apply text-theme-ink-reverse text-xs uppercase font-semibold tracking-wider;
+      @apply transition-all duration-300;
+    }
+
+    &:hover span {
+      @apply opacity-100;
+    }
+  }
+
+  .thumbnail {
+    @apply flex-1 w-full;
+    @apply transition-all duration-300;
+    @apply group-hover:scale-[1.4];
+
+    img {
+      @apply w-[300px] m-auto rounded-xl overflow-hidden;
+    }
+  }
+
+  .content-card--details {
+    @apply flex flex-col mt-4;
+  }
+
+  .title {
+    @apply font-semibold;
+  }
+
+  .metadata {
+    @apply text-sm mb-0;
+  }
+</style>

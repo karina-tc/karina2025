@@ -3,49 +3,47 @@ function initializeUnderline() {
     const underline = nav?.querySelector('.dynamic-underline') as HTMLElement;
     const links = nav?.querySelectorAll('a');
     const activeLink = nav?.querySelector('a.active');
-
+    
+    // Use ResizeObserver instead of window.resize
+    const resizeObserver = new ResizeObserver(updateActiveUnderline);
+    if (nav) resizeObserver.observe(nav);
+    
+    // Use requestAnimationFrame for smooth animations
+    let rafId: number;
+    
     function updateUnderline(link: Element | null) {
         if (!link || !underline || !nav) return;
-        // Force a reflow to ensure accurate measurements
-        void (nav as HTMLElement).offsetHeight;
         
-        const span = link.querySelector('span');
-        const spanRect = span?.getBoundingClientRect();
-        const navRect = nav.getBoundingClientRect();
-        
-        if (spanRect) {
-            const left = Math.round(spanRect.left - navRect.left);
-            const width = Math.round(spanRect.width);
+        cancelAnimationFrame(rafId);
+        rafId = requestAnimationFrame(() => {
+            const span = link.querySelector('span');
+            const spanRect = span?.getBoundingClientRect();
+            const navRect = nav.getBoundingClientRect();
             
-            requestAnimationFrame(() => {
+            if (spanRect) {
+                const left = Math.round(spanRect.left - navRect.left);
+                const width = Math.round(spanRect.width);
+                
                 underline.style.setProperty('--left', `${left}px`);
                 underline.style.setProperty('--width', `${width}px`);
-            });
-        }
+            }
+        });
     }
 
-    // Initialize with a slight delay to ensure all styles are applied
-    setTimeout(() => {
+    function updateActiveUnderline() {
         updateUnderline(activeLink ?? null);
-    }, 0);
-    
-    links?.forEach(link => {
-        link.addEventListener('mouseenter', () => updateUnderline(link));
-    });
-    
-    nav?.addEventListener('mouseleave', () => {
-        updateUnderline(activeLink ?? null);
+    }
+
+    // Event delegation for better performance
+    nav?.addEventListener('mouseover', (e) => {
+        const link = (e.target as Element).closest('a');
+        if (link) updateUnderline(link);
     });
 
-    window.addEventListener('resize', () => {
-        updateUnderline(activeLink ?? null);
-    });
+    nav?.addEventListener('mouseleave', updateActiveUnderline);
 
-    // Update on page load and when all resources are loaded
-    window.addEventListener('load', () => {
-        updateUnderline(activeLink ?? null);
-    });
+    // Initial position
+    updateActiveUnderline();
 }
-
 // Ensure the function runs when the DOM is ready
-document.addEventListener('DOMContentLoaded', initializeUnderline); 
+document.addEventListener('DOMContentLoaded', initializeUnderline);

@@ -1,0 +1,61 @@
+---
+import Tooltip from "../../elements/Tooltip.astro";
+import Music from "../../elements/Music.astro";
+import { Image } from "astro:assets";
+import melancholia from "../../../assets/other/melancholia.png";
+import book from "../../../assets/other/book.png";
+import life from "../../../assets/other/life.png";
+import SubSection from "../../structure/SubSection.astro";
+
+---
+
+<SubSection
+  label="Personal"
+  title="Outside of Work"
+  show_link={false}
+  include_classes="my-10"
+/>
+<p>
+  I like to watch dark psychological thrillers that are too much to watch more
+  than once. Don't ask me why I've watched
+  <Tooltip text="Melancholia">
+    <span class="inline-block mb-2 text-left"
+      >A Danish psychological thriller film written and directed by Lars von
+      Trier.</span
+    >
+    <Image
+      src={melancholia}
+      alt="Melancholia"
+      class="w-[200px]"
+      loading="lazy"
+    />
+  </Tooltip>
+  way more than needed. I also enjoy watching soccer, reading the occasional
+  <Tooltip text="book">
+    <span class="flex items-center gap-2">
+      <span class="inline-block mb-2 text-left"
+        >Currently reading The Anthropocene Reviewed by John Green.</span
+      >
+      <Image src={book} alt="Book" class="w-20" loading="lazy" />
+    </span>
+  </Tooltip>, and playing with my kiddo and crazy dog.
+</p>
+
+<figure class="picture-frame">
+  <Image src={life} alt="Life" class="w-[790px]" loading="lazy" />
+</figure>
+
+<figcaption class="text-left text-sm mt-4">
+  <span>Working tirelessly for them.</span>
+</figcaption>
+
+<h3>Currently Listening</h3>
+<div class="mt-5 mb-10">
+  <Music />
+</div>
+
+<style>
+  .picture-frame {
+    @apply flex justify-center w-full bg-theme-surface-light border-[5px] border-white rounded-lg shadow-lg;
+  }
+</style>

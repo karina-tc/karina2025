@@ -1,0 +1,78 @@
+---
+interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+---
+
+<span class="tooltip-wrapper">
+  <span class="tooltip-trigger group">
+    <span class="tooltip-trigger--text">{text}</span>
+    <span class="tooltip-trigger--highlight"></span>
+  </span>
+  <span class="tooltip-content">
+    <slot />
+  </span>
+</span>
+
+<script>
+  import { createPopper } from "@popperjs/core";
+
+  class Tooltip {
+    constructor(element: HTMLElement) {
+      const trigger = element.querySelector(".tooltip-trigger") as HTMLElement;
+      const content = element.querySelector(".tooltip-content") as HTMLElement;
+
+      createPopper(trigger, content, {
+        placement: "top",
+        modifiers: [
+          {
+            name: "offset",
+            options: {
+              offset: [0, 8],
+            },
+          },
+          {
+            name: "flip",
+            options: {
+              fallbackPlacements: ["bottom", "right", "left"],
+            },
+          },
+        ],
+      });
+    }
+  }
+
+  document.querySelectorAll(".tooltip-wrapper").forEach((tooltip) => {
+    new Tooltip(tooltip as HTMLElement);
+  });
+</script>
+
+<style>
+  .tooltip-wrapper {
+    @apply inline-block relative;
+  }
+
+  .tooltip-trigger {
+    @apply cursor-pointer px-1.5 py-0.5 bg-theme-highlight-mint relative rounded-md overflow-hidden;
+  }
+
+  .tooltip-trigger--text {
+    @apply w-full h-full relative z-[1] hover:underline underline-offset-4 transition-all duration-200;
+  }
+
+  .tooltip-trigger--highlight {
+    @apply absolute inset-0 w-0 opacity-0 text-theme-ink rounded-md transition-all duration-200;
+    @apply group-hover:opacity-100 group-hover:w-full;
+  }
+
+  .tooltip-content {
+    @apply bg-theme-surface-dark text-theme-ink-reverse text-sm rounded-lg shadow-lg p-3 absolute z-10 invisible opacity-0;
+    @apply -translate-y-1 transition-all duration-200 w-56 text-center bottom-full left-1/2 -translate-x-1/2 mb-2;
+  }
+
+  .tooltip-wrapper:hover .tooltip-content {
+    @apply visible opacity-100 -translate-y-0;
+  }
+</style>

@@ -1,0 +1,50 @@
+---
+// Components
+import GridContainer from '../structure/GridContainer.astro';
+import SectionContainer from '../structure/SectionContainer.astro';
+
+// Props
+interface Props {
+  type?: 'default' | 'grid';
+  size?: 'large' | 'small';
+  title: string;
+  subtitle?: string;
+  description?: string;
+}
+
+const { type = 'default', size = 'large', title, subtitle, description } = Astro.props;
+---
+
+<header class="header-container">
+  {type === 'grid' ? (
+    <GridContainer size={size}>
+      <h1>{title}</h1>
+      {subtitle && <h2>{subtitle}</h2>}
+      {description && <p>{description}</p>}
+    </GridContainer>
+  ) : (
+    <SectionContainer>
+      <h1>{title}</h1>
+      {subtitle && <h2>{subtitle}</h2>}
+      {description && <p>{description}</p>}
+    </SectionContainer>
+  )}
+</header>
+
+<style>
+  .header-container {
+    @apply w-full flex flex-col items-start justify-start py-10;
+
+    h1, h2, p {
+      @apply my-0;
+    }
+
+    h2 {
+      @apply mt-16;
+    }
+
+    p {
+      @apply mt-5;
+    }
+  }
+</style>

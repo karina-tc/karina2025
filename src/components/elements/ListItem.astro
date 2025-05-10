@@ -1,0 +1,94 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+  isLink: boolean;
+  label: string;
+  detail: string;
+  href?: string;
+  icon?: boolean;
+  icon_art?: ImageMetadata;
+  iconWidth?: number;
+  iconHeight?: number;
+}
+
+const {
+  isLink = false,
+  label,
+  detail,
+  href,
+  icon = false,
+  icon_art,
+  iconWidth = 10,
+  iconHeight = 10,
+} = Astro.props;
+---
+
+{
+  isLink ? (
+    <a href={href} class="listing-item group relative">
+      {icon && (
+        <Image
+          src={icon_art!}
+          alt=""
+          class={`w-${iconWidth} h-${iconHeight} z-[1]`}
+        />
+      )}
+      <span class="listing-label">{label}</span>
+      <span class="listing-dots" />
+      <span class="listing-detail">{detail}</span>
+      <div class="listing-hover-overlay" />
+    </a>
+  ) : (
+    <div class="listing-item group relative">
+      {icon && (
+        <Image
+          src={icon_art!}
+          alt=""
+          class={`w-${iconWidth} h-${iconHeight} z-[1]`}
+        />
+      )}
+      <span class="listing-label">{label}</span>
+      <span class="listing-dots" />
+      <span class="listing-detail">{detail}</span>
+      <div class="listing-hover-overlay" />
+    </div>
+  )
+}
+
+<style>
+  .listing-item {
+    @apply flex items-center gap-4 py-3 px-3 -ml-3 mb-3 rounded-xl;
+    @apply overflow-hidden w-[calc(100%+1.5rem)];
+  }
+
+  @screen md {
+    .listing-item {
+      @apply px-0 -ml-0 mb-0 w-full transition-all duration-300;
+      @apply hover:px-3 hover:-ml-3 hover:w-[calc(100%+1.5rem)] transition-all duration-300;
+    }
+  }
+
+  .listing-label {
+    @apply z-[1] shrink-0 max-xl:group-hover:underline;
+  }
+
+  .listing-dots {
+    @apply grow border-b border-dotted border-theme-stroke h-3 z-10;
+  }
+
+  .listing-detail {
+    @apply text-theme-ink text-sm z-[1] shrink-0;
+  }
+
+  .listing-hover-overlay {
+    @apply absolute inset-0 bg-theme-surface-light w-full opacity-0;
+  }
+
+  @screen md {
+    .listing-hover-overlay {
+      @apply absolute inset-0 bg-theme-surface-light w-0 opacity-0;
+      @apply transition-all duration-300 group-hover:w-full group-hover:opacity-100;
+    }
+  }
+</style>

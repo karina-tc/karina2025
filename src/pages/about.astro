@@ -1,74 +1,146 @@
 ---
+// Layout and Components
 import Layout from "../layouts/Layout.astro";
-import karina from "../assets/brand/karina-profile.webp";
-import SectionHeader from "../components/structure/SectionHeader.astro";
+import Header from "../components/structure/Header.astro";
+import SectionContainer from "../components/structure/SectionContainer.astro";
+import Timeline from "../components/elements/Timeline.astro";
+import TenetCard from "../components/elements/TenetCard.astro";
+import AtomSymbol from "../components/elements/AtomSymbol.astro";
+import PersonalSection from "../components/sections/about/PersonalSection.astro";
+import ToolsSection from "../components/sections/about/ToolsSection.astro";
+import SubSection from "../components/structure/SubSection.astro";
+import ProfileFrame from "../components/elements/ProfileFrame.astro";
+
+// Data
+import { timelineItems } from "../data/timeline";
+import { tenets } from "../data/tenets";
+
+// Assets
+import { Image } from "astro:assets";
+import karina from "../assets/brand/karina-profile.png";
+import framebg from "../assets/avatars/avatar-4.png";
 ---
 
 <Layout
   pageTitle="About - Karina Tovar"
   pageDescription="Pixel Philosopher Cautious Technologist"
-  eyelash_text="About Me"
-  title_text="Designing for human prosperity"
-  header_visual_image={karina}
-  header_visual_alt_text="Karina Tovar"
-  header_visual_classes="mt-10"
-  header_visual_width={473}
-  horizon_height="455px"
 >
-  <div class="divider--small"></div>
+  <div class="layout--two-columns">
+    <div class="layout--two-columns__left glued">
+      {/* Hero Section */}
+      <Header type="default" size="small" title="Hello Stranger" />
+      <figure
+        class="profile-frame"
+        style={`background-image: url(${framebg.src})`}
+      >
+        <ProfileFrame />
+        <Image
+          src={karina}
+          alt="Karina Tovar"
+          class="profile-frame--image"
+          width={600}
+          height={600}
+          id="themeImage"
+        />
+      </figure>
+    </div>
 
-  <section class="section-wrapper mt-10 content-section">
-    <SectionHeader eyebrow="Background" title="Artist turned product designer">
-      <div slot="section-header-content" class="flex flex-col gap-5 text-left">
-        <p class="text-base text-ink-secondary">
-          I had my first encounter with technology playing around with Photoshop
-          for art class. Never did I think that a tool I just played with would
-          show me what I wanted to do for a living. I currently live in the East
-          Cost my wife, daughter, and a really hyper pooch.
+    <div class="layout--two-columns__right relative">
+      {/* Introduction */}
+      <SectionContainer id="introduction">
+        <SubSection
+          label="brief history"
+          title="My Background"
+          show_link={false}
+          include_classes="lg:mt-10"
+        />
+        <p class="copy-large mt-6">
+          I am an artist, turned product designer, who likes to code and make
+          things.
         </p>
-        <p class="text-base text-ink-secondary">
+        <p>
           I have a background in the Fine Arts, with a MFA from the
           Massachusetts College of Art & Design. There I was part of the Studio
           for Interrelated Media where I made artwork focused on performative
-          technology. That just means that I obsessed over the intersection of
-          technology and human happiness. I worked on a lot of performance art
-          pieces that lived outside of the museum so I could create room for joy
-          in the mundane.
+          technology. There I made a lot of performanc based pieces that lived
+          outside of the museum so I could create room for joy in the mundane.
         </p>
-      </div>
-    </SectionHeader>
-  </section>
-
-  <div class="divider--large"></div>
-
-  <section class="section-wrapper mt-10 content-section">
-    <SectionHeader
-      eyebrow="RATIONALE"
-      title="Anthro-technologist"
-      description="As an artist, I always look for the meaning on the things I work. Part of that is always trying to establish the tangible benefit of what we build—whether that is in design systems, ux flows, or business strategy."
-      descriptionAlign="left"
-    />
-  </section>
-
-  <div class="divider--large"></div>
-
-  <section class="section-wrapper mt-10 content-section">
-    <SectionHeader eyebrow="IN REAL LIFE" title="Perpetual learner">
-      <div slot="section-header-content" class="flex flex-col gap-5 text-left">
-        <p class="text-base text-ink-secondary">
-          I started designing emails and later on I learned to code them. Once I
-          got my first product gig, I pushed my curiosity about coding by
-          learning basic front-end languages. While I am not a seasoned dev, I
-          enjoy turning pixels into code and find it rather soothing.
+        <p>
+          All in all, that just means that I am obsessed over how technology can
+          be used to make people truly happier. One pixel, one bit, one thought
+          at a time.
         </p>
-        <p class="text-base text-ink-secondary">
-          Outside of work, I enjoy listening to music and exploring the world
-          through my daughter’s eyes. She is always teaching me new things by
-          always having fun.
-        </p>
-      </div>
-    </SectionHeader>
-  </section>
+      </SectionContainer>
 
-  <div class="divider--large"></div>
+      {/* Tenets Section */}
+      <SectionContainer id="tenets" spacing="lg">
+        <SubSection
+          label="philosophy"
+          title="My Design Tenets"
+          show_link={false}
+          include_classes="mt-10"
+        />
+        <div class="grid grid-cols-1 gap-8 mt-8 w-full">
+          <TenetCard items={tenets} />
+        </div>
+      </SectionContainer>
+
+      {/* Experience Section */}
+      <SectionContainer id="experience" spacing="lg">
+        <SubSection
+          label="RESUME"
+          title="A Decade of Experience"
+          show_link={true}
+          link_label="Get Resume"
+          link_hover_label="Download PDF"
+          link_href="/resume"
+          include_classes="mb-10"
+        />
+        <Timeline items={timelineItems} />
+      </SectionContainer>
+
+      {/* Tools Section */}
+      <SectionContainer id="tools" spacing="lg">
+        <ToolsSection />
+      </SectionContainer>
+
+      {/* Personal Section */}
+      <SectionContainer id="personal" spacing="lg">
+        <PersonalSection />
+      </SectionContainer>
+    </div>
+  </div>
 </Layout>
+
+<style>
+  .profile-frame {
+    @apply flex justify-center items-center w-fit pt-20;
+    @apply rounded-t-full bg-theme-highlight-orange;
+    @apply overflow-hidden bg-cover bg-center relative;
+    @apply xl:mx-0 md:ml-[15%] max-xl:mb-10 ;
+  }
+
+  .profile-frame--svg {
+    @apply absolute top-0 left-0 w-full h-full xl:max-w-[45vh];
+    @apply flex justify-center items-end;
+    @apply max-xl:max-w-[85%] max-xl:ml-[12%] max-xl:mt-11;
+
+    svg {
+      @apply w-full h-full xl:max-w-[38vh] xl:h-auto xl:ml-[12%];
+    }
+  }
+
+  .profile-frame--image {
+    @apply mx-auto xl:mx-0 xl:max-w-[45vh] mix-blend-overlay translate-x-8;
+  }
+
+  .resume-link {
+    @apply flex items-center gap-2 h-5 w-fit text-sm transition-all duration-300;
+    span {
+      @apply underline-offset-4;
+    }
+    &:hover span {
+      @apply underline;
+    }
+  }
+</style>

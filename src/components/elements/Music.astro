@@ -1,0 +1,142 @@
+---
+import { Image } from "astro:assets";
+import record from "../../assets/other/record.png";
+import SpotifyLogo from "phosphor-astro/SpotifyLogo.astro";
+---
+
+<div class="music-container group" id="music-container">
+  <div class="music-details">
+    <div class="flex flex-row flex-wrap items-center gap-3">
+      {/* Album Art */}
+      <div class="album-art-container">
+        <div class="album-art-cover">
+          <div class="album-equalizer">
+            <div class="album-equalizer-column">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+        </div>
+        <div class="album-vinyl">
+          <Image
+            class="album-art"
+            src={record}
+            alt="Album Art"
+            draggable="false"
+            width={100}
+            height={100}
+          />
+        </div>
+      </div>
+
+      {/* Text Info */}
+      <div class="text-info flex-1">
+        <span class="song-name">Some song</span>
+        <span class="artist-name">Some artist</span>
+      </div>
+
+      {/* Spotify Badge */}
+      <a href="#" class="spotify-badge" target="_blank" rel="noopener noreferrer">
+        <SpotifyLogo class="w-6 h-6" />
+        <span class="hover:underline underline-offset-4 transition-all duration-200">Listen With Me</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .music-container {
+    @apply relative flex items-center justify-end text-theme-ink;
+  }
+
+  .music-details {
+    @apply w-full p-4 bg-theme-highlight-lilac rounded-xl transition-all duration-200;
+
+    .album-art-container {
+      @apply w-32 h-20 relative;
+    }
+
+    .album-art-cover {
+      @apply w-20 h-full bg-theme-highlight-orange border border-white rounded-lg overflow-hidden relative z-10;
+    }
+
+    .album-vinyl {
+      @apply w-20 h-20 rounded-full overflow-hidden relative shadow-md border border-white;
+      @apply absolute top-0 left-1/3 scale-[0.8] flex items-center justify-center;
+
+      .album-art {
+        @apply w-24 h-24 transition-all duration-[1500ms];
+        animation: spin 4s linear infinite paused;
+        animation-play-state: running;
+      }
+    }
+
+    .text-info {
+      @apply flex flex-col justify-center;
+
+      .song-name {
+        @apply text-sm font-medium text-theme-ink-dark line-clamp-2;
+      }
+
+      .artist-name {
+        @apply text-lg text-theme-ink-dark font-medium;
+      }
+    }
+
+    .spotify-badge {
+      @apply flex flex-row gap-1 items-center w-fit pr-3.5 pl-2 h-9 max-sm:ml-[130px] max-sm:-mt-4;
+      @apply text-sm font-medium bg-theme-paper rounded-full transition-colors duration-200;
+    }
+  }
+
+  .album-equalizer {
+    @apply flex gap-1 justify-center items-center w-full h-full;
+
+    .album-equalizer-column {
+      @apply flex flex-col gap-0.5 -rotate-90;
+
+      span {
+        @apply w-2 h-0.5 bg-white origin-left;
+        animation: equalize 1s ease-in-out infinite;
+      }
+
+      span:nth-child(1) {
+        animation-delay: 0s;
+      }
+      span:nth-child(2) {
+        animation-delay: 0.35s;
+      }
+      span:nth-child(3) {
+        animation-delay: 0.7s;
+      }
+      span:nth-child(4) {
+        animation-delay: 1.05s;
+      }
+    }
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes equalize {
+    0%,
+    100% {
+      transform: scaleX(0.5);
+    }
+    50% {
+      transform: scaleX(2);
+    }
+  }
+</style>
+
+<script>
+  import "../../scripts/controllers/music-controller";
+</script>

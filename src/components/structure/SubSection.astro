@@ -1,0 +1,85 @@
+---
+import LinkButton from "../elements/LinkButton.astro";
+
+interface Props {
+  label: string;
+  title: string;
+  show_link: boolean;
+  link_label?: string;
+  link_hover_label?: string;
+  link_href?: string;
+  link_html_attributes?: Record<string, string>;
+  include_classes?: string;
+}
+
+const {
+  label = "Label",
+  title = "Title",
+  show_link = false,
+  link_label = "",
+  link_hover_label = "",
+  link_href = "",
+  link_html_attributes = {},
+  include_classes = "",
+} = Astro.props;
+---
+
+<div class={`flex flex-col gap-4 ${include_classes}`}>
+  {/* Top Container */}
+  <div class="top-container">
+    <div class="top-label">
+      <span>{label}</span>
+    </div>
+    <div class="cross-border" aria-hidden="true">
+      <svg
+        width="268"
+        height="23"
+        viewBox="0 0 268 23"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M1 19C29.4655 14.7407 82.1944 4 130.45 4L129.772 13.4444C173.826 12.1481 254.614 8.11111 266 11.2222"
+          stroke="#C7BBF9"
+          stroke-width="8"></path>
+      </svg>
+    </div>
+  </div>
+  {/* Bottom Container */}
+  <div class="bottom-container">
+    <h2 class="my-0">{title}</h2>
+    {
+      show_link && (
+        <LinkButton
+          href={link_href}
+          label={link_label}
+          hover_label={link_hover_label}
+          html_data={link_html_attributes}
+        />
+      )
+    }
+  </div>
+</div>
+
+<style>
+  .top-container {
+    @apply relative flex flex-col items-start justify-start flex-wrap;
+  }
+
+  .cross-border {
+    @apply flex items-start justify-start w-fit scale-y-75 max-w-[140px];
+  }
+
+  .top-label {
+    @apply relative flex justify-start;
+
+    span {
+      @apply uppercase tracking-widest font-mono text-sm font-medium pr-2;
+    }
+  }
+
+  .bottom-container {
+    @apply flex lg:flex-row flex-col justify-between lg:items-center;
+    @apply items-start lg:gap-4 gap-10 w-full pt-5 pb-5;
+  }
+</style>

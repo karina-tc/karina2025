@@ -1,70 +1,178 @@
-@font-face {
-    font-family: 'Safiro-Regular';
-    src: url('/fonts/Safiro-Regular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-}
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  :root {
-  }
+/* Theme System */
+:root {
+  /* Base theme variables */
+  --color-paper: theme('colors.light.paper');
+  --color-ink: theme('colors.light.ink');
+  /* ... other default theme colors ... */
 }
 
-@layer utilities {
-  .divider--extra-large {
-    @apply w-full h-32;
-  }
-  .divider--large {
-    @apply w-full h-20;
-  }
-  .divider--small {
-    @apply w-full h-10;
-  }
+/* Theme variants */
+[data-theme] {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+[data-theme="dark"] {
+  --color-paper: theme('colors.dark.paper');
+  --color-ink: theme('colors.dark.ink');
+  --color-ink-secondary: theme('colors.dark.ink-secondary');
+  --color-ink-reverse: theme('colors.dark.ink-reverse');
+  --color-ink-dark: theme('colors.dark.ink-dark');
+  --color-stroke: theme('colors.dark.stroke');
+  --color-surface-light: theme('colors.dark.surface-light');
+  --color-surface-medium: theme('colors.dark.surface-medium');
+  --color-surface-dark: theme('colors.dark.surface-dark'); 
+  --color-surface-white: theme('colors.dark.surface-white');
+  --color-highlight-lilac: theme('colors.dark.highlight-lilac'); 
+  --color-highlight-pink: theme('colors.dark.highlight-pink');
+  --color-highlight-orange: theme('colors.dark.highlight-orange');
+  --color-highlight-mint: theme('colors.dark.highlight-mint');
+}
+
+[data-theme="light"] {
+  --color-paper: theme('colors.light.paper');
+  --color-ink: theme('colors.light.ink');
+  --color-ink-secondary: theme('colors.light.ink-secondary');
+  --color-ink-reverse: theme('colors.light.ink-reverse');
+  --color-ink-dark: theme('colors.light.ink-dark');
+  --color-stroke: theme('colors.light.stroke');
+  --color-surface-light: theme('colors.light.surface-light');
+  --color-surface-medium: theme('colors.light.surface-medium');
+  --color-surface-dark: theme('colors.light.surface-dark');
+  --color-surface-white: theme('colors.light.surface-white');
+  --color-highlight-lilac: theme('colors.light.highlight-lilac');
+  --color-highlight-pink: theme('colors.light.highlight-pink');
+  --color-highlight-orange: theme('colors.light.highlight-orange');
+  --color-highlight-mint: theme('colors.light.highlight-mint');
+}
+
+[data-theme="grape"] {
+  --color-paper: theme('colors.grape.paper');
+  --color-ink: theme('colors.grape.ink');
+  --color-ink-secondary: theme('colors.grape.ink-secondary');
+  --color-ink-reverse: theme('colors.grape.ink-reverse');
+  --color-ink-dark: theme('colors.grape.ink-dark');
+  --color-stroke: theme('colors.grape.stroke');
+  --color-surface-light: theme('colors.grape.surface-light');
+  --color-surface-medium: theme('colors.grape.surface-medium');
+  --color-surface-dark: theme('colors.grape.surface-dark');
+  --color-surface-white: theme('colors.grape.surface-white');
+  --color-highlight-lilac: theme('colors.grape.highlight-lilac');
+  --color-highlight-pink: theme('colors.grape.highlight-pink');
+  --color-highlight-orange: theme('colors.grape.highlight-orange');
+  --color-highlight-mint: theme('colors.grape.highlight-mint');
 }
 
 /* Base styles */
-html {
-  scroll-behavior: smooth;
-  -webkit-font-smoothing: antialiased;
-}
-
+html,
 body {
-  @apply min-h-screen bg-paper-base text-ink-primary font-safiro font-normal;
+  @apply min-h-screen;
+  scroll-behavior: smooth;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
+.root {
+  @apply antialiased;
+  @apply bg-theme-paper text-theme-ink;
+  @apply font-safiro font-normal;
+}
+
+.main {
+  @apply mx-auto w-full px-10 lg:px-20 pb-10;
+  @apply flex flex-col justify-center items-center;
+  @apply z-10 relative min-h-fit;
+}
+
+/* Typography */
 h1 {
-  @apply font-instrument-serif text-6xl lg:text-8xl tracking-tight text-ink-primary font-medium;
+  @apply text-[64px] leading-[68px] lg:text-[100px] lg:leading-[90px];
+  @apply font-semibold tracking-tight mb-4 sm:mb-6 lg:mb-8;
+  font-size: clamp(2.5rem, 5vw + 1rem, 6rem);
+  line-height: 1.1;
 }
 
 h2 {
-  @apply font-instrument-serif text-4xl lg:text-5xl tracking-tight text-ink-primary font-medium;
+  @apply text-3xl xl:text-4xl;
+  @apply font-semibold tracking-tight opacity-75;
+  @apply mt-8 lg:mt-12;
+  @apply mb-4 lg:mb-6;
 }
 
 h3 {
-  @apply font-safiro text-base font-semibold text-ink-tertiary tracking-widest uppercase;
+  @apply text-2xl;
+  @apply font-semibold tracking-tight opacity-75;
+  @apply mt-8 lg:mt-12;
+  @apply mb-4 lg:mb-6;
 }
 
 p {
-  @apply text-xl leading-8 text-ink-secondary;
+  @apply text-base leading-relaxed;
+  @apply mb-4 lg:mb-8;
 }
 
-.section-wrapper {
-  @apply px-10 w-full max-w-3xl m-auto;
+p.copy-large {
+  @apply text-2xl font-semibold;
 }
 
-.content-section {
-  opacity: 0;
-  transform: translateY(20px);
-  transition:
-    opacity 0.6s ease-out,
-    transform 0.6s ease-out;
+p.copy-extra-large {
+  @apply text-3xl md:text-5xl font-semibold;
+  font-size: clamp(1.5rem, 3vw + 1rem, 3rem);
 }
 
-.content-section.visible {
-  opacity: 1;
-  transform: translateY(0);
+em {
+  @apply font-normal not-italic text-neutral-900;
+}
+
+/* Global styles */
+body {
+  @apply text-base leading-relaxed;
+}
+
+a {
+  @apply text-inherit underline-offset-4;
+}
+
+em {
+  @apply text-inherit italic;
+}
+
+/* Update footer spacing */
+.content {
+  @apply mb-auto w-full;
+}
+
+/* Layouts */
+.layout--two-columns {
+  @apply w-full max-w-screen-base mx-auto grid grid-cols-1 xl:grid-cols-24;
+}
+
+.layout--two-columns__left {
+  @apply xl:col-start-1 xl:col-end-8;
+}
+
+.layout--two-columns__left.glued {
+  @apply xl:sticky xl:top-0 xl:h-fit xl:pt-20 xl:-mt-20;
+}
+
+.layout--two-columns__right {
+  @apply xl:col-start-12 xl:col-end-22;
+}
+
+/* Thoughts */
+.artwork-wrapper {
+  @apply relative mb-12 rounded-lg overflow-hidden bg-theme-surface-dark;
+}
+
+.loading-overlay {
+  transition: opacity 0.3s ease-out;
+}
+  
+.artwork-wrapper img {
+  transition: opacity 0.3s ease-out;
 }

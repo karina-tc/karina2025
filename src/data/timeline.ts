@@ -1,0 +1,90 @@
+import avatar1 from "../assets/avatars/avatar-1.png";
+import avatar2 from "../assets/avatars/avatar-2.png";
+import avatar3 from "../assets/avatars/avatar-3.png";
+import avatar4 from "../assets/avatars/avatar-4.png";
+import avatar5 from "../assets/avatars/avatar-5.png";
+import avatar6 from "../assets/avatars/avatar-6.png";
+import avatar7 from "../assets/avatars/avatar-7.png";
+import avatar8 from "../assets/avatars/avatar-8.png";
+import avatar9 from "../assets/avatars/avatar-9.png";
+import avatar10 from "../assets/avatars/avatar-10.png";
+
+export interface TimelineItem {
+  title: string;
+  company: string;
+  companyUrl?: string;
+  startDate?: string;
+  endDate?: string;
+  description: string;
+  avatar: ImageMetadata;
+  categories: string[];
+}
+
+export const timelineItems: TimelineItem[] = [
+  {
+    title: "Fractional Product Designer",
+    company: "Renumerate",
+    startDate: "2024",
+    endDate: "Present",
+    description:
+      "Currently working on setting Renumerate with the right initial branding and design product strategy on their quest to a pre-seed round and beyond.",
+    avatar: avatar1,
+    categories: ["AI", "eCommerce"],
+  },
+  {
+    title: "Lead Product Designer",
+    company: "Tropic App",
+    companyUrl: "https://tropicapp.io",
+    startDate: "2023",
+    endDate: "Present",
+    description: `Currently leading design and product strategy on Tropic's new Procurement Intelligence product and AI efforts. Which has already helped increase retention and revenue.
+
+    I have also worked on the engineering side through front-end code helping push polish into our application.`,
+    avatar: avatar3,
+    categories: ["AI", "FinTech"],
+  },
+  {
+    title: "Senior Product Designer",
+    company: "Glue",
+    companyUrl: "https://glue.com",
+    startDate: "2023",
+    endDate: "2022",
+    description:
+      "I was responsible for product design and branding. Worked on maintaining and improving their experiences features while helping develop their HR tech product.",
+    avatar: avatar7,
+    categories: ["HR Tech"],
+  },
+  {
+    title: "Staff Product Designer",
+    company: "Teikametrics",
+    companyUrl: "https://teikametrics.com",
+    startDate: "2020",
+    endDate: "2022",
+    description:
+      "Worked on a product overhaul by redesigning their core product and helping develop the initial advertising intelligence features. Plus, I helped develop Teikametrics' first design system and design language.",
+    avatar: avatar3,
+    categories: ["MarTech", "AI", "eCommerce", "Advertising"],
+  },
+  {
+    title: "Product Owner",
+    company: "Rejoiner",
+    companyUrl: "https://rejoiner.com",
+    startDate: "2014",
+    endDate: "2020",
+    description:
+      "Owned the product roadmap and worked on the initial product design and strategy for Rejoiner's reshaping of their core offering.",
+    avatar: avatar4,
+    categories: ["eCommerce", "Email Marketing"],
+  },
+  {
+    title: "Lead Designer",
+    company: "Venly",
+    companyUrl: "https://venly.com",
+    startDate: "2013",
+    endDate: "2014",
+    description:
+      "Led efforts on Venly's strategy and helped build branding and websites for their customers who were small local businesses charted in the greater Boston area.",
+    avatar: avatar5,
+    categories: ["Local Commerce"],
+  },
+]; 

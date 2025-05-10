@@ -1,112 +1,342 @@
 ---
+// Components
 import Layout from "../layouts/Layout.astro";
-import karina from "../assets/brand/karina-profile.webp";
-import { statusCards } from "../types/intro/Statuses";
-import { jobHistory } from "../types/intro/Resume";
-import { projects } from "../types/Projects";
-import ArrowElbowRightDown from "phosphor-astro/ArrowElbowRightDown.astro";
-import tropic from "../assets/work/tropic/demo-tropic-01.png";
-import SectionHeader from "../components/structure/SectionHeader.astro";
-import ProjectCard from "../components/ProjectCard.astro";
+import GridContainer from "../components/structure/GridContainer.astro";
+import SectionContainer from "../components/structure/SectionContainer.astro";
+import Details from "../components/elements/Details.astro";
+import Showcase from "../components/structure/Showcase.astro";
+import TestimonialCard from "../components/elements/TestimonialCard.astro";
+import SubSection from "../components/structure/SubSection.astro";
+
+// Assets
+import { Image } from "astro:assets";
+import archbg from "../assets/backgrounds/arch.png";
+import columnOutline from "../assets/backgrounds/column-outline.svg";
+import columnOne from "../assets/backgrounds/Column-1.png";
+import columnTwo from "../assets/backgrounds/Column-2.png";
+import columnThree from "../assets/backgrounds/Column-3.png";
+import columnFour from "../assets/backgrounds/Column-4.png";
+
+// Data
+import { projects } from "../data/projects";
+import { testimonials } from "../data/testimonials";
+
+// Links
+const linkedInTestimonials =
+  "https://www.linkedin.com/in/karina-tovar-castro/details/recommendations/?detailScreenTabIndex=0";
 ---
 
-<Layout
-  pageTitle="Karina Tovar"
-  pageDescription="Pixel Philosopher Cautious Technologist"
-  eyelash_text="Karina Tovar"
-  title_text="Pixel Philosopher Cautious Technologist"
-  description_text="My motivation is to build products that aim to help people have happier days. Life is too short to be ruined by awful experiences. Every product needs to be crafted for human joy."
-  header_visual_image={karina}
-  header_visual_alt_text="Karina Tovar"
-  header_visual_classes="mt-10"
-  header_visual_width={473}
-  horizon_height="455px"
->
-  <div class="arrow-holder content-section">
-    <div>
-      <ArrowElbowRightDown class="w-6 h-6" />
-    </div>
-  </div>
-
-  <div class="content-wrapper flex flex-col">
-    <section class="section-wrapper pt-20 content-section">
-      <SectionHeader
-        eyebrow="Experience"
-        title="10+ years of making the complex simple and enjoyable"
-        description="Over 10 years I've worked on all size startups in all categories. I have deep experience distilling technical products into simple easy-to-use solutions."
-      />
-      <div
-        class="grid grid-cols-1 md:grid-cols-3 mt-8 items-center bg-paper-green rounded-md overflow-hidden"
-      >
-        {
-          statusCards.map((item) => (
-            <div class="flex flex-1 flex-col gap-2 p-5 border-r border-white text-stone-900 text-sm text-center">
-              <span class="text-ink-highlight-green font-semibold tracking-widest text-xs">
-                {item.label}
-              </span>
-              <span>{item.value}</span>
-            </div>
-          ))
-        }
+<Layout pageTitle="Karina Tovar">
+  <SectionContainer
+    include_classes="min-h-[70vh] lg:h-[90vh] md:min-w-fit flex flex-col justify-center items-center text-center overflow-hidden"
+  >
+    <div class="hp-image">
+      <div class="columns-container">
+        <Image
+          class="column-outline"
+          src={columnOutline}
+          alt="Column Outline"
+          loading="eager"
+          width={260}
+          height={500}
+        />
+        <Image
+          class="column-one"
+          src={columnOne}
+          alt="Column One"
+          loading="eager"
+        />
+        <Image
+          class="column-two"
+          src={columnTwo}
+          alt="Column Two"
+          loading="lazy"
+        />
+        <Image
+          class="column-three"
+          src={columnThree}
+          alt="Column Three"
+          loading="lazy"
+        />
+        <Image
+          class="column-four"
+          src={columnFour}
+          alt="Column Four"
+          loading="lazy"
+        />
       </div>
-    </section>
-
-    <div class="divider--small"></div>
-
-    <section class="section-wrapper content-section">
-      <div class="flex flex-col gap-10 w-full">
-        <div class="flex-1 flex flex-col text-base">
-          {
-            jobHistory.map((job) => (
-              <div class="flex flex-col md:flex-row justify-between items-start md:items-center px-2 py-4 bg-paper-base border-b border-dashed border-neutral-200 px-4 transition-all duration-300 ease-in-out">
-                <div class="flex items-center">
-                  <div class="w-10 h-10 bg-white shadow-md shadow-neutral-200 rounded-md overflow-hidden border border-neutral-200 mr-4" />
-                  <span class="font-semibold">{job.company}</span>
-                  <span>, {job.role}</span>
-                </div>
-                <span class="text-ink-secondary text-xs md:text-base text-center md:text-left pl-14 md:pl-0">{job.period}</span>
-              </div>
-            ))
-          }
-        </div>
-      </div>
-    </section>
-
-    <div class="divider--large"></div>
-
-    <section class="demo-area h-96 content-section">
-      <h2>Building procurement paradise</h2>
-      <span
-        class="uppercase text-sm tracking-widest font-semibold text-ink-secondary my-5"
-        >Supplier Intelligence for Tropic</span
-      >
-    </section>
-
-    <div class="divider--large"></div>
-
-    <section class="section-wrapper mt-10 content-section">
-      <SectionHeader eyebrow="Testimonials" title="In their own words" />
-    </section>
-  </div>
-
-  <div class="divider--large"></div>
-  <div class="content-section hidden">
-    <div class="grid grid-cols-12 gap-8 gap-y-8 my-20 pb-20 max-w-screen-2xl mx-auto">
-      {projects.map((project) => <ProjectCard {...project} />)}
+      <Image class="arch" src={archbg} alt="Arch" loading="eager" width={500} height={500} />
     </div>
-  </div>
+    <div class="hp-headline">
+      <h1>Pixel Philosopher</h1>
+      <h1>Cautious Technologist</h1>
+      <p class="copy-large !font-normal">
+        My motivation is to build products that aim to help people have happier days. Life is to short to be ruined by awful experiences. Every product needs to be crafted for human joy.
+      </p>
+    </div>
+  </SectionContainer>
+
+  <SectionContainer>
+    <GridContainer spacing="md" include_classes="[&>p]:text-2xl max-w-3xl pb-0">
+      <h2>What I Believe</h2>
+      <p class="copy-extra-large">
+        Life is too short to put poorly thought-out products out into the world.
+      </p>
+      <p>
+        For most of us in tech, our products are used by hundreds of people, if
+        not more. So why give them something that doesn't work?
+      </p>
+      <p>
+        Customers are paying you to make sure they can get their job done. So
+        your company's success should be enshrined in the success and happiness
+        of your customers.
+      </p>
+      <p>
+        Today, with all the tools available to our disposal, we have no excuse
+        to not reach validation faster and iterate quickly on the solutions that
+        can be life changing for our customers. Every customer&mdash;regardless
+        of your product's category&mdash;is in pain. You must give them a
+        solution that changes their life for the better. That in turn makes your
+        product worth it. That in turn makes your product worth it.
+      </p>
+      <p>
+        The future of design is not one just in pushing pretty pixels, but in
+        delivering actual value to customers. That value is in their happiness
+        and that hapiness will be rewarded in your product's financial success.
+      </p>
+    </GridContainer>
+
+    <GridContainer include_classes="pt-0">
+      <h2>What I Can Do</h2>
+      <div class="skills-container [&>details]:-mb-[9px]">
+        <Details
+          html_data={{ open: "true" }}
+          summary_text="Full-stack product builder"
+        >
+          I've helped startup companies of all sizes build products from the
+          ground up. Focusing on strategy, design and dabbling in front-end
+          development.
+        </Details>
+        <Details summary_text="Bring polish to your product">
+          While I cannot claim to be a master of design, I can help you bring
+          delight and the right brand aesthetics to your product. All while
+          keeping your product's functionality in mind and building long-lasting
+          systems.
+        </Details>
+        <Details summary_text="Build for now and later">
+          I will help you attain focused, right-sized versions of your product
+          as I also help you imagine what your product can be based on customer
+          feedback and market signals.
+        </Details>
+      </div>
+    </GridContainer>
+  </SectionContainer>
+
+  <SectionContainer include_classes="max-w-screen-base-md mx-auto">
+    <SubSection
+      label="Work"
+      title="Most Recent Projects"
+      show_link={true}
+      link_label="See All Work"
+      link_hover_label="View Case Studies"
+      link_href="/work"
+    />
+
+    <section class="showcase-container">
+      {projects.map((project) => <Showcase {...project} />)}
+    </section>
+  </SectionContainer>
+
+  <SectionContainer include_classes="max-w-screen-base-md mx-auto my-20">
+    <SubSection
+      label="Testimonials"
+      title="What People Say"
+      show_link={true}
+      link_label="See More"
+      link_hover_label="View in Linkedin"
+      link_href={linkedInTestimonials}
+      link_html_attributes={{ target: "_blank" }}
+    />
+
+    <div class="testimonials-container">
+      {testimonials.map((testimonial) => <TestimonialCard {...testimonial} />)}
+    </div>
+  </SectionContainer>
 </Layout>
 
 <style>
-  .arrow-holder {
-    @apply w-full -mt-20 absolute z-minimal text-white flex items-center justify-center;
+  :root {
+    --column-width-desktop: 260px;
+    --column-width-mobile: 220px;
+  }
 
-    div {
-      @apply mx-auto h-14 w-14 rounded-full bg-paper-dark border-2 border-white flex items-center justify-center;
+  .columns-container img {
+    will-change: opacity, transform;
+    @apply w-[500px] transition-all duration-1000;
+  }
+
+  .testimonials-container {
+    container-type: inline-size;
+    @apply grid gap-10 pt-10 max-w-screen-base-md mx-auto;
+  }
+
+  @container (min-width: 400px) {
+    .testimonials-container {
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
     }
   }
 
-  .demo-area {
-    @apply w-full p-10 bg-paper-green relative flex flex-col items-center justify-center;
+  .showcase-container {
+    @apply w-full overflow-x-scroll py-10 h-fit flex flex-col gap-32 scroll-smooth mb-10;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    scroll-snap-type: x mandatory;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    scroll-padding: 1rem;
+  }
+
+  .skills-container {
+    @apply flex flex-col gap-2 pb-28;
+  }
+
+  .testimonials-container {
+    @apply grid grid-cols-[repeat(auto-fill,minmax(400px,1fr))] gap-10 pt-10 max-w-screen-base-md mx-auto;
+  }
+
+  .hp-headline {
+    @apply flex flex-col justify-center items-center gap-5 relative z-10;
+
+    h1 {
+      @apply text-[5rem] md:text-[6rem] lg:text-[10rem] mb-0 font-bold;
+      filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+    }
+
+    span {
+      @apply text-5xl;
+    }
+
+    p {
+      @apply max-w-3xl mx-auto;
+    }
+  }
+
+  .hp-image {
+    @apply flex justify-center items-center animate-slow-fade-in absolute inset-0;
+
+    img.arch {
+      @apply w-[380px] lg:w-[500px] absolute opacity-15 lg:opacity-30 lg:-mt-16;
+    }
+  }
+
+  .columns-container {
+    @apply flex justify-center items-center gap-10 relative z-10;
+    @apply transition-all duration-300 mix-blend-multiply;
+
+    img {
+      @apply w-[500px] transition-all duration-1000;
+    }
+
+    img.column-outline {
+      @apply w-[220px] lg:w-[260px] absolute z-[1] translate-x-[10px];
+    }
+
+    img.column-one {
+      @apply opacity-50 lg:opacity-90;
+    }
+
+    img.column-two,
+    img.column-three,
+    img.column-four {
+      @apply opacity-0 absolute inset-0;
+    }
+
+    img.active {
+      @apply opacity-35 lg:opacity-90;
+    }
+  }
+
+  /* Responsive typography using clamp */
+  .hp-headline h1 {
+    @apply mb-0 font-bold;
+    font-size: clamp(3rem, 8vw, 10rem);
+    line-gradient: var(--gradient-primary);
+  }
+
+  .hp-headline span {
+    font-size: clamp(1.5rem, 4vw, 3rem);
+  }
+
+  /* Improved responsive image handling */
+  .hp-image {
+    @apply flex justify-center items-center animate-slow-fade-in absolute inset-0;
+  }
+
+  .hp-image img.arch {
+    width: clamp(280px, 50vw, 500px);
+    @apply absolute opacity-15 lg:opacity-30;
+    transform: translateY(clamp(-8px, -1vw, -16px));
+  }
+
+  .columns-container {
+    @apply flex justify-center items-center relative z-10;
+    
+    img.column-outline {
+      width: clamp(180px, 30vw, 260px);
+      @apply absolute z-[1];
+    }
+  }
+
+  /* Responsive grid layouts */
+  .testimonials-container {
+    container-type: inline-size;
+    @apply grid gap-5 md:gap-10 pt-5 md:pt-10;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
+  }
+
+  .showcase-container {
+    @apply w-full py-5 md:py-10 gap-16 md:gap-32;
+  }
+
+  /* Improved text readability on mobile */
+  .skills-container {
+    @apply flex flex-col gap-2 pb-16 md:pb-28 px-4 md:px-0;
+  }
+
+  /* Add smooth transitions for responsive changes */
+  .columns-container,
+  .hp-headline {
+    @apply transition-all duration-300 ease-in-out;
   }
 </style>
+
+<script>
+  function cycleColumns() {
+    const columns = Array.from(document.querySelectorAll('.column-one, .column-two, .column-three, .column-four'));
+    let currentIndex = 0;
+    let previousTime = 0;
+    const INTERVAL = 1000;
+
+    // Set initial state
+    columns[0]?.classList.add('active');
+
+    function animate(currentTime: number) {
+      if (currentTime - previousTime >= INTERVAL) {
+        columns[currentIndex]?.classList.remove('active');
+        currentIndex = (currentIndex + 1) % columns.length;
+        columns[currentIndex]?.classList.add('active');
+        previousTime = currentTime;
+      }
+      requestAnimationFrame(animate);
+    }
+
+    requestAnimationFrame(animate);
+  }
+
+  // Use more efficient event listener
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', cycleColumns);
+  } else {
+    cycleColumns();
+  }
+</script>

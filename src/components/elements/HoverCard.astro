@@ -1,0 +1,60 @@
+---
+---
+
+<div class="hover-card">
+  <div class="hover-card--content">
+    <slot />
+  </div>
+  <div class="hover-card--popup">
+    <slot name="popup" />
+  </div>
+</div>
+
+<script>
+  import { createPopper } from '@popperjs/core';
+
+  class HoverCard {
+    constructor(element: HTMLElement) {
+      const content = element.querySelector('.hover-card--content') as HTMLElement;
+      const popup = element.querySelector('.hover-card--popup') as HTMLElement;
+
+      createPopper(content, popup, {
+        placement: 'top',
+        modifiers: [
+          {
+            name: 'offset',
+            options: {
+              offset: [0, 8], // [x, y] offset
+            },
+          },
+          {
+            name: 'flip',
+            options: {
+              fallbackPlacements: ['bottom', 'right', 'left'],
+            },
+          },
+        ],
+      });
+    }
+  }
+
+  // Initialize all hover cards
+  document.querySelectorAll('.hover-card').forEach(card => {
+    new HoverCard(card as HTMLElement);
+  });
+</script>
+
+<style>
+  .hover-card {
+    @apply relative;
+  }
+
+  .hover-card--popup {
+    @apply bg-theme-surface-dark text-theme-ink-reverse text-sm rounded-lg shadow-lg p-3 z-10 invisible opacity-0;
+    @apply transition-opacity duration-200 w-56 text-center;
+  }
+
+  .hover-card:hover .hover-card--popup {
+    @apply visible opacity-100;
+  }
+</style> 

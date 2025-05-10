@@ -1,0 +1,81 @@
+---
+// Components
+import Logo from "./Logo.astro";
+import SplashLogo from "./SplashLogo.astro";
+
+// Props
+const { pathname } = Astro.url;
+
+// Nav Items
+const navItems = [
+  { href: "/", label: "Intro", paths: ["/"] },
+  { href: "/about", label: "About", paths: ["/about"] },
+  { href: "/work", label: "Work", paths: ["/work"] },
+  { href: "/thoughts", label: "Thoughts", paths: ["/thoughts", "/notebooks"] },
+];
+
+// Defines Active State for Nav Items
+const isActive = (paths: string[]) => {
+  if (paths.includes("/")) {
+    return pathname === "/";
+  }
+  return paths.some((path) => pathname.startsWith(path));
+};
+---
+
+<nav class="nav">
+  <div class="nav-container">
+    <a href="/" class="nav-home">
+      <SplashLogo />
+      <span class="nav-home-text animate-fade-in"> Karina Tovar</span>
+    </a>
+    <div class="nav-links">
+      {
+        navItems.map(({ href, label, paths }) => (
+          <a href={href} class={isActive(paths) ? "active" : ""}>
+            {label}
+          </a>
+        ))
+      }
+    </div>
+  </div>
+  <div class="nav-fade"></div>
+</nav>
+
+<style>
+  .nav {
+    @apply w-full flex flex-col justify-between items-center;
+    @apply sticky top-0 z-navigation;
+  }
+
+  .nav-container {
+    @apply flex items-center justify-between flex-wrap;
+    @apply w-full space-y-10 bg-theme-paper;
+    @apply pt-10 pb-2 px-10 xl:px-20;
+  }
+
+  .nav-home {
+    @apply font-medium flex items-center justify-center;
+  }
+
+  .nav-home-text {
+    @apply text-2xl font-medium ml-4 transition-all duration-300 ease-out;
+  }
+
+  .nav-links {
+    @apply flex items-center gap-2 xl:!mt-0;
+  }
+
+  .nav-links a {
+    @apply px-3 py-1 rounded-full underline-offset-4 transition-all;
+    @apply hover:bg-theme-surface-light hover:underline;
+  }
+
+  .nav-links a.active {
+    @apply text-theme-ink bg-theme-surface-light shadow-md;
+  }
+
+  .nav-fade {
+    @apply w-full h-8 bg-gradient-to-t from-theme-paper to-transparent rotate-180;
+  }
+</style>

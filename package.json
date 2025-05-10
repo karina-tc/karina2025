@@ -15,6 +15,7 @@
     "@astrojs/prism": "^3.2.0",
     "@astrojs/tailwind": "^5.1.4",
     "@notionhq/client": "^2.2.15",
+    "@popperjs/core": "^2.11.8",
     "astro": "^5.1.1",
     "phosphor-astro": "^2.1.0",
     "spotify-web-api-node": "^5.0.2",

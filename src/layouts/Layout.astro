@@ -1,44 +1,47 @@
 ---
+// Global Styles
 import "../styles/global.css";
-import type { HeaderProps } from "../types/HeaderProps";
-import NavWrapper from "../components/header/NavWrapper.astro";
-import Clouds from "../components/background/Clouds.astro";
-import HeaderHero from "../components/structure/HeaderHero.astro";
-import Footer from "../components/structure/Footer.astro";
-import LoadingBar from "../components/elements/LoadingBar.astro";
-import CommonHead from "../components/structure/CommonHead.astro";
 
-interface Props extends HeaderProps {
-  pageTitle: string;
-  pageDescription: string;
-  showBackToTop?: boolean;
+// Components
+import CommonHead from "../components/structure/CommonHead.astro";
+import Preloader from "../components/structure/Preloader.astro";
+import StickyNav from "../components/elements/StickyNav.astro";
+import Footer from "../components/structure/Footer.astro";
+
+// Theme
+import texture from "../assets/backgrounds/2-texture.png";
+
+interface Props {
+  pageTitle?: string;
+  pageDescription?: string;
+  pageBottomPadding?: boolean;
 }
 
 const {
   pageTitle = "Karina Tovar",
   pageDescription = "Pixel Philosopher Cautious Technologist",
-  showBackToTop = true,
-  ...headerProps
+  pageBottomPadding = true,
 } = Astro.props;
+
+// Get the current path
+const currentPath = Astro.url.pathname;
+const isHomePage = currentPath === "/";
 ---
 
 <!doctype html>
-<html lang="en">
-  <head>
-    <CommonHead pageTitle={pageTitle} pageDescription={pageDescription} />
-  </head>
-  <body class="w-full h-screen p-0 m-0 overflow-x-hidden relative">
-    <NavWrapper />
-    <HeaderHero {...headerProps}>
-      <slot name="title-content" slot="title-content" />
-    </HeaderHero>
-    <main class="flex-1 relative">
-      <slot />
-    </main>
-    <Footer showBackToTop={showBackToTop} />
+<html lang="en" data-theme="dark">
+  <CommonHead {pageTitle} {pageDescription} />
+  <body>
+    <div class="root bg-contain bg-repeat">
+      {isHomePage && <Preloader />}
+      <StickyNav />
+      <main class="main">
+        <div class="content">
+          <slot />
+        </div>
+      </main>
+      {pageBottomPadding && <div class="p-20"></div>}
+      <Footer />
+    </div>
   </body>
 </html>
-
-<script>
-  import "../scripts/controllers/intersection-controller";
-</script>

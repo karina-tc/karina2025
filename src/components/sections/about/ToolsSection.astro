@@ -1,0 +1,62 @@
+---
+// Elements
+import { Image } from "astro:assets";
+import HoverCard from "../../elements/HoverCard.astro";
+import SubSection from "../../structure/SubSection.astro";
+
+// Data
+import { tools } from "../../../data/tools";
+---
+
+<SubSection
+  label="Tools"
+  title="My Preferred Stack"
+  show_link={false}
+  include_classes="my-10"
+/>
+
+<div class="stack-grid">
+  {
+    tools.map((tool) => (
+      <HoverCard>
+        <div class="stack-item--cell group">
+          <div class="stack-item--icon">
+            <Image src={tool.icon} alt={tool.name} class={tool.iconSize} />
+          </div>
+          <span class="stack-item--name">{tool.name}</span>
+        </div>
+        <span class="flex flex-col items-center gap-2" slot="popup">
+          <span class="text-left">{tool.description}</span>
+          <Image
+            src={tool.gif}
+            alt={tool.name}
+            class="w-[200px]"
+            loading="lazy"
+          />
+        </span>
+      </HoverCard>
+    ))
+  }
+</div>
+
+<style>
+  .stack-grid {
+    @apply grid grid-cols-1 md:grid-cols-3 max-sm:grid-cols-1 gap-3;
+  }
+
+  .stack-item--cell {
+    @apply flex flex-col items-center gap-2 bg-theme-surface-light rounded-lg px-4 py-6;
+    @apply cursor-pointer transition-all duration-200 hover:bg-theme-surface-medium;
+  }
+
+  .stack-item--name {
+    @apply inline-block mb-2 text-left underline-offset-4 decoration-dashed decoration-neutral-300;
+    @apply transition-all duration-200 group-hover:underline;
+  }
+
+  .stack-item--icon {
+    @apply w-12 h-12 bg-theme-surface-light rounded-full;
+    @apply flex items-center justify-center;
+    @apply text-theme-ink rounded-lg shadow-md mb-2;
+  }
+</style>

@@ -1,0 +1,109 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+  items: {
+    number: string;
+    title: string;
+    description: string;
+    image?: ImageMetadata;
+    image_text?: string;
+    image_classes?: string;
+  }[];
+}
+
+const { items } = Astro.props;
+---
+
+<ul class="tenets">
+  {
+    items.map((item, index) => (
+      <li class={`tenet-card group ${index === 0 ? "focused" : ""}`}>
+        {item.image && (
+          <div class="tenet-card--image">
+            <Image
+              src={item.image}
+              alt={item.image_text ?? "Artwork"}
+              class={item.image_classes}
+              height={140}
+              width={140}
+            />
+          </div>
+        )}
+        <div class="tenet-card--content">
+          <span>{item.number}</span>
+          <h3>{item.title}</h3>
+          <p>{item.description}</p>
+        </div>
+      </li>
+    ))
+  }
+</ul>
+
+<script>
+  // Handle focus states
+  const tenetCards = document.querySelectorAll(".tenet-card");
+
+  tenetCards.forEach((item) => {
+    item.addEventListener("mouseenter", () => {
+      tenetCards.forEach((i) => i.classList.remove("focused"));
+    });
+
+    item.addEventListener("mouseleave", () => {
+      tenetCards[0].classList.add("focused");
+    });
+  });
+</script>
+
+<style>
+  .tenets {
+    @apply flex flex-col items-start gap-4 w-full;
+  }
+
+  .tenet-card {
+    @apply relative flex items-center rounded-2xl transition-all duration-300 overflow-hidden;
+    @apply max-sm:flex-col max-sm:bg-theme-surface-light w-full;
+
+    &.focused {
+      @apply bg-theme-surface-light;
+
+      span {
+        @apply opacity-100;
+      }
+    }
+
+    &:hover {
+      @apply bg-theme-surface-light;
+    }
+  }
+
+  .tenet-card--image {
+    @apply flex items-center justify-center p-3 pr-1 transition-all delay-100;
+    @apply sm:max-w-[100px] min-w-[100px] overflow-hidden;
+    @apply max-sm:bg-theme-surface-light max-sm:w-full;
+
+    img {
+      @apply w-full h-full object-cover scale-75 max-sm:mr-auto;
+    }
+  }
+
+  .tenet-card--content {
+    @apply flex flex-col items-start p-3 px-5;
+  }
+
+  .tenet-card span {
+    @apply text-xl mb-2 opacity-50 transition-all duration-300;
+  }
+
+  .tenet-card h3 {
+    @apply mt-0 mb-2;
+  }
+
+  .tenet-card p {
+    @apply text-sm mb-2;
+  }
+
+  .tenet-card:hover span {
+    @apply opacity-100;
+  }
+</style>
